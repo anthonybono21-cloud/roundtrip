@@ -9,31 +9,48 @@ there on the next refresh, with nothing to do on that machine.
 
 ## How it is hosted
 
-This repo's root *is* the site. A push to `main` runs
-`.github/workflows/pages.yml`, which turns Pages on if it is off, uploads the
-repo root, and deploys it. No settings to click, no build step.
+GitHub Pages serves this repo's `main` branch from the root. A push to `main`
+is a deploy; there is no build step and no workflow.
+
+**Turning Pages on is a one-time repo setting that only the repo owner can do.**
+It cannot be automated from a project session, and this was worth an hour to
+learn once:
+
+- `actions/configure-pages@v5` with `enablement: true` **fails** here. The
+  Actions runner token cannot switch Pages on for a repo that has never had it.
+  Both attempts failed at that step, so upload and deploy never ran and the
+  address 404ed while the workflow list still displayed the runs as green.
+  The workflow has been removed; do not re-add it.
+- Pushing a `gh-pages` branch does **not** auto-enable Pages either. That legacy
+  behaviour is gone; `has_pages` stayed `false` after the push.
+- The Pages REST API (`/repos/{owner}/{repo}/pages`) is **blocked by the agent
+  proxy** (403), so a session cannot enable it directly even with a token.
+
+The setting: repo **Settings → Pages → Source: Deploy from a branch → `main` /
+(root) → Save**, at
+<https://github.com/anthonybono21-cloud/roundtrip/settings/pages>.
+
+Verify it took with `curl -s https://api.github.com/repos/anthonybono21-cloud/roundtrip | grep has_pages`
+— that endpoint is not proxy-blocked, so a session can confirm enablement
+without any tool that prompts the user.
 
 The root holds the **source layout** — `index.html`, `assets/`, `vendor/`,
 `clouds/`, `cameras.json` — not the bundled single file. Pages serves over http,
 so the ES module import and the local textures load natively; `build.py`'s
 data-URI inlining exists only so the file works when double-clicked from disk.
-Serving the source also means a rebuild changes `index.html` and `cameras.json`
-instead of committing a fresh 6.5 MB blob each time, and ET45 re-uses its cached
-copy of the ~4.6 MB of textures on every reload.
+Serving the source also keeps each rebuild to a small diff instead of a fresh
+6.5 MB blob, and lets ET45 re-use its cached copy of the ~4.6 MB of textures.
 
-`Roundtrip.html`, the double-click build, stays in the project files. Run
-`python3 build.py` here to regenerate it from this same source.
+Note the name collision: in this repo `index.html` is the **editable module
+source**, and it needs `assets/`, `vendor/` and `clouds/` beside it. The
+single-file double-click build is `Roundtrip.html` in the project folder;
+`python3 build.py` here regenerates it from this same source.
 
-## The routine, per build
-
-```bash
-git clone https://github.com/anthonybono21-cloud/roundtrip
-# edit index.html / drop in a new cameras.json
-git add -A && git commit -m "Roundtrip build $(date -u +%Y-%m-%dT%H:%MZ)"
-git push origin main
-```
-
-Pages redeploys in about a minute. The address never changes.
+This layout is verified: served over plain http and driven in headless
+Chromium, every local asset returns 200 (only `favicon.ico` 404s, harmless),
+there are no page errors, and the globe renders with city lights, clouds and
+the terminator. Only the external hosts below fail, and only because a session's
+egress blocks them.
 
 ## What the host has to allow
 
@@ -47,6 +64,7 @@ feed still reach five origins at runtime:
 | `s3.amazonaws.com` | terrarium terrain tiles | ground is flat |
 | `overpass-api.de` | OSM buildings | no buildings |
 | `clouds.matteason.co.uk` | today's real clouds | falls back to the baked texture (fine) |
+| `gibs.earthdata.nasa.gov` | NASA GIBS cloud source used by `clouds/` | falls back with the above |
 
 GitHub Pages is a plain static host with no content security policy of its own,
 so all five behave exactly as they do from a double-clicked file. That is why it

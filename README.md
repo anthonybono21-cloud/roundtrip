@@ -24,15 +24,40 @@ After editing `cameras.json`, rebuild the single file with `build.py`
 | `/` | open search: places, scenes and tags |
 | `N` | dive to the next camera now |
 | `Space` | hold this camera, cancel the rotation |
-| `R` | reject this camera and skip on (remembered in this browser) |
+| `↑` | good camera: keep it, and let it come round a little more often |
+| `↓` | bad camera: drop it from the rotation here and move straight on |
+| `R` | the older spelling of `↓` |
 | `Esc` | pull back to orbit, and release a search set |
 | `F` | fullscreen |
 | `H` | show/hide the key list |
-| `Shift+X` | print the local reject list to the console |
+| `Shift+X` | print this browser's votes to the console |
 
 `Roundtrip.offAir()` lists cameras held back right now by a `live_window`: the
 part-time and seasonal ones are kept in the list and returned to the rotation
 when they are actually broadcasting, rather than rejected.
+
+## Thumbs up and thumbs down
+
+Two round buttons sit under the magnifier while a camera is on screen, and the
+up and down arrow keys do the same thing without moving a hand.
+
+Thumbs down is immediate, because it means "I do not want to see that again":
+the camera leaves this browser's deck on the spot and the next dive starts.
+A still image posing as a live stream is exactly what it is for. Thumbs up
+keeps the camera and nudges it a little earlier in the shuffle - gently, and
+only within a cycle, so the deck still deals every camera exactly once and a
+favourite crowds nothing out. The same thumb again takes the mark off.
+
+Votes stay in the browser that cast them, in `localStorage` under
+`roundtrip.votes`, and go nowhere else. `Roundtrip.votes()` prints them as a
+list, each entry carrying the camera's key, name, location and the moment of
+the verdict:
+
+    [{ key: "2umaXl_TvIg", vote: -1, name: "...", location: "...",
+       url: "...", at: "2026-09-17T22:24:51.383Z" }]
+
+That is the list to prune `cameras.json` from: a `vote: -1` becomes an entry in
+`rejects` with a `reject_reason` and a `rejected_at`.
 
 ## Search
 

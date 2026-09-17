@@ -80,6 +80,23 @@
   #sound.off .on-i{display:none}
   #sound.off .off-i{display:block}
 
+  /* Thumbs. They only mean anything with a camera on screen, so they are
+     absent in orbit rather than faded: display, not opacity, so the touch
+     rules above still decide how bright they rest. */
+  .vote-btn{display:none;right:calc(34px + env(safe-area-inset-right,0px))}
+  .vote-btn.on{display:grid}
+  /* The right-hand column, top down: speaker, magnifier (search.js owns
+     that one at 108/116), then the two thumbs. */
+  #voteup{top:calc(158px + env(safe-area-inset-top,0px))}
+  #votedown{top:calc(208px + env(safe-area-inset-top,0px))}
+  .vote-btn.cast{opacity:1;background:rgba(255,212,121,.2);border-color:rgba(255,212,121,.55)}
+  .vote-btn.cast svg{stroke:#ffd479}
+  @media (hover:none),(pointer:coarse){
+    #voteup{top:calc(174px + env(safe-area-inset-top,0px))}
+    #votedown{top:calc(232px + env(safe-area-inset-top,0px))}
+    .vote-btn.cast{background:rgba(255,212,121,.3)}
+  }
+
   #attrib{position:fixed;right:12px;bottom:10px;font-size:10px;color:rgba(200,215,235,.42);
     text-align:right;line-height:1.5;pointer-events:none}
 
@@ -152,7 +169,8 @@
   <div><kbd>N</kbd>dive to the next camera</div>
   <div><kbd>/</kbd>search places, scenes and tags</div>
   <div><kbd>Space</kbd>hold this one</div>
-  <div><kbd>R</kbd>reject and skip</div>
+  <div><kbd>&uarr;</kbd>good camera, show it more</div>
+  <div><kbd>&darr;</kbd>bad camera, drop it and move on</div>
   <div><kbd>M</kbd>sound on/off</div>
   <div><kbd>Shift+M</kbd>silence this one</div>
   <div><kbd>Esc</kbd>pull back to orbit</div>
@@ -168,6 +186,22 @@
   <svg class="off-i" viewBox="0 0 24 24" aria-hidden="true">
     <path d="M4 9.2v5.6h3.4L12.8 19V5L7.4 9.2H4z"/>
     <path d="M16.6 9.8l4.8 4.4"/><path d="M21.4 9.8l-4.8 4.4"/>
+  </svg>
+</div>
+
+<div id="voteup" class="hud-btn vote-btn" role="button" tabindex="0" aria-pressed="false"
+     aria-label="Good camera" title="Good camera (up arrow)">
+  <svg viewBox="0 0 24 24" aria-hidden="true">
+    <path d="M7 10.5v9H4.6a.6.6 0 0 1-.6-.6v-7.8a.6.6 0 0 1 .6-.6H7z"/>
+    <path d="M7 10.5l4.4-6.2a.9.9 0 0 1 1.6.5v4.3h4.7a2 2 0 0 1 2 2.4l-1.2 5.8a2.4 2.4 0 0 1-2.3 1.9H7"/>
+  </svg>
+</div>
+
+<div id="votedown" class="hud-btn vote-btn" role="button" tabindex="0" aria-pressed="false"
+     aria-label="Bad camera, drop it" title="Bad camera, drop it (down arrow)">
+  <svg viewBox="0 0 24 24" aria-hidden="true">
+    <path d="M7 13.5v-9H4.6a.6.6 0 0 0-.6.6v7.8c0 .33.27.6.6.6H7z"/>
+    <path d="M7 13.5l4.4 6.2a.9.9 0 0 0 1.6-.5v-4.3h4.7a2 2 0 0 0 2-2.4l-1.2-5.8A2.4 2.4 0 0 0 16.2 4.8H7"/>
   </svg>
 </div>
 
@@ -1225,7 +1259,8 @@ const state = {
 const Search = window.RoundtripSearch || null;
 try { state.rejects = new Set(JSON.parse(localStorage.getItem('et45.rejects')||'[]')); } catch {}
 
-const setPhase = p => { state.phase = p; state.t0 = clock(); $('#phase').textContent = p; };
+const setPhase = p => { state.phase = p; state.t0 = clock(); $('#phase').textContent = p;
+                        paintVote(); };
 const clock = () => performance.now()/1000;
 const phaseT = dur => clamp((clock()-state.t0)/dur, 0, 1);
 
@@ -1279,6 +1314,96 @@ function isLiveNow(cam){
   return true;
 }
 
+/* ── thumbs up and thumbs down ──────────────────────────────────────────────
+
+   A verdict on the camera in front of you, on the two arrow keys or the two
+   buttons under the speaker.
+
+   Thumbs down is the one that has to feel instant, because it means "I do not
+   want to see that again": the camera leaves this device's deck on the spot
+   and the next dive starts immediately. A still image dressed up as a live
+   stream is exactly what it is for. Thumbs up keeps the camera and nudges it
+   a little earlier in the shuffle; the deck still deals everything once per
+   cycle, so a favourite crowds nothing out. The same thumb again clears the
+   mark.
+
+   Votes stay on the machine that cast them, in localStorage, and go nowhere
+   else. Each one records enough to act on later — the camera's key, its name,
+   where it is and when the verdict was given — so `Roundtrip.votes()` is a
+   list the camera file can be pruned from. */
+
+const VOTE_KEY = 'roundtrip.votes';
+
+let votes = {};
+try { votes = JSON.parse(localStorage.getItem(VOTE_KEY) || '{}') || {}; } catch {}
+
+const voteOf = cam => (cam && votes[camKey(cam)]?.vote) || 0;
+
+/* Deliberately gentle, and it only skews the order inside a cycle, exactly
+   like the light bias does. */
+const voteWeight = cam => voteOf(cam) > 0 ? 1.4 : 1;
+
+function saveVotes(){
+  try { localStorage.setItem(VOTE_KEY, JSON.stringify(votes)); } catch {}
+}
+
+function saveRejects(){
+  try { localStorage.setItem('et45.rejects', JSON.stringify([...state.rejects])); } catch {}
+}
+
+function castVote(dir){
+  const cam = state.cam;
+  if (!cam || state.align) return;
+  const key = camKey(cam);
+
+  if (voteOf(cam) === dir){            // the same thumb again takes it back
+    delete votes[key];
+    state.rejects.delete(key);
+    saveRejects(); saveVotes(); paintVote();
+    note('Cleared the mark on ' + cam.name + '.');
+    return;
+  }
+
+  votes[key] = { vote: dir, name: cam.name, location: cam.location || '',
+                 url: cam.url || '', at: new Date().toISOString() };
+  saveVotes();
+
+  if (dir > 0){
+    paintVote();
+    note('Thumbs up. ' + cam.name + ' will come round a little more often.');
+    return;
+  }
+
+  state.rejects.add(key);
+  bag = bag.filter(c => c !== cam);
+  if (upNext === cam) upNext = null;
+  saveRejects();
+  note('Thumbs down. ' + cam.name + ' is out of the rotation here.');
+  if (state.phase === 'live' || state.phase === 'orbit') beginDive(pickNext());
+  else backToOrbit();
+  paintVote();
+}
+
+const voteUpEl = $('#voteup'), voteDownEl = $('#votedown');
+function paintVote(){
+  const show = !!state.cam && !state.align
+            && (state.phase === 'live' || state.phase === 'reveal');
+  const v = voteOf(state.cam);
+  voteUpEl.classList.toggle('on', show);
+  voteDownEl.classList.toggle('on', show);
+  voteUpEl.classList.toggle('cast', v > 0);
+  voteDownEl.classList.toggle('cast', v < 0);
+  voteUpEl.setAttribute('aria-pressed', String(v > 0));
+  voteDownEl.setAttribute('aria-pressed', String(v < 0));
+}
+voteUpEl.addEventListener('click', () => castVote(1));
+voteDownEl.addEventListener('click', () => castVote(-1));
+for (const el of [voteUpEl, voteDownEl]){
+  el.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' '){ e.preventDefault(); e.stopPropagation(); el.click(); }
+  });
+}
+
 function lightWeight(cam){
   const el = sunElevation(cam.pose.lat, cam.pose.lng);
   const raw = el < -8 ? 0.90      // night: a little behind, never excluded
@@ -1306,7 +1431,7 @@ function shuffledBag(){
   const onAir = kept.filter(isLiveNow);
   const pool = onAir.length ? onAir : kept;
   return pool
-    .map(c => ({ c, k: Math.pow(Math.random(), 1/lightWeight(c)) }))
+    .map(c => ({ c, k: Math.pow(Math.random(), 1/(lightWeight(c)*voteWeight(c))) }))
     .sort((a,b) => b.k - a.k)
     .map(o => o.c);
 }
@@ -1767,17 +1892,10 @@ addEventListener('keydown', e => {
     }
   }
   else if (k==='m'){ toggleSound(); }
-  else if (k==='r' || k==='R'){
-    if (state.cam){
-      state.rejects.add(camKey(state.cam));
-      bag = bag.filter(c => c !== state.cam);
-      if (upNext === state.cam) upNext = null;
-      try { localStorage.setItem('et45.rejects', JSON.stringify([...state.rejects])); } catch {}
-      note('Rejected '+state.cam.name+'. Stored locally; press Shift+X to print the reject list.');
-      backToOrbit();
-    }
-  }
-  else if (k==='X'){ console.log('rejects:', [...state.rejects]); note('Reject list printed to the console.'); }
+  else if (k==='ArrowUp'){ if (state.cam){ castVote(1); e.preventDefault(); } }
+  else if (k==='ArrowDown'){ if (state.cam){ castVote(-1); e.preventDefault(); } }
+  else if (k==='r' || k==='R'){ castVote(-1); }   // the older spelling of a thumbs down
+  else if (k==='X'){ console.log('votes:', votes); note('Vote list printed to the console.'); }
   else if (k==='a' || k==='A'){ if (state.phase==='live') enterAlign(); }
   else if (k==='Escape'){
     // One key for 'get me out of here': it leaves the feed and, if a
@@ -1882,6 +2000,10 @@ const progress = v => { bar.style.width = (v*100)+'%'; };
     // Roundtrip.audio shows the button state, whether the browser has allowed
     // sound yet, and where the volume ramp currently sits.
     audio, toggleSound, camHasSound,
+    // Roundtrip.votes() is every thumb cast in this browser, as a list the
+    // camera file can be pruned from.
+    votes: () => Object.entries(votes).map(([key, v]) => ({ key, ...v })),
+    castVote,
     silenced: () => [...silenced],
     // Roundtrip.find('beach') is what the search box runs.
     find: q => (Search ? Search.search(q).map(r => r.cam.name) : []),

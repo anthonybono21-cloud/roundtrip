@@ -49,17 +49,33 @@
 
   /* Sound. Always there, glassy and see-through, and it brightens under the
      cursor so it never competes with the picture. */
-  #sound{position:fixed;right:34px;top:58px;width:42px;height:42px;border-radius:50%;
+  /* Round HUD buttons. Any new one should carry .hud-btn and supply only its
+     own corner, so it inherits the touch behaviour below.
+     On a mouse they rest faint and lift on hover. A touch screen never hovers,
+     so a 34%-opacity glyph stayed 34% forever and was invisible over the lit
+     globe; there they rest bright, grow past the 44px tap minimum and sit
+     inside the safe area. */
+  .hud-btn{position:fixed;width:42px;height:42px;border-radius:50%;
     display:grid;place-items:center;cursor:pointer;z-index:9;
     background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.14);
     backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
     opacity:.34;transition:opacity .25s ease,background .25s ease,transform .12s ease;
-    -webkit-tap-highlight-color:transparent}
-  #sound:hover,#sound:focus-visible{opacity:1;background:rgba(255,255,255,.15);outline:none}
-  #sound:active{transform:scale(.93)}
-  #sound svg{width:19px;height:19px;fill:none;stroke:var(--ink);stroke-width:1.7;
-    stroke-linecap:round;stroke-linejoin:round;display:none;
+    touch-action:manipulation;-webkit-tap-highlight-color:transparent}
+  .hud-btn:hover,.hud-btn:focus-visible{opacity:1;background:rgba(255,255,255,.15);outline:none}
+  .hud-btn:active{transform:scale(.93)}
+  .hud-btn svg{width:19px;height:19px;fill:none;stroke:var(--ink);stroke-width:1.7;
+    stroke-linecap:round;stroke-linejoin:round;
     filter:drop-shadow(0 1px 3px rgba(0,0,0,.6))}
+  @media (hover:none),(pointer:coarse){
+    .hud-btn{width:50px;height:50px;opacity:.94;
+      background:rgba(9,15,25,.52);border-color:rgba(255,255,255,.32);
+      box-shadow:0 2px 10px rgba(0,0,0,.35)}
+    .hud-btn:hover,.hud-btn:focus-visible{background:rgba(9,15,25,.66)}
+    .hud-btn svg{width:24px;height:24px;stroke-width:1.9}
+  }
+  #sound{right:calc(34px + env(safe-area-inset-right,0px));
+    top:calc(58px + env(safe-area-inset-top,0px))}
+  #sound svg{display:none}                 /* one of the two, chosen by .off */
   #sound .on-i{display:block}
   #sound.off .on-i{display:none}
   #sound.off .off-i{display:block}
@@ -142,7 +158,7 @@
   <div><kbd>F</kbd>fullscreen &middot; <kbd>H</kbd>hide this</div>
 </div>
 
-<div id="sound" class="off" role="button" tabindex="0" aria-pressed="false" aria-label="Sound">
+<div id="sound" class="hud-btn off" role="button" tabindex="0" aria-pressed="false" aria-label="Sound">
   <svg class="on-i" viewBox="0 0 24 24" aria-hidden="true">
     <path d="M4 9.2v5.6h3.4L12.8 19V5L7.4 9.2H4z"/>
     <path d="M16.3 9a4.2 4.2 0 0 1 0 6"/>

@@ -274,17 +274,31 @@
   #rt-search .hint{padding:8px 14px 10px;font-size:11px;color:var(--dim,#8fa3bd);opacity:.65;
     border-top:1px solid rgba(255,255,255,.05)}
 
-  /* The magnifier, sitting under the speaker and behaving like it. */
-  #rt-mag{position:fixed;right:34px;top:108px;width:42px;height:42px;border-radius:50%;
+  /* The magnifier, sitting under the speaker and behaving like it. The host
+     page has a .hud-btn class that says the same thing, but this file stays
+     self-contained, so the rules are repeated rather than inherited. */
+  #rt-mag{position:fixed;border-radius:50%;
+    right:calc(34px + env(safe-area-inset-right,0px));
+    top:calc(108px + env(safe-area-inset-top,0px));width:42px;height:42px;
     display:grid;place-items:center;cursor:pointer;z-index:9;
     background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.14);
     backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
     opacity:.34;transition:opacity .25s ease,background .25s ease,transform .12s ease;
-    -webkit-tap-highlight-color:transparent}
+    touch-action:manipulation;-webkit-tap-highlight-color:transparent}
   #rt-mag:hover,#rt-mag:focus-visible{opacity:1;background:rgba(255,255,255,.15);outline:none}
   #rt-mag:active{transform:scale(.93)}
   #rt-mag svg{width:19px;height:19px;fill:none;stroke:var(--ink,#e8eef7);stroke-width:1.7;
     stroke-linecap:round;filter:drop-shadow(0 1px 3px rgba(0,0,0,.6))}
+  /* A touch screen never hovers, so a 34% glyph would stay 34% and be
+     invisible over the lit globe. There it rests bright and hits 44px+. */
+  @media (hover:none),(pointer:coarse){
+    #rt-mag{width:50px;height:50px;opacity:.94;
+      top:calc(116px + env(safe-area-inset-top,0px));
+      background:rgba(9,15,25,.52);border-color:rgba(255,255,255,.32);
+      box-shadow:0 2px 10px rgba(0,0,0,.35)}
+    #rt-mag:hover,#rt-mag:focus-visible{background:rgba(9,15,25,.66)}
+    #rt-mag svg{width:24px;height:24px;stroke-width:1.9}
+  }
 
   /* The pill that says the rotation is currently a subset. */
   #rt-set{position:fixed;right:40px;top:32px;font-size:11px;letter-spacing:.14em;

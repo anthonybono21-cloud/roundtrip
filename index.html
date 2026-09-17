@@ -134,6 +134,7 @@
 
 <div id="help">
   <div><kbd>N</kbd>dive to the next camera</div>
+  <div><kbd>/</kbd>search places, scenes and tags</div>
   <div><kbd>Space</kbd>hold this one</div>
   <div><kbd>R</kbd>reject and skip</div>
   <div><kbd>M</kbd>sound on/off &middot; <kbd>Shift+M</kbd>silence this one</div>
@@ -159,6 +160,8 @@
 
 <!-- Live clouds. Self-contained, publishes window.ET45Clouds, never throws. -->
 <script src="./clouds/et45-clouds-inline.js"></script>
+<!-- Search. Self-contained, publishes window.RoundtripSearch. -->
+<script src="./search.js"></script>
 <script type="module">
 import * as THREE from './vendor/three.module.js';
 
@@ -1173,7 +1176,13 @@ const state = {
   ground: null,
   blend: 0,                   // 0 = globe, 1 = ground
   liveOn: false,
+  // A search can narrow the rotation to the cameras it matched. null is
+  // the whole list; a Set of camera keys is "play these until Esc".
+  set: null, setLabel: '',
 };
+
+/* search.js, loaded above. Optional: the app runs without it. */
+const Search = window.RoundtripSearch || null;
 try { state.rejects = new Set(JSON.parse(localStorage.getItem('et45.rejects')||'[]')); } catch {}
 
 const setPhase = p => { state.phase = p; state.t0 = clock(); $('#phase').textContent = p; };
@@ -1245,7 +1254,14 @@ function lightWeight(cam){
    per item, raised to 1/weight, sorted. Heavier items tend to sort earlier
    while every item still appears exactly once. */
 function shuffledBag(){
-  const kept = state.cams.filter(c => !state.rejects.has(camKey(c)));
+  let kept = state.cams.filter(c => !state.rejects.has(camKey(c)));
+  // A search set narrows the deck without touching anything else: the
+  // light bias, the live windows and the once-per-cycle rule all still
+  // apply, just over fewer cameras.
+  if (state.set){
+    const only = kept.filter(c => state.set.has(camKey(c)));
+    if (only.length) kept = only; else clearSet();   // set emptied by rejects
+  }
   // Prefer the ones actually on air, but never end up with nothing to show.
   const onAir = kept.filter(isLiveNow);
   const pool = onAir.length ? onAir : kept;
@@ -1279,6 +1295,7 @@ function peekNext(){
   return upNext;
 }
 function pickNext(){
+  if (queued){ const c = queued; queued = null; return c; }
   if (upNext){ const c = upNext; upNext = null; return c; }
   return drawNext();
 }
@@ -1316,6 +1333,35 @@ function prefetchNext(){
     for (let dx=-r;dx<=r;dx++) for (let dy=-r;dy<=r;dy++) warm(CFG.dem.url(z,cx+dx,cy+dy));
   }
   if (CFG.buildings) osmBuildings(lat, lng).catch(()=>{});
+}
+
+/* A camera asked for from outside the rotation. From orbit or from a feed
+   it starts right away; mid-flight it queues, because restarting a descent
+   from the globe halfway down is a visible cut. */
+let queued = null;
+function requestDive(cam){
+  if (!cam) return;
+  if (state.phase === 'orbit' || state.phase === 'live') beginDive(cam);
+  else { queued = cam; if (state.phase !== 'retreat') backToOrbit(); }
+}
+
+/* Narrow the rotation to a set of cameras, or drop back to all of them. */
+function playSet(list, label){
+  if (!list || list.length < 2) return;
+  state.set = new Set(list.map(camKey));
+  state.setLabel = label || 'set';
+  bag = []; upNext = null; prefetched = null;
+  Search?.showSet(state.setLabel, state.set.size);
+  note('Playing ' + state.set.size + ' cameras: ' + state.setLabel + '. Esc plays everything again.');
+  requestDive(list[0]);
+}
+function clearSet(quiet){
+  if (!state.set) return false;
+  state.set = null; state.setLabel = '';
+  bag = []; upNext = null;
+  Search?.showSet('', 0);
+  if (!quiet) note('Playing everything again.');
+  return true;
 }
 
 function beginDive(cam){
@@ -1500,7 +1546,8 @@ function tick(){
 
   switch (state.phase){
     case 'orbit':
-      if (!state.pinned && clock()-state.t0 > 6) beginDive(pickNext());
+      if (queued) beginDive(pickNext());
+      else if (!state.pinned && clock()-state.t0 > 6) beginDive(pickNext());
       break;
     case 'depart': {
       // Hold on the globe until the ground is actually ready. A dive into
@@ -1640,6 +1687,14 @@ async function copyPose(){
 
 addEventListener('keydown', e => {
   const k = e.key;
+  // While the search box is open every key is typing, and it handles its
+  // own Escape, arrows and Enter.
+  if (Search?.isOpen()) return;
+  if (k === '/' && Search && !state.align){
+    Search.open('');          // always opens on the tag list
+    e.preventDefault();
+    return;
+  }
   if (state.align){
     const p = state.cam.pose, fine = e.shiftKey ? 0.1 : 1;
     if (k==='ArrowLeft')  p.heading = (p.heading - fine + 360)%360;
@@ -1684,7 +1739,12 @@ addEventListener('keydown', e => {
   }
   else if (k==='X'){ console.log('rejects:', [...state.rejects]); note('Reject list printed to the console.'); }
   else if (k==='a' || k==='A'){ if (state.phase==='live') enterAlign(); }
-  else if (k==='Escape'){ if (state.cam) backToOrbit(); }
+  else if (k==='Escape'){
+    // One key for 'get me out of here': it leaves the feed and, if a
+    // search narrowed the rotation, hands the whole world back.
+    clearSet();
+    if (state.cam) backToOrbit();
+  }
   else if (k==='f' || k==='F'){ document.fullscreenElement ? document.exitFullscreen() : document.body.requestFullscreen(); }
   else if (k==='h' || k==='H'){ $('#help').classList.toggle('on'); }
 });
@@ -1749,6 +1809,13 @@ const progress = v => { bar.style.width = (v*100)+'%'; };
   if (clouds) clouds.ready.then(attrib).catch(()=>{});
   buildDetail();
   buildPins(state.cams);
+  // Search reads the same list the globe does, tags and all.
+  Search?.init({
+    cams: state.cams,
+    isLiveNow,
+    onPick: cam => requestDive(cam),
+    onPlaySet: (list, label) => playSet(list, label),
+  });
   buildGroundShell();
   resize();
   progress(1);
@@ -1776,6 +1843,9 @@ const progress = v => { bar.style.width = (v*100)+'%'; };
     // sound yet, and where the volume ramp currently sits.
     audio, toggleSound, camHasSound,
     silenced: () => [...silenced],
+    // Roundtrip.find('beach') is what the search box runs.
+    find: q => (Search ? Search.search(q).map(r => r.cam.name) : []),
+    search: Search, playSet, clearSet, requestDive,
     dive: q => { const c = state.cams.find(c => c.name.toLowerCase().includes(String(q).toLowerCase()));
                  if (c) beginDive(c); else console.warn('no camera matching', q); return c?.name; } };
 

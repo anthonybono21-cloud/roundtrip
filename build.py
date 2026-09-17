@@ -30,6 +30,12 @@ tag = '<script src="./clouds/et45-clouds-inline.js"></script>'
 assert tag in html, 'cloud script tag not found'
 html = html.replace(tag, '<script>\n' + clouds_js + '\n</script>', 1)
 
+# The search module, inlined for the same reason.
+search_js = (D/'search.js').read_text(encoding='utf-8')
+tag = '<script src="./search.js"></script>'
+assert tag in html, 'search script tag not found'
+html = html.replace(tag, '<script>\n' + search_js + '\n</script>', 1)
+
 anchor = "<script type=\"module\">\nimport * as THREE from './vendor/three.module.js';\n"
 assert anchor in html, 'module header not found'
 html = html.replace(anchor, prelude + '<script>\n', 1)

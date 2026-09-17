@@ -21,10 +21,11 @@ After editing `cameras.json`, rebuild the single file with `build.py`
 
 | key | what it does |
 | --- | --- |
+| `/` | open search: places, scenes and tags |
 | `N` | dive to the next camera now |
 | `Space` | hold this camera, cancel the rotation |
 | `R` | reject this camera and skip on (remembered in this browser) |
-| `Esc` | pull back to orbit |
+| `Esc` | pull back to orbit, and release a search set |
 | `F` | fullscreen |
 | `H` | show/hide the key list |
 | `Shift+X` | print the local reject list to the console |
@@ -32,6 +33,45 @@ After editing `cameras.json`, rebuild the single file with `build.py`
 `Roundtrip.offAir()` lists cameras held back right now by a `live_window`: the
 part-time and seasonal ones are kept in the list and returned to the rotation
 when they are actually broadcasting, rather than rejected.
+
+## Search
+
+Press `/`, or click the magnifier under the speaker. Type a place, a scene or a
+tag and every camera that matches is listed - all of them, scrolled, never a
+top-five. `Enter` or a click flies there through the normal dive; **Play these**
+narrows the rotation to exactly that set until `Esc` hands the world back.
+
+The box opens on a tag list, so nothing has to be known in advance: the chips
+under Places, Scenes and Moods are searches, and so is every chip on a result
+row. Clicking `beach` on the Copacabana row lists all eighteen beaches.
+
+Matching is forgiving on purpose. A term is scored against the camera's tags
+first, then its name, then its location, then against an edit distance that
+survives a typo or two, so `phillipines` and `venise` both land. Several words
+are an AND. A handful of words people type that are not in the data are mapped
+across - `zoo` reaches the aquariums and the safari cams, `planes` reaches the
+airports - at a discount, so the literal matches still sort first.
+
+Every camera carries a `tags` array in `cameras.json` covering three things:
+
+- **place** - city, region, country, continent and the aliases people actually
+  type: `nyc`, `ph`, `uk`, `mecca`, `rockies`.
+- **scene** - `beach`, `skyline`, `volcano`, `waterhole`, `zoo`, `underwater`,
+  `airport`, `sacred`, `stage`.
+- **quality** - `busy`, `quiet`, `night lights`, `sunset-facing`,
+  `sunrise-facing`, `always-on`, `part-time`, `has-sound`.
+
+`python3 tag.py` regenerates the whole array from the camera's own fields plus a
+hand-written table of what no field knows - that the Long Beach penguin cam is
+penguins, that Abbey Road is the Beatles. Edit `tag.py`, not `cameras.json`.
+`sunset-facing` comes from the pose heading, `has-sound` only from a camera
+confirmed to carry real ambience or live music (`audio: "unknown"` means nobody
+has listened yet, so it makes no promise).
+
+`search.js` is the whole feature: it builds its own panel and styles, matches
+against the list, and talks to the globe through four callbacks. The app calls
+`RoundtripSearch.init()` once and adds one line to the key handler. From the
+console, `Roundtrip.find('beach')` runs the same match the box does.
 
 ## Poses, and the alignment tool
 
@@ -101,6 +141,7 @@ pulled into the browser cache in the background.
 | terrain | AWS open terrain tiles, terrarium encoding | free |
 | buildings | OpenStreetMap via Overpass | free |
 | live feeds | the project's verified YouTube cams | free |
+| search tags | derived in `tag.py` from the camera records | free |
 
 No account, no key, no billing. The attribution line bottom-right is required
 by Esri's and OpenStreetMap's terms; leave it in.

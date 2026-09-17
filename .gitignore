@@ -1,0 +1,3 @@
+# The single-file double-click build. Pages serves the source layout, so this
+# is a local artifact: rebuild it with `python3 build.py`.
+Roundtrip.html

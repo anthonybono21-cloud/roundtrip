@@ -1,6 +1,10 @@
 # Publishing Roundtrip
 
-Roundtrip is live at **https://anthonybono21-cloud.github.io/roundtrip/**
+Intended address: **https://anthonybono21-cloud.github.io/roundtrip/**
+
+**It is not serving yet.** GitHub Pages is still switched off for this repo
+(`has_pages: false`). Everything else is built, pushed and verified; see
+"How it is hosted" for the one owner-only setting that turns it on.
 
 ET45 (the desk PC) opens that address once. Every build after this one appears
 there on the next refresh, with nothing to do on that machine.

@@ -879,6 +879,7 @@ async function stageGround(cam, onPass, detailJob){
     old.material.map?.dispose(); old.material.dispose();
   }
   patch = closePatch = null;
+  for (const m of bldGroup.children){ m.geometry.dispose(); m.material.dispose(); }
   bldGroup.clear();
 
   // Sky and sun for this place and this minute, so the render matches the feed.
@@ -995,11 +996,17 @@ async function stageGround(cam, onPass, detailJob){
   Promise.all([...pending, detailJob]).then(() => { state.ready = true; });
 
   // Buildings, in the background — the dive should never wait on Overpass.
+  // Every footprint is extruded, baked into one buffer and thrown away again.
+  // A mesh each was 900 draw calls at the altitude where frame time matters
+  // most, and Group.clear() detached them without freeing their buffers, so an
+  // all-day display shed 900 live geometries per dive until it ran out.
   if (CFG.buildings) (async () => {
     const bs = await osmBuildings(lat, lng);
     if (!bs.length) return;
-    const mats = [0x9aa0a6, 0xa8a49c, 0x8f959b].map(c =>
-      new THREE.MeshStandardMaterial({ color:c, roughness:0.85, flatShading:true }));
+    // Color.set already lands in the renderer's linear working space, and a
+    // vertex colour is read from there too, so no conversion belongs here.
+    const tint = [0x9aa0a6, 0xa8a49c, 0x8f959b].map(c => new THREE.Color(c));
+    const pos = [], nrm = [], col = [];
     bs.forEach((b,i) => {
       const shape = new THREE.Shape();
       b.ring.forEach(([la,ln],k) => {
@@ -1010,11 +1017,27 @@ async function stageGround(cam, onPass, detailJob){
       try { g = new THREE.ExtrudeGeometry(shape, { depth:b.h, bevelEnabled:false }); }
       catch { return; }
       g.rotateX(-Math.PI/2);
-      const m = new THREE.Mesh(g, mats[i%3]);
       const c = b.ring[0];
-      m.position.y = dem ? dem(c[0],c[1]) - h0 : 0;
-      bldGroup.add(m);
+      g.translate(0, dem ? dem(c[0],c[1]) - h0 : 0, 0);
+      // Flat shading came from a per-mesh material flag that a merged buffer
+      // cannot carry, so the facet normals are baked in instead.
+      const flat = g.index ? g.toNonIndexed() : g;
+      if (flat !== g) g.dispose();
+      flat.computeVertexNormals();
+      const P = flat.attributes.position.array, N = flat.attributes.normal.array;
+      const t = tint[i % 3];
+      for (let k = 0; k < P.length; k++){ pos.push(P[k]); nrm.push(N[k]); }
+      for (let k = 0; k < P.length; k += 3){ col.push(t.r, t.g, t.b); }
+      flat.dispose();
     });
+    if (!pos.length) return;
+    const geo = new THREE.BufferGeometry();
+    geo.setAttribute('position', new THREE.BufferAttribute(new Float32Array(pos), 3));
+    geo.setAttribute('normal',   new THREE.BufferAttribute(new Float32Array(nrm), 3));
+    geo.setAttribute('color',    new THREE.BufferAttribute(new Float32Array(col), 3));
+    geo.computeBoundingSphere();
+    bldGroup.add(new THREE.Mesh(geo, new THREE.MeshStandardMaterial(
+      { vertexColors:true, roughness:0.85, metalness:0 })));
   })();
 
   return { h0, dem };

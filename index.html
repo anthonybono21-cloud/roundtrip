@@ -47,6 +47,23 @@
     text-transform:uppercase;color:#ffd479;opacity:0;transition:opacity .4s}
   #pinned.on{opacity:1}
 
+  /* Sound. Always there, glassy and see-through, and it brightens under the
+     cursor so it never competes with the picture. */
+  #sound{position:fixed;right:34px;top:58px;width:42px;height:42px;border-radius:50%;
+    display:grid;place-items:center;cursor:pointer;z-index:9;
+    background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.14);
+    backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+    opacity:.34;transition:opacity .25s ease,background .25s ease,transform .12s ease;
+    -webkit-tap-highlight-color:transparent}
+  #sound:hover,#sound:focus-visible{opacity:1;background:rgba(255,255,255,.15);outline:none}
+  #sound:active{transform:scale(.93)}
+  #sound svg{width:19px;height:19px;fill:none;stroke:var(--ink);stroke-width:1.7;
+    stroke-linecap:round;stroke-linejoin:round;display:none;
+    filter:drop-shadow(0 1px 3px rgba(0,0,0,.6))}
+  #sound .on-i{display:block}
+  #sound.off .on-i{display:none}
+  #sound.off .off-i{display:block}
+
   #attrib{position:fixed;right:12px;bottom:10px;font-size:10px;color:rgba(200,215,235,.42);
     text-align:right;line-height:1.5;pointer-events:none}
 
@@ -119,8 +136,21 @@
   <div><kbd>N</kbd>dive to the next camera</div>
   <div><kbd>Space</kbd>hold this one</div>
   <div><kbd>R</kbd>reject and skip</div>
+  <div><kbd>M</kbd>sound on/off &middot; <kbd>Shift+M</kbd>silence this one</div>
   <div><kbd>Esc</kbd>pull back to orbit</div>
   <div><kbd>F</kbd>fullscreen &middot; <kbd>H</kbd>hide this</div>
+</div>
+
+<div id="sound" class="off" role="button" tabindex="0" aria-pressed="false" aria-label="Sound">
+  <svg class="on-i" viewBox="0 0 24 24" aria-hidden="true">
+    <path d="M4 9.2v5.6h3.4L12.8 19V5L7.4 9.2H4z"/>
+    <path d="M16.3 9a4.2 4.2 0 0 1 0 6"/>
+    <path d="M19 6.4a8 8 0 0 1 0 11.2"/>
+  </svg>
+  <svg class="off-i" viewBox="0 0 24 24" aria-hidden="true">
+    <path d="M4 9.2v5.6h3.4L12.8 19V5L7.4 9.2H4z"/>
+    <path d="M16.6 9.8l4.8 4.4"/><path d="M21.4 9.8l-4.8 4.4"/>
+  </svg>
 </div>
 
 <div id="attrib"></div>
@@ -158,6 +188,7 @@ const CFG = {
   prefetch:     true,   // warm the next camera's tiles while a feed plays
   breathe:      1.0,    // idle camera drift and roll, 0 turns it off
   maxDepart:    11,     // seconds to wait for tiles before diving anyway
+  volume:       15,     // percent, the level a feed's own sound settles at
   buildings:    true,   // pull OSM footprints for the final approach
   wideM:        11000,  // detailed ground, wide enough to carry the horizon
   nearM:        900,    // sharp ground for the last stretch
@@ -998,7 +1029,8 @@ function mountLive(cam){
     f.allow = 'autoplay; encrypted-media; picture-in-picture';
     f.referrerPolicy = 'origin-when-cross-origin';
     f.src = `https://www.youtube.com/embed/${cam.video_id}`
-          + `?autoplay=1&mute=1&playsinline=1&controls=0&modestbranding=1&rel=0&iv_load_policy=3`;
+          + `?autoplay=1&mute=1&playsinline=1&controls=0&modestbranding=1&rel=0&iv_load_policy=3`
+          + `&enablejsapi=1`;      // so the volume can be driven once sound is on
     liveEl.appendChild(f);
     liveEl.classList.add('zoom');        // crop the player chrome out of frame
     liveFrame = f;
@@ -1010,7 +1042,92 @@ function mountLive(cam){
     liveFrame = v;
   }
 }
-function unmountLive(){ liveEl.classList.remove('on','zoom'); liveEl.innerHTML=''; liveFrame=null; }
+function unmountLive(){
+  liveEl.classList.remove('on','zoom'); liveEl.innerHTML=''; liveFrame=null;
+  audio.vol = audio.target = 0;     // a fresh player starts muted
+}
+
+/* ── feed audio ────────────────────────────────────────────────────────────
+   The feeds are YouTube embeds, so their sound is whatever the camera's own
+   microphone hears: surf, birds, a street, a crowd. Some channels run a music
+   bed or a broadcast loop instead of ambience; those carry audio:"music" in
+   the camera list and stay silent whatever the button says, and any camera can
+   be silenced for good with Shift+M.
+
+   Volume is driven by postMessage straight to the player rather than through
+   the IFrame API, so the page pulls in no script at runtime and a failure here
+   is silence rather than a broken feed.
+
+   Browsers will not let a page make noise until someone has interacted with
+   it. Nothing says so on screen: the speaker button is itself the interaction,
+   so the first click both permits the sound and turns it on. */
+const SOUND_KEY = 'roundtrip.sound', SILENCE_KEY = 'roundtrip.silenced';
+const audio = { on:false, armed:false, vol:0, target:0, sent:0, lastCmd:null };
+let silenced = new Set();
+try { audio.on = localStorage.getItem(SOUND_KEY) === 'on'; } catch {}
+try { silenced = new Set(JSON.parse(localStorage.getItem(SILENCE_KEY) || '[]')); } catch {}
+
+const camHasSound = cam => !!cam && cam.audio !== 'music' && cam.audio !== 'silent'
+                        && !silenced.has(camKey(cam));
+
+function ytCmd(func, args){
+  if (!liveFrame || liveFrame.tagName !== 'IFRAME' || !liveFrame.contentWindow) return;
+  audio.sent++; audio.lastCmd = args && args.length ? func+'('+args.join(',')+')' : func+'()';
+  try {
+    liveFrame.contentWindow.postMessage(
+      JSON.stringify({ event:'command', func, args: args || [] }), 'https://www.youtube.com');
+  } catch {}
+}
+
+function applyVolume(){
+  const pct = Math.round(audio.vol * CFG.volume);
+  if (pct > 0){ ytCmd('unMute'); ytCmd('setVolume', [pct]); }
+  else { ytCmd('setVolume', [0]); ytCmd('mute'); }
+  if (liveFrame && liveFrame.tagName === 'VIDEO'){
+    liveFrame.volume = pct/100; liveFrame.muted = pct === 0;
+  }
+}
+
+/* Up over about two seconds once the feed has settled, down in one on the way
+   out. This runs on its own timer because the render loop idles while a feed
+   is playing, which is the whole time the sound matters. */
+setInterval(() => {
+  const want = (audio.on && audio.armed && state.liveOn && camHasSound(state.cam))
+             ? audio.target : 0;
+  if (Math.abs(want - audio.vol) < 0.004){
+    if (audio.vol !== want){ audio.vol = want; applyVolume(); }
+    return;
+  }
+  audio.vol = clamp(audio.vol + Math.sign(want - audio.vol) * (want > audio.vol ? 0.06 : 0.12), 0, 1);
+  applyVolume();
+}, 120);
+
+// Any real interaction is the permission a browser is waiting for.
+const armAudio = () => {
+  if (audio.armed) return;
+  audio.armed = true;
+  removeEventListener('pointerdown', armAudio); removeEventListener('keydown', armAudio);
+};
+addEventListener('pointerdown', armAudio, { passive:true });
+addEventListener('keydown', armAudio);
+
+const soundEl = $('#sound');
+function paintSound(){
+  soundEl.classList.toggle('off', !audio.on);
+  soundEl.setAttribute('aria-pressed', String(audio.on));
+  soundEl.setAttribute('aria-label', audio.on ? 'Sound on' : 'Silent');
+  soundEl.title = audio.on ? 'Sound on' : 'Silent';
+}
+function toggleSound(){
+  audio.on = !audio.on;
+  try { localStorage.setItem(SOUND_KEY, audio.on ? 'on' : 'off'); } catch {}
+  paintSound();
+}
+soundEl.addEventListener('click', toggleSound);
+soundEl.addEventListener('keydown', e => {
+  if (e.key === 'Enter' || e.key === ' '){ e.preventDefault(); e.stopPropagation(); toggleSound(); }
+});
+paintSound();
 
 /* ── place card ─────────────────────────────────────────────────────────── */
 
@@ -1403,6 +1520,7 @@ function tick(){
         setPhase('reveal');
         liveEl.classList.add('on');
         state.liveOn = true;
+        audio.target = 1;              // the feed's own sound, if it has any
         showCard(state.cam);
         setTimeout(prefetchNext, 1500);   // warm the next one while this plays
       }
@@ -1415,6 +1533,7 @@ function tick(){
       break;
     case 'retreat': {
       const t = phaseT(CFG.retreat);
+      audio.target = 0;
       if (state.liveOn && t > 0.05){ liveEl.classList.remove('on'); state.liveOn = false; hideCard(); }
       state.blend = clamp(1 - t*2.2, 0, 1);
       if (t >= 1){ unmountLive(); state.blend = 0; setPhase('orbit'); }
@@ -1538,6 +1657,15 @@ addEventListener('keydown', e => {
   }
   if (k==='n' || k==='N'){ if (state.phase==='live'||state.phase==='orbit') beginDive(pickNext()); }
   else if (k===' '){ state.pinned = !state.pinned; $('#pinned').classList.toggle('on', state.pinned); e.preventDefault(); }
+  else if (k==='M' || (k==='m' && e.shiftKey)){
+    // Silence this camera for good: a music bed or a radio loop, not ambience.
+    if (state.cam){
+      silenced.add(camKey(state.cam));
+      try { localStorage.setItem(SILENCE_KEY, JSON.stringify([...silenced])); } catch {}
+      note('Silenced '+state.cam.name+' for good. Sound stays on for the rest.');
+    }
+  }
+  else if (k==='m'){ toggleSound(); }
   else if (k==='r' || k==='R'){
     if (state.cam){
       state.rejects.add(camKey(state.cam));
@@ -1638,6 +1766,10 @@ const progress = v => { bar.style.width = (v*100)+'%'; };
     // Roundtrip.offAir() lists cams held back right now by their live_window.
     offAir: () => state.cams.filter(c => !isLiveNow(c)).map(c => c.name),
     isLiveNow,
+    // Roundtrip.audio shows the button state, whether the browser has allowed
+    // sound yet, and where the volume ramp currently sits.
+    audio, toggleSound, camHasSound,
+    silenced: () => [...silenced],
     dive: q => { const c = state.cams.find(c => c.name.toLowerCase().includes(String(q).toLowerCase()));
                  if (c) beginDive(c); else console.warn('no camera matching', q); return c?.name; } };
 

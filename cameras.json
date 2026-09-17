@@ -57,7 +57,9 @@
     "method": "youtube watch page metadata (isLiveBroadcast / startDate / endDate)",
     "embed": "ok",
     "embed_reason": "embed page returns the video title, plays without login"
-   }
+   },
+   "audio": "unknown",
+   "audio_basis": "not established by listening; plays when sound is on, Shift+M silences it if it turns out to be music"
   },
   {
    "name": "Maribago Port, Mactan",
@@ -96,7 +98,9 @@
     "method": "youtube watch page metadata (isLiveBroadcast / startDate / endDate)",
     "embed": "ok",
     "embed_reason": "embed page returns the video title, plays without login"
-   }
+   },
+   "audio": "unknown",
+   "audio_basis": "not established by listening; plays when sound is on, Shift+M silences it if it turns out to be music"
   },
   {
    "name": "Mayon Volcano",
@@ -135,7 +139,9 @@
     "method": "youtube watch page metadata (isLiveBroadcast / startDate / endDate)",
     "embed": "ok",
     "embed_reason": "embed page returns the video title, plays without login"
-   }
+   },
+   "audio": "music",
+   "audio_basis": "afarTV runs a music bed over its scenic streams"
   },
   {
    "name": "Agdao Public Market",
@@ -174,7 +180,9 @@
     "method": "youtube watch page metadata (isLiveBroadcast / startDate / endDate)",
     "embed": "ok",
     "embed_reason": "embed page returns the video title, plays without login"
-   }
+   },
+   "audio": "unknown",
+   "audio_basis": "not established by listening; plays when sound is on, Shift+M silences it if it turns out to be music"
   },
   {
    "name": "Bankerohan street food",
@@ -213,7 +221,9 @@
     "method": "youtube watch page metadata (isLiveBroadcast / startDate / endDate)",
     "embed": "ok",
     "embed_reason": "embed page returns the video title, plays without login"
-   }
+   },
+   "audio": "unknown",
+   "audio_basis": "not established by listening; plays when sound is on, Shift+M silences it if it turns out to be music"
   },
   {
    "name": "Rialto Bridge, Venice",
@@ -252,7 +262,9 @@
     "method": "youtube watch page metadata (isLiveBroadcast / startDate / endDate)",
     "embed": "ok",
     "embed_reason": "embed page returns the video title, plays without login"
-   }
+   },
+   "audio": "unknown",
+   "audio_basis": "not established by listening; plays when sound is on, Shift+M silences it if it turns out to be music"
   },
   {
    "name": "Grand Canal, Venice",
@@ -291,7 +303,9 @@
     "method": "youtube watch page metadata (isLiveBroadcast / startDate / endDate)",
     "embed": "ok",
     "embed_reason": "embed page returns the video title, plays without login"
-   }
+   },
+   "audio": "unknown",
+   "audio_basis": "not established by listening; plays when sound is on, Shift+M silences it if it turns out to be music"
   },
   {
    "name": "St Mark's Basin, Venice",
@@ -330,7 +344,9 @@
     "method": "youtube watch page metadata (isLiveBroadcast / startDate / endDate)",
     "embed": "ok",
     "embed_reason": "embed page returns the video title, plays without login"
-   }
+   },
+   "audio": "unknown",
+   "audio_basis": "not established by listening; plays when sound is on, Shift+M silences it if it turns out to be music"
   },
   {
    "name": "Piazza del Campo, Siena",
@@ -369,7 +385,9 @@
     "method": "youtube watch page metadata (isLiveBroadcast / startDate / endDate)",
     "embed": "ok",
     "embed_reason": "embed page returns the video title, plays without login"
-   }
+   },
+   "audio": "unknown",
+   "audio_basis": "not established by listening; plays when sound is on, Shift+M silences it if it turns out to be music"
   },
   {
    "name": "Piazza del Comune, Assisi",
@@ -408,7 +426,9 @@
     "method": "youtube watch page metadata (isLiveBroadcast / startDate / endDate)",
     "embed": "ok",
     "embed_reason": "embed page returns the video title, plays without login"
-   }
+   },
+   "audio": "unknown",
+   "audio_basis": "not established by listening; plays when sound is on, Shift+M silences it if it turns out to be music"
   },
   {
    "name": "Manarola, Cinque Terre",
@@ -447,7 +467,9 @@
     "method": "youtube watch page metadata (isLiveBroadcast / startDate / endDate)",
     "embed": "ok",
     "embed_reason": "embed page returns the video title, plays without login"
-   }
+   },
+   "audio": "unknown",
+   "audio_basis": "not established by listening; plays when sound is on, Shift+M silences it if it turns out to be music"
   },
   {
    "name": "Maria Pia Beach, Sardinia",
@@ -486,7 +508,9 @@
     "method": "youtube watch page metadata (isLiveBroadcast / startDate / endDate)",
     "embed": "ok",
     "embed_reason": "embed page returns the video title, plays without login"
-   }
+   },
+   "audio": "unknown",
+   "audio_basis": "not established by listening; plays when sound is on, Shift+M silences it if it turns out to be music"
   },
   {
    "name": "Sottomarina beach, Chioggia",
@@ -525,7 +549,9 @@
     "method": "youtube watch page metadata (isLiveBroadcast / startDate / endDate)",
     "embed": "ok",
     "embed_reason": "embed page returns the video title, plays without login"
-   }
+   },
+   "audio": "unknown",
+   "audio_basis": "not established by listening; plays when sound is on, Shift+M silences it if it turns out to be music"
   },
   {
    "name": "Mount Etna",
@@ -564,7 +590,9 @@
     "method": "youtube watch page metadata (isLiveBroadcast / startDate / endDate)",
     "embed": "ok",
     "embed_reason": "embed page returns the video title, plays without login"
-   }
+   },
+   "audio": "music",
+   "audio_basis": "afarTV runs a music bed over its scenic streams"
   },
   {
    "name": "Dolomites panorama",
@@ -603,7 +631,9 @@
     "method": "youtube watch page metadata (isLiveBroadcast / startDate / endDate)",
     "embed": "ok",
     "embed_reason": "embed page returns the video title, plays without login"
-   }
+   },
+   "audio": "unknown",
+   "audio_basis": "not established by listening; plays when sound is on, Shift+M silences it if it turns out to be music"
   },
   {
    "name": "Florence",
@@ -642,7 +672,9 @@
     "method": "youtube watch page metadata (isLiveBroadcast / startDate / endDate)",
     "embed": "ok",
     "embed_reason": "embed page returns the video title, plays without login"
-   }
+   },
+   "audio": "unknown",
+   "audio_basis": "not established by listening; plays when sound is on, Shift+M silences it if it turns out to be music"
   },
   {
    "name": "Seoul Station Plaza",
@@ -681,7 +713,9 @@
     "method": "youtube watch page metadata (isLiveBroadcast / startDate / endDate)",
     "embed": "ok",
     "embed_reason": "embed page returns the video title, plays without login"
-   }
+   },
+   "audio": "unknown",
+   "audio_basis": "not established by listening; plays when sound is on, Shift+M silences it if it turns out to be music"
   },
   {
    "name": "Han River at Banpo Bridge",
@@ -720,7 +754,9 @@
     "method": "youtube watch page metadata (isLiveBroadcast / startDate / endDate)",
     "embed": "ok",
     "embed_reason": "embed page returns the video title, plays without login"
-   }
+   },
+   "audio": "unknown",
+   "audio_basis": "not established by listening; plays when sound is on, Shift+M silences it if it turns out to be music"
   },
   {
    "name": "Han River skyline, Yeouido",
@@ -759,7 +795,9 @@
     "method": "youtube watch page metadata (isLiveBroadcast / startDate / endDate)",
     "embed": "ok",
     "embed_reason": "embed page returns the video title, plays without login"
-   }
+   },
+   "audio": "unknown",
+   "audio_basis": "not established by listening; plays when sound is on, Shift+M silences it if it turns out to be music"
   },
   {
    "name": "Dongdaemun Design Plaza",
@@ -798,7 +836,9 @@
     "method": "youtube watch page metadata (isLiveBroadcast / startDate / endDate)",
     "embed": "ok",
     "embed_reason": "embed page returns the video title, plays without login"
-   }
+   },
+   "audio": "unknown",
+   "audio_basis": "not established by listening; plays when sound is on, Shift+M silences it if it turns out to be music"
   },
   {
    "name": "Gwangan Bridge and Gwangalli Beach",
@@ -837,7 +877,9 @@
     "method": "youtube watch page metadata (isLiveBroadcast / startDate / endDate)",
     "embed": "ok",
     "embed_reason": "embed page returns the video title, plays without login"
-   }
+   },
+   "audio": "unknown",
+   "audio_basis": "not established by listening; plays when sound is on, Shift+M silences it if it turns out to be music"
   },
   {
    "name": "Haeundae Beach",
@@ -876,7 +918,9 @@
     "method": "youtube watch page metadata (isLiveBroadcast / startDate / endDate)",
     "embed": "ok",
     "embed_reason": "embed page returns the video title, plays without login"
-   }
+   },
+   "audio": "unknown",
+   "audio_basis": "not established by listening; plays when sound is on, Shift+M silences it if it turns out to be music"
   },
   {
    "name": "Gangmun Beach, Gangneung",
@@ -915,7 +959,9 @@
     "method": "youtube watch page metadata (isLiveBroadcast / startDate / endDate)",
     "embed": "ok",
     "embed_reason": "embed page returns the video title, plays without login"
-   }
+   },
+   "audio": "unknown",
+   "audio_basis": "not established by listening; plays when sound is on, Shift+M silences it if it turns out to be music"
   },
   {
    "name": "Kelp Forest Cam",
@@ -959,7 +1005,9 @@
     "confidence": "medium",
     "basis": "OpenStreetMap has a dedicated 'Kelp Forest' attraction node at this point inside the aquarium footprint, in the original 1984 Ocean's Edge wing."
    },
-   "timezone": "America/Los_Angeles"
+   "timezone": "America/Los_Angeles",
+   "audio": "unknown",
+   "audio_basis": "a tank or underwater view, so there is little outdoor ambience to carry and aquarium channels often add a bed; plays when sound is on, Shift+M silences it"
   },
   {
    "name": "Open Sea Cam",
@@ -1003,7 +1051,9 @@
     "confidence": "low",
     "basis": "The million-gallon Open Sea tank is in the separate 1996 Outer Bay wing; this is the SE half of the mapped footprint on the bay side. No georeferenced floor plan exists, so it is within about 60-100m of the tank."
    },
-   "timezone": "America/Los_Angeles"
+   "timezone": "America/Los_Angeles",
+   "audio": "unknown",
+   "audio_basis": "a tank or underwater view, so there is little outdoor ambience to carry and aquarium channels often add a bed; plays when sound is on, Shift+M silences it"
   },
   {
    "name": "Jelly Cam",
@@ -1047,7 +1097,9 @@
     "confidence": "low",
     "basis": "The aquarium's accessibility guide puts the jellies at the Ocean's Edge entry of the Open Sea wing. Building-level accuracy only."
    },
-   "timezone": "America/Los_Angeles"
+   "timezone": "America/Los_Angeles",
+   "audio": "unknown",
+   "audio_basis": "a tank or underwater view, so there is little outdoor ambience to carry and aquarium channels often add a bed; plays when sound is on, Shift+M silences it"
   },
   {
    "name": "Tropical Reef Camera",
@@ -1086,7 +1138,9 @@
     "confidence": "low",
     "basis": "The visitor guide puts the Tropical Pacific gallery on the second floor at the far SW end of the main building. Derived from the mapped footprint plus the floor-plan text, not a georeferenced plan."
    },
-   "timezone": "America/Los_Angeles"
+   "timezone": "America/Los_Angeles",
+   "audio": "unknown",
+   "audio_basis": "a tank or underwater view, so there is little outdoor ambience to carry and aquarium channels often add a bed; plays when sound is on, Shift+M silences it"
   },
   {
    "name": "Shark Lagoon",
@@ -1125,7 +1179,9 @@
     "confidence": "medium",
     "basis": "The visitor guide places Shark Lagoon outdoors at ground level in the eastern section with its own restrooms, matching the OSM toilets building in the NE entry plaza."
    },
-   "timezone": "America/Los_Angeles"
+   "timezone": "America/Los_Angeles",
+   "audio": "unknown",
+   "audio_basis": "a tank or underwater view, so there is little outdoor ambience to carry and aquarium channels often add a bed; plays when sound is on, Shift+M silences it"
   },
   {
    "name": "Blue Cavern",
@@ -1164,7 +1220,9 @@
     "confidence": "medium",
     "basis": "The accessibility map puts the main entrance on the SE side of the Great Hall with the Honda Blue Cavern just ahead and left, i.e. the NE end of the main building."
    },
-   "timezone": "America/Los_Angeles"
+   "timezone": "America/Los_Angeles",
+   "audio": "unknown",
+   "audio_basis": "a tank or underwater view, so there is little outdoor ambience to carry and aquarium channels often add a bed; plays when sound is on, Shift+M silences it"
   },
   {
    "name": "Homosassa Springs Underwater Manatees",
@@ -1203,7 +1261,9 @@
     "confidence": "high",
     "basis": "Natural Atlas geolocates the Fish Bowl Underwater Observatory at this point, matching OpenStreetMap's Homosassa Spring vents about 20m away."
    },
-   "timezone": "America/New_York"
+   "timezone": "America/New_York",
+   "audio": "unknown",
+   "audio_basis": "a tank or underwater view, so there is little outdoor ambience to carry and aquarium channels often add a bed; plays when sound is on, Shift+M silences it"
   },
   {
    "name": "Utopia Village Underwater Coral",
@@ -1247,7 +1307,9 @@
     "confidence": "medium",
     "basis": "Utopia Village is on Utila in the Bay Islands of Honduras, not Placencia, Belize as the old record said. The cam operator publishes 16.06841, -86.95662 for the co-located edge-of-wall reef cam, about 120m offshore in roughly 8m of water."
    },
-   "timezone": "America/Tegucigalpa"
+   "timezone": "America/Tegucigalpa",
+   "audio": "unknown",
+   "audio_basis": "a tank or underwater view, so there is little outdoor ambience to carry and aquarium channels often add a bed; plays when sound is on, Shift+M silences it"
   },
   {
    "name": "USC Wrigley Catalina Marine Reserve",
@@ -1291,7 +1353,9 @@
     "confidence": "high",
     "basis": "OpenStreetMap bay centroid for Big Fisherman Cove, about 130m WSW of the USC Wrigley Institute node, inside the Blue Cavern marine protected area."
    },
-   "timezone": "America/Los_Angeles"
+   "timezone": "America/Los_Angeles",
+   "audio": "unknown",
+   "audio_basis": "a tank or underwater view, so there is little outdoor ambience to carry and aquarium channels often add a bed; plays when sound is on, Shift+M silences it"
   },
   {
    "name": "Penguins, Underwater View",
@@ -1330,7 +1394,9 @@
     "confidence": "low",
     "basis": "The visitor guide puts the June Keyes Penguin Habitat outdoors on the second floor at the eastern end, above the Shark Lagoon side. Building-level accuracy."
    },
-   "timezone": "America/Los_Angeles"
+   "timezone": "America/Los_Angeles",
+   "audio": "unknown",
+   "audio_basis": "a tank or underwater view, so there is little outdoor ambience to carry and aquarium channels often add a bed; plays when sound is on, Shift+M silences it"
   },
   {
    "name": "Underwater Salmon Cam",
@@ -1376,7 +1442,9 @@
     "confidence": "medium",
     "basis": "explore.org describes the cam as mounted on the floating bridge at the mouth of the Brooks River looking downstream; OSM has that bridge at 58.55337,-155.77862 with the river running ENE to Naknek Lake. Lens is submerged, so the landing is top-down at the bridge."
    },
-   "timezone": "America/Anchorage"
+   "timezone": "America/Anchorage",
+   "audio": "ambience",
+   "audio_basis": "this channel carries the microphone at the camera"
   },
   {
    "name": "Silver Springs Underwater Manatee Camera",
@@ -1415,7 +1483,9 @@
     "confidence": "high",
     "basis": "OpenStreetMap's 'Silver Springs Main' spring node, the Mammoth Spring head where the glass-bottom boats launch."
    },
-   "timezone": "America/New_York"
+   "timezone": "America/New_York",
+   "audio": "unknown",
+   "audio_basis": "a tank or underwater view, so there is little outdoor ambience to carry and aquarium channels often add a bed; plays when sound is on, Shift+M silences it"
   },
   {
    "name": "Brooks Falls Brown Bears",
@@ -1461,7 +1531,9 @@
     "confidence": "high",
     "basis": "explore.org says the cam is on the elevated Brooks Falls viewing platform; OpenStreetMap puts that platform at 58.55475,-155.79193 with the falls lip about 35m to the NE, so it looks NE across the falls."
    },
-   "timezone": "America/Anchorage"
+   "timezone": "America/Anchorage",
+   "audio": "ambience",
+   "audio_basis": "this channel carries the microphone at the camera"
   },
   {
    "name": "Anan Wildlife Observatory, Lower Falls",
@@ -1507,7 +1579,9 @@
     "confidence": "medium",
     "basis": "OSM has a GPS-surveyed 'Anan viewing deck' node at 56.17899,-131.88400 on the SW bank; Anan Creek flows NW toward Anan Bay, so the deck looks ESE up-creek at the lower falls. Deck height from the three-storey stairway down to the creek-level blind."
    },
-   "timezone": "America/Anchorage"
+   "timezone": "America/Anchorage",
+   "audio": "ambience",
+   "audio_basis": "this channel carries the microphone at the camera"
   },
   {
    "name": "African Watering Hole at Mpala",
@@ -1546,7 +1620,9 @@
     "confidence": "medium",
     "basis": "The eBird hotspot 'Mpala Research Centre--Hippo Pool' maps to this point, and the cam watches the Ewaso Ng'iro hippo pool rather than an artificial pan. Heading is inferred from the river running at about 69 degrees with the cam on the north bank, so it looks across to the south bank."
    },
-   "timezone": "Africa/Nairobi"
+   "timezone": "Africa/Nairobi",
+   "audio": "ambience",
+   "audio_basis": "this channel carries the microphone at the camera"
   },
   {
    "name": "Tembe Elephant Park Waterhole",
@@ -1585,7 +1661,9 @@
     "confidence": "high",
     "basis": "OpenStreetMap tags the two-storey Mahlasela Hide at this exact point and the Mahlasela Pan 92m away; hide to pan is a bearing of 193 degrees. Height is the hide's upper deck."
    },
-   "timezone": "Africa/Johannesburg"
+   "timezone": "Africa/Johannesburg",
+   "audio": "ambience",
+   "audio_basis": "this channel carries the microphone at the camera"
   },
   {
    "name": "Tau Waterhole",
@@ -1624,7 +1702,9 @@
     "confidence": "medium",
     "basis": "OSM puts Tau Game Lodge's waterhole about 80m SSE of the lodge, and a published cam coordinate falls between the lodge deck and the water, so it looks SSE across it. Africam confirms the camera sits next to the lodge waterhole."
    },
-   "timezone": "Africa/Johannesburg"
+   "timezone": "Africa/Johannesburg",
+   "audio": "ambience",
+   "audio_basis": "this channel carries the microphone at the camera"
   },
   {
    "name": "Nkorho Bush Lodge",
@@ -1663,7 +1743,9 @@
     "confidence": "medium",
     "basis": "OSM has the lodge building and, 289m north, the only nearby pan; lodge to pan is a bearing of 12 degrees. The camera is placed just south of the pan on the lodge side looking north, which is the usual Africam pole setup, so the heading is the weakest part of this one."
    },
-   "timezone": "Africa/Johannesburg"
+   "timezone": "Africa/Johannesburg",
+   "audio": "ambience",
+   "audio_basis": "this channel carries the microphone at the camera"
   },
   {
    "name": "Panama Fruit Feeder at Canopy Lodge",
@@ -1707,7 +1789,9 @@
     "confidence": "medium",
     "basis": "eBird has a hotspot named exactly 'Canopy Lodge--Panama Fruit Feeder Cam' at this point, so the position is solid. The cam sees a fruit table, not a landscape, so the dive ends looking straight down at the lodge garden."
    },
-   "timezone": "America/Panama"
+   "timezone": "America/Panama",
+   "audio": "ambience",
+   "audio_basis": "this channel carries the microphone at the camera"
   },
   {
    "name": "Panama Hummingbird Feeder at Canopy Tower",
@@ -1751,7 +1835,9 @@
     "confidence": "medium",
     "basis": "eBird's Canopy Tower hotspot, corroborated by Birdingplaces. The feeders sit on the tower's viewing deck, so the frame is feeders rather than a view; the dive ends straight down on the tower in the rainforest canopy of Semaphore Hill."
    },
-   "timezone": "America/Panama"
+   "timezone": "America/Panama",
+   "audio": "ambience",
+   "audio_basis": "this channel carries the microphone at the camera"
   },
   {
    "name": "Burrowing Owls at the Former Umatilla Chemical Depot",
@@ -1790,7 +1876,9 @@
     "confidence": "low",
     "basis": "The burrow is deliberately unpublished: the cam watches one of about 180 artificial burrows spread over 10,000 acres in the Coyote Coulee area. Position is the depot centroid, so it is a site-level guess, not the burrow."
    },
-   "timezone": "America/Los_Angeles"
+   "timezone": "America/Los_Angeles",
+   "audio": "ambience",
+   "audio_basis": "this channel carries the microphone at the camera"
   },
   {
    "name": "International Wolf Center, North Camera",
@@ -1829,7 +1917,9 @@
     "confidence": "medium",
     "basis": "OSM maps the centre building at 1396 State Hwy 169 with the 1.25-acre ambassador-wolf enclosure immediately NE of it; position is the building's rear wall where the viewing windows face the yard, looking NE along the enclosure. Heading and height inferred, not published."
    },
-   "timezone": "America/Chicago"
+   "timezone": "America/Chicago",
+   "audio": "ambience",
+   "audio_basis": "this channel carries the microphone at the camera"
   },
   {
    "name": "Plains Bison Watering Hole",
@@ -1868,7 +1958,9 @@
     "confidence": "low",
     "basis": "Parks Canada only says 'near a known watering hole along the EcoTour road' in the West Block. This is the closest mapped waterbody to the Ecotour Scenic Drive crossing, so it is good to roughly 3km along the loop. Heading is a convention guess."
    },
-   "timezone": "America/Regina"
+   "timezone": "America/Regina",
+   "audio": "ambience",
+   "audio_basis": "this channel carries the microphone at the camera"
   },
   {
    "name": "Texas Backyard Wildlife",
@@ -1907,7 +1999,9 @@
     "confidence": "low",
     "basis": "A private residence that publishes only 'our Austin backyard' and no address. Rock squirrels and ringtails in frame point to the limestone hill-country side of town, so this is a west-Austin guess only."
    },
-   "timezone": "America/Chicago"
+   "timezone": "America/Chicago",
+   "audio": "ambience",
+   "audio_basis": "this channel carries the microphone at the camera"
   },
   {
    "name": "Banzai Pipeline, North Shore Oahu",
@@ -1937,7 +2031,9 @@
     "view": "landscape",
     "confidence": "medium",
     "basis": "Mount position from the provider's own page and the landmarks in frame; heading and tilt from what the shot actually shows. Eye height and field of view are estimates."
-   }
+   },
+   "audio": "ambience",
+   "audio_basis": "this channel carries the microphone at the camera"
   },
   {
    "name": "Ala Moana and Magic Island, Honolulu",
@@ -1967,7 +2063,9 @@
     "view": "landscape",
     "confidence": "medium",
     "basis": "Mount position from the provider's own page and the landmarks in frame; heading and tilt from what the shot actually shows. Eye height and field of view are estimates."
-   }
+   },
+   "audio": "unknown",
+   "audio_basis": "not established by listening; plays when sound is on, Shift+M silences it if it turns out to be music"
   },
   {
    "name": "Waikiki Beach from the Marriott",
@@ -1997,7 +2095,9 @@
     "view": "landscape",
     "confidence": "medium",
     "basis": "Mount position from the provider's own page and the landmarks in frame; heading and tilt from what the shot actually shows. Eye height and field of view are estimates."
-   }
+   },
+   "audio": "unknown",
+   "audio_basis": "not established by listening; plays when sound is on, Shift+M silences it if it turns out to be music"
   },
   {
    "name": "Halemaumau Crater, Kilauea",
@@ -2027,7 +2127,9 @@
     "view": "landscape",
     "confidence": "low",
     "basis": "The old position was the crater centre. Moved to the caldera rim at Uekahuna, looking south into Halemaumau. Which rim the live cam is actually on is not verified from here."
-   }
+   },
+   "audio": "ambience",
+   "audio_basis": "this channel carries the microphone at the camera"
   },
   {
    "name": "Lake Hood seaplane base",
@@ -2057,7 +2159,9 @@
     "view": "landscape",
     "confidence": "medium",
     "basis": "Mount position from the provider's own page and the landmarks in frame; heading and tilt from what the shot actually shows. Eye height and field of view are estimates."
-   }
+   },
+   "audio": "unknown",
+   "audio_basis": "not established by listening; plays when sound is on, Shift+M silences it if it turns out to be music"
   },
   {
    "name": "Mendenhall Glacier, Juneau",
@@ -2087,7 +2191,9 @@
     "view": "landscape",
     "confidence": "medium",
     "basis": "Mount position from the provider's own page and the landmarks in frame; heading and tilt from what the shot actually shows. Eye height and field of view are estimates."
-   }
+   },
+   "audio": "ambience",
+   "audio_basis": "this channel carries the microphone at the camera"
   },
   {
    "name": "Vancouver Harbour and Canada Place",
@@ -2117,7 +2223,9 @@
     "view": "landscape",
     "confidence": "medium",
     "basis": "The old position was Canada Place, the subject. Moved to a downtown rooftop south of it; Canada Place and the harbour then bear about 26 degrees."
-   }
+   },
+   "audio": "unknown",
+   "audio_basis": "not established by listening; plays when sound is on, Shift+M silences it if it turns out to be music"
   },
   {
    "name": "Golden Gate Bridge across the bay",
@@ -2147,7 +2255,9 @@
     "view": "landscape",
     "confidence": "medium",
     "basis": "The old position was out in the bay. Moved onto Treasure Island, from which the bridge is due west."
-   }
+   },
+   "audio": "unknown",
+   "audio_basis": "not established by listening; plays when sound is on, Shift+M silences it if it turns out to be music"
   },
   {
    "name": "LAX south runways",
@@ -2177,7 +2287,9 @@
     "view": "landscape",
     "confidence": "medium",
     "basis": "Mount position from the provider's own page and the landmarks in frame; heading and tilt from what the shot actually shows. Eye height and field of view are estimates."
-   }
+   },
+   "audio": "unknown",
+   "audio_basis": "not established by listening; plays when sound is on, Shift+M silences it if it turns out to be music"
   },
   {
    "name": "Spray Valley and Mount Rundle, Banff",
@@ -2207,7 +2319,9 @@
     "view": "landscape",
     "confidence": "medium",
     "basis": "Mount position from the provider's own page and the landmarks in frame; heading and tilt from what the shot actually shows. Eye height and field of view are estimates."
-   }
+   },
+   "audio": "unknown",
+   "audio_basis": "not established by listening; plays when sound is on, Shift+M silences it if it turns out to be music"
   },
   {
    "name": "Popocatepetl",
@@ -2237,7 +2351,9 @@
     "view": "landscape",
     "confidence": "low",
     "basis": "The old position was the summit itself, at 5415m of terrain. Moved to San Pedro Benito Juarez on the south-east flank, where the cam is. From there the summit bears about 300 degrees and stands roughly 14 degrees above the horizon, so the tilt is up, not down."
-   }
+   },
+   "audio": "music",
+   "audio_basis": "afarTV runs a music bed over its scenic streams"
   },
   {
    "name": "Duluth Ship Canal and Aerial Lift Bridge",
@@ -2267,7 +2383,9 @@
     "view": "landscape",
     "confidence": "medium",
     "basis": "Mount position from the provider's own page and the landmarks in frame; heading and tilt from what the shot actually shows. Eye height and field of view are estimates."
-   }
+   },
+   "audio": "unknown",
+   "audio_basis": "not established by listening; plays when sound is on, Shift+M silences it if it turns out to be music"
   },
   {
    "name": "Mackinac Bridge from Mackinaw City",
@@ -2297,7 +2415,9 @@
     "view": "landscape",
     "confidence": "medium",
     "basis": "The bridge runs north from Mackinaw City and its south tower bears about 6 degrees; the pose carried 320, which faces the empty shore."
-   }
+   },
+   "audio": "unknown",
+   "audio_basis": "not established by listening; plays when sound is on, Shift+M silences it if it turns out to be music"
   },
   {
    "name": "Hollywood Beach Broadwalk",
@@ -2327,7 +2447,9 @@
     "view": "landscape",
     "confidence": "medium",
     "basis": "Mount position from the provider's own page and the landmarks in frame; heading and tilt from what the shot actually shows. Eye height and field of view are estimates."
-   }
+   },
+   "audio": "unknown",
+   "audio_basis": "not established by listening; plays when sound is on, Shift+M silences it if it turns out to be music"
   },
   {
    "name": "Horseshoe Falls, Niagara",
@@ -2357,7 +2479,9 @@
     "view": "landscape",
     "confidence": "medium",
     "basis": "Mount position from the provider's own page and the landmarks in frame; heading and tilt from what the shot actually shows. Eye height and field of view are estimates."
-   }
+   },
+   "audio": "unknown",
+   "audio_basis": "not established by listening; plays when sound is on, Shift+M silences it if it turns out to be music"
   },
   {
    "name": "The National Mall from the Washington Monument",
@@ -2387,7 +2511,9 @@
     "view": "landscape",
     "confidence": "medium",
     "basis": "Mount position from the provider's own page and the landmarks in frame; heading and tilt from what the shot actually shows. Eye height and field of view are estimates."
-   }
+   },
+   "audio": "unknown",
+   "audio_basis": "not established by listening; plays when sound is on, Shift+M silences it if it turns out to be music"
   },
   {
    "name": "Lower Manhattan skyline and One World Trade Center",
@@ -2417,7 +2543,9 @@
     "view": "landscape",
     "confidence": "medium",
     "basis": "Mount position from the provider's own page and the landmarks in frame; heading and tilt from what the shot actually shows. Eye height and field of view are estimates."
-   }
+   },
+   "audio": "unknown",
+   "audio_basis": "not established by listening; plays when sound is on, Shift+M silences it if it turns out to be music"
   },
   {
    "name": "Statue of Liberty",
@@ -2447,7 +2575,9 @@
     "view": "landscape",
     "confidence": "medium",
     "basis": "From this shoreline the statue bears 296 degrees, not the 260 the pose carried."
-   }
+   },
+   "audio": "unknown",
+   "audio_basis": "not established by listening; plays when sound is on, Shift+M silences it if it turns out to be music"
   },
   {
    "name": "Times Square North, Manhattan",
@@ -2477,7 +2607,9 @@
     "view": "landscape",
     "confidence": "medium",
     "basis": "Mount position from the provider's own page and the landmarks in frame; heading and tilt from what the shot actually shows. Eye height and field of view are estimates."
-   }
+   },
+   "audio": "unknown",
+   "audio_basis": "not established by listening; plays when sound is on, Shift+M silences it if it turns out to be music"
   },
   {
    "name": "Santiago and the Cordillera",
@@ -2507,7 +2639,9 @@
     "view": "landscape",
     "confidence": "medium",
     "basis": "Mount position from the provider's own page and the landmarks in frame; heading and tilt from what the shot actually shows. Eye height and field of view are estimates."
-   }
+   },
+   "audio": "unknown",
+   "audio_basis": "not established by listening; plays when sound is on, Shift+M silences it if it turns out to be music"
   },
   {
    "name": "Valle Nevado in the Andes",
@@ -2537,7 +2671,9 @@
     "view": "landscape",
     "confidence": "medium",
     "basis": "Ski station cam. alt_m was 3000, the station's elevation above sea level; the terrain model already carries that, so this is eye height over the ground."
-   }
+   },
+   "audio": "unknown",
+   "audio_basis": "not established by listening; plays when sound is on, Shift+M silences it if it turns out to be music"
   },
   {
    "name": "Handelskade waterfront, Willemstad",
@@ -2567,7 +2703,9 @@
     "view": "landscape",
     "confidence": "medium",
     "basis": "Mount position from the provider's own page and the landmarks in frame; heading and tilt from what the shot actually shows. Eye height and field of view are estimates."
-   }
+   },
+   "audio": "unknown",
+   "audio_basis": "not established by listening; plays when sound is on, Shift+M silences it if it turns out to be music"
   },
   {
    "name": "Maho Beach landings, Sint Maarten",
@@ -2597,7 +2735,9 @@
     "view": "landscape",
     "confidence": "medium",
     "basis": "Mount position from the provider's own page and the landmarks in frame; heading and tilt from what the shot actually shows. Eye height and field of view are estimates."
-   }
+   },
+   "audio": "music",
+   "audio_basis": "commentary and music over the runway"
   },
   {
    "name": "Necochea Beach",
@@ -2627,7 +2767,9 @@
     "view": "landscape",
     "confidence": "medium",
     "basis": "Mount position from the provider's own page and the landmarks in frame; heading and tilt from what the shot actually shows. Eye height and field of view are estimates."
-   }
+   },
+   "audio": "unknown",
+   "audio_basis": "not established by listening; plays when sound is on, Shift+M silences it if it turns out to be music"
   },
   {
    "name": "Avenida 9 de Julio",
@@ -2657,7 +2799,9 @@
     "view": "landscape",
     "confidence": "medium",
     "basis": "Mount position from the provider's own page and the landmarks in frame; heading and tilt from what the shot actually shows. Eye height and field of view are estimates."
-   }
+   },
+   "audio": "unknown",
+   "audio_basis": "not established by listening; plays when sound is on, Shift+M silences it if it turns out to be music"
   },
   {
    "name": "Ilulissat Icefjord",
@@ -2687,7 +2831,9 @@
     "view": "landscape",
     "confidence": "medium",
     "basis": "Mount position from the provider's own page and the landmarks in frame; heading and tilt from what the shot actually shows. Eye height and field of view are estimates."
-   }
+   },
+   "audio": "music",
+   "audio_basis": "afarTV runs a music bed over its scenic streams"
   },
   {
    "name": "Copacabana Beach from Posto 6",
@@ -2717,7 +2863,9 @@
     "view": "landscape",
     "confidence": "medium",
     "basis": "Mount position from the provider's own page and the landmarks in frame; heading and tilt from what the shot actually shows. Eye height and field of view are estimates."
-   }
+   },
+   "audio": "unknown",
+   "audio_basis": "not established by listening; plays when sound is on, Shift+M silences it if it turns out to be music"
   },
   {
    "name": "Reykjavik and Mount Esja",
@@ -2747,7 +2895,9 @@
     "view": "landscape",
     "confidence": "low",
     "basis": "Rooftop cam looking north over the bay to Esja. alt_m was 70, which matches the ground elevation here rather than a mount height."
-   }
+   },
+   "audio": "unknown",
+   "audio_basis": "not established by listening; plays when sound is on, Shift+M silences it if it turns out to be music"
   },
   {
    "name": "Northern lights over the Golden Circle",
@@ -2777,7 +2927,9 @@
     "view": "landscape",
     "confidence": "medium",
     "basis": "Ground-mounted sky cam. alt_m was 140, the site's elevation above sea level. Tilted up to frame the sky."
-   }
+   },
+   "audio": "unknown",
+   "audio_basis": "not established by listening; plays when sound is on, Shift+M silences it if it turns out to be music"
   },
   {
    "name": "Madeira runway approach",
@@ -2807,7 +2959,9 @@
     "view": "landscape",
     "confidence": "medium",
     "basis": "Airport cam on the approach. alt_m was 40 against a 63m site, reduced to a plausible mount height."
-   }
+   },
+   "audio": "unknown",
+   "audio_basis": "not established by listening; plays when sound is on, Shift+M silences it if it turns out to be music"
   },
   {
    "name": "Dublin Port mouth",
@@ -2837,7 +2991,9 @@
     "view": "landscape",
     "confidence": "medium",
     "basis": "Mount position from the provider's own page and the landmarks in frame; heading and tilt from what the shot actually shows. Eye height and field of view are estimates."
-   }
+   },
+   "audio": "unknown",
+   "audio_basis": "not established by listening; plays when sound is on, Shift+M silences it if it turns out to be music"
   },
   {
    "name": "Poolbeg Lighthouse and the mouth of the Liffey",
@@ -2867,7 +3023,9 @@
     "view": "landscape",
     "confidence": "medium",
     "basis": "Mount position from the provider's own page and the landmarks in frame; heading and tilt from what the shot actually shows. Eye height and field of view are estimates."
-   }
+   },
+   "audio": "unknown",
+   "audio_basis": "not established by listening; plays when sound is on, Shift+M silences it if it turns out to be music"
   },
   {
    "name": "Arthur's Seat and Salisbury Crags",
@@ -2897,7 +3055,9 @@
     "view": "landscape",
     "confidence": "medium",
     "basis": "Mount position from the provider's own page and the landmarks in frame; heading and tilt from what the shot actually shows. Eye height and field of view are estimates."
-   }
+   },
+   "audio": "unknown",
+   "audio_basis": "not established by listening; plays when sound is on, Shift+M silences it if it turns out to be music"
   },
   {
    "name": "Abbey Road crossing",
@@ -2927,7 +3087,9 @@
     "view": "landscape",
     "confidence": "medium",
     "basis": "Mount position from the provider's own page and the landmarks in frame; heading and tilt from what the shot actually shows. Eye height and field of view are estimates."
-   }
+   },
+   "audio": "unknown",
+   "audio_basis": "not established by listening; plays when sound is on, Shift+M silences it if it turns out to be music"
   },
   {
    "name": "The Thames and the City from Bankside",
@@ -2957,7 +3119,9 @@
     "view": "landscape",
     "confidence": "medium",
     "basis": "Mount position from the provider's own page and the landmarks in frame; heading and tilt from what the shot actually shows. Eye height and field of view are estimates."
-   }
+   },
+   "audio": "unknown",
+   "audio_basis": "not established by listening; plays when sound is on, Shift+M silences it if it turns out to be music"
   },
   {
    "name": "Mierlo-Hout level crossing",
@@ -2987,7 +3151,9 @@
     "view": "landscape",
     "confidence": "medium",
     "basis": "Mount position from the provider's own page and the landmarks in frame; heading and tilt from what the shot actually shows. Eye height and field of view are estimates."
-   }
+   },
+   "audio": "unknown",
+   "audio_basis": "not established by listening; plays when sound is on, Shift+M silences it if it turns out to be music"
   },
   {
    "name": "Cologne Cathedral",
@@ -3017,7 +3183,9 @@
     "view": "landscape",
     "confidence": "low",
     "basis": "The old position was 190m from a 157m cathedral with a 5 degree tilt, which would have cut the spires off. Moved across the Rhine, where the cathedral bears about 280 degrees and its top sits 11 degrees up."
-   }
+   },
+   "audio": "music",
+   "audio_basis": "a radio station, so the audio is the station"
   },
   {
    "name": "Geirangerfjord from Hotel Union",
@@ -3047,7 +3215,9 @@
     "view": "landscape",
     "confidence": "low",
     "basis": "Hotel Union sits on the hillside above Geiranger, not at the water. The old position was down in the fjord and alt_m was 210, the hotel's elevation above sea level. Moved uphill and given a roof height."
-   }
+   },
+   "audio": "unknown",
+   "audio_basis": "not established by listening; plays when sound is on, Shift+M silences it if it turns out to be music"
   },
   {
    "name": "Grimentz in the Val d'Anniviers",
@@ -3077,7 +3247,9 @@
     "view": "landscape",
     "confidence": "medium",
     "basis": "Village cam. alt_m was 1665, Grimentz's elevation above sea level, corrected to eye height."
-   }
+   },
+   "audio": "unknown",
+   "audio_basis": "not established by listening; plays when sound is on, Shift+M silences it if it turns out to be music"
   },
   {
    "name": "Eiger, Monch and Jungfrau over Lake Thun",
@@ -3107,7 +3279,9 @@
     "view": "landscape",
     "confidence": "medium",
     "basis": "Terrace cam above Beatenberg. alt_m was 1150, the village's elevation above sea level, corrected to a terrace height."
-   }
+   },
+   "audio": "unknown",
+   "audio_basis": "not established by listening; plays when sound is on, Shift+M silences it if it turns out to be music"
   },
   {
    "name": "St Peter's Square",
@@ -3137,7 +3311,9 @@
     "view": "landscape",
     "confidence": "low",
     "basis": "The old position was 40m from the basilica facade with a downward tilt, which cannot see the square. Moved east along Via della Conciliazione, looking back over the square at the facade, which bears about 276 degrees."
-   }
+   },
+   "audio": "music",
+   "audio_basis": "a broadcaster, so the audio is its programming"
   },
   {
    "name": "St Peter's dome across Rome",
@@ -3167,7 +3343,9 @@
     "view": "landscape",
     "confidence": "medium",
     "basis": "Mount position from the provider's own page and the landmarks in frame; heading and tilt from what the shot actually shows. Eye height and field of view are estimates."
-   }
+   },
+   "audio": "unknown",
+   "audio_basis": "not established by listening; plays when sound is on, Shift+M silences it if it turns out to be music"
   },
   {
    "name": "Zell am See and the Zeller See",
@@ -3197,7 +3375,9 @@
     "view": "landscape",
     "confidence": "medium",
     "basis": "Hotel cam over the lake. alt_m was 780, the town's elevation above sea level, corrected to a roof height."
-   }
+   },
+   "audio": "unknown",
+   "audio_basis": "not established by listening; plays when sound is on, Shift+M silences it if it turns out to be music"
   },
   {
    "name": "Namib Desert waterhole",
@@ -3227,7 +3407,9 @@
     "view": "landscape",
     "confidence": "medium",
     "basis": "Mount position from the provider's own page and the landmarks in frame; heading and tilt from what the shot actually shows. Eye height and field of view are estimates."
-   }
+   },
+   "audio": "unknown",
+   "audio_basis": "not established by listening; plays when sound is on, Shift+M silences it if it turns out to be music"
   },
   {
    "name": "Okaukuejo waterhole, Etosha",
@@ -3257,7 +3439,9 @@
     "view": "landscape",
     "confidence": "medium",
     "basis": "Mount position from the provider's own page and the landmarks in frame; heading and tilt from what the shot actually shows. Eye height and field of view are estimates."
-   }
+   },
+   "audio": "unknown",
+   "audio_basis": "not established by listening; plays when sound is on, Shift+M silences it if it turns out to be music"
   },
   {
    "name": "Sea Point and Lion's Head",
@@ -3287,7 +3471,9 @@
     "view": "landscape",
     "confidence": "medium",
     "basis": "Lion's Head bears about 191 degrees from Three Anchor Bay; 180 keeps both the head and the Sea Point shoreline in frame."
-   }
+   },
+   "audio": "unknown",
+   "audio_basis": "not established by listening; plays when sound is on, Shift+M silences it if it turns out to be music"
   },
   {
    "name": "Table Mountain from Bloubergstrand",
@@ -3317,7 +3503,9 @@
     "view": "landscape",
     "confidence": "medium",
     "basis": "From Bloubergstrand, Table Mountain bears about 200 degrees across Table Bay, not the 150 the pose carried."
-   }
+   },
+   "audio": "unknown",
+   "audio_basis": "not established by listening; plays when sound is on, Shift+M silences it if it turns out to be music"
   },
   {
    "name": "Tromso harbour and the Arctic sound",
@@ -3347,7 +3535,9 @@
     "view": "landscape",
     "confidence": "medium",
     "basis": "Mount position from the provider's own page and the landmarks in frame; heading and tilt from what the shot actually shows. Eye height and field of view are estimates."
-   }
+   },
+   "audio": "unknown",
+   "audio_basis": "not established by listening; plays when sound is on, Shift+M silences it if it turns out to be music"
   },
   {
    "name": "Aurora over Kilpisjarvi",
@@ -3377,7 +3567,9 @@
     "view": "landscape",
     "confidence": "medium",
     "basis": "Ground-mounted sky cam. alt_m was 490, Kilpisjarvi's elevation above sea level. Tilted further up because an aurora cam frames the sky, not the fells."
-   }
+   },
+   "audio": "music",
+   "audio_basis": "aurora stream carried over music"
   },
   {
    "name": "Senyati waterhole",
@@ -3407,7 +3599,9 @@
     "view": "landscape",
     "confidence": "medium",
     "basis": "Mount position from the provider's own page and the landmarks in frame; heading and tilt from what the shot actually shows. Eye height and field of view are estimates."
-   }
+   },
+   "audio": "ambience",
+   "audio_basis": "this channel carries the microphone at the camera"
   },
   {
    "name": "The Kotel, close view",
@@ -3437,7 +3631,9 @@
     "view": "landscape",
     "confidence": "medium",
     "basis": "Mount position from the provider's own page and the landmarks in frame; heading and tilt from what the shot actually shows. Eye height and field of view are estimates."
-   }
+   },
+   "audio": "music",
+   "audio_basis": "a devotional stream with its own audio"
   },
   {
    "name": "Western Wall plaza, Jerusalem",
@@ -3467,7 +3663,9 @@
     "view": "landscape",
     "confidence": "medium",
     "basis": "The old position was on the wall itself. Moved west into the plaza, looking east at the wall."
-   }
+   },
+   "audio": "unknown",
+   "audio_basis": "not established by listening; plays when sound is on, Shift+M silences it if it turns out to be music"
   },
   {
    "name": "ol Donyo waterhole",
@@ -3497,7 +3695,9 @@
     "view": "landscape",
     "confidence": "medium",
     "basis": "Mount position from the provider's own page and the landmarks in frame; heading and tilt from what the shot actually shows. Eye height and field of view are estimates."
-   }
+   },
+   "audio": "ambience",
+   "audio_basis": "this channel carries the microphone at the camera"
   },
   {
    "name": "The Kaaba, Masjid al-Haram",
@@ -3527,7 +3727,9 @@
     "view": "landscape",
     "confidence": "low",
     "basis": "The old position was the Kaaba itself. Moved to the mosque gallery north-east of it, which is where a cam of this framing sits; the Kaaba then bears about 223 degrees, matching the heading."
-   }
+   },
+   "audio": "music",
+   "audio_basis": "a Quran recitation channel, not ambience"
   },
   {
    "name": "Yiti cliffs near Muscat",
@@ -3557,7 +3759,9 @@
     "view": "landscape",
     "confidence": "medium",
     "basis": "Clifftop cam. alt_m was 120, the cliff's height above the sea, which the terrain model already carries."
-   }
+   },
+   "audio": "unknown",
+   "audio_basis": "not established by listening; plays when sound is on, Shift+M silences it if it turns out to be music"
   },
   {
    "name": "Ala-Too Square, Bishkek",
@@ -3587,7 +3791,9 @@
     "view": "landscape",
     "confidence": "medium",
     "basis": "Mount position from the provider's own page and the landmarks in frame; heading and tilt from what the shot actually shows. Eye height and field of view are estimates."
-   }
+   },
+   "audio": "unknown",
+   "audio_basis": "not established by listening; plays when sound is on, Shift+M silences it if it turns out to be music"
   },
   {
    "name": "Zailiysky Alatau above Almaty",
@@ -3617,7 +3823,9 @@
     "view": "landscape",
     "confidence": "medium",
     "basis": "Mount position from the provider's own page and the landmarks in frame; heading and tilt from what the shot actually shows. Eye height and field of view are estimates."
-   }
+   },
+   "audio": "unknown",
+   "audio_basis": "not established by listening; plays when sound is on, Shift+M silences it if it turns out to be music"
   },
   {
    "name": "Kathmandu river bend",
@@ -3647,7 +3855,9 @@
     "view": "landscape",
     "confidence": "medium",
     "basis": "Mount position from the provider's own page and the landmarks in frame; heading and tilt from what the shot actually shows. Eye height and field of view are estimates."
-   }
+   },
+   "audio": "unknown",
+   "audio_basis": "not established by listening; plays when sound is on, Shift+M silences it if it turns out to be music"
   },
   {
    "name": "Crystal Bay Beach, Koh Samui",
@@ -3677,7 +3887,9 @@
     "view": "landscape",
     "confidence": "medium",
     "basis": "Mount position from the provider's own page and the landmarks in frame; heading and tilt from what the shot actually shows. Eye height and field of view are estimates."
-   }
+   },
+   "audio": "unknown",
+   "audio_basis": "not established by listening; plays when sound is on, Shift+M silences it if it turns out to be music"
   },
   {
    "name": "Bangkok skyline",
@@ -3707,7 +3919,9 @@
     "view": "landscape",
     "confidence": "medium",
     "basis": "Mount position from the provider's own page and the landmarks in frame; heading and tilt from what the shot actually shows. Eye height and field of view are estimates."
-   }
+   },
+   "audio": "unknown",
+   "audio_basis": "not established by listening; plays when sound is on, Shift+M silences it if it turns out to be music"
   },
   {
    "name": "Semeru",
@@ -3737,7 +3951,9 @@
     "view": "landscape",
     "confidence": "low",
     "basis": "The old position was the summit itself, at 3668m of terrain. Moved to the Gunung Sawur observation post about 9km south, which is where Semeru is watched from; the summit is then almost due north and about 19 degrees up."
-   }
+   },
+   "audio": "music",
+   "audio_basis": "afarTV runs a music bed over its scenic streams"
   },
   {
    "name": "Bukit Jimbaran panorama, Bali",
@@ -3767,7 +3983,9 @@
     "view": "landscape",
     "confidence": "low",
     "basis": "Hilltop cam above Jimbaran. alt_m was 170, the hill's elevation, corrected to a mount height."
-   }
+   },
+   "audio": "unknown",
+   "audio_basis": "not established by listening; plays when sound is on, Shift+M silences it if it turns out to be music"
   },
   {
    "name": "Mount Fuji from Lake Kawaguchi",
@@ -3797,7 +4015,9 @@
     "view": "landscape",
     "confidence": "medium",
     "basis": "Lakeside park at Oishi on the north shore. alt_m was 840, the park's elevation above sea level. Fuji's summit sits about 10 degrees up from here, so the tilt is level rather than down."
-   }
+   },
+   "audio": "unknown",
+   "audio_basis": "not established by listening; plays when sound is on, Shift+M silences it if it turns out to be music"
   },
   {
    "name": "Shibuya Scramble Crossing",
@@ -3827,7 +4047,9 @@
     "view": "landscape",
     "confidence": "medium",
     "basis": "Mount position from the provider's own page and the landmarks in frame; heading and tilt from what the shot actually shows. Eye height and field of view are estimates."
-   }
+   },
+   "audio": "unknown",
+   "audio_basis": "not established by listening; plays when sound is on, Shift+M silences it if it turns out to be music"
   },
   {
    "name": "Tokyo Tower from Shiodome",
@@ -3857,7 +4079,9 @@
     "view": "landscape",
     "confidence": "medium",
     "basis": "Mount position from the provider's own page and the landmarks in frame; heading and tilt from what the shot actually shows. Eye height and field of view are estimates."
-   }
+   },
+   "audio": "unknown",
+   "audio_basis": "not established by listening; plays when sound is on, Shift+M silences it if it turns out to be music"
   },
   {
    "name": "Odaiba and the Rainbow Bridge, Tokyo",
@@ -3887,7 +4111,9 @@
     "view": "landscape",
     "confidence": "medium",
     "basis": "Mount position from the provider's own page and the landmarks in frame; heading and tilt from what the shot actually shows. Eye height and field of view are estimates."
-   }
+   },
+   "audio": "unknown",
+   "audio_basis": "not established by listening; plays when sound is on, Shift+M silences it if it turns out to be music"
   },
   {
    "name": "Haneda plane spotting, Tokyo",
@@ -3917,7 +4143,9 @@
     "view": "landscape",
     "confidence": "medium",
     "basis": "Mount position from the provider's own page and the landmarks in frame; heading and tilt from what the shot actually shows. Eye height and field of view are estimates."
-   }
+   },
+   "audio": "unknown",
+   "audio_basis": "not established by listening; plays when sound is on, Shift+M silences it if it turns out to be music"
   },
   {
    "name": "Werribee lion plains",
@@ -3947,7 +4175,9 @@
     "view": "landscape",
     "confidence": "medium",
     "basis": "Mount position from the provider's own page and the landmarks in frame; heading and tilt from what the shot actually shows. Eye height and field of view are estimates."
-   }
+   },
+   "audio": "unknown",
+   "audio_basis": "not established by listening; plays when sound is on, Shift+M silences it if it turns out to be music"
   },
   {
    "name": "Melbourne skyline from Southbank",
@@ -3977,7 +4207,9 @@
     "view": "landscape",
     "confidence": "medium",
     "basis": "Mount position from the provider's own page and the landmarks in frame; heading and tilt from what the shot actually shows. Eye height and field of view are estimates."
-   }
+   },
+   "audio": "unknown",
+   "audio_basis": "not established by listening; plays when sound is on, Shift+M silences it if it turns out to be music"
   },
   {
    "name": "Sydney Harbour, the Bridge and the Opera House",
@@ -4007,7 +4239,9 @@
     "view": "landscape",
     "confidence": "medium",
     "basis": "Mount position from the provider's own page and the landmarks in frame; heading and tilt from what the shot actually shows. Eye height and field of view are estimates."
-   }
+   },
+   "audio": "unknown",
+   "audio_basis": "not established by listening; plays when sound is on, Shift+M silences it if it turns out to be music"
   },
   {
    "name": "Brisbane skyline from Bowen Hills",
@@ -4037,7 +4271,9 @@
     "view": "landscape",
     "confidence": "medium",
     "basis": "Mount position from the provider's own page and the landmarks in frame; heading and tilt from what the shot actually shows. Eye height and field of view are estimates."
-   }
+   },
+   "audio": "unknown",
+   "audio_basis": "not established by listening; plays when sound is on, Shift+M silences it if it turns out to be music"
   },
   {
    "name": "Auckland skyline and Waitemata Harbour",
@@ -4067,7 +4303,9 @@
     "view": "landscape",
     "confidence": "medium",
     "basis": "Mount position from the provider's own page and the landmarks in frame; heading and tilt from what the shot actually shows. Eye height and field of view are estimates."
-   }
+   },
+   "audio": "unknown",
+   "audio_basis": "not established by listening; plays when sound is on, Shift+M silences it if it turns out to be music"
   },
   {
    "name": "Lyall Bay, Wellington",
@@ -4097,7 +4335,9 @@
     "view": "landscape",
     "confidence": "medium",
     "basis": "Mount position from the provider's own page and the landmarks in frame; heading and tilt from what the shot actually shows. Eye height and field of view are estimates."
-   }
+   },
+   "audio": "unknown",
+   "audio_basis": "not established by listening; plays when sound is on, Shift+M silences it if it turns out to be music"
   }
  ],
  "rejects": [
@@ -5147,5 +5387,10 @@
    "reject_reason": "Anthony: static interior",
    "rejected_at": "2026-09-17"
   }
+ ],
+ "audio_notes": [
+  "audio is one of: ambience (the camera's own microphone, expected to be worth hearing), music (the channel carries a music bed, a radio feed or a recitation, so the viewer keeps it silent whatever the speaker button says), unknown (not established either way).",
+  "unknown plays when the speaker button is on. Defaulting it to silent would leave most of the list mute and make the button look broken; this way the exceptions are the ones that get silenced.",
+  "These tags were assigned from what each channel is, not by listening: the session that wrote them cannot reach youtube.com, so no feed's audio has actually been heard. Shift+M in the viewer silences one camera for good and remembers it, which is how a wrong tag gets fixed."
  ]
 }

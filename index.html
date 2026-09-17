@@ -233,6 +233,7 @@ import * as THREE from './vendor/three.module.js';
 
 const CFG = {
   dwell:        90,     // seconds on a live feed before moving on
+  orbitDwell:   2.6,    // seconds parked on the globe before the next dive
   depart:       3.4,    // orbit swing + drop, seconds
   handoff:      0.9,    // globe → ground crossfade
   descend:      3.6,    // ground drop to the camera pose
@@ -244,7 +245,7 @@ const CFG = {
   approachPitch:-52,    // degrees below horizontal at the start of the descent
   prefetch:     true,   // warm the next camera's tiles while a feed plays
   breathe:      1.0,    // idle camera drift and roll, 0 turns it off
-  maxDepart:    11,     // seconds to wait for tiles before diving anyway
+  maxDepart:    8,      // seconds to wait for tiles before diving anyway
   volume:       15,     // percent, the level a feed's own sound settles at
   buildings:    true,   // pull OSM footprints for the final approach
   wideM:        11000,  // detailed ground, wide enough to carry the horizon
@@ -773,7 +774,16 @@ function buildDetail(){
    built to the mosaic's own bounds needs no UV remapping: three.js lays out
    phi/theta exactly the way latLngToVec3 does. */
 function stageDetail(pose){
-  return Promise.all(detail.map(async (mesh, i) => {
+  const jobs = detail.map((mesh, i) => stageOneDetail(mesh, i, pose).catch(()=>{}));
+  // Leave orbit as soon as the levels that carry the top of the descent are
+  // up. L2 and L3 do not reach full opacity until 20km and 6.7km, a long way
+  // into the dive, and a level that lands after its altitude eases in over
+  // 0.7s rather than popping, so waiting for their tiles before departing
+  // only lengthens the shot of the globe.
+  return Promise.all(jobs.slice(0, 2));
+}
+function stageOneDetail(mesh, i, pose){
+  return (async () => {
     const lv = DETAIL_LEVELS[i];
     // Deliberately not blanked first. Hiding the old mosaic here leaves the
     // sphere on blue marble for as long as the new one takes to arrive, which
@@ -803,7 +813,7 @@ function stageDetail(pose){
     // Only a level appearing from nothing needs the ease; one that was already
     // up is a swap of imagery at the same opacity.
     if (!mesh.visible){ mesh.userData.shown = clock(); mesh.visible = true; }
-  }));
+  })();
 }
 
 /* Small markers so the next destination is visible from orbit. Sprites with
@@ -1715,7 +1725,7 @@ function tick(){
   switch (state.phase){
     case 'orbit':
       if (queued) beginDive(pickNext());
-      else if (!state.pinned && clock()-state.t0 > 6) beginDive(pickNext());
+      else if (!state.pinned && clock()-state.t0 > CFG.orbitDwell) beginDive(pickNext());
       break;
     case 'depart': {
       // Hold on the globe until the ground is actually ready. A dive into
@@ -1959,6 +1969,12 @@ const progress = v => { bar.style.width = (v*100)+'%'; };
       `Globe: NASA Blue Marble &amp; Black Marble &middot; ${CFG.imagery.credit}<br>`
       + `${CFG.dem.credit} &middot; Buildings: &copy; OpenStreetMap contributors`
       + (clouds ? `<br>${clouds.credit()}` : '');
+    // Sit the help panel above the credits rather than on top of them. Both
+    // are anchored bottom-right, and the panel was covering the tail of the
+    // first credit line, which Esri and OpenStreetMap both require to stay
+    // readable. Measured rather than guessed at, because the block gains a
+    // line when the cloud layer attaches and wraps on a narrow window.
+    $('#help').style.bottom = ($('#attrib').offsetHeight + 22) + 'px';
   };
   attrib();
 
@@ -1982,6 +1998,12 @@ const progress = v => { bar.style.width = (v*100)+'%'; };
   progress(1);
   setPhase('orbit');
   setTimeout(()=>$('#boot').classList.add('gone'), 260);
+
+  // The first dive used to be the only cold one: nothing prefetches until a
+  // feed has played, so it alone paid full network time and stretched its
+  // departure to cover it, which is the long wait on the globe you notice
+  // right after opening the page. Warm it here instead.
+  prefetchNext();
 
   // Handle for the console: Roundtrip.dive('Rialto') jumps straight to a
   // camera, Roundtrip.CFG tunes timings live while you watch.

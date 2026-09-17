@@ -279,18 +279,19 @@
      self-contained, so the rules are repeated rather than inherited. */
   #rt-mag{position:fixed;border-radius:50%;
     right:calc(34px + env(safe-area-inset-right,0px));
-    top:calc(108px + env(safe-area-inset-top,0px));width:42px;height:42px;
+    top:calc(108px + env(safe-area-inset-top,0px));width:46px;height:46px;
     display:grid;place-items:center;cursor:pointer;z-index:9;
-    background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.14);
+    background:rgba(9,15,25,.42);border:1px solid rgba(255,255,255,.26);
     backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
-    opacity:.34;transition:opacity .25s ease,background .25s ease,transform .12s ease;
+    opacity:.72;transition:opacity .25s ease,background .25s ease,transform .12s ease;
     touch-action:manipulation;-webkit-tap-highlight-color:transparent}
-  #rt-mag:hover,#rt-mag:focus-visible{opacity:1;background:rgba(255,255,255,.15);outline:none}
+  #rt-mag:hover,#rt-mag:focus-visible{opacity:1;background:rgba(18,28,44,.62);outline:none}
   #rt-mag:active{transform:scale(.93)}
   #rt-mag svg{width:19px;height:19px;fill:none;stroke:var(--ink,#e8eef7);stroke-width:1.7;
     stroke-linecap:round;filter:drop-shadow(0 1px 3px rgba(0,0,0,.6))}
-  /* A touch screen never hovers, so a 34% glyph would stay 34% and be
-     invisible over the lit globe. There it rests bright and hits 44px+. */
+  /* A coarse pointer gets a bigger target; the resting brightness above is
+     already the same on every pointer type, since a faint glyph over the lit
+     globe read as no button at all on a mouse too. */
   @media (hover:none),(pointer:coarse){
     #rt-mag{width:50px;height:50px;opacity:.94;
       top:calc(116px + env(safe-area-inset-top,0px));

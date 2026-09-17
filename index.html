@@ -50,18 +50,21 @@
   /* Sound. Always there, glassy and see-through, and it brightens under the
      cursor so it never competes with the picture. */
   /* Round HUD buttons. Any new one should carry .hud-btn and supply only its
-     own corner, so it inherits the touch behaviour below.
-     On a mouse they rest faint and lift on hover. A touch screen never hovers,
-     so a 34%-opacity glyph stayed 34% forever and was invisible over the lit
-     globe; there they rest bright, grow past the 44px tap minimum and sit
-     inside the safe area. */
-  .hud-btn{position:fixed;width:42px;height:42px;border-radius:50%;
+     own corner, so it inherits everything below.
+     They sit on a dark translucent disc rather than a pale one, because pale
+     over a lit globe is exactly where a button disappears. They rest
+     see-through and go solid on hover or focus. They used to rest at 34% and
+     only lift on hover, which on a mouse read as no button at all and on a
+     touch screen, where nothing ever hovers, meant they were never visible;
+     a coarse pointer or no hover additionally gets a bigger target and the
+     safe-area inset. */
+  .hud-btn{position:fixed;width:46px;height:46px;border-radius:50%;
     display:grid;place-items:center;cursor:pointer;z-index:9;
-    background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.14);
+    background:rgba(9,15,25,.42);border:1px solid rgba(255,255,255,.26);
     backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
-    opacity:.34;transition:opacity .25s ease,background .25s ease,transform .12s ease;
+    opacity:.72;transition:opacity .25s ease,background .25s ease,transform .12s ease;
     touch-action:manipulation;-webkit-tap-highlight-color:transparent}
-  .hud-btn:hover,.hud-btn:focus-visible{opacity:1;background:rgba(255,255,255,.15);outline:none}
+  .hud-btn:hover,.hud-btn:focus-visible{opacity:1;background:rgba(18,28,44,.62);outline:none}
   .hud-btn:active{transform:scale(.93)}
   .hud-btn svg{width:19px;height:19px;fill:none;stroke:var(--ink);stroke-width:1.7;
     stroke-linecap:round;stroke-linejoin:round;

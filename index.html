@@ -1207,19 +1207,25 @@ const camKey = c => c.video_id || c.url || c.name;
 function isLiveNow(cam){
   const w = cam.live_window;
   if (!w) return true;
-  const zone = w.tz || cam.timezone || 'UTC';
+  const zone = w.tz || w.timezone || cam.timezone || 'UTC';
   const within = (v, a, b) => a <= b ? (v >= a && v < b) : (v >= a || v < b);
+  // Two spellings are in the wild for the same fields, so accept both.
+  const from = w.from || w.start, to = w.to || w.end;
   try {
     if (w.season?.from && w.season?.to){
       const md = new Intl.DateTimeFormat('en-CA',
         { month:'2-digit', day:'2-digit', timeZone:zone }).format(now()).replace('-','-');
       if (!within(md, w.season.from, w.season.to)) return false;
     }
-    if (w.from && w.to){
-      const hm = new Intl.DateTimeFormat('en-GB',
-        { hour:'2-digit', minute:'2-digit', hour12:false, timeZone:zone }).format(now());
-      if (!within(hm, w.from, w.to)) return false;
-    }
+    const hm = new Intl.DateTimeFormat('en-GB',
+      { hour:'2-digit', minute:'2-digit', hour12:false, timeZone:zone }).format(now());
+    if (from && to && !within(hm, from, to)) return false;
+    // A venue with published set times has gaps inside its opening hours. Those
+    // gaps are an empty stage, which is the whole reason for the window, so a
+    // camera that lists sets has to be inside one of them, not just inside the
+    // outer span.
+    if (Array.isArray(w.sets) && w.sets.length
+        && !w.sets.some(t => within(hm, t.from || t.start, t.to || t.end))) return false;
   } catch { return true; }        // a bad zone should not hide a camera
   return true;
 }

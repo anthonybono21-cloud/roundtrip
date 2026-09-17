@@ -3,7 +3,7 @@
  "generated": "2026-09-17",
  "generated_by": "roundtrip prototype thread",
  "source_list": "cameras-master-world-2026-09-17.json",
- "content_rule": "Scenery, cities, nature, harbours and squares are in. Bar, club, stage, nightlife and adult venue cams are out (Anthony, 2026-09-17). Cams that only broadcast part of the day or year are kept and given a live_window instead of being rejected; see POSE-FORMAT.md.",
+ "content_rule": "Scenery, cities, nature, harbours and squares are in. Bar, club, nightlife and adult venue cams are out (Anthony, 2026-09-17). The one exception is a stage camera whose feed carries real live music, which Anthony asked for by name the same day; those are gated to the venue's published set times so the app never parks on an empty stage. Cams that only broadcast part of the day or year are kept and given a live_window rather than rejected; see POSE-FORMAT.md.",
  "pose_notes": [
   "pose drives the orbit-to-camera dive: lat/lng is the camera's own position, alt_m is eye height above ground, heading is degrees clockwise from north, pitch is degrees below the horizon (negative looks down), fov is vertical field of view.",
   "lat/lng are researched to roughly the right street or beach; heading, pitch and fov are first guesses. aligned:false means nobody has matched the render to the live frame yet.",
@@ -4338,6 +4338,64 @@
    },
    "audio": "unknown",
    "audio_basis": "not established by listening; plays when sound is on, Shift+M silences it if it turns out to be music"
+  },
+  {
+   "name": "Hog's Breath Saloon stage",
+   "location": "400 Front Street, Key West, Florida, USA",
+   "country": "United States",
+   "category": "stage",
+   "provider": "Hogs Breath Saloon Key West (YouTube)",
+   "kind": "youtube",
+   "video_id": "_eE4GBEjjs4",
+   "url": "https://www.youtube.com/embed/_eE4GBEjjs4?autoplay=1&mute=1",
+   "watch_url": "https://www.youtube.com/watch?v=_eE4GBEjjs4",
+   "requires_login": false,
+   "last_verified": "2026-09-17",
+   "notes": "The open-air stage at the Hog's Breath in Old Town Key West, from the saloon's own camera. Live music every day in three sets, and the feed carries the band. One unbroken broadcast since September 2024 with 2.5 million views. The venue itself is open 10am to 1am.",
+   "audio": "live-music",
+   "always_on": true,
+   "live_window": {
+    "timezone": "America/New_York",
+    "days": "daily",
+    "start": "11:30",
+    "end": "00:30",
+    "sets": [
+     {
+      "start": "11:30",
+      "end": "15:30"
+     },
+     {
+      "start": "16:00",
+      "end": "20:00"
+     },
+     {
+      "start": "20:30",
+      "end": "00:30"
+     }
+    ],
+    "source": "hogsbreath.com/events, read 2026-09-17",
+    "note": "Three acts a day with roughly half-hour changeovers between them. The end time crosses midnight, so treat 00:30 as belonging to the following day."
+   },
+   "lat": 24.5595,
+   "lng": -81.8069,
+   "timezone": "America/New_York",
+   "pose": {
+    "lat": 24.5595,
+    "lng": -81.8069,
+    "alt_m": 6,
+    "heading": 200,
+    "pitch": -8,
+    "fov": 62,
+    "aligned": false,
+    "view": "landscape",
+    "confidence": "low",
+    "basis": "Stage at 400 Front Street, Key West, from the saloon's own camera looking south across the courtyard. Mount position is building-level only and the heading is inferred from the courtyard layout, not from the frame."
+   },
+   "audio_basis": "The venue's own camera on its open-air stage, and the feed carries the band. Anthony asked for this one by name on 2026-09-17 after asking about native sound. Plays when the speaker button is on.",
+   "scene_set": "stage-audio",
+   "in_sets": [
+    "stage-audio"
+   ]
   }
  ],
  "rejects": [
@@ -4746,8 +4804,8 @@
    "video_id": "6lFBKxt8kIo"
   },
   {
-   "name": "Key West and Fort Lauderdale bar cams (Hogs Breath, Irish Kevin's, Elbo Room)",
-   "reject_reason": "Bar, pub and live-stage cams, excluded by the no-nightlife rule.",
+   "name": "Key West and Fort Lauderdale bar cams (Irish Kevin's, Elbo Room)",
+   "reject_reason": "Bar and pub cams pointed at the room rather than a stage, so they carry no live music. The Hog's Breath stage camera from the same group is now in the list: Anthony asked for it by name on 2026-09-17, and it is gated to the venue's published set times.",
    "rejected_at": "2026-09-17",
    "kind": "youtube",
    "location": "Key West, Florida",
@@ -5386,6 +5444,15 @@
    "watch_url": "https://www.youtube.com/watch?v=Br_R_JDM4P0",
    "reject_reason": "Anthony: static interior",
    "rejected_at": "2026-09-17"
+  },
+  {
+   "name": "Hog's Breath mini bar cam and outside cam",
+   "reject_reason": "The same channel's other two cameras point at the bar rail and the street rather than the stage, so they carry no live music and do not qualify under the audio exception.",
+   "rejected_at": "2026-09-17",
+   "kind": "youtube",
+   "video_id": "S605ycm0Vlk",
+   "location": "Key West, Florida",
+   "country": "United States"
   }
  ],
  "audio_notes": [

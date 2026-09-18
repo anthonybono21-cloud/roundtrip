@@ -72,17 +72,37 @@ jobs:
           name: roundtrip-firetv-apk
           path: firetv/app/build/outputs/apk/release/app-release.apk
 
+      # A checkout is pinned to the commit that triggered it, so by the time
+      # the apk is built main may have moved — and then `git pull --rebase`
+      # tries to rebase a new binary over a different new binary and stops on
+      # a conflict it can never resolve. That is what killed build 8.
+      #
+      # There is no merge to do here: whatever was just built is the apk, and
+      # an older one is only ever in the way. So the commit is made fresh
+      # against whatever main is at this second, with this run's apk dropped
+      # on top, and remade if main moves again while we are pushing.
       - name: Publish it beside the site
         if: github.event_name != 'pull_request'
         run: |
-          cp firetv/app/build/outputs/apk/release/app-release.apk rt.apk
+          set -eu
+          cp firetv/app/build/outputs/apk/release/app-release.apk "$RUNNER_TEMP/rt.apk"
           git config user.name  "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add rt.apk
-          if git diff --cached --quiet; then
-            echo "apk unchanged"
-          else
+          for attempt in 1 2 3 4 5; do
+            git fetch origin main
+            git reset --hard origin/main
+            cp "$RUNNER_TEMP/rt.apk" rt.apk
+            git add rt.apk
+            if git diff --cached --quiet; then
+              echo "apk unchanged"
+              exit 0
+            fi
             git commit -m "Fire TV app build ${{ github.run_number }}"
-            git pull --rebase origin main
-            git push origin HEAD:main
-          fi
+            if git push origin HEAD:main; then
+              exit 0
+            fi
+            echo "main moved under attempt $attempt; rebuilding the commit"
+            sleep $((attempt * 3))
+          done
+          echo "could not publish the apk after five attempts" >&2
+          exit 1

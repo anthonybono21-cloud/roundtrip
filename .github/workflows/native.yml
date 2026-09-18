@@ -10,7 +10,9 @@ name: Apps
 
 on:
   push:
-    branches: [main]
+    # Work branches build too: an app that only gets compiled once it is on
+    # main is an app nobody finds out is broken until it is too late.
+    branches: [main, 'claude/**']
     paths:
       - 'native/**'
       - 'index.html'

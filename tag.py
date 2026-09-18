@@ -276,6 +276,8 @@ EXTRAS = {
  'Deshler Diamond': ['trains','railfan','trainspotting','diamond','csx','level crossing','freight','ohio'],
  'Welland Canal at Port Colborne': ['freighters','canal','lift bridge','seaway','ships','ship spotting','niagara','ontario','great lakes'],
  'Kiel-Holtenau Lock': ['kiel canal','nord-ostsee-kanal','schleuse','locks','ships','ship spotting','baltic','holtenau'],
+ "Irish Kevin's Stage": ['live band','bar','key west','music','duval street','sing along','acoustic','honky tonk','florida keys'],
+ 'Elbo Room BandCam': ['live band','bar','fort lauderdale','music','beach bar','a1a','las olas','florida'],
 }
 
 

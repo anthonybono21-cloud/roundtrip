@@ -7273,6 +7273,187 @@
         "sunrise",
         "always-on"
       ]
+    },
+    {
+      "name": "Irish Kevin's Stage",
+      "location": "211 Duval Street, Old Town, Key West, Florida, United States",
+      "country": "United States",
+      "category": "stage",
+      "provider": "Seek Duval Street (YouTube)",
+      "kind": "youtube",
+      "video_id": "qXMiIsbXSIA",
+      "url": "https://www.youtube.com/embed/qXMiIsbXSIA?autoplay=1&mute=1",
+      "watch_url": "https://www.youtube.com/watch?v=qXMiIsbXSIA",
+      "requires_login": false,
+      "last_verified": "2026-09-17",
+      "notes": "A front-row seat on the little stage at Irish Kevin's, the sing-along bar halfway down Duval Street. One performer with a guitar works the room for three-and-a-half hours at a stretch, trading insults with the crowd between songs, and a new act takes over the moment the last one steps down. The venue's own calendar has run four back-to-back acts every single day without a break for as far ahead as it publishes.",
+      "audio": "live-music",
+      "audio_basis": "Dedicated stage cam whose whole purpose is the performer; the venue bills itself as live entertainment from 11am to close and the stream carries the room mix.",
+      "always_on": true,
+      "live_window": {
+        "tz": "America/New_York",
+        "days": "daily",
+        "from": "11:00",
+        "to": "02:00",
+        "sets": [
+          {
+            "from": "11:00",
+            "to": "14:30"
+          },
+          {
+            "from": "14:30",
+            "to": "18:00"
+          },
+          {
+            "from": "18:00",
+            "to": "22:00"
+          },
+          {
+            "from": "22:00",
+            "to": "02:00"
+          }
+        ],
+        "source": "irishkevins.com/events, read 2026-09-18",
+        "note": "All 35 consecutive days on the published calendar (2026-08-31 through 2026-10-04) carry exactly 4 acts, back to back with no changeover gap. First slot is always 11:00-14:30. On roughly 40% of days slots 2-4 run 30 minutes later (14:30-18:30, 18:30-22:30, 22:30-02:30), so the last set can end at 02:30 rather than 02:00 - the window above is the conservative reading."
+      },
+      "timezone": "America/New_York",
+      "pose": {
+        "lat": 24.55853,
+        "lng": -81.80532,
+        "alt_m": 4,
+        "heading": 45,
+        "pitch": -5,
+        "fov": 55,
+        "aligned": false,
+        "view": "landscape",
+        "confidence": "low",
+        "basis": "Street address 211 Duval St geocoded from the venue's own site; camera placed just inside the Duval frontage looking back along the room's depth toward the stage at the rear. Interior heading is inferred from the building's orientation off Duval, not from a floor plan."
+      },
+      "check": {
+        "verdict": "live",
+        "checked": "2026-09-17",
+        "reason": "isLiveBroadcast True, startDate present, no endDate, statusCode 200, US in regionsAllowed - checked by this thread on 2026-09-17. Still showing LIVE with viewers in a live-filtered search on 2026-09-18.",
+        "method": "youtube watch page metadata (isLiveBroadcast / startDate / endDate)",
+        "embed": "ok",
+        "embed_reason": "embed page returned the real video title on 2026-09-17, so it plays in an iframe without a login."
+      },
+      "scene_set": "stages",
+      "in_sets": [
+        "stages"
+      ],
+      "tags": [
+        "211 duval street",
+        "old town",
+        "key west",
+        "florida",
+        "united states",
+        "us",
+        "usa",
+        "america",
+        "united states of america",
+        "north america",
+        "stage",
+        "live music",
+        "music",
+        "bar",
+        "venue",
+        "live band",
+        "duval street",
+        "sing along",
+        "acoustic",
+        "honky tonk",
+        "florida keys",
+        "busy",
+        "part-time",
+        "has-sound"
+      ]
+    },
+    {
+      "name": "Elbo Room BandCam",
+      "location": "241 S Fort Lauderdale Beach Blvd (A1A at Las Olas), Fort Lauderdale, Florida, United States",
+      "country": "United States",
+      "category": "stage",
+      "provider": "Elbo Room / ElboTV (YouTube)",
+      "kind": "youtube",
+      "video_id": "YWs0HMRVCBY",
+      "url": "https://www.youtube.com/embed/YWs0HMRVCBY?autoplay=1&mute=1",
+      "watch_url": "https://www.youtube.com/watch?v=YWs0HMRVCBY",
+      "requires_login": false,
+      "last_verified": "2026-09-17",
+      "notes": "The dance floor and band corner of the Elbo Room, the 1938 beach bar on the corner where A1A meets Las Olas - the one from Where the Boys Are. The camera is the venue's own, part of their ElboTV network, and it points at the spot where the band sets up and the crowd never quite sits down. Three booked acts a day, seven days a week, running from lunchtime until midnight.",
+      "audio": "live-music",
+      "audio_basis": "Venue-operated BandCam pointed at the stage; the channel's own description calls it 'where the bands play', and the venue cross-promotes 'Tune in live as <act> takes the stage'.",
+      "always_on": true,
+      "live_window": {
+        "tz": "America/New_York",
+        "days": "daily",
+        "from": "12:00",
+        "to": "00:00",
+        "sets": [
+          {
+            "from": "12:00",
+            "to": "16:00"
+          },
+          {
+            "from": "16:30",
+            "to": "20:30"
+          },
+          {
+            "from": "21:00",
+            "to": "00:00"
+          }
+        ],
+        "source": "elboroom.com/band-schedule, read 2026-09-18",
+        "note": "Every day on the published calendar (2026-09-17 through 2026-09-30, including Sundays, Tuesdays and Wednesdays) carries exactly the same three accepted bookings: 12-4pm, 4:30-8:30pm, 9pm-12am. The two 30-minute gaps at 16:00-16:30 and 20:30-21:00 are changeovers and are an empty stage - they are excluded from the sets on purpose."
+      },
+      "timezone": "America/New_York",
+      "pose": {
+        "lat": 26.11948,
+        "lng": -80.10505,
+        "alt_m": 6,
+        "heading": 250,
+        "pitch": -12,
+        "fov": 60,
+        "aligned": false,
+        "view": "landscape",
+        "confidence": "low",
+        "basis": "Venue address at the SE corner of A1A and Las Olas Blvd geocoded; camera placed high on the ocean-facing side of the room looking inland/west across the dance floor toward the band corner. Interior heading inferred, not measured. Deliberately offset from the venue's other two cams (Bar Cam wVNt3l657X0, Patio Cam bM0GplM_vPY) so no two share a dive point."
+      },
+      "check": {
+        "verdict": "live",
+        "checked": "2026-09-17",
+        "reason": "isLiveBroadcast True, startDate present, no endDate, statusCode 200, US in regionsAllowed - checked by this thread on 2026-09-17. Still showing LIVE with viewers in a live-filtered search on 2026-09-18.",
+        "method": "youtube watch page metadata (isLiveBroadcast / startDate / endDate)",
+        "embed": "ok",
+        "embed_reason": "embed page returned the real video title on 2026-09-17, so it plays in an iframe without a login."
+      },
+      "scene_set": "stages",
+      "in_sets": [
+        "stages"
+      ],
+      "tags": [
+        "241 s fort lauderdale beach blvd (a1a at las olas)",
+        "fort lauderdale",
+        "florida",
+        "united states",
+        "us",
+        "usa",
+        "america",
+        "united states of america",
+        "north america",
+        "stage",
+        "live music",
+        "music",
+        "bar",
+        "venue",
+        "live band",
+        "beach bar",
+        "a1a",
+        "las olas",
+        "busy",
+        "part-time",
+        "has-sound"
+      ]
     }
   ],
   "rejects": [
@@ -8330,6 +8511,69 @@
       "video_id": "S605ycm0Vlk",
       "location": "Key West, Florida",
       "country": "United States"
+    },
+    {
+      "name": "Live Cameras Around the World (Boston and Maine Live)",
+      "video_id": "AiNCbGzabVo",
+      "reject_reason": "Rotating multi-cam aggregator with a chill-music bed over other people's feeds.",
+      "rejected_at": "2026-09-18",
+      "kind": "youtube"
+    },
+    {
+      "name": "RIO Boat 24/7 (SlowTV)",
+      "video_id": "VnsRQvfv_g4",
+      "reject_reason": "SlowTV re-stream channel; full quality is gated behind channel membership.",
+      "rejected_at": "2026-09-18",
+      "kind": "youtube"
+    },
+    {
+      "name": "Kensington Cam3, Philadelphia (Rescue Rescue)",
+      "video_id": "rbbYXhP2glA",
+      "reject_reason": "Channel's stated purpose is broadcasting street-level human tragedy; not a transport cam and wrong for the app.",
+      "rejected_at": "2026-09-18",
+      "kind": "youtube"
+    },
+    {
+      "name": "The Next Railroad Crossing (Rail Moments)",
+      "video_id": "daphM0VINdE",
+      "reject_reason": "Mobile trackside camera that relocates; no fixed dive point, so it cannot be pinned on the globe.",
+      "rejected_at": "2026-09-18",
+      "kind": "youtube"
+    },
+    {
+      "name": "Hafen-Livestream Hamburg / Kieler Foerde (wettercom LIVE)",
+      "video_id": "mIpgUIeFJbk",
+      "reject_reason": "Rotating multi-location weather-channel montage rather than one fixed harbour camera.",
+      "rejected_at": "2026-09-18",
+      "kind": "youtube"
+    },
+    {
+      "name": "Bosphorus / Istanbul ship traffic",
+      "video_id": "",
+      "reject_reason": "YouTube live filter returned zero results for Bosphorus and Istanbul ship-traffic queries; no embeddable live stream found.",
+      "rejected_at": "2026-09-18",
+      "kind": "youtube"
+    },
+    {
+      "name": "Nashville Lower Broadway / Honky Tonk Highway live cam",
+      "video_id": "YK-R4X9ECAI",
+      "reject_reason": "Street cam looking down Broadway, not a stage cam - you see the neon and the crowd, not a band. Belongs to the street-scene niche, not this one. The Nashville honky tonks (Tootsie's, Robert's Western World, Nudie's) appear to run their cams through SkylineWebcams/flycams rather than their own YouTube channels, so the whole Nashville lead looks weak for a YouTube-only list.",
+      "rejected_at": "2026-09-18",
+      "kind": "youtube"
+    },
+    {
+      "name": "Bagatelle Key West Duval Street Cam",
+      "video_id": "BP9AtblEpXE",
+      "reject_reason": "Exterior Duval Street view from a restaurant balcony, not a stage cam. No band in frame.",
+      "rejected_at": "2026-09-18",
+      "kind": "youtube"
+    },
+    {
+      "name": "Temple Bar Pub stage, Dublin",
+      "video_id": "3nyPER2kzqk",
+      "reject_reason": "The only YouTube route to the Temple Bar stage is EarthCam's 'EarthCam Live: Dublin' feed, which is a rotating multi-cam aggregator - excluded by rule 5. The pub's own stage view is an EarthCam embed on thetemplebarpub.com, not a standalone YouTube live stream. Already in the skip list too.",
+      "rejected_at": "2026-09-18",
+      "kind": "youtube"
     },
     {
       "name": "Live Cameras Around the World (Boston and Maine Live)",

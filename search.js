@@ -62,6 +62,18 @@
      is matched as if it were a tag, at a slight discount, so "zoo" finds the
      aquariums and "sunset" finds the west-facing cams. */
   const SYNONYMS = {
+    college: ['campus', 'university', 'quad'],
+    colleges: ['campus', 'university', 'quad'],
+    campus: ['university', 'college', 'quad'],
+    campuses: ['campus', 'university', 'quad'],
+    park: ['public-garden', 'garden', 'park'],
+    parks: ['park', 'garden', 'public-garden'],
+    mall: ['outdoor mall', 'shopping', 'marketplace'],
+    malls: ['outdoor mall', 'shopping', 'marketplace'],
+    'theme park': ['amusement park', 'themepark'],
+    'theme parks': ['amusement park', 'themepark'],
+    squares: ['square', 'plaza'],
+    inside: ['indoor', 'public-indoor', 'aquarium', 'museum'],
     zoo: ['aquarium', 'wildlife', 'animals', 'safari', 'waterhole'],
     animal: ['wildlife', 'animals', 'safari', 'waterhole', 'zoo'],
     animals: ['wildlife', 'safari', 'waterhole', 'zoo'],
@@ -232,7 +244,7 @@
     ['Scenes', ['beach', 'city', 'skyline', 'mountain', 'volcano', 'harbor',
                 'waterhole', 'underwater', 'aquarium', 'airport', 'landmark',
                 'sacred', 'square', 'glacier', 'aurora', 'wildlife', 'zoo',
-                'market', 'stage', 'railway']],
+                'market', 'stage', 'railway', 'park', 'campus', 'mall', 'theme park', 'inside']],
     ['Moods',  ['busy', 'quiet', 'night lights', 'sunset', 'sunrise',
                 'tropical', 'snow', 'has-sound', 'always-on']],
   ];

@@ -1,10 +1,12 @@
 # Builds the Roundtrip apps.
 #
-# Android is built all the way to an installable APK and attached to the run.
-# The Apple targets are compiled — iPhone, iPad and Mac — which catches every
-# mistake a build can catch, but stops short of an .ipa or a .app anyone can
-# install: that needs an Apple developer account and a signing certificate,
-# which this repository does not have.
+# Android is built all the way to an installable APK, attached to the run and
+# dropped at the root of the site as phone.apk.
+#
+# The Apple targets are compiled here, iPhone, iPad and Mac, which catches
+# every mistake a build can catch but stops short of anything installable: a
+# signed build needs the certificate on Anthony's MacBook, which builds and
+# installs them directly. native/BUILD.md has those commands.
 
 name: Apps
 
@@ -101,21 +103,41 @@ jobs:
       # An artifact needs a GitHub account and a zip to get at. A file beside
       # the site is a link you open on the phone you want it on. The Fire TV
       # app does the same with rt.apk.
+      # A checkout is pinned to the commit that triggered it, so when a second
+      # change lands while this one is building, the old `git pull --rebase`
+      # here tried to rebase one new apk over a different new apk, stopped on a
+      # conflict nothing can resolve, and exited. Build 20 compiled, signed and
+      # verified and was then thrown away, and the run read as a build failure.
+      #
+      # There is no merge to do: whatever this run built is the apk, and an
+      # older one is only ever in the way. So rebuild the commit on top of
+      # wherever main has got to and try again. The Fire TV publish hit the
+      # same thing and took the same shape; see .github/workflows/firetv.yml.
       - name: Publish it beside the site
         if: github.ref == 'refs/heads/main'
         run: |
           set -eu
-          cp native/android/app/build/outputs/apk/debug/app-debug.apk phone.apk
+          cp native/android/app/build/outputs/apk/debug/app-debug.apk "$RUNNER_TEMP/phone.apk"
           git config user.name  "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add phone.apk
-          if git diff --cached --quiet; then
-            echo "apk unchanged"
-          else
+          for attempt in 1 2 3 4 5; do
+            git fetch origin main
+            git reset --hard origin/main
+            cp "$RUNNER_TEMP/phone.apk" phone.apk
+            git add phone.apk
+            if git diff --cached --quiet; then
+              echo "apk unchanged"
+              exit 0
+            fi
             git commit -m "Android app build ${{ github.run_number }}"
-            git pull --rebase origin main
-            git push origin HEAD:main
-          fi
+            if git push origin HEAD:main; then
+              exit 0
+            fi
+            echo "main moved under attempt $attempt; rebuilding the commit"
+            sleep $((attempt * 3))
+          done
+          echo "could not publish the apk after five attempts" >&2
+          exit 1
 
   apple:
     name: iPhone, iPad and Mac
@@ -141,9 +163,11 @@ jobs:
         working-directory: native
         run: npx cap sync ios
 
-      # Building for a simulator needs no certificate and no developer
-      # account, so this runs on every push while the real thing waits for
-      # someone to sign it.
+      # Compiled unsigned, for a simulator. The signed build that actually
+      # goes on a phone happens on the MacBook, which has the developer
+      # account; see native/BUILD.md. This is here to catch a Swift or
+      # project mistake on the push that made it, not to produce anything
+      # installable.
       - name: Compile for iPhone and iPad
         working-directory: native/ios/App
         run: |

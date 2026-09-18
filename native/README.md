@@ -5,12 +5,16 @@ stays the source of truth. This directory wraps that same app in native shells
 so it can be installed rather than opened: **iPhone, iPad, Mac and Android**.
 
 Each shell is a thin native app around the web build, plus one thing the web
-build cannot do for itself — a **detailed map**. Tap the pin button in the
-top-right and the app puts every camera as a dot on the device's own map
-engine: Apple's 3D satellite Flyover on iPhone, iPad and Mac, MapLibre with
-Esri satellite imagery on Android. Tap a camera, tap *Watch this one*, and the
-map closes and the globe dives into it. The rotation is held while the map is
-open so you come back to what you left.
+build cannot do for itself: a **detailed map**. Tap the screen to bring up the
+action strip and there is a **Map** action beside Full. It puts every camera as
+a dot on the device's own map engine, Apple's 3D satellite Flyover on iPhone,
+iPad and Mac, MapLibre with Esri satellite imagery on Android. Tap a camera,
+tap *Watch this one*, and the map closes and the globe dives into it. The
+rotation is held while the map is open so you come back to what you left.
+
+The action strip is `menu.js`, which reserved that slot for this; the bridge
+only registers an item, and falls back to a floating button if it is talking
+to a build that predates the strip.
 
 Nothing here needs a paid API, a key, or an account to *build*. Putting the
 Apple apps on a device does need an Apple developer account, which is Apple's

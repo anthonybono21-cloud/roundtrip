@@ -6,10 +6,10 @@
 
    What it adds is the map. The web build's globe is stitched from free raster
    tiles, which is as much detail as a browser can pull down; inside an app
-   there is a real map engine already on the device — MapKit on Apple, MapLibre
-   with terrain on Android — so the apps get a third view alongside the globe
-   and the feed: every camera as a pin on a 3D satellite map you can push
-   around with a finger, and tapping one dives into it.
+   there is a real map engine already on the device, MapKit on Apple and
+   MapLibre on Android, so the apps get a third view alongside the globe and
+   the feed: every camera as a pin on a satellite map you can push around with
+   a finger, and tapping one dives into it.
 
    It is deliberately self-contained and defensive. If the plugin is missing,
    if the app object never turns up, if anything throws, the page is left
@@ -26,43 +26,6 @@
   if (!Map) return;
 
   var PLATFORM = (Cap.getPlatform && Cap.getPlatform()) || 'unknown';
-
-  /* ── the button ──────────────────────────────────────────────────────────
-     The right-hand HUD column is speaker, magnifier, then the two thumbs, at
-     50px steps. The map slots in third and pushes the thumbs down, which is
-     why this restyles them rather than hanging the new button off the bottom
-     of a column that is half the time not there. */
-  var CSS = [
-    '#rt-map-btn{position:fixed;border-radius:50%;',
-    '  right:calc(34px + env(safe-area-inset-right,0px));',
-    '  top:calc(158px + env(safe-area-inset-top,0px));width:46px;height:46px;',
-    '  display:grid;place-items:center;cursor:pointer;z-index:9;',
-    '  background:rgba(9,15,25,.42);border:1px solid rgba(255,255,255,.26);',
-    '  backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);',
-    '  opacity:.72;transition:opacity .25s ease,background .25s ease,transform .12s ease;',
-    '  touch-action:manipulation;-webkit-tap-highlight-color:transparent}',
-    '#rt-map-btn:hover,#rt-map-btn:focus-visible{opacity:1;background:rgba(18,28,44,.62);outline:none}',
-    '#rt-map-btn:active{transform:scale(.93)}',
-    '#rt-map-btn svg{width:19px;height:19px;fill:none;stroke:var(--ink,#e8eef7);stroke-width:1.7;',
-    '  stroke-linecap:round;stroke-linejoin:round;filter:drop-shadow(0 1px 3px rgba(0,0,0,.6))}',
-    '#voteup{top:calc(208px + env(safe-area-inset-top,0px))}',
-    '#votedown{top:calc(258px + env(safe-area-inset-top,0px))}',
-    '@media (hover:none),(pointer:coarse){',
-    '  #rt-map-btn{width:50px;height:50px;opacity:.94;',
-    '    top:calc(174px + env(safe-area-inset-top,0px));',
-    '    background:rgba(9,15,25,.52);border-color:rgba(255,255,255,.32);',
-    '    box-shadow:0 2px 10px rgba(0,0,0,.35)}',
-    '  #rt-map-btn:hover,#rt-map-btn:focus-visible{background:rgba(9,15,25,.66)}',
-    '  #rt-map-btn svg{width:24px;height:24px;stroke-width:1.9}',
-    '  #voteup{top:calc(232px + env(safe-area-inset-top,0px))}',
-    '  #votedown{top:calc(290px + env(safe-area-inset-top,0px))}',
-    '}'
-  ].join('\n');
-
-  // A map pin, in the same one-weight line style as the speaker and magnifier.
-  var PIN = '<svg viewBox="0 0 24 24" aria-hidden="true">'
-          + '<path d="M12 21s6.5-6.1 6.5-11a6.5 6.5 0 1 0-13 0C5.5 14.9 12 21 12 21Z"/>'
-          + '<circle cx="12" cy="10" r="2.4"/></svg>';
 
   /* ── state ───────────────────────────────────────────────────────────── */
 
@@ -141,9 +104,61 @@
     hide();
   }
 
-  /* ── wiring ──────────────────────────────────────────────────────────── */
+  /* ── where the map lives ──────────────────────────────────────────────────
+     menu.js draws the action strip and reserves a slot for exactly this: its
+     own comment names the pin map as the thing that drops in beside Full. So
+     the map goes there rather than as another disc floating over the picture,
+     and it inherits the strip's keyboard and remote handling for free. The
+     floating button further down is only a fallback, for a build old enough
+     not to have the strip. */
 
-  function button() {
+  function addToMenu() {
+    var menu = app && app.menu;
+    if (!menu || typeof menu.addItem !== 'function') return false;
+    menu.addItem({
+      id: 'map',
+      label: 'Map',
+      icon: 'map',
+      run: show
+    }, 'full');
+    return true;
+  }
+
+  /* Fallback only: a disc under the magnifier, matching the other HUD
+     buttons. It also nudges the two thumbs down a slot so the column stays
+     evenly spaced, which is why the styles below reach outside themselves. */
+  var CSS = [
+    '#rt-map-btn{position:fixed;border-radius:50%;',
+    '  right:calc(34px + env(safe-area-inset-right,0px));',
+    '  top:calc(158px + env(safe-area-inset-top,0px));width:46px;height:46px;',
+    '  display:grid;place-items:center;cursor:pointer;z-index:9;',
+    '  background:rgba(9,15,25,.42);border:1px solid rgba(255,255,255,.26);',
+    '  backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);',
+    '  opacity:.72;transition:opacity .25s ease,background .25s ease,transform .12s ease;',
+    '  touch-action:manipulation;-webkit-tap-highlight-color:transparent}',
+    '#rt-map-btn:hover,#rt-map-btn:focus-visible{opacity:1;background:rgba(18,28,44,.62);outline:none}',
+    '#rt-map-btn:active{transform:scale(.93)}',
+    '#rt-map-btn svg{width:19px;height:19px;fill:none;stroke:var(--ink,#e8eef7);stroke-width:1.7;',
+    '  stroke-linecap:round;stroke-linejoin:round;filter:drop-shadow(0 1px 3px rgba(0,0,0,.6))}',
+    '#voteup{top:calc(208px + env(safe-area-inset-top,0px))}',
+    '#votedown{top:calc(258px + env(safe-area-inset-top,0px))}',
+    '@media (hover:none),(pointer:coarse){',
+    '  #rt-map-btn{width:50px;height:50px;opacity:.94;',
+    '    top:calc(174px + env(safe-area-inset-top,0px));',
+    '    background:rgba(9,15,25,.52);border-color:rgba(255,255,255,.32);',
+    '    box-shadow:0 2px 10px rgba(0,0,0,.35)}',
+    '  #rt-map-btn:hover,#rt-map-btn:focus-visible{background:rgba(9,15,25,.66)}',
+    '  #rt-map-btn svg{width:24px;height:24px;stroke-width:1.9}',
+    '  #voteup{top:calc(232px + env(safe-area-inset-top,0px))}',
+    '  #votedown{top:calc(290px + env(safe-area-inset-top,0px))}',
+    '}'
+  ].join('\n');
+
+  var PIN = '<svg viewBox="0 0 24 24" aria-hidden="true">'
+          + '<path d="M12 21s6.5-6.1 6.5-11a6.5 6.5 0 1 0-13 0C5.5 14.9 12 21 12 21Z"/>'
+          + '<circle cx="12" cy="10" r="2.4"/></svg>';
+
+  function addFloatingButton() {
     var style = document.createElement('style');
     style.textContent = CSS;
     document.head.appendChild(style);
@@ -187,7 +202,10 @@
   function start() {
     whenReady(function () {
       app = window.Roundtrip;
-      try { button(); listen(); } catch (e) { console.warn('[roundtrip-native]', e); }
+      try {
+        if (!addToMenu()) addFloatingButton();
+        listen();
+      } catch (e) { console.warn('[roundtrip-native]', e); }
       // A small handle for the same reasons Roundtrip has one.
       app.native = { platform: PLATFORM, map: Map, showMap: show, hideMap: hide, pins: pins };
     });

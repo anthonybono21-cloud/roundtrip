@@ -304,7 +304,11 @@ const CFG = {
   dwell:        90,     // seconds on a live feed before moving on
   orbitDwell:   2.6,    // seconds parked on the globe before the next dive
   mapSpin:      0.55,   // pin map: degrees per second once the controls go idle
-  depart:       3.4,    // orbit swing + drop, seconds
+  depart:       6.5,    // the whole zoom, orbit down to the place, seconds.
+                        // The old sequence spent 3.4s getting to 6km and then
+                        // another 3.6s on a ground stage; with the imagery
+                        // doing all of it the one number has to cover both, or
+                        // the levels flash past instead of sharpening.
   settle:       0.55,   // hold the matched frame before the reveal
   reveal:       1.1,    // render → live crossfade
   retreat:      2.2,    // live → orbit on the way out
@@ -313,7 +317,15 @@ const CFG = {
   volume:       15,     // percent, the level a feed's own sound settles at
   adHold:       6,      // seconds to hold the landing rather than reveal a pre-roll
   adGrace:      1.2,    // seconds to let a slow player say whether it has one
-  arriveR:      0.95,   // where the approach stops, in earth radii above the surface
+  arriveR:      0.0013, // where the zoom stops, in earth radii above the surface: 8km
+  prefetch:     true,   // warm the next camera's tiles while a feed plays
+  maxDepart:    8,      // seconds to wait for imagery before going anyway
+  imagery: {
+    // Free, keyless, attribution required. Swap the URL to change providers.
+    url: (z,x,y) => `https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/${z}/${y}/${x}`,
+    credit: 'Imagery: Esri, Maxar, Earthstar Geographics',
+    maxZoom: 19,
+  },
   tempUnit:     'F',    // the card's temperature: 'F' or 'C'
   restR:        2.7,    // resting distance from the centre; the globe fills the frame
 };
@@ -363,6 +375,18 @@ function latLngToVec3(lat, lng, r=1){
      r*Math.cos(phi),
      r*Math.sin(phi)*Math.sin(theta));
 }
+const lng2tileX = (lng,z) => (lng+180)/360 * 2**z;
+const lat2tileY = (lat,z) => {
+  const s = Math.sin(lat*DEG);
+  return (0.5 - Math.log((1+s)/(1-s))/(4*Math.PI)) * 2**z;
+};
+const tileX2lng = (x,z) => x/2**z*360 - 180;
+const tileY2lat = (y,z) => {
+  const n = Math.PI - 2*Math.PI*y/2**z;
+  return Math.atan(0.5*(Math.exp(n)-Math.exp(-n)))/DEG;
+};
+
+/* Subsolar point, good to a fraction of a degree — enough for a terminator. */
 function sunPosition(date=now()){
   const d = (date - Date.UTC(2000,0,1,12)) / 86400000;          // days from J2000
   const g = (357.529 + 0.98560028*d) * DEG;                     // mean anomaly
@@ -392,6 +416,58 @@ function lightLabel(el){
   return ['high sun','#cfe6ff'];
 }
 
+/* ── tile fetching ──────────────────────────────────────────────────────── */
+
+function loadImage(url){
+  return new Promise((res, rej) => {
+    const im = new Image();
+    im.crossOrigin = 'anonymous';
+    im.onload = () => res(im);
+    im.onerror = () => rej(new Error('tile '+url));
+    im.src = url;
+  });
+}
+
+/* The sharpest zoom whose mosaic still fits a tile budget. Degrees of
+   longitude shrink toward the poles, so this has to be computed, not assumed. */
+function fitZoom(lat, lng, halfM, budget, maxZ){
+  for (let z = Math.min(maxZ, CFG.imagery.maxZoom); z >= 6; z--){
+    const dLat = halfM/111320, dLng = halfM/(111320*Math.cos(lat*DEG));
+    const nx = Math.floor(lng2tileX(lng+dLng,z)) - Math.floor(lng2tileX(lng-dLng,z)) + 1;
+    const ny = Math.floor(lat2tileY(lat-dLat,z)) - Math.floor(lat2tileY(lat+dLat,z)) + 1;
+    if (nx*ny <= budget) return z;
+  }
+  return 6;
+}
+
+/* Mosaic the imagery tiles covering a patch into one canvas texture.
+   Returns {canvas, bounds} so the mesh UVs can be mapped onto it exactly. */
+async function imageryMosaic(lat, lng, halfM, z){
+  z = Math.min(z, CFG.imagery.maxZoom);
+  const dLat = halfM / 111320;
+  const dLng = halfM / (111320 * Math.cos(lat*DEG));
+  const x0 = Math.floor(lng2tileX(lng-dLng, z)), x1 = Math.floor(lng2tileX(lng+dLng, z));
+  const y0 = Math.floor(lat2tileY(lat+dLat, z)), y1 = Math.floor(lat2tileY(lat-dLat, z));
+  const nx = x1-x0+1, ny = y1-y0+1;
+  if (nx*ny > 140) throw new Error(`mosaic too large: ${nx}x${ny} tiles at z${z}`);
+  const cv = document.createElement('canvas');
+  cv.width = nx*256; cv.height = ny*256;
+  const ctx = cv.getContext('2d');
+  ctx.fillStyle = '#1a2436'; ctx.fillRect(0,0,cv.width,cv.height);
+  const jobs = [];
+  for (let x=x0; x<=x1; x++) for (let y=y0; y<=y1; y++){
+    jobs.push(loadImage(CFG.imagery.url(z,x,y))
+      .then(im => ctx.drawImage(im,(x-x0)*256,(y-y0)*256,256,256))
+      .catch(()=>{}));                       // a missing tile leaves the backing colour
+  }
+  await Promise.all(jobs);
+  return { canvas: cv, bounds: {
+    west: tileX2lng(x0,z), east: tileX2lng(x1+1,z),
+    north: tileY2lat(y0,z), south: tileY2lat(y1+1,z) } };
+}
+
+/* Terrarium DEM → a metre-height sampler over the patch. */
+
 /* ── renderer ───────────────────────────────────────────────────────────── */
 
 const renderer = new THREE.WebGLRenderer({ antialias:true, powerPreference:'high-performance' });
@@ -414,12 +490,35 @@ const loadTex = (p, srgb=true) => new Promise(res => tex.load(p, t => {
 const space = new THREE.Scene();
 const spaceCam = new THREE.PerspectiveCamera(38, 1, 0.001, 100);
 let earth, atmo, stars, pins;
+/* Detail levels laid on the globe near the destination. Two are enough: a wide
+   coarse one to carry the descent out of orbit, and a narrow sharp one at the
+   same zoom the ground stage starts with, so the handoff is a crossfade between
+   two renderings of the same imagery. altIn/altFull are camera altitudes in
+   earth radii (1 radius = 6371km). */
+/* Four mosaics, each sharp enough for the altitude it covers. The tile budget
+   is what actually picks the zoom — the maxZ caps almost never bind — so the
+   budgets are set from pixel arithmetic rather than by feel: at the altitude
+   where a level reaches full opacity, its ground resolution has to be at least
+   as fine as one screen pixel, or the globe reads as blurry however sharp the
+   source is. The last level is fit to the same grid as the ground scene's own
+   wide patch, so the two agree to the metre and the crossfade at 6km is not a
+   resolution jump. */
+const DETAIL_LEVELS = [
+  //  span         tiles      cap        fade in          full     span  m/px  screen
+  { spanDeg:5.40, budget: 96, maxZ:10, altIn:0.3400, altFull:0.04800 }, // 601km  429   361
+  { spanDeg:1.10, budget: 72, maxZ:12, altIn:0.0520, altFull:0.01300 }, // 122km   74    98
+  { spanDeg:0.24, budget:100, maxZ:14, altIn:0.0135, altFull:0.00320 }, //  27km   13    24
+  { spanDeg:0.09, budget: 72, maxZ:15, altIn:0.0034, altFull:0.00105 }, //  10km    7     8
+];
+const detail = [];
 let clouds = null;                 // the live cloud layer, if it attaches
 const sunDir = new THREE.Vector3(1,0,0);
 const camAlt = { value: 2.1 };     // camera altitude in earth radii, for shaders
 // A single transparent pixel, so a sampler uniform is never null.
 const blankTex = () => { const t = new THREE.DataTexture(new Uint8Array([255,255,255,0]),1,1);
                          t.needsUpdate = true; return t; };
+const detFog    = { value: new THREE.Vector2(1, 2) };
+const detFogCol = { value: new THREE.Color(0x9fc0e4) };
 const uTime  = { value: 0 };       // seconds, for the city-light flicker
 
 async function buildSpace(progress){
@@ -622,6 +721,114 @@ async function buildSpace(progress){
    globe turns to mush well before the handoff. This lays a real satellite
    mosaic on the sphere around the destination and fades it in on approach,
    which is what keeps the zoom sharp all the way down. */
+function buildDetail(){
+  DETAIL_LEVELS.forEach((lv, i) => {
+  const mesh = new THREE.Mesh(
+    new THREE.SphereGeometry(1, 8, 8, 0, 0.1, 0, 0.1),
+    new THREE.ShaderMaterial({
+      uniforms:{ map:{value:null}, sunDir:{value:sunDir}, fade:{value:0}, alt:camAlt,
+                 fog:detFog, fogCol:detFogCol },
+      vertexShader:`varying vec2 vUv; varying vec3 vW;
+        void main(){ vUv=uv; vec4 w=modelMatrix*vec4(position,1.); vW=w.xyz;
+          gl_Position=projectionMatrix*viewMatrix*w; }`,
+      fragmentShader:`
+        uniform sampler2D map; uniform vec3 sunDir; uniform float fade; uniform float alt;
+        uniform vec2 fog; uniform vec3 fogCol;
+        varying vec2 vUv; varying vec3 vW;
+        // The exposure the ground scene's own sun and hemisphere light produce
+        // on flat ground, sampled at the same elevations as SKY_STOPS. Without
+        // this the globe hands off to a ground twice as bright as itself, which
+        // reads as a flash at 6km. d is sin(sun elevation) at this pixel.
+        float groundLight(float d){
+          float l = 0.218;
+          l = mix(l, 0.269, smoothstep(-0.309, -0.139, d));
+          l = mix(l, 0.416, smoothstep(-0.139, -0.035, d));
+          l = mix(l, 0.500, smoothstep(-0.035,  0.052, d));
+          l = mix(l, 0.756, smoothstep( 0.052,  0.208, d));
+          l = mix(l, 1.827, smoothstep( 0.208,  0.766, d));
+          l = mix(l, 2.225, smoothstep( 0.766,  1.000, d));
+          return l;
+        }
+        void main(){
+          vec3 c=texture2D(map,vUv).rgb;
+          float d=dot(normalize(vW),normalize(sunDir));
+          float day=smoothstep(-0.14,0.20,d);
+          float golden=exp(-pow((d-0.04)/0.15,2.0));
+          c*=mix(vec3(1.0),vec3(1.28,1.04,0.82),golden*0.8);
+          // Seen as part of the globe the patch has to match the globe, and on
+          // approach it has to match the scene it is about to become. Night
+          // keeps some ambient either way, or the patch reads as a hole.
+          // 0.02 earth radii is 127km, 0.0015 is 9.6km.
+          float k=smoothstep(0.02,0.0015,alt);
+          float lit=mix(mix(0.12,1.12,day), groundLight(d), k);
+          // Feather the border. Without this a level's edge is a visible
+          // square against the coarser level underneath it.
+          float e=min(min(vUv.x,1.-vUv.x),min(vUv.y,1.-vUv.y));
+          // The ground scene hazes its far distance. Without the same haze here
+          // the top of the frame steps in brightness at the crossfade even when
+          // the geometry lines up perfectly.
+          float h=clamp((length(vW-cameraPosition)-fog.x)/max(fog.y-fog.x,1e-6),0.0,1.0);
+          gl_FragColor=vec4(mix(c*lit,fogCol,h*k),fade*smoothstep(0.0,0.09,e));
+        }`,
+      transparent:true, depthWrite:false,
+      polygonOffset:true, polygonOffsetFactor:-(4 + i*4), polygonOffsetUnits:-(4 + i*4),
+    }));
+    mesh.visible = false;
+    mesh.renderOrder = 1 + i;
+    mesh.userData.level = lv;
+    mesh.userData.shown = 0;
+    detail.push(mesh);
+    space.add(mesh);
+  });
+}
+
+/* Point the detail patch at one place and load its imagery. A sphere section
+   built to the mosaic's own bounds needs no UV remapping: three.js lays out
+   phi/theta exactly the way latLngToVec3 does. */
+function stageDetail(pose){
+  // Every level, before the dive starts. Leaving with only the top two staged
+  // saved a second or so in orbit and spent it where it actually shows: the
+  // last stretch of the descent arriving soft while L2 and L3 were still on
+  // their way. The departure now covers the wait smoothly instead of
+  // stuttering through it, so there is nothing left to gain by going early.
+  return Promise.all(detail.map((mesh, i) => stageOneDetail(mesh, i, pose).catch(()=>{})));
+}
+function stageOneDetail(mesh, i, pose){
+  return (async () => {
+    const lv = DETAIL_LEVELS[i];
+    // Deliberately not blanked first. Hiding the old mosaic here leaves the
+    // sphere on blue marble for as long as the new one takes to arrive, which
+    // is most of the upper descent. The old patch is over the previous place,
+    // so it is off-frame anyway, and holding it costs nothing.
+    const halfM = lv.spanDeg/2 * 111320;
+    const z = fitZoom(pose.lat, pose.lng, halfM, lv.budget, lv.maxZ);
+    let mosaic;
+    try { mosaic = await imageryMosaic(pose.lat, pose.lng, halfM, z); }
+    catch { return; }
+
+    const { west, east, north, south } = mosaic.bounds;
+    mesh.geometry.dispose();
+    // Enough segments that the patch follows the curve at low altitude; the
+    // widest level needs the most because it spans hundreds of kilometres.
+    const seg = i === 0 ? 128 : i === 1 ? 96 : 64;
+    mesh.geometry = new THREE.SphereGeometry(1, seg, seg,
+      (west+180)*DEG, (east-west)*DEG, (90-north)*DEG, (north-south)*DEG);
+
+    const t = new THREE.CanvasTexture(mosaic.canvas);
+    t.colorSpace = THREE.SRGBColorSpace;
+    t.anisotropy = renderer.capabilities.getMaxAnisotropy();
+    t.wrapS = t.wrapT = THREE.ClampToEdgeWrapping;
+    renderer.initTexture(t);
+    mesh.material.uniforms.map.value?.dispose();
+    mesh.material.uniforms.map.value = t;
+    // Only a level appearing from nothing needs the ease; one that was already
+    // up is a swap of imagery at the same opacity.
+    if (!mesh.visible){ mesh.userData.shown = clock(); mesh.visible = true; }
+  })();
+}
+
+/* Small markers so the next destination is visible from orbit. Sprites with
+   size attenuation off stay a constant few pixels at any altitude. */
 function glowTexture(){
   const c = document.createElement('canvas'); c.width = c.height = 64;
   const g = c.getContext('2d').createRadialGradient(32,32,0,32,32,32);
@@ -969,6 +1176,7 @@ const state = {
   orbitT: 0,                  // last idle frame, so the drift is per second
   sway: 0,                    // phase of the idle drift
   from: null, arrive: null,
+  ready: false,               // the destination's imagery is staged
   departDur: 0,
   departP: 0,                  // accumulated, so extending the wait never rewinds it
   lastT: 0,
@@ -1227,6 +1435,25 @@ function pickNext(){
    next destination's tiles into the browser cache so its dive starts instantly
    instead of waiting on the first mosaic. */
 let prefetched = null;
+function prefetchNext(){
+  if (!CFG.prefetch) return;
+  const cam = peekNext();
+  if (!cam || cam === prefetched) return;
+  prefetched = cam;
+  const { lat, lng } = cam.pose;
+  const warm = url => { const im = new Image(); im.crossOrigin='anonymous'; im.src = url; };
+
+  for (const lv of DETAIL_LEVELS){
+    const half = lv.spanDeg/2 * 111320;
+    const z = fitZoom(lat, lng, half, lv.budget, lv.maxZ);
+    const dLat = half/111320, dLng = half/(111320*Math.cos(lat*DEG));
+    const x0 = Math.floor(lng2tileX(lng-dLng,z)), x1 = Math.floor(lng2tileX(lng+dLng,z));
+    const y0 = Math.floor(lat2tileY(lat+dLat,z)), y1 = Math.floor(lat2tileY(lat-dLat,z));
+    for (let x=x0;x<=x1;x++) for (let y=y0;y<=y1;y++) warm(CFG.imagery.url(z,x,y));
+  }
+}
+
+
 /* A camera asked for from outside the rotation. From orbit or from a feed
    it starts right away; mid-flight it queues, because restarting a descent
    from the globe halfway down is a visible cut. */
@@ -1306,6 +1533,8 @@ function beginDive(cam){
   state.departDur = CFG.depart;
   state.departP = 0;
   state.lastT = clock();
+  state.ready = false;
+  stageDetail(cam.pose).then(()=>{ state.ready = true; }).catch(()=>{ state.ready = true; });
   mountLive(cam);              // buffers through the whole dive
   hideCard();
   setPhase('depart');
@@ -1359,14 +1588,26 @@ function updateSpaceCam(){
 
   const lat = lerp(a.lat, b.lat, e);
   const lng = lerp(a.lng, shortestAngle(a.lng, b.lng), e);
-  // Pull back a little before leaning in: the altitude arc is what makes it
-  // read as a camera move instead of a zoom. It is small now. The arc was set
-  // when a dive fell from orbit to six kilometres and needed to cover that
-  // whole range; against the much shorter move it became a visible retreat
-  // before the approach, so it is scaled to the distance actually travelled.
-  const span = Math.max(a.r - (1 + b.alt/R_EARTH), 0.001);
-  const arc = Math.sin(Math.PI*raw) * 0.30 * span;
-  const r = lerp(a.r, 1 + b.alt/R_EARTH, e) + arc*(1-e);
+  // Altitude moves geometrically, not in a straight line. Height above the
+  // ground goes from about 17,000km to 8, and interpolating that linearly
+  // means the picture hardly changes for the first half and then the last
+  // hundred kilometres arrive in a rush: at the midpoint you are still
+  // 8,000km up, which looks like orbit. Each step being the same fraction of
+  // the height left is what makes a zoom read as one steady move all the way
+  // in, and it is the whole of what he called the magic of it.
+  const altA = Math.max(a.r - 1, 1e-6), altB = Math.max(b.alt/R_EARTH, 1e-6);
+  // The shared ease is a quintic, which is right for a swing but far too
+  // sharp for a descent: it leaves you at 8,000km a third of the way in and
+  // then drops the last 200km almost at once. The height gets its own, gentle
+  // curve so the zoom starts and stops softly and runs at a steady rate in
+  // between. The swing in latitude and longitude keeps the quintic.
+  const eZoom = raw*raw*(3 - 2*raw);
+  const alt = altA * Math.pow(altB/altA, eZoom);
+  // Pull back a little before leaning in: the arc is what makes the start read
+  // as a camera move rather than a zoom. Scaled to the height it starts from,
+  // and gone by the time the imagery matters.
+  const arc = Math.sin(Math.PI*raw) * 0.30 * altA;
+  const r = 1 + alt + arc*(1-e);
 
   spaceCam.position.copy(latLngToVec3(lat, lng, r));
   spaceCam.up.set(0,1,0);         // level through the dive
@@ -1399,6 +1640,26 @@ function tick(){
   sunDir.copy(latLngToVec3(s.lat, s.lng, 1));
   if (stars) stars.rotation.y += 0.00002;
   camAlt.value = Math.max(spaceCam.position.length() - 1, 0);
+  // The haze the low levels wear on the way in, so the last stretch does not
+  // read as a flat photo pasted on a sphere. The colour is fixed now: there is
+  // no ground scene to take it from any more.
+  if (state.cam){
+    const edgeM = Math.max(camAlt.value*R_EARTH, 1) * 1.6;
+    detFog.value.set(edgeM*0.62/R_EARTH, edgeM*1.02/R_EARTH);
+  }
+  // Each level fades up over its own altitude window, so the surface sharpens
+  // continuously instead of swapping in one visible step.
+  for (const mesh of detail){
+    if (!mesh.visible) continue;
+    const { altIn, altFull } = mesh.userData.level;
+    const byAlt = clamp((altIn - camAlt.value) / (altIn - altFull), 0, 1);
+    // A mosaic can finish loading below the altitude at which it would already
+    // be fully opaque, and then it appears in a single frame. Cap it by how
+    // long it has been up, so a late arrival is a short crossfade instead.
+    const eased = clamp((clock() - mesh.userData.shown) / 0.7, 0, 1);
+    mesh.material.uniforms.fade.value = Math.min(byAlt, eased);
+  }
+
   switch (state.phase){
     case 'orbit':
       // A dive asked for from the map, or a return to the map after one.
@@ -1408,13 +1669,18 @@ function tick(){
         beginDive(pickNext());
       break;
     case 'depart': {
-      // The approach out of orbit. There is no ground stage to wait for now,
-      // so this is a plain eased move that always takes CFG.depart seconds.
-      // Progress is still accumulated per frame rather than recomputed from
-      // the clock: that is what stopped the camera backing off and coming in
-      // again, and it keeps the move rate-independent besides.
+      // The zoom out of orbit and down through the imagery. It holds off a
+      // little near the bottom if the mosaics are still arriving, because
+      // reaching the end before they do is how you land on a blurred globe.
+      //
+      // The brake is a rate multiplier, not a growing duration, so it cannot
+      // run away, and progress is accumulated per frame rather than recomputed
+      // from the clock: that is what stopped the camera backing off and coming
+      // in again, and it keeps the move rate-independent besides.
       const now = clock();
-      state.departP = clamp(state.departP + clamp(now - state.lastT, 0, MAX_DT) / state.departDur, 0, 1);
+      const waiting = !state.ready && now - state.t0 < CFG.maxDepart;
+      const slow = (waiting && state.departP > 0.62) ? 0.25 : 1;
+      state.departP = clamp(state.departP + clamp(now - state.lastT, 0, MAX_DT) * slow / state.departDur, 0, 1);
       state.lastT = now;
       if (state.departP >= 1) setPhase('settle');
       break;
@@ -1438,6 +1704,7 @@ function tick(){
         state.liveOn = true;
         audio.target = 1;              // the feed's own sound, if it has any
         showCard(state.cam);
+        setTimeout(prefetchNext, 1500);   // warm the next one while this plays
       }
       break;
     case 'reveal':
@@ -2076,8 +2343,8 @@ const progress = v => { bar.style.width = (v*100)+'%'; };
 
   const attrib = () => {
     $('#attrib').innerHTML =
-      `Globe: NASA Blue Marble &amp; Black Marble`
-      + (clouds ? ` &middot; ${clouds.credit()}` : '');
+      `Globe: NASA Blue Marble &amp; Black Marble &middot; ${CFG.imagery.credit}`
+      + (clouds ? `<br>${clouds.credit()}` : '');
     // Sit the help panel above the credits rather than on top of them. Both
     // are anchored bottom-right, and the panel was covering the tail of the
     // first credit line, which Esri and OpenStreetMap both require to stay
@@ -2100,6 +2367,7 @@ const progress = v => { bar.style.width = (v*100)+'%'; };
     onPick: cam => requestDive(cam),
     onPlaySet: (list, label) => playSet(list, label),
   });
+  buildDetail();
   resize();
   progress(1);
   setPhase('orbit');
@@ -2116,7 +2384,7 @@ const progress = v => { bar.style.width = (v*100)+'%'; };
     setTime: iso => { timeWarp = iso ? (new Date(iso) - Date.now()) : 0;
                       return now().toISOString(); },
     now,
-    parts: () => ({ space, spaceCam, earth, atmo, stars, pins }),
+    parts: () => ({ space, spaceCam, earth, atmo, stars, pins, detail }),
     name: 'Roundtrip',
     // Roundtrip.order() shows the rest of this cycle; Roundtrip.CFG.lightBias
     // changes how much the light skews it.

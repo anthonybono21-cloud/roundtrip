@@ -64,6 +64,33 @@ finger drive exactly the same strip.
 part-time and seasonal ones are kept in the list and returned to the rotation
 when they are actually broadcasting, rather than rejected.
 
+## On a television
+
+Roundtrip recognises a Fire TV or another 10-foot screen from its user agent
+and sizes the whole overlay off the viewport instead of in desk pixels, inside
+a 5% title-safe margin. `?tv=1` forces that layout on a desktop and `?tv=0`
+forces it off on a television; either choice is remembered.
+
+The remote is keyboard handling, since a Fire TV's buttons arrive as ordinary
+key events. `tv.js` holds it, self-contained like `search.js`, and it does
+nothing unless the page decided it is on a television.
+
+| remote | what it does |
+| --- | --- |
+| Select | show what you can do here, and change nothing on its own |
+| ▶ / fast forward | next camera |
+| ◀ / rewind | the camera before |
+| ▲ / ▼ | the thumbs, as on a keyboard |
+| Play/Pause | stay on this one |
+| Back | pull out to orbit, rather than out of the app |
+
+A Fire TV remote's Back button is wired to browser history rather than to
+Escape, so `tv.js` keeps a spare history entry to absorb it. The first press of
+anything also takes the page full screen, which is what loses Silk's title bar.
+
+`firetv/` is the app that puts Roundtrip on the home row without a browser;
+`firetv/README.md` covers what it is and how it is installed.
+
 ## Thumbs up and thumbs down
 
 **Good** and **Drop** in the action strip, or the up and down arrow keys

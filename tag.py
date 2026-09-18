@@ -124,7 +124,8 @@ CATEGORY = {
   'sacred':      ['sacred','religion','pilgrimage','holy','worship'],
   'stage':       ['stage','live music','music','bar','venue'],
   'airport':     ['airport','planes','aviation','plane spotting','runway'],
-  'railway':     ['railway','trains','rail','trainspotting'],
+  'railway':     ['railway','trains','rail','trainspotting','railfan'],
+  'locks':       ['locks','lock','ships','freighters','canal','water','shipping'],
   'zoo':         ['zoo','wildlife','animals'],
   'aquarium':    ['aquarium','underwater','fish','indoor','ocean'],
   'kelp forest': ['kelp forest','underwater','aquarium','ocean','fish','indoor'],
@@ -143,7 +144,8 @@ BUSY  = {'square','street','crossing','market','city','airport','stage','promena
 QUIET = {'mountain','glacier','fjord','desert','aurora','nest','feeder','reef',
          'kelp forest','waterhole','volcano','coast'}
 # Scenes where a city lights up after dark.
-LIT   = {'skyline','city','square','crossing','street','promenade','harbor'}
+LIT   = {'skyline','city','square','crossing','street','promenade','harbor',
+         'locks','canal','railway'}
 # Scenes where the compass heading says nothing about the sun.
 INDOOR = {'aquarium','kelp forest','reef','manatees','stage'}
 
@@ -270,6 +272,10 @@ EXTRAS = {
  'Auckland skyline and Waitemata Harbour': ['sky tower','harbour','yachts','downtown','night lights'],
  'Lyall Bay, Wellington': ['surf','wind','cook strait','seaside','planes'],
  "Hog's Breath Saloon stage": ['live band','bar','key west','music','duval street','nightlife','honky tonk'],
+ 'Soo Locks': ['freighters','lakers','great lakes','locks','ships','ship horns','michigan','upper peninsula','sault ste marie','soo'],
+ 'Deshler Diamond': ['trains','railfan','trainspotting','diamond','csx','level crossing','freight','ohio'],
+ 'Welland Canal at Port Colborne': ['freighters','canal','lift bridge','seaway','ships','ship spotting','niagara','ontario','great lakes'],
+ 'Kiel-Holtenau Lock': ['kiel canal','nord-ostsee-kanal','schleuse','locks','ships','ship spotting','baltic','holtenau'],
 }
 
 

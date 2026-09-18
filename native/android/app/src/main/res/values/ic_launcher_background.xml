@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="ic_launcher_background">#FFFFFF</color>
+    <!-- The adaptive icon carries the supplied background layer as artwork;
+     this is only the flat fallback for anything that asks for a colour. -->
+    <color name="ic_launcher_background">#071022</color>
 </resources>

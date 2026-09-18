@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
   <style name="AppTheme" parent="@android:style/Theme.Black.NoTitleBar.Fullscreen">
-    <item name="android:windowBackground">#FF05070C</item>
+    <!-- The brand backdrop is what the television shows for the second or
+         two before the globe paints, in place of a flat dark rectangle.
+         It sits behind an opaque WebView, so it is only ever seen then. -->
+    <item name="android:windowBackground">@drawable/tv_background</item>
   </style>
 </resources>

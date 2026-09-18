@@ -1,0 +1,88 @@
+# Builds the Fire TV app and drops the apk at the root of the site, so the
+# Fire Stick can fetch it from a short address that never changes:
+#
+#   anthonybono21-cloud.github.io/roundtrip/rt.apk
+#
+# This environment cannot build it: dl.google.com is blocked from a project
+# session, so there is no Android SDK there. A runner has one already.
+name: Fire TV app
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'firetv/**'
+      - '.github/workflows/firetv.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: firetv
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      # setup-android@v3 is not used: it asks the sdkmanager for the obsolete
+      # `tools` package, which no longer exists in Google's repository, and
+      # dies. The runner image already carries the SDK, so take it and add the
+      # two pieces this build needs.
+      - name: Android SDK
+        run: |
+          set -eu
+          SDKMGR=$(ls "$ANDROID_HOME"/cmdline-tools/*/bin/sdkmanager | tail -1)
+          yes | "$SDKMGR" --licenses > /dev/null 2>&1 || true
+          "$SDKMGR" "platforms;android-34" "build-tools;34.0.0"
+
+      - uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: '8.10.2'
+
+      # The run number becomes the version code, so each build installs over
+      # the last one instead of being refused as a downgrade.
+      - name: Build the apk
+        working-directory: firetv
+        run: >
+          gradle --no-daemon --stacktrace
+          -PversionCode=${{ github.run_number }}
+          -PversionName=1.${{ github.run_number }}
+          assembleRelease
+
+      - name: Check it came out signed
+        working-directory: firetv
+        run: |
+          set -eu
+          APK=app/build/outputs/apk/release/app-release.apk
+          ls -l "$APK"
+          SIGNER=$(ls "$ANDROID_HOME"/build-tools/*/apksigner | tail -1)
+          "$SIGNER" verify --print-certs "$APK"
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: roundtrip-firetv-apk
+          path: firetv/app/build/outputs/apk/release/app-release.apk
+
+      - name: Publish it beside the site
+        if: github.event_name != 'pull_request'
+        run: |
+          cp firetv/app/build/outputs/apk/release/app-release.apk rt.apk
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add rt.apk
+          if git diff --cached --quiet; then
+            echo "apk unchanged"
+          else
+            git commit -m "Fire TV app build ${{ github.run_number }}"
+            git pull --rebase origin main
+            git push origin HEAD:main
+          fi

@@ -1,3 +1,9 @@
 # The single-file double-click build. Pages serves the source layout, so this
 # is a local artifact: rebuild it with `python3 build.py`.
 Roundtrip.html
+
+# The Fire TV app's build output. CI builds it and publishes rt.apk.
+firetv/.gradle/
+firetv/build/
+firetv/app/build/
+firetv/local.properties

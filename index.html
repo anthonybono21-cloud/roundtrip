@@ -1330,6 +1330,8 @@ const state = {
   sway: 0,                    // phase of the idle drift
   from: null, handoff: null,
   departDur: 0,
+  departP: 0,                  // accumulated, so extending the wait never rewinds it
+  lastT: 0,
   ready: false,               // ground stage textured and uploaded
   ground: null,
   blend: 0,                   // 0 = globe, 1 = ground
@@ -1629,6 +1631,8 @@ function beginDive(cam){
   state.ground = null;
   state.ready = false;
   state.departDur = CFG.depart;
+  state.departP = 0;
+  state.lastT = clock();
   const detailJob = stageDetail(cam.pose).catch(()=>{});
   stageGround(cam, null, detailJob).then(g => { state.ground = g; }).catch(e => {
     note('Ground stage failed: '+e.message);
@@ -1641,12 +1645,35 @@ function beginDive(cam){
 }
 
 function backToOrbit(){
+  // The retreat runs the departure backwards, so whatever sits in state.from
+  // is where it comes to rest. Pointing it at the next destination is what
+  // turns the pull-out into a rotation toward the next place instead of a
+  // trip home to the same view.
+  const nxt = nextFramedOrbit();
+  state.from = { lat: nxt.lat, lng: nxt.lng, r: nxt.r };
   setPhase('retreat');
 }
 
-/* Where the idle camera wants to be: a fixed offset from the subsolar point,
-   so the lit limb and the terminator are always in frame whatever the hour,
-   with a slow sway on top so the planet reads as turning. */
+/* Where the globe rests between dives. Framing the sun put the camera over
+   the same part of the world every single time, so every retreat ended on the
+   same shot of North America and the next dive set off from there. Frame the
+   next destination instead: the wait then reads as the planet turning toward
+   where it is about to go. Kept off to one side and above, so the dive still
+   has somewhere to travel rather than dropping down its own axis. */
+function nextFramedOrbit(){
+  const cam = peekNext();
+  if (!cam || !cam.pose) return sunFramedOrbit();
+  const b = CFG.breathe, p = cam.pose;
+  return {
+    lat: clamp(p.lat*0.86 + 5 + drift(state.sway*0.63, 1.3)*5*b, -62, 66),
+    lng: p.lng - 17 + drift(state.sway, 4.7)*9*b,
+    r:   3.1 + drift(state.sway*0.41, 8.9)*0.18*b,
+  };
+}
+
+/* The fallback, used only when there is no next camera to frame: a fixed
+   offset from the subsolar point, so the lit limb and the terminator are in
+   frame whatever the hour, with a slow sway so the planet reads as turning. */
 function sunFramedOrbit(){
   const s = sunPosition();
   const b = CFG.breathe;
@@ -1667,7 +1694,7 @@ function updateSpaceCam(){
     state.sway += 0.00055;                       // a full sway takes ~3 minutes
     // Ease toward the sun-framed pose rather than snapping, so the shot recovers
     // smoothly after a dive instead of cutting back.
-    const tgt = sunFramedOrbit();
+    const tgt = nextFramedOrbit();
     state.orbit.lat = lerp(state.orbit.lat, tgt.lat, 0.010);
     state.orbit.lng = lerp(state.orbit.lng, shortestAngle(state.orbit.lng, tgt.lng), 0.010);
     state.orbit.r   = lerp(state.orbit.r,   tgt.r,   0.010);
@@ -1692,7 +1719,7 @@ function updateSpaceCam(){
   // Retreat runs the identical path backwards, so leaving looks like arriving.
   // Every phase after the departure holds the camera at the handoff pose.
   const raw = retreating ? 1 - phaseT(CFG.retreat)
-            : state.phase === 'depart' ? phaseT(state.departDur)
+            : state.phase === 'depart' ? state.departP
             : 1;
   const e = ease(raw);
   const a = state.from, b = state.handoff;
@@ -1712,7 +1739,9 @@ function updateSpaceCam(){
   spaceCam.lookAt(_look);
   spaceCam.fov = lerp(38, 46, e);
   setSpaceClip(r-1);
-  if (state.phase === 'depart'){ state.orbit.lat = lat; state.orbit.lng = lng; }
+  if (state.phase === 'depart' || retreating){
+    state.orbit.lat = lat; state.orbit.lng = lng; state.orbit.r = r;
+  }
 }
 
 /* Clip planes have to follow altitude: a fixed near plane at 6km above the
@@ -1800,13 +1829,29 @@ function tick(){
       break;
     case 'depart': {
       // Hold on the globe until the ground is actually ready. A dive into
-      // untextured grey, or a texture upload mid-descent, is the one thing that
-      // breaks the illusion, so the departure stretches to cover it.
-      const t = phaseT(state.departDur);
-      if (t >= 1){
-        if (state.ready || clock()-state.t0 > CFG.maxDepart) setPhase('handoff');
-        else state.departDur += 0.25;         // keep flying, keep waiting
-      }
+      // untextured grey, or a texture upload mid-descent, is the one thing
+      // that breaks the illusion, so the departure stretches to cover it.
+      //
+      // The stretch used to grow departDur while the progress through it was
+      // recomputed from the clock, so every extension threw that progress
+      // backwards and the camera visibly backed off and came in again, over
+      // and over, right where the satellite photo appears. That was the
+      // judder on the way down. Progress is accumulated per frame instead, so
+      // waiting can only slow the remaining travel, never undo travel already
+      // made. That reads as easing in rather than stuttering.
+      const now = clock();
+      const dt = clamp(now - state.lastT, 0, 0.1);
+      state.lastT = now;
+      const waiting = !state.ready && now - state.t0 < CFG.maxDepart;
+      // Brake before the travel runs out, or there is nothing left to slow
+      // down and the approach stops dead instead of easing. The brake is a
+      // rate multiplier, not a growing duration: at worst the last 0.38 of
+      // the descent runs at a quarter speed, which caps the whole departure
+      // at about 7.3 s, and it returns to full speed the instant the ground
+      // reports ready.
+      const slow = (waiting && state.departP > 0.62) ? 0.25 : 1;
+      state.departP = clamp(state.departP + dt * slow / state.departDur, 0, 1);
+      if (state.departP >= 1) setPhase('handoff');
       break;
     }
     case 'handoff':

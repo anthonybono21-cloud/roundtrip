@@ -46,7 +46,9 @@ jobs:
           distribution: temurin
           java-version: '21'
 
-      - uses: android-actions/setup-android@v3
+      # No setup-android step: the Ubuntu runner already ships the SDK with its
+      # licences accepted, and the action insists on installing the long-dead
+      # "tools" package, which fails.
 
       - name: Install
         working-directory: native

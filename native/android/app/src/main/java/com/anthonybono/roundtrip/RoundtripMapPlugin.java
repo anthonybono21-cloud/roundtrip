@@ -31,6 +31,7 @@ import org.maplibre.android.geometry.LatLng;
 import org.maplibre.android.maps.MapLibreMap;
 import org.maplibre.android.maps.MapView;
 import org.maplibre.android.maps.Style;
+import org.maplibre.android.style.expressions.Expression;
 import org.maplibre.android.style.layers.CircleLayer;
 import org.maplibre.android.style.layers.PropertyFactory;
 import org.maplibre.android.style.layers.RasterLayer;
@@ -210,12 +211,13 @@ public class RoundtripMapPlugin extends Plugin {
 
         CircleLayer dots = new CircleLayer(LYR_DOTS, SRC_CAMS).withProperties(
             PropertyFactory.circleRadius(5.5f),
+            // "case", not "match": the style spec only matches on strings and
+            // numbers, and `live` is a boolean.
             PropertyFactory.circleColor(
-                org.maplibre.android.style.expressions.Expression.match(
-                    org.maplibre.android.style.expressions.Expression.get("live"),
-                    org.maplibre.android.style.expressions.Expression.color(Color.parseColor("#8fa3bd")),
-                    org.maplibre.android.style.expressions.Expression.stop(
-                        true, org.maplibre.android.style.expressions.Expression.color(Color.parseColor("#ffd479"))))),
+                Expression.switchCase(
+                    Expression.eq(Expression.get("live"), true),
+                    Expression.color(Color.parseColor("#ffd479")),
+                    Expression.color(Color.parseColor("#8fa3bd")))),
             PropertyFactory.circleStrokeWidth(1.6f),
             PropertyFactory.circleStrokeColor(Color.parseColor("#05070c")),
             PropertyFactory.circleStrokeOpacity(0.85f));

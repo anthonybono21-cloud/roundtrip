@@ -31,8 +31,17 @@ test('resource lifecycle, optional catalog and minute-rate ephemeris without a r
     camera.lookAt(0, 0, 0);
     const sky = await createSpaceScene({ THREE: { ...THREE, TextureLoader }, scene, camera });
     await new Promise(resolve => setImmediate(resolve));
-    assert.equal(sky.stats.stars, 5080);
+    assert.equal(sky.stats.catalogStars, 5080);
+    assert.equal(sky.stats.backgroundStars, 6000);
+    assert.equal(sky.stats.stars, 11080);
     assert.equal(sky.stats.drawCalls, 3);
+    const starMesh = sky.group.getObjectByName('yale-bright-star-catalog');
+    const directions = starMesh.geometry.attributes.position;
+    for (let i = 0; i < directions.count; i++) {
+      assert.ok(Math.abs(Math.hypot(directions.getX(i), directions.getY(i), directions.getZ(i)) - 1) < 1e-6);
+    }
+    assert.equal(starMesh.geometry.attributes.pointSize.count, directions.count);
+    assert.equal(starMesh.geometry.attributes.intensity.count, directions.count);
     const date = new Date('2026-09-18T12:00:00Z'), sun = new THREE.Vector3(1, 0, 0);
     for (let frame = 0; frame < 120; frame++) sky.update(new Date(+date + frame * 16), sun, 1.7);
     assert.equal(sky.stats.ephemerisUpdates, 1);

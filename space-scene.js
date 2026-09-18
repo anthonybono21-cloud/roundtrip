@@ -14,7 +14,11 @@ export const CELESTIAL_STYLE = Object.freeze({
   moonEarthshine: 0.028,
   sunScale: 2.25,
   sunPhysicalDiameterDegrees: 0.53,
-  sunDiskRadiusUV: 0.2
+  sunDiskRadiusUV: 0.2,
+  starMinSize: 3.2,
+  starMaxSize: 6,
+  starMinIntensity: 0.66,
+  backgroundStars: 6000
 });
 
 export function siderealAngle(date) {
@@ -160,8 +164,23 @@ export async function createSpaceScene({ THREE, scene, camera }) {
         positions.push(...equatorialDirection(catalog.ra[i] * DEG, catalog.dec[i] * DEG));
         const color = palette[clamp(catalog.cls?.[i] ?? 4, 0, 6)];
         colors.push(color.r, color.g, color.b);
-        sizes.push(clamp(2.8 - mag * 0.29, 1.0, 3.5));
-        intensities.push(clamp(Math.pow(10, -0.20 * (mag - 1)), 0.11, 1.0));
+        // TV-scale exposure: keep the faint catalog members visible beside
+        // a bright Earth instead of losing them to subpixel point falloff.
+        sizes.push(clamp(5.4 - mag * 0.34, CELESTIAL_STYLE.starMinSize, CELESTIAL_STYLE.starMaxSize));
+        intensities.push(clamp(Math.pow(10, -0.035 * (mag - 1)), CELESTIAL_STYLE.starMinIntensity, 1.0));
+      }
+      // Stable decorative depth between the real catalog stars. Generated once,
+      // uniformly across the sphere, in the same buffer and single draw call.
+      // These are explicitly scenery, not additional astronomical catalog data.
+      let seed = 0x524f554e;
+      const random = () => { seed = (Math.imul(seed, 1664525) + 1013904223) >>> 0; return seed / 4294967296; };
+      for (let i = 0; i < CELESTIAL_STYLE.backgroundStars; i++) {
+        const y = random() * 2 - 1, angle = random() * Math.PI * 2;
+        const radius = Math.sqrt(1 - y * y);
+        positions.push(radius * Math.cos(angle), y, radius * Math.sin(angle));
+        colors.push(0.78, 0.84, 1);
+        sizes.push(1.4 + random() * 1.1);
+        intensities.push(0.28 + random() * 0.22);
       }
       const geometry = keep(new THREE.BufferGeometry());
       geometry.setAttribute('position', new THREE.Float32BufferAttribute(positions, 3));
@@ -181,7 +200,7 @@ export async function createSpaceScene({ THREE, scene, camera }) {
           gl_PointSize=pointSize*pixelRatio;}`,
         fragmentShader: `varying vec3 vColor;varying float vIntensity;uniform float opacity;
           void main(){float radius=length(gl_PointCoord-0.5)*2.0;
-          float alpha=(1.0-smoothstep(0.1,1.0,radius))*vIntensity*opacity;
+          float alpha=(1.0-smoothstep(0.4,1.0,radius))*vIntensity*opacity;
           if(alpha<0.008)discard;gl_FragColor=vec4(vColor,alpha);
           #include <colorspace_fragment>
           }`
@@ -193,6 +212,8 @@ export async function createSpaceScene({ THREE, scene, camera }) {
       stars.rotation.y = -siderealAngle(Number.isFinite(lastAstrometry) ? lastAstrometry : Date.now());
       group.add(stars);
       stats.stars = positions.length / 3;
+      stats.catalogStars = stats.stars - CELESTIAL_STYLE.backgroundStars;
+      stats.backgroundStars = CELESTIAL_STYLE.backgroundStars;
       stats.drawCalls = 3;
       stats.starCatalog = 'Yale J2000';
     }).catch(error => { if (!disposed) stats.starCatalog = `unavailable: ${error.message}`; });

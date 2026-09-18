@@ -16,7 +16,7 @@ sky.dispose();
 Remove the previous star sphere and its per-frame rotation. Do not run sky.update
 while a webcam/native map covers the globe. The module has no animation loop,
 interval, light objects, bloom pass, or network polling. Three draw calls cover
-all 5,080 stars, the Sun, and the Moon. Moon texture and catalog load once, locally,
+all 11,080 star points, the Sun, and the Moon. Moon texture and catalog load once, locally,
 without blocking Earth initialization. `sky.stats` reports load and update status.
 
 The sky vertex shaders project onto the far depth boundary; leave the globe's
@@ -31,6 +31,11 @@ disabled because their apparent depth is controlled in the vertex shader.
   Catalogue, magnitude 6 and brighter, equatorial coordinates in J2000. Spectral
   classes map to approximate display colors. One points mesh, no fake twinkling.
   Earth's sidereal rotation is applied. Precession and proper motion are omitted.
+  The 5,080 real catalog stars use a deliberately brighter display exposure and
+  3.2–6 CSS-pixel points for television visibility. Another 6,000 smaller,
+  deterministically generated background points add visual density; these are
+  decorative scenery, not catalog objects. Both share one geometry and draw call,
+  rotate together, and fade out on the ground approach without animated twinkling.
 - Moon: approximate orbital position and distance adapted from
   [SunCalc 1.9.0](https://github.com/mourner/suncalc/blob/v1.9.0/suncalc.js), itself
   based on [Louis Strous's astronomical formulas](https://aa.quae.nl/en/reken/hemelpositie.html).
@@ -57,8 +62,8 @@ The darker lunar surface retains a gentle earthshine term while its phase remain
 driven by the supplied Sun direction. The image itself is unmodified.
 
 `CELESTIAL_STYLE` documents the display choices in one place. The enhancement adds
-no draw calls, textures, timers, animation loops, stars, light sources, or full-screen
-post-processing. The original star catalog and brightness are unchanged. With
+no draw calls, textures, timers, animation loops, light sources, or full-screen
+post-processing. The original star catalog coordinates are unchanged. With
 motion disabled, the same static celestial composition remains complete; motion
 and reduced-motion camera behavior continue to belong to the parent app.
 

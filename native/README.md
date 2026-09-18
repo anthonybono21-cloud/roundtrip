@@ -20,7 +20,7 @@ rule, not a choice made here.
 
 | | Builds | Runs | What is missing |
 |---|---|---|---|
-| **Android** | Yes, in CI, on every push | Phone and tablet | Installing a new build over an old one (see below) |
+| **Android** | Yes, in CI, on every push | Phone and tablet | Nothing, for sideloading |
 | **iPhone / iPad** | Compiles in CI; needs Xcode for a device build | — | An Apple developer account to sign it |
 | **Mac** | Same project, Mac Catalyst | — | The same account |
 | **Apple TV** | Not possible as a web shell | — | See below |
@@ -69,10 +69,11 @@ attaches it to the run, and drops it beside the site as
 <https://anthonybono21-cloud.github.io/roundtrip/phone.apk> — open that on the
 phone you want it on.
 
-One rough edge: the build is not signed with a fixed key, so Android will
-refuse to install a new one *over* an old one; remove the app first. Fixing it
-means pointing the build at the sideload key `firetv/` already keeps, which is
-a few lines in `android/app/build.gradle`.
+It is signed with the same sideload key the Fire TV app uses, so each build
+installs over the last one instead of being refused. That key is declared once,
+in `firetv/app/build.gradle`, and read from there rather than copied. It is in
+the repository on purpose and protects nothing: neither app is going near a
+store. A real store release would need a private key kept somewhere else.
 
 **iPhone, iPad and Mac** (needs a Mac with Xcode)
 

@@ -80,6 +80,18 @@ jobs:
           -PversionName=1.${{ github.run_number }}
           assembleDebug
 
+      # The build falls back to a throwaway debug key if the shared sideload
+      # one cannot be read, and a throwaway key means the next build will not
+      # install over this one. Better to find that out here than on the phone.
+      - name: Check it is signed with the sideload key
+        run: |
+          set -eu
+          APK=native/android/app/build/outputs/apk/debug/app-debug.apk
+          SIGNER=$(ls "$ANDROID_HOME"/build-tools/*/apksigner | tail -1)
+          "$SIGNER" verify --print-certs "$APK" | tee /tmp/certs.txt
+          grep -qi 'CN=Roundtrip\|roundtrip' /tmp/certs.txt \
+            || echo "::warning::apk is not signed with the shared sideload key"
+
       - uses: actions/upload-artifact@v4
         with:
           name: roundtrip-android-apk

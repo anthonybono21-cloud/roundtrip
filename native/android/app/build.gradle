@@ -8,6 +8,31 @@ apply plugin: 'com.android.application'
 def rtVersionCode = ((project.findProperty('versionCode') ?: '1') as String).toInteger()
 def rtVersionName = (project.findProperty('versionName') ?: "1.0.${rtVersionCode}").toString()
 
+// Sideload signing.
+//
+// Android refuses to install a build over one signed by a different key, and
+// a debug key is regenerated on every machine, so without this each update
+// means deleting the app first. The Fire TV app in this repository already
+// keeps a key for exactly that reason and declares its credentials once, in
+// firetv/app/build.gradle. They are read out of that file here rather than
+// copied, so there is one key and one place it is written down, and the two
+// apps cannot drift apart. Neither app is going near a store: the key is in
+// the repository on purpose and protects nothing.
+def sideloadKey = rootProject.file('../../firetv/roundtrip-sideload.jks')
+def sideloadFrom = rootProject.file('../../firetv/app/build.gradle')
+def sideload = [:]
+if (sideloadFrom.exists()) {
+    sideloadFrom.eachLine { line ->
+        def m = (line =~ /^\s*(storePassword|keyAlias|keyPassword)\s+'([^']*)'/)
+        if (m.find()) sideload[m.group(1)] = m.group(2)
+    }
+}
+def canSign = sideloadKey.exists() &&
+    ['storePassword', 'keyAlias', 'keyPassword'].every { sideload.containsKey(it) }
+if (!canSign) {
+    logger.lifecycle('Roundtrip: no sideload key found, falling back to debug signing')
+}
+
 android {
     namespace "com.anthonybono.roundtrip"
     compileSdk rootProject.ext.compileSdkVersion
@@ -27,10 +52,25 @@ android {
     // No compileOptions here on purpose: capacitor.build.gradle, applied at
     // the bottom of this file, sets Java 21 and would override anything set
     // above it. MapLibre is built against 17 and is happy on 21.
+    if (canSign) {
+        signingConfigs {
+            sideload {
+                storeFile sideloadKey
+                storePassword sideload['storePassword']
+                keyAlias sideload['keyAlias']
+                keyPassword sideload['keyPassword']
+            }
+        }
+    }
+
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            if (canSign) signingConfig signingConfigs.sideload
+        }
+        debug {
+            if (canSign) signingConfig signingConfigs.sideload
         }
     }
 }

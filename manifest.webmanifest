@@ -1,0 +1,17 @@
+{
+  "name": "Roundtrip",
+  "short_name": "Roundtrip",
+  "description": "Spin the earth, stop somewhere, watch it live.",
+  "id": "/roundtrip/",
+  "start_url": "./",
+  "scope": "./",
+  "display": "fullscreen",
+  "orientation": "any",
+  "background_color": "#05070c",
+  "theme_color": "#071022",
+  "icons": [
+    { "src": "./assets/brand/icons/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "./assets/brand/icons/icon-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "./assets/brand/icons/apple-touch-icon-180.png", "sizes": "180x180", "type": "image/png" }
+  ]
+}

@@ -60,6 +60,13 @@ for rel, mime in [('assets/earth-day.jpg','image/jpeg'), ('assets/earth-night.jp
     assert token in html, token
     html = html.replace(token, f"'{data_uri(rel, mime)}'")
 
+# The overlay lockup, for the same reason: a single file that reaches for a
+# sibling PNG shows a broken image where the brand should be.
+mark = 'assets/brand/handle-flight-white.png'
+token = f'"./{mark}"'
+assert token in html, token
+html = html.replace(token, '"' + data_uri(mark, 'image/png') + '"')
+
 out = D/'Roundtrip.html'
 out.write_text(html, encoding='utf-8')
 print(f'built {out.name}: {out.stat().st_size/1048576:.2f} MB')

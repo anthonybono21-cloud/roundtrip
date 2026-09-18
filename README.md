@@ -362,6 +362,29 @@ pulled into the browser cache in the background.
 No account, no key, no billing. The attribution line bottom-right is required
 by Esri's and OpenStreetMap's terms; leave it in.
 
+## The brand
+
+Handle Flight, the suitcase and airplane. The package is `assets/brand/`,
+exactly as it was handed over, with a README of its own that maps every file
+and a `manifest.json` that hashes them. Nothing in it is edited, and the
+wordmark is never retyped in a font: every file the apps carry is a resize, a
+crop or a composite of that artwork, cut by `brand.py` at the repo root.
+
+| where it shows | file |
+| --- | --- |
+| the overlay, beside the place and the local time | `assets/brand/handle-flight-white.png`, white with real alpha |
+| browser tab, home screen, installed web app | `favicon.ico` at the root, `manifest.webmanifest`, and the PNGs in `assets/brand/icons/` |
+| Fire TV home row and the screen before the globe paints | `firetv/…/drawable-*/banner.png`, `drawable-nodpi/tv_background.png` |
+| iPhone, iPad and Mac icon and splash | `native/ios/App/App/Assets.xcassets/` |
+| Android icon and splash | `native/android/app/src/main/res/` |
+
+`python3 brand.py` re-cuts all of it. The page itself needs nothing from that
+script: it links the brand files where they lie.
+
+The tvOS layered icon in `assets/brand/tvos/` is wired to nothing, and stays
+that way. There is no Apple TV target and there cannot be one — tvOS ships no
+web view at all, which is why the television answer is a Fire Stick.
+
 ## Tuning
 
 `CFG` near the top of the script holds everything worth changing: dwell time,

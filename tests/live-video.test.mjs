@@ -102,12 +102,14 @@ test('native HLS releases network source under cover and restores it once visibl
   player.destroy();
 });
 
-test('startup budget excludes both map-covered and backgrounded time',t=>{
+test('startup budget excludes both map-covered and backgrounded time',async t=>{
   t.mock.timers.enable({apis:['setTimeout']});let elapsed=0,errors=0;
   const advance=ms=>{elapsed+=ms;t.mock.timers.tick(ms);};
   const {doc,video}=fixture(true);
-  const player=mountDirectVideo(video,camera,{doc,now:()=>elapsed,onError:()=>errors++});
-  advance(10000);player.setSuspended(true);advance(60000);
+  const mock=fakeHls();
+  const player=mountDirectVideo(video,camera,{doc,now:()=>elapsed,
+    load:()=>Promise.resolve(mock.Hls),onError:()=>errors++});
+  advance(10000);await flush();player.setSuspended(true);advance(60000);
   assert.equal(errors,0);
   doc.hidden=true;doc.dispatchEvent(new Event('visibilitychange'));
   player.setSuspended(false);advance(60000);assert.equal(errors,0);
@@ -133,4 +135,48 @@ test('media recovery is bounded to one attempt before failing',async()=>{
   assert.equal(mock.instance.recoveries,1);assert.equal(errors,0);
   mock.instance.handlers.error('error',fault);
   assert.equal(mock.instance.destroyed,1);assert.equal(errors,1);player.destroy();
+});
+
+test('native decoding failure falls back to MSE once without reporting a dead camera',async()=>{
+  const {doc,video}=fixture(true);const mock=fakeHls();let errors=0,loads=0;
+  const player=mountDirectVideo(video,camera,{doc,onError:()=>errors++,
+    load:()=>{loads++;return Promise.resolve(mock.Hls);}});
+  video.dispatchEvent(new Event('error'));await flush();
+  assert.equal(loads,1);assert.equal(mock.instance.sources,1);assert.equal(errors,0);
+  video.dispatchEvent(new Event('playing'));assert.equal(player.isReady(),true);
+  video.dispatchEvent(new Event('error'));assert.equal(errors,1);assert.equal(loads,1);
+  assert.equal(mock.instance.destroyed,1);player.destroy();
+});
+
+test('native stall falls back after eight visible seconds and can play through MSE',async t=>{
+  t.mock.timers.enable({apis:['setTimeout']});
+  const {doc,video}=fixture(true);const mock=fakeHls();let loads=0,errors=0;
+  const player=mountDirectVideo(video,camera,{doc,onError:()=>errors++,
+    load:()=>{loads++;return Promise.resolve(mock.Hls);}});
+  t.mock.timers.tick(7999);await flush();assert.equal(loads,0);
+  t.mock.timers.tick(1);await flush();assert.equal(loads,1);
+  video.dispatchEvent(new Event('playing'));t.mock.timers.tick(60000);
+  assert.equal(player.isReady(),true);assert.equal(errors,0);player.destroy();
+});
+
+test('native fallback clock pauses under cover and retirement cancels it',async t=>{
+  t.mock.timers.enable({apis:['setTimeout']});let elapsed=0,loads=0;
+  const advance=ms=>{elapsed+=ms;t.mock.timers.tick(ms);};
+  const {doc,video}=fixture(true);const mock=fakeHls();
+  const player=mountDirectVideo(video,camera,{doc,now:()=>elapsed,
+    load:()=>{loads++;return Promise.resolve(mock.Hls);}});
+  advance(6000);player.setSuspended(true);advance(60000);await flush();
+  assert.equal(loads,0);player.setSuspended(false);advance(1999);await flush();
+  assert.equal(loads,0);player.destroy();advance(60000);await flush();assert.equal(loads,0);
+});
+
+test('native-only devices retain native playback if MSE is unsupported',async t=>{
+  t.mock.timers.enable({apis:['setTimeout']});let errors=0;
+  const {doc,video}=fixture(true);const mock=fakeHls();
+  mock.Hls.isSupported=()=>false;
+  const player=mountDirectVideo(video,camera,{doc,onError:()=>errors++,load:()=>Promise.resolve(mock.Hls)});
+  t.mock.timers.tick(8000);await flush();
+  assert.equal(video.src,camera.url);assert.equal(mock.instance,undefined);
+  video.dispatchEvent(new Event('playing'));t.mock.timers.tick(60000);
+  assert.equal(errors,0);assert.equal(player.isReady(),true);player.destroy();
 });

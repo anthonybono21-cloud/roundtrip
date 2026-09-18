@@ -214,9 +214,14 @@
 
   /* Two-word names have to survive being chopped into words, so the
      tokenizer is told which sequences to keep whole. */
+  // Keep a quality tag together after punctuation normalization. A lone
+  // digit is intentionally not matched inside tags by the abbreviation rules.
   const PHRASES = new Set(
-    [...Object.keys(PLACES), ...Object.keys(SYNONYMS)].filter(k => k.includes(' ')));
+    [...Object.keys(PLACES), ...Object.keys(SYNONYMS),
+     ...[0, 1, 2, 3, 4, 5].map(n => 'quality ' + n),
+     ...[0, 1, 2, 3, 4, 5].map(n => 'score ' + n)].filter(k => k.includes(' ')));
   const PHRASE_MAX = [...PHRASES].reduce((m, k) => Math.max(m, k.split(' ').length), 0);
+  const isQualityTerm = term => /^(?:quality|score) [0-5]$/.test(term);
 
   /* Words first, then the longest phrase that starts at each position:
      "new york city skyline" is New York City and skyline, not four words. */
@@ -270,6 +275,8 @@
 
   // How well one query term fits one camera. 0 means it does not.
   function termScore(e, term, discount) {
+    // Ratings are exact filters: typo tolerance must not turn 5 into 4 or 3.
+    if (isQualityTerm(term)) return e.tagSet.has(term) ? 110 * (discount || 1) : 0;
     let best = 0;
     const hit = v => { if (v > best) best = v; };
 
@@ -332,7 +339,7 @@
     let out = run(list);
     // A phrase that meant nothing here should not swallow the words inside
     // it: "middle east coast" falls back to three ordinary words.
-    if (!out.length && list.some(t => t.includes(' '))) {
+    if (!out.length && list.some(t => t.includes(' ')) && !list.some(isQualityTerm)) {
       list = words(q);
       out = run(list);
     }

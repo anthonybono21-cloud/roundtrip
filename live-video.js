@@ -20,23 +20,44 @@ export function mountDirectVideo(video,cam,{onError=()=>{},load=loadHls,doc=docu
   let covered=!!suspended,paused=covered||doc.hidden;
   let loadingLibrary=false,sourceLoaded=false;
   let startup=null,startupAt=0,startupRemaining=30000,started=false;
+  let nativeProbe=null,nativeProbeAt=0,nativeProbeRemaining=8000;
+  let nativeFallbackAttempted=false;
   const isHls=cam.kind==='hls'||/\.m3u8(?:[?#]|$)/i.test(cam.url);
-  const native=!isHls||!!video.canPlayType('application/vnd.apple.mpegurl');
+  let native=!isHls||!!video.canPlayType('application/vnd.apple.mpegurl');
   const play=()=>{if(!disposed&&!paused)video.play()?.catch(()=>{});};
   const waiting=()=>{ready=false;};
   const playing=()=>{
     if(disposed)return;
     if(paused){video.pause();return;}
     ready=true;started=true;clearTimeout(startup);startup=null;
+    clearTimeout(nativeProbe);nativeProbe=null;
   };
   const fail=error=>{if(!disposed){destroy();onError(error);}};
-  const failed=()=>fail(new Error('Camera video unavailable'));
+  const failed=()=>{if(!tryMse())fail(new Error('Camera video unavailable'));};
+  function tryMse(){
+    if(disposed||!native||!isHls||nativeFallbackAttempted)return false;
+    // Native HLS can advertise support yet stall on a feed's codec mix.
+    // Try the worker-backed player once, retaining the startup deadline.
+    nativeFallbackAttempted=true;
+    native=false;ready=false;clearTimeout(nativeProbe);nativeProbe=null;
+    if(started){started=false;startupRemaining=30000;}
+    sourceLoaded=false;video.pause();video.removeAttribute('src');video.load();
+    activate();return true;
+  }
   function pauseDeadline(){
+    if(nativeProbe!==null){
+      nativeProbeRemaining=Math.max(0,nativeProbeRemaining-(now()-nativeProbeAt));
+      clearTimeout(nativeProbe);nativeProbe=null;
+    }
     if(startup===null)return;
     startupRemaining=Math.max(0,startupRemaining-(now()-startupAt));
     clearTimeout(startup);startup=null;
   }
   function resumeDeadline(){
+    if(!started&&native&&isHls&&!nativeFallbackAttempted&&nativeProbe===null){
+      nativeProbeAt=now();
+      nativeProbe=setTimeout(()=>{nativeProbe=null;if(!paused)tryMse();},nativeProbeRemaining);
+    }
     if(started||startup!==null)return;
     startupAt=now();
     startup=setTimeout(()=>{
@@ -57,7 +78,12 @@ export function mountDirectVideo(video,cam,{onError=()=>{},load=loadHls,doc=docu
       loadingLibrary=true;
       Promise.resolve().then(()=>disposed ? null : load()).then(Hls=>{
         if(disposed)return;
-        if(!Hls.isSupported())throw new Error('HLS playback unsupported');
+        if(!Hls.isSupported()){
+          // Some native-only devices can take longer to start. Keep their
+          // original path and remaining deadline when MSE is unavailable.
+          if(nativeFallbackAttempted){native=true;loadingLibrary=false;activate();return;}
+          throw new Error('HLS playback unsupported');
+        }
         hls=new Hls({enableWorker:true,autoStartLoad:false,lowLatencyMode:false,
           maxBufferLength:20,backBufferLength:10});
         hls.on(Hls.Events.MANIFEST_PARSED,play);
@@ -87,6 +113,7 @@ export function mountDirectVideo(video,cam,{onError=()=>{},load=loadHls,doc=docu
   function destroy(){
     if(disposed)return;
     disposed=true;ready=false;clearTimeout(startup);startup=null;
+    clearTimeout(nativeProbe);nativeProbe=null;
     doc.removeEventListener('visibilitychange',visibility);
     video.removeEventListener('playing',playing);video.removeEventListener('error',failed);
     for(const event of ['waiting','pause','emptied'])video.removeEventListener(event,waiting);

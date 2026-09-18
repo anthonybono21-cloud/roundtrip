@@ -1,0 +1,3822 @@
+{
+  "generated_at": "2026-09-18T15:53:08.582032+00:00",
+  "existing_count": 240,
+  "requested_additions": 434,
+  "accepted": [
+    {
+      "name": "Shibuya Center-gai",
+      "video_id": "EaRgJQ--2eE",
+      "lane": "east-asia",
+      "source_file": "east-asia.json",
+      "quality_score": 5,
+      "reasons": []
+    },
+    {
+      "name": "Temple Bar, Dublin",
+      "video_id": "3nyPER2kzqk",
+      "lane": "europe-north",
+      "source_file": "europe-north.json",
+      "quality_score": 5,
+      "reasons": []
+    },
+    {
+      "name": "ROVINJ main square",
+      "video_id": null,
+      "lane": "europe-south",
+      "source_file": "europe-south.json",
+      "quality_score": 5,
+      "reasons": []
+    },
+    {
+      "name": "Rovinj promenade and marina – Istria – Croatia",
+      "video_id": null,
+      "lane": "europe-south",
+      "source_file": "europe-south.json",
+      "quality_score": 5,
+      "reasons": []
+    },
+    {
+      "name": "Split Riva – Prokurative | Trg Republike",
+      "video_id": null,
+      "lane": "europe-south",
+      "source_file": "europe-south.json",
+      "quality_score": 5,
+      "reasons": []
+    },
+    {
+      "name": "Zagreb – Ban Jelačić square",
+      "video_id": null,
+      "lane": "europe-south",
+      "source_file": "europe-south.json",
+      "quality_score": 5,
+      "reasons": []
+    },
+    {
+      "name": "Beringharjo Market walkway",
+      "video_id": null,
+      "lane": "south-asia",
+      "source_file": "south-asia.json",
+      "quality_score": 5,
+      "reasons": []
+    },
+    {
+      "name": "Sukhumvit at Soi 19, Bangkok",
+      "video_id": "Q71sLS8h9a4",
+      "lane": "south-asia",
+      "source_file": "south-asia.json",
+      "quality_score": 5,
+      "reasons": []
+    },
+    {
+      "name": "AllenBirdcam garden feeders",
+      "video_id": "BVbFRP_vIIc",
+      "lane": "south-world",
+      "source_file": "south-world.json",
+      "quality_score": 5,
+      "reasons": []
+    },
+    {
+      "name": "Avenida Atlantica Pier Camboriu",
+      "video_id": "5Xl6pSgiy3A",
+      "lane": "south-world",
+      "source_file": "south-world.json",
+      "quality_score": 5,
+      "reasons": []
+    },
+    {
+      "name": "Half Way Tree clock intersection, Kingston",
+      "video_id": "C71bNZ1coG4",
+      "lane": "south-world",
+      "source_file": "south-world.json",
+      "quality_score": 5,
+      "reasons": []
+    },
+    {
+      "name": "Lola ya Bonobo Sanctuary",
+      "video_id": "gqP5nBCRbHA",
+      "lane": "south-world",
+      "source_file": "south-world.json",
+      "quality_score": 5,
+      "reasons": []
+    },
+    {
+      "name": "Mambo Beach LionsDive Resort",
+      "video_id": "loHbMM9JfCs",
+      "lane": "south-world",
+      "source_file": "south-world.json",
+      "quality_score": 5,
+      "reasons": []
+    },
+    {
+      "name": "Ocho Rios Town Centre St Ann Jamaica",
+      "video_id": "DUX3qXG-SYg",
+      "lane": "south-world",
+      "source_file": "south-world.json",
+      "quality_score": 5,
+      "reasons": []
+    },
+    {
+      "name": "Santa Fe do Sul Railway Station",
+      "video_id": "B4zkUHMP1Mw",
+      "lane": "south-world",
+      "source_file": "south-world.json",
+      "quality_score": 5,
+      "reasons": []
+    },
+    {
+      "name": "Dania Beach Fishing Pier Florida",
+      "video_id": "o1eTLR7Degs",
+      "lane": "us-east",
+      "source_file": "us-east.json",
+      "quality_score": 5,
+      "reasons": []
+    },
+    {
+      "name": "Deerfield Beach Fishing Pier",
+      "video_id": "H33wtprQqSM",
+      "lane": "us-east",
+      "source_file": "us-east.json",
+      "quality_score": 5,
+      "reasons": []
+    },
+    {
+      "name": "Galesburg Illinois BNSF Rail Hub",
+      "video_id": "On1MRt0NqFs",
+      "lane": "us-east",
+      "source_file": "us-east.json",
+      "quality_score": 5,
+      "reasons": []
+    },
+    {
+      "name": "Glendale Ohio Norfolk Southern Rail",
+      "video_id": "vF4ZdG-_6FE",
+      "lane": "us-east",
+      "source_file": "us-east.json",
+      "quality_score": 5,
+      "reasons": []
+    },
+    {
+      "name": "Horseshoe Falls from above",
+      "video_id": "7gBzLGlJnwk",
+      "lane": "us-east",
+      "source_file": "us-east.json",
+      "quality_score": 5,
+      "reasons": []
+    },
+    {
+      "name": "Houston Sampson Street railway, south view",
+      "video_id": "OmWt0efvmNQ",
+      "lane": "us-east",
+      "source_file": "us-east.json",
+      "quality_score": 5,
+      "reasons": []
+    },
+    {
+      "name": "La Trattoria Duval Street Key West",
+      "video_id": "3bXyYuk-XK0",
+      "lane": "us-east",
+      "source_file": "us-east.json",
+      "quality_score": 5,
+      "reasons": []
+    },
+    {
+      "name": "New Orleans public street intersection",
+      "video_id": "QhFYcPBmkcI",
+      "lane": "us-east",
+      "source_file": "us-east.json",
+      "quality_score": 5,
+      "reasons": []
+    },
+    {
+      "name": "Peace Bridge Canada Bound Buffalo NY",
+      "video_id": "DnUFAShZKus",
+      "lane": "us-east",
+      "source_file": "us-east.json",
+      "quality_score": 5,
+      "reasons": []
+    },
+    {
+      "name": "Peggy's Cove Lighthouse",
+      "video_id": "SFoS6nBL138",
+      "lane": "us-east",
+      "source_file": "us-east.json",
+      "quality_score": 5,
+      "reasons": []
+    },
+    {
+      "name": "Rochelle Railroad Park Illinois Hub",
+      "video_id": "LhNpn9L5ndM",
+      "lane": "us-east",
+      "source_file": "us-east.json",
+      "quality_score": 5,
+      "reasons": []
+    },
+    {
+      "name": "Vineyard Haven Downtown Harbour Marthas",
+      "video_id": "CHd0z44hTQc",
+      "lane": "us-east",
+      "source_file": "us-east.json",
+      "quality_score": 5,
+      "reasons": []
+    },
+    {
+      "name": "Big 10 Curve, Arvada",
+      "video_id": "nUdVtKcprJU",
+      "lane": "us-west",
+      "source_file": "us-west.json",
+      "quality_score": 5,
+      "reasons": []
+    },
+    {
+      "name": "Steamboat Square",
+      "video_id": "2UJDLWcSADk",
+      "lane": "us-west",
+      "source_file": "us-west.json",
+      "quality_score": 5,
+      "reasons": []
+    },
+    {
+      "name": "Ginza Sukiyabashi Crossing",
+      "video_id": "1Xm5bjdI5hU",
+      "lane": "east-asia",
+      "source_file": "east-asia.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Gwanghwamun Boulevard",
+      "video_id": "Bp8TlbfCmXI",
+      "lane": "east-asia",
+      "source_file": "east-asia.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Hakata Station Square",
+      "video_id": "yETDDgrE2E4",
+      "lane": "east-asia",
+      "source_file": "east-asia.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Han River Park",
+      "video_id": "ZL1SUWuFxKQ",
+      "lane": "east-asia",
+      "source_file": "east-asia.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Jamsil Bridge",
+      "video_id": "OCfFNf1oUFo",
+      "lane": "east-asia",
+      "source_file": "east-asia.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Kobe Port Tower",
+      "video_id": "AU_2zfM4m68",
+      "lane": "east-asia",
+      "source_file": "east-asia.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Nagoya Station Shinkansen",
+      "video_id": "bEv1d0w_WJo",
+      "lane": "east-asia",
+      "source_file": "east-asia.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Songjeong Beach",
+      "video_id": "6yc_wu4bLtc",
+      "lane": "east-asia",
+      "source_file": "east-asia.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Tokyo Station Marunouchi",
+      "video_id": "ZN4gh5IOowM",
+      "lane": "east-asia",
+      "source_file": "east-asia.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Amsterdam Centraal Station IJ",
+      "video_id": "1phWWCgzXgM",
+      "lane": "europe-north",
+      "source_file": "europe-north.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Bruul Shopping Street Mechelen",
+      "video_id": "RldtQqPdRDw",
+      "lane": "europe-north",
+      "source_file": "europe-north.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Dartmouth Harbour Pontoon Terrace",
+      "video_id": "c1-8Qg8bQec",
+      "lane": "europe-north",
+      "source_file": "europe-north.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "De Koog Beach Texel",
+      "video_id": "Di4WiSTX1oY",
+      "lane": "europe-north",
+      "source_file": "europe-north.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Egmond aan Zee Beach & Boulevard",
+      "video_id": "mI1Os7TFdGc",
+      "lane": "europe-north",
+      "source_file": "europe-north.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Goettingen Historic Center Square",
+      "video_id": "cfCKCrOyHmw",
+      "lane": "europe-north",
+      "source_file": "europe-north.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Haven Volendam Harbour",
+      "video_id": "1m20g4RXE2c",
+      "lane": "europe-north",
+      "source_file": "europe-north.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "IJzerenleen Shopping Promenade, Mechelen",
+      "video_id": "eCTpAJeqfdg",
+      "lane": "europe-north",
+      "source_file": "europe-north.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Karvetti Sports Park Naantali",
+      "video_id": "dfHED2S-auo",
+      "lane": "europe-north",
+      "source_file": "europe-north.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Koksijde-Bad Beach",
+      "video_id": "5Uqw_G_IdjE",
+      "lane": "europe-north",
+      "source_file": "europe-north.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Oostduinkerke-Bad Beach",
+      "video_id": "wqWoNyCAvss",
+      "lane": "europe-north",
+      "source_file": "europe-north.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Ramsgate Royal Harbour Marina",
+      "video_id": "lSA3pKWjmc4",
+      "lane": "europe-north",
+      "source_file": "europe-north.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Saint-Malo Beach",
+      "video_id": "VNOV8KgGR0c",
+      "lane": "europe-north",
+      "source_file": "europe-north.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Scheveningen Boulevard and Beach 2",
+      "video_id": "A5kXiKzbBFs",
+      "lane": "europe-north",
+      "source_file": "europe-north.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Scheveningen South Beach",
+      "video_id": "XB2T9RjIM-g",
+      "lane": "europe-north",
+      "source_file": "europe-north.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Schoenmarkt Mechelen Historic Square",
+      "video_id": "pVEY2Q4rXwE",
+      "lane": "europe-north",
+      "source_file": "europe-north.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Sittard Town Market Square",
+      "video_id": "GvPyyntKyCY",
+      "lane": "europe-north",
+      "source_file": "europe-north.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Sjogata 1 Bodo Harbour",
+      "video_id": "04jMCyigPQM",
+      "lane": "europe-north",
+      "source_file": "europe-north.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Skateparken Freden Varberg",
+      "video_id": "vNNRzot1bVU",
+      "lane": "europe-north",
+      "source_file": "europe-north.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "SnowWorld Landgraaf Funpark",
+      "video_id": "N7yP1VSKK74",
+      "lane": "europe-north",
+      "source_file": "europe-north.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Station Amsterdam Centraal Dijksgracht",
+      "video_id": "vmNQjvCC3Ws",
+      "lane": "europe-north",
+      "source_file": "europe-north.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Sylt Westerland Surf Beach North Sea",
+      "video_id": "kiOefBj8Ju4",
+      "lane": "europe-north",
+      "source_file": "europe-north.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Turku Market Square Kauppatori",
+      "video_id": "KLQLeZ9vjt4",
+      "lane": "europe-north",
+      "source_file": "europe-north.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Viru Square and Tallinn Old Town",
+      "video_id": "VhVgZi2lGv0",
+      "lane": "europe-north",
+      "source_file": "europe-north.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Zandvoort Beach Boulevard North Sea",
+      "video_id": "q0-DDh1zdY4",
+      "lane": "europe-north",
+      "source_file": "europe-north.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Baška Voda Croatia | Saint Nikola and beach",
+      "video_id": null,
+      "lane": "europe-south",
+      "source_file": "europe-south.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Baška Voda | Podluka beach webcam",
+      "video_id": null,
+      "lane": "europe-south",
+      "source_file": "europe-south.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Baška Voda promenade webcam",
+      "video_id": null,
+      "lane": "europe-south",
+      "source_file": "europe-south.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Beach Slanica Murter – Live Cam",
+      "video_id": null,
+      "lane": "europe-south",
+      "source_file": "europe-south.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Bol Harbour – Live View of Bol Riva & Marina",
+      "video_id": null,
+      "lane": "europe-south",
+      "source_file": "europe-south.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Bol Town Center & Marina – Live View from Bol, Brač",
+      "video_id": null,
+      "lane": "europe-south",
+      "source_file": "europe-south.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Crikvenica – Stjepan Radić square",
+      "video_id": null,
+      "lane": "europe-south",
+      "source_file": "europe-south.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Drašnice (Podgora)  – Beach – Ober apartments",
+      "video_id": null,
+      "lane": "europe-south",
+      "source_file": "europe-south.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Gorizia – Vittoria square – Carducci street",
+      "video_id": null,
+      "lane": "europe-south",
+      "source_file": "europe-south.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Gyps – Zagreb Zoo Live",
+      "video_id": null,
+      "lane": "europe-south",
+      "source_file": "europe-south.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Šibenik – Poljana square",
+      "video_id": null,
+      "lane": "europe-south",
+      "source_file": "europe-south.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Igrane –  Central beach",
+      "video_id": null,
+      "lane": "europe-south",
+      "source_file": "europe-south.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Igrane – marina",
+      "video_id": null,
+      "lane": "europe-south",
+      "source_file": "europe-south.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Jelsa / Hvar live webcam",
+      "video_id": null,
+      "lane": "europe-south",
+      "source_file": "europe-south.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Karlovac – Lana Center and Peter Zrinski Street",
+      "video_id": null,
+      "lane": "europe-south",
+      "source_file": "europe-south.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Kobarid city center – Soča valley – Slovenia",
+      "video_id": null,
+      "lane": "europe-south",
+      "source_file": "europe-south.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "live – Novi Vinodolski harbour",
+      "video_id": null,
+      "lane": "europe-south",
+      "source_file": "europe-south.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Live Piran – Tartini Square View",
+      "video_id": null,
+      "lane": "europe-south",
+      "source_file": "europe-south.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Live Skate park Nova Gorica – Slovenia",
+      "video_id": null,
+      "lane": "europe-south",
+      "source_file": "europe-south.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Mali Lošinj – Main square",
+      "video_id": null,
+      "lane": "europe-south",
+      "source_file": "europe-south.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Mali Lošinj – Sunčana uvala beach – Veli Žal",
+      "video_id": null,
+      "lane": "europe-south",
+      "source_file": "europe-south.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Mandre – marina",
+      "video_id": null,
+      "lane": "europe-south",
+      "source_file": "europe-south.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Nova Gorica – Bevkov trg | GO! 2025",
+      "video_id": null,
+      "lane": "europe-south",
+      "source_file": "europe-south.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Nova Gorica Sport Park – Slovenia",
+      "video_id": null,
+      "lane": "europe-south",
+      "source_file": "europe-south.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Novigrad Mandrač | old marina – Istria",
+      "video_id": null,
+      "lane": "europe-south",
+      "source_file": "europe-south.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Novigrad – Veliki Trg / Piazza Grande – Istria – Croatien",
+      "video_id": null,
+      "lane": "europe-south",
+      "source_file": "europe-south.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Pag – Katine bridge",
+      "video_id": null,
+      "lane": "europe-south",
+      "source_file": "europe-south.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Pag – main square and Church of St. Mary",
+      "video_id": null,
+      "lane": "europe-south",
+      "source_file": "europe-south.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Panorama Split Riva",
+      "video_id": null,
+      "lane": "europe-south",
+      "source_file": "europe-south.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Podgora beach – Dalmatia – Croatia",
+      "video_id": null,
+      "lane": "europe-south",
+      "source_file": "europe-south.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Prizna ferry port to Pag island",
+      "video_id": null,
+      "lane": "europe-south",
+      "source_file": "europe-south.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Promajna –  beach live",
+      "video_id": null,
+      "lane": "europe-south",
+      "source_file": "europe-south.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Rijeka – City Tower and Clock",
+      "video_id": null,
+      "lane": "europe-south",
+      "source_file": "europe-south.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Rijeka – Jadran square",
+      "video_id": null,
+      "lane": "europe-south",
+      "source_file": "europe-south.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Rijeka –  Rječina, Fiumara and Tito square",
+      "video_id": null,
+      "lane": "europe-south",
+      "source_file": "europe-south.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Roses beach – Hotel Montecarlo Roses",
+      "video_id": null,
+      "lane": "europe-south",
+      "source_file": "europe-south.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Selce – beach – Diving center",
+      "video_id": null,
+      "lane": "europe-south",
+      "source_file": "europe-south.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Senj riva – seafront – Croatia",
+      "video_id": null,
+      "lane": "europe-south",
+      "source_file": "europe-south.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Soča River at Solkan Kayak Center",
+      "video_id": null,
+      "lane": "europe-south",
+      "source_file": "europe-south.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Split – Bačvice beach",
+      "video_id": null,
+      "lane": "europe-south",
+      "source_file": "europe-south.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Split – Riva Hrvatskog preporoda",
+      "video_id": null,
+      "lane": "europe-south",
+      "source_file": "europe-south.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Veli Lošninj – main square",
+      "video_id": null,
+      "lane": "europe-south",
+      "source_file": "europe-south.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Viganj Windsurf – beach",
+      "video_id": null,
+      "lane": "europe-south",
+      "source_file": "europe-south.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Vir LIVE – Beach – Dalmatia – Croatia",
+      "video_id": null,
+      "lane": "europe-south",
+      "source_file": "europe-south.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Zadar Bridge – Croatia",
+      "video_id": null,
+      "lane": "europe-south",
+      "source_file": "europe-south.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Zebras in Ljubljana ZOO – Slovenia",
+      "video_id": null,
+      "lane": "europe-south",
+      "source_file": "europe-south.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Zoo Ljubljana – Giraffes",
+      "video_id": null,
+      "lane": "europe-south",
+      "source_file": "europe-south.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Zoo Zagreb – California Sea Lion",
+      "video_id": null,
+      "lane": "europe-south",
+      "source_file": "europe-south.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Napier Port little penguin nest, Camera 1",
+      "video_id": "KD-QM0txA0A",
+      "lane": "oceania",
+      "source_file": "oceania.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Otago shag colony, Sumpter Wharf",
+      "video_id": "nt8CbI84298",
+      "lane": "oceania",
+      "source_file": "oceania.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Agdao tire repair and street-food cart",
+      "video_id": "1rWzQP_ZYxc",
+      "lane": "south-asia",
+      "source_file": "south-asia.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Alun-Alun Kidul public square",
+      "video_id": null,
+      "lane": "south-asia",
+      "source_file": "south-asia.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "El Gaucho beachfront dining, Bophut",
+      "video_id": "CSp55hSd_6A",
+      "lane": "south-asia",
+      "source_file": "south-asia.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "El Gaucho walkway, Fishermans Village",
+      "video_id": "FyFAqPHBKiQ",
+      "lane": "south-asia",
+      "source_file": "south-asia.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "F. Bangoy and Soliman crossing",
+      "video_id": "yznpQlk0exE",
+      "lane": "south-asia",
+      "source_file": "south-asia.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Fort Vredeburg and Gedung Agung",
+      "video_id": null,
+      "lane": "south-asia",
+      "source_file": "south-asia.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Mutiara Concept Store walkway",
+      "video_id": null,
+      "lane": "south-asia",
+      "source_file": "south-asia.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Nguyen Hue school street, Da Nang",
+      "video_id": "sJvEFrG0wq0",
+      "lane": "south-asia",
+      "source_file": "south-asia.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Phuong Tran street view, Da Nang",
+      "video_id": "G_G8A6JU_LI",
+      "lane": "south-asia",
+      "source_file": "south-asia.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Plaza Malioboro mall frontage",
+      "video_id": null,
+      "lane": "south-asia",
+      "source_file": "south-asia.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Tugu railway station east entrance",
+      "video_id": null,
+      "lane": "south-asia",
+      "source_file": "south-asia.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Aparecida National Shrine interior",
+      "video_id": "juUt-rN5CVo",
+      "lane": "south-world",
+      "source_file": "south-world.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Aparecida National Shrine pedestrian bridge",
+      "video_id": "uVmutRH_u6M",
+      "lane": "south-world",
+      "source_file": "south-world.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Arraial do Cabo beach access street",
+      "video_id": "FhYBQWoMobs",
+      "lane": "south-world",
+      "source_file": "south-world.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Avenida Brasil, Balneário Camboriú",
+      "video_id": "ZMcmtGYYg5E",
+      "lane": "south-world",
+      "source_file": "south-world.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Avila Beach Hotel Curacao",
+      "video_id": "-oiR7FxcwYU",
+      "lane": "south-world",
+      "source_file": "south-world.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Basilica of Our Lady of Guadalupe",
+      "video_id": "NmHkMgNwawg",
+      "lane": "south-world",
+      "source_file": "south-world.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Córdova–Américas crossing, north approach",
+      "video_id": "mp3RS0y77tY",
+      "lane": "south-world",
+      "source_file": "south-world.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Córdova–Américas crossing, Rafael Pérez Serna avenue",
+      "video_id": "Y3OESQEXBlI",
+      "lane": "south-world",
+      "source_file": "south-world.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Córdova–Américas crossing, south approach",
+      "video_id": "CZM5TpXLzE8",
+      "lane": "south-world",
+      "source_file": "south-world.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Canal do Porto de Santos",
+      "video_id": "5BxqzvR6TgM",
+      "lane": "south-world",
+      "source_file": "south-world.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Caravelle Christiansted Harbor St Croix",
+      "video_id": "II9_tyn1HDI",
+      "lane": "south-world",
+      "source_file": "south-world.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Central Balneário Camboriú streets",
+      "video_id": "QMN4_62A3As",
+      "lane": "south-world",
+      "source_file": "south-world.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Copacabana Posto 3 promenade",
+      "video_id": "k2QzfrPLQSg",
+      "lane": "south-world",
+      "source_file": "south-world.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Eagle Beach Costa Linda Resort",
+      "video_id": "_ZXMjk5K0_s",
+      "lane": "south-world",
+      "source_file": "south-world.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Fifth Avenue Playa del Carmen Quintana Roo",
+      "video_id": "w9at4FtWOjQ",
+      "lane": "south-world",
+      "source_file": "south-world.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Great Bay Beach",
+      "video_id": "s_UpggS3J9Y",
+      "lane": "south-world",
+      "source_file": "south-world.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Great Bay Beach Boardwalk Philipsburg",
+      "video_id": "N5Mb2bjYwZo",
+      "lane": "south-world",
+      "source_file": "south-world.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Historical Basilica of Aparecida Old Sanctuary",
+      "video_id": "X52LJG2z_UQ",
+      "lane": "south-world",
+      "source_file": "south-world.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Ixtapa Playa Poniente",
+      "video_id": "5TNmP5luKCM",
+      "lane": "south-world",
+      "source_file": "south-world.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Klein Curacao Turtle Marine Habitat",
+      "video_id": "_P3fgFEG55E",
+      "lane": "south-world",
+      "source_file": "south-world.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Mara River Fig Tree Crossing hippos",
+      "video_id": "Io1Kle7QR-E",
+      "lane": "south-world",
+      "source_file": "south-world.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Mira la Vista Balneario Camboriu",
+      "video_id": "j4Wne61IJ3I",
+      "lane": "south-world",
+      "source_file": "south-world.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Morro do Itararé paragliding launch",
+      "video_id": "ukoSyGLdoTQ",
+      "lane": "south-world",
+      "source_file": "south-world.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Paso del Norte crossing, south street",
+      "video_id": "IcvugJWPXz8",
+      "lane": "south-world",
+      "source_file": "south-world.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Plaza Baquedano Santiago",
+      "video_id": "LLvmjcP5KIY",
+      "lane": "south-world",
+      "source_file": "south-world.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Plaza Garibaldi Mexico",
+      "video_id": "KBU8GXi-XMI",
+      "lane": "south-world",
+      "source_file": "south-world.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Praia de Laranjeiras Camboriu",
+      "video_id": "lFlovxrE9Og",
+      "lane": "south-world",
+      "source_file": "south-world.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Rosies Pan Waterhole Balule",
+      "video_id": "ItdXaWUVF48",
+      "lane": "south-world",
+      "source_file": "south-world.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Simpson Bay Beach Resort Sint Maarten",
+      "video_id": "vxHKAImxUHk",
+      "lane": "south-world",
+      "source_file": "south-world.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Supertubes Beach",
+      "video_id": "7rdk79WCsQs",
+      "lane": "south-world",
+      "source_file": "south-world.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Utopia Village back-channel reef",
+      "video_id": "nmjlQlYygB4",
+      "lane": "south-world",
+      "source_file": "south-world.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Utopia Village back-of-dock reef",
+      "video_id": "Lv9t0hZTvz4",
+      "lane": "south-world",
+      "source_file": "south-world.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Utopia Village edge-of-wall reef",
+      "video_id": "Sq-X4Ga1oyc",
+      "lane": "south-world",
+      "source_file": "south-world.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Utopia Village front-of-dock reef",
+      "video_id": "Kf-x20Yq0_A",
+      "lane": "south-world",
+      "source_file": "south-world.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Utopia Village sandy-channel reef",
+      "video_id": "jzx_n25g3kA",
+      "lane": "south-world",
+      "source_file": "south-world.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Zaragoza crossing, Waterfill avenue",
+      "video_id": "ZZFgkly8XyE",
+      "lane": "south-world",
+      "source_file": "south-world.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Zaragoza Waterfill avenue, south view",
+      "video_id": "o5h9RB7qwY8",
+      "lane": "south-world",
+      "source_file": "south-world.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Zocalo Plaza de la Constitucion Mexico City",
+      "video_id": "7tf7p5LCtXY",
+      "lane": "south-world",
+      "source_file": "south-world.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Auburn Toomers Corner, four street views",
+      "video_id": "qG-86nZmZqU",
+      "lane": "us-east",
+      "source_file": "us-east.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Back Bay from the Charles",
+      "video_id": "BBlaNNmUJy8",
+      "lane": "us-east",
+      "source_file": "us-east.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Backyard Feeder Station",
+      "video_id": "y9t1g8Ike6g",
+      "lane": "us-east",
+      "source_file": "us-east.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Blue Island Rail Junction Chicago IL",
+      "video_id": "GKjSoXuZ0hU",
+      "lane": "us-east",
+      "source_file": "us-east.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Brownwood Paddock Square The Villages FL",
+      "video_id": "WY2t935xDqM",
+      "lane": "us-east",
+      "source_file": "us-east.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Charles River Basin",
+      "video_id": "UZ20XjGsCCs",
+      "lane": "us-east",
+      "source_file": "us-east.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Charlevoix Bridge Pine River Channel MI",
+      "video_id": "yWIHgMW2yVQ",
+      "lane": "us-east",
+      "source_file": "us-east.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Charlevoix Pine River Channel Cam",
+      "video_id": "HeZbPbqO-6M",
+      "lane": "us-east",
+      "source_file": "us-east.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Chicago River, Wrigley Building and DuSable Bridge",
+      "video_id": "Dq4ih_eeQ9w",
+      "lane": "us-east",
+      "source_file": "us-east.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Elkhart Yard",
+      "video_id": "YR1PdWaSxgk",
+      "lane": "us-east",
+      "source_file": "us-east.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "ETSU intramural sports fields",
+      "video_id": "C6MbTzGVnWc",
+      "lane": "us-east",
+      "source_file": "us-east.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Harbor Springs Steeple Cam",
+      "video_id": "u13ItW40TDw",
+      "lane": "us-east",
+      "source_file": "us-east.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Hearne Texas UP Rail Diamond Yard Hub",
+      "video_id": "qzCDW6w9ayM",
+      "lane": "us-east",
+      "source_file": "us-east.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Hotel Roanoke railway, west view",
+      "video_id": "cV3kP5FSUDk",
+      "lane": "us-east",
+      "source_file": "us-east.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Kearney Nebraska UP Rail Corridor",
+      "video_id": "23tmCNeFh7A",
+      "lane": "us-east",
+      "source_file": "us-east.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Lafayette Indiana Wabash Rail Hub",
+      "video_id": "IAC4KczQuQY",
+      "lane": "us-east",
+      "source_file": "us-east.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Lower Manhattan from Brooklyn Heights",
+      "video_id": "1kvGNR_A3DY",
+      "lane": "us-east",
+      "source_file": "us-east.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Marthas Vineyard Ferry Terminal Port",
+      "video_id": "bdjXsDufCQY",
+      "lane": "us-east",
+      "source_file": "us-east.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Menemsha Harbour Marthas Vineyard",
+      "video_id": "MAuXQgZsq3Y",
+      "lane": "us-east",
+      "source_file": "us-east.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Miami International (KMIA) - Runway 9/27",
+      "video_id": "_GUsXnlVJmo",
+      "lane": "us-east",
+      "source_file": "us-east.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Milwaukee Deer District and Fiserv Forum",
+      "video_id": "7fZ2JLtv_c8",
+      "lane": "us-east",
+      "source_file": "us-east.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Mississippi Flyway Migration",
+      "video_id": "feR0k8-nkWE",
+      "lane": "us-east",
+      "source_file": "us-east.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Myrtle Beach Boardwalk South Carolina",
+      "video_id": "UKtfCDXhCq0",
+      "lane": "us-east",
+      "source_file": "us-east.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "NC State Memorial Belltower and campus streets",
+      "video_id": "D9nujG0PUTQ",
+      "lane": "us-east",
+      "source_file": "us-east.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Northeast College Clock Tower Quad NY",
+      "video_id": "OITzJlCxMco",
+      "lane": "us-east",
+      "source_file": "us-east.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Okaloosa Island Pier Florida",
+      "video_id": "hXqjUfQJf9U",
+      "lane": "us-east",
+      "source_file": "us-east.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Old Forge Main Street Adirondacks NY",
+      "video_id": "kGMOVb0IABs",
+      "lane": "us-east",
+      "source_file": "us-east.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Peace Bridge Canada Border Fort Erie",
+      "video_id": "WPMgP2C3_co",
+      "lane": "us-east",
+      "source_file": "us-east.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Peace Bridge US Inspection Plaza Buffalo",
+      "video_id": "9En2186vo5g",
+      "lane": "us-east",
+      "source_file": "us-east.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Princeton Indiana Rail Corridor",
+      "video_id": "jRvnO7D-FpA",
+      "lane": "us-east",
+      "source_file": "us-east.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Public Square Watertown New York",
+      "video_id": "Zz9hMrxl20I",
+      "lane": "us-east",
+      "source_file": "us-east.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Samford Hall Auburn University Alabama",
+      "video_id": "IsCs_GYfMPk",
+      "lane": "us-east",
+      "source_file": "us-east.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "SkyBridge Boyne Mountain Michigan",
+      "video_id": "ioTfHBawdw4",
+      "lane": "us-east",
+      "source_file": "us-east.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "South Haven South Pier Light and Beach",
+      "video_id": "G-tlKF32_p4",
+      "lane": "us-east",
+      "source_file": "us-east.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "St Augustine Lighthouse Bridge Florida",
+      "video_id": "uLJBad4vSno",
+      "lane": "us-east",
+      "source_file": "us-east.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "St Paul Mississippi River Rail Minnesota",
+      "video_id": "u5dt2mHDuxQ",
+      "lane": "us-east",
+      "source_file": "us-east.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Sunset Beach Pier North Carolina",
+      "video_id": "DscmQzgXAYw",
+      "lane": "us-east",
+      "source_file": "us-east.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Surf Station North Pier St Augustine FL",
+      "video_id": "Q6eZVkUKFxo",
+      "lane": "us-east",
+      "source_file": "us-east.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Toronto skyline, CN Tower and Lake Ontario",
+      "video_id": "bbjwotvAvDM",
+      "lane": "us-east",
+      "source_file": "us-east.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "University of Tampa Riverfront Green FL",
+      "video_id": "QvNWCIOaB4Y",
+      "lane": "us-east",
+      "source_file": "us-east.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Vermont Historic Covered Bridge Green Mtn",
+      "video_id": "IB55Ni_wJcQ",
+      "lane": "us-east",
+      "source_file": "us-east.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Vilano Pier St Augustine Florida",
+      "video_id": "mYbn_umeenk",
+      "lane": "us-east",
+      "source_file": "us-east.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Vineyard Haven harbor and Black Dog Wharf",
+      "video_id": "Y0BRntF3178",
+      "lane": "us-east",
+      "source_file": "us-east.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "WKDZ Studio Downtown Cadiz",
+      "video_id": "qbAMePGp0ks",
+      "lane": "us-east",
+      "source_file": "us-east.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Woods Hole Ferry Dock",
+      "video_id": "5-ClAzUV2UA",
+      "lane": "us-east",
+      "source_file": "us-east.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Bay Bridge West Span",
+      "video_id": "CXYr04BWvmc",
+      "lane": "us-west",
+      "source_file": "us-west.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Breckenridge Main Street",
+      "video_id": "SH63YaIWyK0",
+      "lane": "us-west",
+      "source_file": "us-west.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Castro Street",
+      "video_id": "pKKaof5b_gE",
+      "lane": "us-west",
+      "source_file": "us-west.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Chirp bird feeders, Big Bear Lake",
+      "video_id": "BY4C06Vx79c",
+      "lane": "us-west",
+      "source_file": "us-west.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Cox Bay from Pacific Sands",
+      "video_id": "LqaP8m2OIqM",
+      "lane": "us-west",
+      "source_file": "us-west.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Deep Cove waterfront",
+      "video_id": "T0oUufecXeE",
+      "lane": "us-west",
+      "source_file": "us-west.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Fremont Street Canopy",
+      "video_id": "ZvYvZLfPatQ",
+      "lane": "us-west",
+      "source_file": "us-west.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Friant and Shepherd intersection",
+      "video_id": "sTF-6_xinUU",
+      "lane": "us-west",
+      "source_file": "us-west.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Grand Avenue Bridge, Glenwood Springs",
+      "video_id": "SNvppiU1-IM",
+      "lane": "us-west",
+      "source_file": "us-west.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Grand Targhee resort plaza",
+      "video_id": "eHL_FJOoVTE",
+      "lane": "us-west",
+      "source_file": "us-west.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Huntington Beach Pier",
+      "video_id": "mhQjsLBfOoY",
+      "lane": "us-west",
+      "source_file": "us-west.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Lincoln City Beach",
+      "video_id": "KFPYXo72qDI",
+      "lane": "us-west",
+      "source_file": "us-west.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Monterey Bay tide pools and seabirds",
+      "video_id": "fVa6-zCBR7A",
+      "lane": "us-west",
+      "source_file": "us-west.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "North Chesterman Beach",
+      "video_id": "Z5fFvERwo0o",
+      "lane": "us-west",
+      "source_file": "us-west.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Oceanside Beach",
+      "video_id": "cvP_F-c2Upw",
+      "lane": "us-west",
+      "source_file": "us-west.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Snow King Summit Gondola",
+      "video_id": "9ID7fhbc_s0",
+      "lane": "us-west",
+      "source_file": "us-west.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Yellowstone River at Gardiner",
+      "video_id": "IvZ22jZgvOI",
+      "lane": "us-west",
+      "source_file": "us-west.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Fushimi Inari Shrine",
+      "video_id": "MMeBDRfRHyA",
+      "lane": "east-asia",
+      "source_file": "east-asia.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Hanamikoji Street, Gion",
+      "video_id": "J3xHBUgWRqc",
+      "lane": "east-asia",
+      "source_file": "east-asia.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Kagoshima & Sakurajima",
+      "video_id": "rXBP07YI-wk",
+      "lane": "east-asia",
+      "source_file": "east-asia.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Kowloon East Waterfront",
+      "video_id": "XN-ArdUrqtc",
+      "lane": "east-asia",
+      "source_file": "east-asia.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Lake Shinji, Matsue",
+      "video_id": "rTViPLUmYAc",
+      "lane": "east-asia",
+      "source_file": "east-asia.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Mukaitaki Ryokan Garden",
+      "video_id": "ISAqpsDLxy8",
+      "lane": "east-asia",
+      "source_file": "east-asia.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Namsan and the Han",
+      "video_id": "ZI65qc2i0VI",
+      "lane": "east-asia",
+      "source_file": "east-asia.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Nichinan Coast",
+      "video_id": "CFgxlt_yf8k",
+      "lane": "east-asia",
+      "source_file": "east-asia.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Onomichi Hillside",
+      "video_id": "ju3n3bvYlRw",
+      "lane": "east-asia",
+      "source_file": "east-asia.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Osaka Night Skyline",
+      "video_id": "YIjxwMxWzgE",
+      "lane": "east-asia",
+      "source_file": "east-asia.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Ryogoku and Tokyo Skytree",
+      "video_id": "XpIILFB9iS0",
+      "lane": "east-asia",
+      "source_file": "east-asia.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Sapporo TV Tower & Odori",
+      "video_id": "RBHsITnIoI0",
+      "lane": "east-asia",
+      "source_file": "east-asia.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Sendai Castle View",
+      "video_id": "Ado_7_DMTdc",
+      "lane": "east-asia",
+      "source_file": "east-asia.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Sendai Station",
+      "video_id": "AinAZQgQp_s",
+      "lane": "east-asia",
+      "source_file": "east-asia.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Sumida River at Night",
+      "video_id": "MwcMURMzJ7A",
+      "lane": "east-asia",
+      "source_file": "east-asia.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Taipei 101 from Elephant Mountain",
+      "video_id": "z_fY1pj1VBw",
+      "lane": "east-asia",
+      "source_file": "east-asia.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Tokyo Bay and the Shibaura Loop",
+      "video_id": "_k-5U7IeK8g",
+      "lane": "east-asia",
+      "source_file": "east-asia.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Broad Street Oxford Martin School",
+      "video_id": "h8glPXsnezU",
+      "lane": "europe-north",
+      "source_file": "europe-north.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Brunnsparken Varberg",
+      "video_id": "IEDF51akADs",
+      "lane": "europe-north",
+      "source_file": "europe-north.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Colyford Station Seaton Tramway",
+      "video_id": "7x4D0qmUkLg",
+      "lane": "europe-north",
+      "source_file": "europe-north.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Czeladz Market Rynek",
+      "video_id": "u-r8OyLEBbc",
+      "lane": "europe-north",
+      "source_file": "europe-north.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Dornumersiel North Sea Harbour",
+      "video_id": "QfOEaDVbLaU",
+      "lane": "europe-north",
+      "source_file": "europe-north.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Esplanade de Mers-les-Bains Beach",
+      "video_id": "Kq_9wTO0dhU",
+      "lane": "europe-north",
+      "source_file": "europe-north.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Fecamp Alabaster Pier",
+      "video_id": "30hMtF2swvE",
+      "lane": "europe-north",
+      "source_file": "europe-north.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Historic Market Square Naumburg",
+      "video_id": "r-aFbbMHnhI",
+      "lane": "europe-north",
+      "source_file": "europe-north.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Joensuu Market Square",
+      "video_id": "yA4aFD0AjDs",
+      "lane": "europe-north",
+      "source_file": "europe-north.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Kaap Noord Paal 33 Texel Beach",
+      "video_id": "Gq8dWezdEX8",
+      "lane": "europe-north",
+      "source_file": "europe-north.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Kamien Krajenski Town Square",
+      "video_id": "bTBslPA0vE4",
+      "lane": "europe-north",
+      "source_file": "europe-north.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Kijkduin Boulevard Beach The Hague",
+      "video_id": "mnxV4iit7S4",
+      "lane": "europe-north",
+      "source_file": "europe-north.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Kristiansund Harbor",
+      "video_id": "JJuaHGhd8g8",
+      "lane": "europe-north",
+      "source_file": "europe-north.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Kuopion Tori Market Square",
+      "video_id": "T7RdJdFMz-U",
+      "lane": "europe-north",
+      "source_file": "europe-north.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Kuressaare Town Center",
+      "video_id": "ZORUBVpWo54",
+      "lane": "europe-north",
+      "source_file": "europe-north.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Molostua Bodo Harbour",
+      "video_id": "ZbKYp5ulmCM",
+      "lane": "europe-north",
+      "source_file": "europe-north.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Noordwijk aan Zee Boulevard Beach",
+      "video_id": "dtFG_mcfWjQ",
+      "lane": "europe-north",
+      "source_file": "europe-north.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "North Circular Road Royal Canal Dublin",
+      "video_id": "eSWxGOZLgCU",
+      "lane": "europe-north",
+      "source_file": "europe-north.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Ostrow Wielkopolski Town Square",
+      "video_id": "ACS8lybLukI",
+      "lane": "europe-north",
+      "source_file": "europe-north.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Paal 17 Beach Club Texel",
+      "video_id": "JHSeVkq5ikE",
+      "lane": "europe-north",
+      "source_file": "europe-north.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Polzeath Beach Cornwall",
+      "video_id": "diIR3SN_c6k",
+      "lane": "europe-north",
+      "source_file": "europe-north.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Porthcawl Pier RNLI Lifeboat Station",
+      "video_id": "bmNAteGGFpA",
+      "lane": "europe-north",
+      "source_file": "europe-north.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Ryde Pier and Solent Strait",
+      "video_id": "R1P9v9bEtuk",
+      "lane": "europe-north",
+      "source_file": "europe-north.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Sandown Beach Esplanade Isle of Wight",
+      "video_id": "I0A2zRu1R0Q",
+      "lane": "europe-north",
+      "source_file": "europe-north.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Teign Estuary Rail Path Teignmouth",
+      "video_id": "ug3AO8rn0IE",
+      "lane": "europe-north",
+      "source_file": "europe-north.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Teignmouth Harbour Salty Cottage",
+      "video_id": "O5weUpesXfc",
+      "lane": "europe-north",
+      "source_file": "europe-north.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Varbergs Torg Market Square",
+      "video_id": "BMTxMn6IYBQ",
+      "lane": "europe-north",
+      "source_file": "europe-north.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Zandvoort Railway Station",
+      "video_id": "kugkhiPZtBc",
+      "lane": "europe-north",
+      "source_file": "europe-north.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Aquapark – Istralandia Istria – Croatia",
+      "video_id": null,
+      "lane": "europe-south",
+      "source_file": "europe-south.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Čazma – Čazmanskog Kaptola square",
+      "video_id": null,
+      "lane": "europe-south",
+      "source_file": "europe-south.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Beach de L’Isuledda – San Teodoro (OT) – Sardinia",
+      "video_id": null,
+      "lane": "europe-south",
+      "source_file": "europe-south.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Beach in Živogošće",
+      "video_id": null,
+      "lane": "europe-south",
+      "source_file": "europe-south.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Bike Park Pohorje Maribor | KKŽ Vzpenjača – Skills park",
+      "video_id": null,
+      "lane": "europe-south",
+      "source_file": "europe-south.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Biograd na Moru – King Tomislav square",
+      "video_id": null,
+      "lane": "europe-south",
+      "source_file": "europe-south.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Botel Marina – Rijeka live cam",
+      "video_id": null,
+      "lane": "europe-south",
+      "source_file": "europe-south.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Brela – marina – Dalmatia – Croatia",
+      "video_id": null,
+      "lane": "europe-south",
+      "source_file": "europe-south.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Brseč beach – Mošćenička Draga – Croatia",
+      "video_id": null,
+      "lane": "europe-south",
+      "source_file": "europe-south.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Cres – Ferry port Merag – Krk on Cres island",
+      "video_id": null,
+      "lane": "europe-south",
+      "source_file": "europe-south.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Dubrovnik – panorama of Old Town",
+      "video_id": null,
+      "lane": "europe-south",
+      "source_file": "europe-south.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Gajac beach – Pag",
+      "video_id": null,
+      "lane": "europe-south",
+      "source_file": "europe-south.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Hvar Vira beach | Hvar island | Dalmatia",
+      "video_id": null,
+      "lane": "europe-south",
+      "source_file": "europe-south.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Šibenik Beach Banj",
+      "video_id": null,
+      "lane": "europe-south",
+      "source_file": "europe-south.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Kanal ob Soči live – Amazing view to old city center and famous bridge on Soča river",
+      "video_id": null,
+      "lane": "europe-south",
+      "source_file": "europe-south.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Koper – Panorama of the marina and promenade from the Grand Hotel Koper",
+      "video_id": null,
+      "lane": "europe-south",
+      "source_file": "europe-south.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "LIVE cam Cres city – main square and “mandrač” – Cres island – Croatia",
+      "video_id": null,
+      "lane": "europe-south",
+      "source_file": "europe-south.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Live cam Port of Roses – Costa Brava",
+      "video_id": null,
+      "lane": "europe-south",
+      "source_file": "europe-south.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "live – Novi Vinodolski – Main street Hrvatskih Branitelja",
+      "video_id": null,
+      "lane": "europe-south",
+      "source_file": "europe-south.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "live Tkon – Ferry Terminal",
+      "video_id": null,
+      "lane": "europe-south",
+      "source_file": "europe-south.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Makarska ‘s seaside promenade",
+      "video_id": null,
+      "lane": "europe-south",
+      "source_file": "europe-south.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Marina Blato Živogošće",
+      "video_id": null,
+      "lane": "europe-south",
+      "source_file": "europe-south.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Marina Klenovica live webcam",
+      "video_id": null,
+      "lane": "europe-south",
+      "source_file": "europe-south.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Metajna – Riva",
+      "video_id": null,
+      "lane": "europe-south",
+      "source_file": "europe-south.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Mošćenička Draga beach",
+      "video_id": null,
+      "lane": "europe-south",
+      "source_file": "europe-south.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Murter – Marina Nautika Murter",
+      "video_id": null,
+      "lane": "europe-south",
+      "source_file": "europe-south.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Naracu Nieddu Beach – Aglientu – Sardinia",
+      "video_id": null,
+      "lane": "europe-south",
+      "source_file": "europe-south.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Žnjan beach and sports facilities – Split",
+      "video_id": null,
+      "lane": "europe-south",
+      "source_file": "europe-south.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Novalja – Alojzija Stepinca square",
+      "video_id": null,
+      "lane": "europe-south",
+      "source_file": "europe-south.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Novi Vinodolski – Beach – live",
+      "video_id": null,
+      "lane": "europe-south",
+      "source_file": "europe-south.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Novigrad – Karpinjan beach",
+      "video_id": null,
+      "lane": "europe-south",
+      "source_file": "europe-south.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Orebić Riva – Ferry to Korčula Live",
+      "video_id": null,
+      "lane": "europe-south",
+      "source_file": "europe-south.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Piazza della Borsa Trieste – Live View of the City Centre",
+      "video_id": null,
+      "lane": "europe-south",
+      "source_file": "europe-south.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Platja de l’Almadrava beach Live Roses – Costa Brava – Spain",
+      "video_id": null,
+      "lane": "europe-south",
+      "source_file": "europe-south.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Ploče | Captivating Views of Riva and the Cathedral",
+      "video_id": null,
+      "lane": "europe-south",
+      "source_file": "europe-south.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Požega – Svetog Trojstva square",
+      "video_id": null,
+      "lane": "europe-south",
+      "source_file": "europe-south.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "PODGORA Marina – Amazing Dalmatia",
+      "video_id": null,
+      "lane": "europe-south",
+      "source_file": "europe-south.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Podgora – panorama beach – Dalmatia – Croatia",
+      "video_id": null,
+      "lane": "europe-south",
+      "source_file": "europe-south.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Pokljuka Sports Centre – Live View of Rudno Polje",
+      "video_id": null,
+      "lane": "europe-south",
+      "source_file": "europe-south.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Portorož Live – view of the marina and tennis courts",
+      "video_id": null,
+      "lane": "europe-south",
+      "source_file": "europe-south.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Portorož Panoramic view from Casino Portoroz",
+      "video_id": null,
+      "lane": "europe-south",
+      "source_file": "europe-south.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Povile – Beach (Novi Vinodolski)",
+      "video_id": null,
+      "lane": "europe-south",
+      "source_file": "europe-south.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Pula – Koper street – Istria",
+      "video_id": null,
+      "lane": "europe-south",
+      "source_file": "europe-south.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Rijeka beach Swimming pools Kantrida",
+      "video_id": null,
+      "lane": "europe-south",
+      "source_file": "europe-south.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Črna na Koroškem city center | Koroška | Slovenia",
+      "video_id": null,
+      "lane": "europe-south",
+      "source_file": "europe-south.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Samobor – Main square dedicated to King Tomislav",
+      "video_id": null,
+      "lane": "europe-south",
+      "source_file": "europe-south.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Savudrija – marina",
+      "video_id": null,
+      "lane": "europe-south",
+      "source_file": "europe-south.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Seaside promenade in Novalja",
+      "video_id": null,
+      "lane": "europe-south",
+      "source_file": "europe-south.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Selce – main square",
+      "video_id": null,
+      "lane": "europe-south",
+      "source_file": "europe-south.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Senj Harbour – Breakwater & Lighthouse Live View",
+      "video_id": null,
+      "lane": "europe-south",
+      "source_file": "europe-south.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Senj – Panoramic view of Senj riva",
+      "video_id": null,
+      "lane": "europe-south",
+      "source_file": "europe-south.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Sv. Ivan beach | Mošćenička Draga",
+      "video_id": null,
+      "lane": "europe-south",
+      "source_file": "europe-south.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "The beach in Nin",
+      "video_id": null,
+      "lane": "europe-south",
+      "source_file": "europe-south.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "The King Tomislav square",
+      "video_id": null,
+      "lane": "europe-south",
+      "source_file": "europe-south.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Ugljan – Preko Ferry to Zadar",
+      "video_id": null,
+      "lane": "europe-south",
+      "source_file": "europe-south.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Vir beach – Dalmatia",
+      "video_id": null,
+      "lane": "europe-south",
+      "source_file": "europe-south.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Vrboska marina | Hvar island | Dalmatia",
+      "video_id": null,
+      "lane": "europe-south",
+      "source_file": "europe-south.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Auckland Viaduct Harbour",
+      "video_id": "nLCMw_Fh0u0",
+      "lane": "oceania",
+      "source_file": "oceania.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Melbourne City Life street intersection",
+      "video_id": "gEbrHdFRgpQ",
+      "lane": "oceania",
+      "source_file": "oceania.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Southern stars and clouds over Tasman",
+      "video_id": "MPwMmEvl6F0",
+      "lane": "oceania",
+      "source_file": "oceania.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Demangan Market street",
+      "video_id": null,
+      "lane": "south-asia",
+      "source_file": "south-asia.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Denggung park food stalls",
+      "video_id": null,
+      "lane": "south-asia",
+      "source_file": "south-asia.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Dragon Bridge west approach and riverfront park",
+      "video_id": "oC8ttZHG50I",
+      "lane": "south-asia",
+      "source_file": "south-asia.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Lyns Sisig Beef BBQ dining room",
+      "video_id": "8V-N6xSL_X8",
+      "lane": "south-asia",
+      "source_file": "south-asia.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Mirota Kampus shopping district",
+      "video_id": null,
+      "lane": "south-asia",
+      "source_file": "south-asia.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Siyono monument roundabout, Wonosari",
+      "video_id": "XhmQkH-8_qw",
+      "lane": "south-asia",
+      "source_file": "south-asia.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Wonosari public square gateway",
+      "video_id": null,
+      "lane": "south-asia",
+      "source_file": "south-asia.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Zero Kilometer public plaza",
+      "video_id": null,
+      "lane": "south-asia",
+      "source_file": "south-asia.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Anse de Flamands Saint Barthelemy",
+      "video_id": "DATTZ-F82Zk",
+      "lane": "south-world",
+      "source_file": "south-world.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Baie de Saint-Jean Beach Saint Barthelemy",
+      "video_id": "hb_nPVSnNqw",
+      "lane": "south-world",
+      "source_file": "south-world.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Balneario Rincao Beach",
+      "video_id": "Ghb1EcQAPNU",
+      "lane": "south-world",
+      "source_file": "south-world.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Barra da Lagoa Beach",
+      "video_id": "BuaUxHlGGXA",
+      "lane": "south-world",
+      "source_file": "south-world.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Barra Funda Railway Hub Sao Paulo",
+      "video_id": "6HF6sqHk_Fg",
+      "lane": "south-world",
+      "source_file": "south-world.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Bay Street Cruz Bay St John USVI",
+      "video_id": "xqAZJTY2q-Y",
+      "lane": "south-world",
+      "source_file": "south-world.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Boteti River",
+      "video_id": "7hKbyXxWT2k",
+      "lane": "south-world",
+      "source_file": "south-world.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Campeche Beach Florianopolis",
+      "video_id": "rdCrFl1VlUQ",
+      "lane": "south-world",
+      "source_file": "south-world.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Casa Malca Tulum Caribbean Beach",
+      "video_id": "keWC1l1flQw",
+      "lane": "south-world",
+      "source_file": "south-world.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Concepción city center panorama",
+      "video_id": "RhdmP5017VM",
+      "lane": "south-world",
+      "source_file": "south-world.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Cottages By The Sea Frederiksted St Croix",
+      "video_id": "lm1f6_4XB9g",
+      "lane": "south-world",
+      "source_file": "south-world.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Downtown Tijuana Mexico Border Skyline",
+      "video_id": "F-X3tq1FKck",
+      "lane": "south-world",
+      "source_file": "south-world.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Founders Lodge by Mantis Waterhole",
+      "video_id": "LaicUirnDJ4",
+      "lane": "south-world",
+      "source_file": "south-world.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Grand Residences Riviera Cancun Mexico",
+      "video_id": "fQJRrJkDKo8",
+      "lane": "south-world",
+      "source_file": "south-world.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Grande Bay Resort Cruz Bay St John USVI",
+      "video_id": "_XL6F4N3qx0",
+      "lane": "south-world",
+      "source_file": "south-world.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Great Expectations St John US Virgin Islands",
+      "video_id": "dsbHMpqPTWI",
+      "lane": "south-world",
+      "source_file": "south-world.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Hilton Los Cabos Beach Resort",
+      "video_id": "YbxFTypnGms",
+      "lane": "south-world",
+      "source_file": "south-world.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Ingleses Beach Florianopolis",
+      "video_id": "00Tl3MSaodY",
+      "lane": "south-world",
+      "source_file": "south-world.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Itajaí Port",
+      "video_id": "tclkS75MV5I",
+      "lane": "south-world",
+      "source_file": "south-world.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Ixtapa beach from Barceló",
+      "video_id": "gHdQ8VDZt9Y",
+      "lane": "south-world",
+      "source_file": "south-world.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Jurere Internacional Beach",
+      "video_id": "wCMacsxZqLI",
+      "lane": "south-world",
+      "source_file": "south-world.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Kalahari Salt Pan waterhole",
+      "video_id": "epZP0VOirh0",
+      "lane": "south-world",
+      "source_file": "south-world.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Kamfers Dam Flamingo Sanctuary",
+      "video_id": "IdDorfgnATw",
+      "lane": "south-world",
+      "source_file": "south-world.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Kings Camp Waterhole Timbavati",
+      "video_id": "_AyumoafMOU",
+      "lane": "south-world",
+      "source_file": "south-world.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Klein Curacao Uninhabited Island",
+      "video_id": "0ImA9IcyQwA",
+      "lane": "south-world",
+      "source_file": "south-world.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Lagoinha do Norte and Cachoeira beaches",
+      "video_id": "MQDs8aq_Bu0",
+      "lane": "south-world",
+      "source_file": "south-world.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Long Bay Beach Villa",
+      "video_id": "ukAfv6bUUAk",
+      "lane": "south-world",
+      "source_file": "south-world.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Los Muertos Pier",
+      "video_id": "OpYVUzkLzGw",
+      "lane": "south-world",
+      "source_file": "south-world.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Lovango Resort and Beach Club USVI",
+      "video_id": "F1nfKWCFsNU",
+      "lane": "south-world",
+      "source_file": "south-world.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Mara River Crossing",
+      "video_id": "BaEFc79IMCA",
+      "lane": "south-world",
+      "source_file": "south-world.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Mare Blu Villa Rendezvous Bay St John",
+      "video_id": "ifxbcOjDdn8",
+      "lane": "south-world",
+      "source_file": "south-world.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Meno a Kwena Boteti River",
+      "video_id": "RZFMYVNhd4k",
+      "lane": "south-world",
+      "source_file": "south-world.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Moela Safari Lodge Zebra Migration Waterhole",
+      "video_id": "54Y7xlLrkuo",
+      "lane": "south-world",
+      "source_file": "south-world.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Nonsuch Island coastal cove",
+      "video_id": "VR_kwFbDHZY",
+      "lane": "south-world",
+      "source_file": "south-world.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Olifants River Kruger National Park",
+      "video_id": "_NXaovxB-Bk",
+      "lane": "south-world",
+      "source_file": "south-world.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Palms at Pelican Cove Beach Resort STX",
+      "video_id": "9nmchjRTEtY",
+      "lane": "south-world",
+      "source_file": "south-world.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Paso del Norte crossing, north queue",
+      "video_id": "0Pg3S6s76IE",
+      "lane": "south-world",
+      "source_file": "south-world.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Pereque Acu Beach Ubatuba",
+      "video_id": "VQ26pFMYudI",
+      "lane": "south-world",
+      "source_file": "south-world.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Picada Cará–Arroio Feliz bridge",
+      "video_id": "P3OWz_BML4M",
+      "lane": "south-world",
+      "source_file": "south-world.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Piedras Negras International Bridge",
+      "video_id": "LoPd9fGjgbI",
+      "lane": "south-world",
+      "source_file": "south-world.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Ponta Negra Beach Manaus",
+      "video_id": "xt5k4nWXOEc",
+      "lane": "south-world",
+      "source_file": "south-world.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Port de Gustavia Saint Barthelemy",
+      "video_id": "zaXzE6ZJAE8",
+      "lane": "south-world",
+      "source_file": "south-world.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Port of San Antonio",
+      "video_id": "ulBAncoXWws",
+      "lane": "south-world",
+      "source_file": "south-world.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Praia da Enseada Guaruja",
+      "video_id": "v5Y6WsD577M",
+      "lane": "south-world",
+      "source_file": "south-world.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Praia Grande Maracana Beach",
+      "video_id": "QxI43ACOlxw",
+      "lane": "south-world",
+      "source_file": "south-world.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Presidente Beach Cancun",
+      "video_id": "OS5Vpxp1zRM",
+      "lane": "south-world",
+      "source_file": "south-world.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Puerto Vallarta Banderas Bay Jalisco",
+      "video_id": "5boZ1Vw95OU",
+      "lane": "south-world",
+      "source_file": "south-world.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Royal Sea Aquarium Resort Curacao",
+      "video_id": "IAkRcsPDO8w",
+      "lane": "south-world",
+      "source_file": "south-world.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Sapphire Beach Resort St Thomas USVI",
+      "video_id": "QuowSqkjImk",
+      "lane": "south-world",
+      "source_file": "south-world.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Schooner Bay Christiansted St Croix USVI",
+      "video_id": "LcjRMvb-yOg",
+      "lane": "south-world",
+      "source_file": "south-world.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Serondella Game Lodge Waterhole",
+      "video_id": "BMQifTcOgts",
+      "lane": "south-world",
+      "source_file": "south-world.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Simbavati Waterside Klaserie Safari SA",
+      "video_id": "zh5QHh9prA0",
+      "lane": "south-world",
+      "source_file": "south-world.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Sorobon Luxury Beach Resort",
+      "video_id": "EcumU_n6fTY",
+      "lane": "south-world",
+      "source_file": "south-world.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "The Royal Cancun Caribbean Beach",
+      "video_id": "5D8BK_MLd-I",
+      "lane": "south-world",
+      "source_file": "south-world.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "The Royal Haciendas Riviera Maya Mexico",
+      "video_id": "YQll66UkkBY",
+      "lane": "south-world",
+      "source_file": "south-world.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "The Royal Sands Cancun Quintana Roo",
+      "video_id": "fv0Qlo_IofY",
+      "lane": "south-world",
+      "source_file": "south-world.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Tropical Panorama Villa St John USVI",
+      "video_id": "mmE7Orodqq0",
+      "lane": "south-world",
+      "source_file": "south-world.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Ulusaba Safari Sabi Sand South Africa",
+      "video_id": "zqc0Z2oWmo8",
+      "lane": "south-world",
+      "source_file": "south-world.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Uruapan Michoacan Centro Plaza",
+      "video_id": "-igWgenMbvI",
+      "lane": "south-world",
+      "source_file": "south-world.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Ushuaia Beagle Channel",
+      "video_id": "aweQQwQgvdE",
+      "lane": "south-world",
+      "source_file": "south-world.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Villa del Palmar Islas de Loreto",
+      "video_id": "0GwE1vu460k",
+      "lane": "south-world",
+      "source_file": "south-world.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "WindSong Villa St John USVI",
+      "video_id": "AH6cJoAQJIU",
+      "lane": "south-world",
+      "source_file": "south-world.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Windswept Point Cinnamon Bay St John",
+      "video_id": "C0e8bpZ-5WY",
+      "lane": "south-world",
+      "source_file": "south-world.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Zaragoza crossing, north queue",
+      "video_id": "KX-bm-Lhy3w",
+      "lane": "south-world",
+      "source_file": "south-world.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Zaragoza crossing, south approach",
+      "video_id": "GC5RY3zipa4",
+      "lane": "south-world",
+      "source_file": "south-world.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Alpena Thunder Bay Marina",
+      "video_id": "FS9Iz-EJW5Y",
+      "lane": "us-east",
+      "source_file": "reserve-qualified.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Bay Shore Park Green Bay",
+      "video_id": "wfGEsNQYAeE",
+      "lane": "us-east",
+      "source_file": "us-east.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Big Sandy Texas UP Rail Corridor",
+      "video_id": "WNSkLhEWbuY",
+      "lane": "us-east",
+      "source_file": "reserve-qualified.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Burlington Iowa BNSF Mississippi Rail",
+      "video_id": "L_xBQqGzNzY",
+      "lane": "us-east",
+      "source_file": "reserve-qualified.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Cape Cod Canal Railroad Bridge",
+      "video_id": "_OeFhA2XqqA",
+      "lane": "us-east",
+      "source_file": "reserve-qualified.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Castillo de San Marcos",
+      "video_id": "FyGb2TZB344",
+      "lane": "us-east",
+      "source_file": "us-east.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Christopher Newport University Great Lawn",
+      "video_id": "1j-V9OAVQN0",
+      "lane": "us-east",
+      "source_file": "us-east.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Connors Point Superior Harbour WI",
+      "video_id": "_L0u39B732I",
+      "lane": "us-east",
+      "source_file": "reserve-qualified.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Dalton Georgia CSX and NS Rail Corridor",
+      "video_id": "DofPCzEUlXk",
+      "lane": "us-east",
+      "source_file": "reserve-qualified.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Dartmouth College Baker Tower Green NH",
+      "video_id": "Vz1K8n-WiGw",
+      "lane": "us-east",
+      "source_file": "us-east.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Downtown Cary Park North Carolina",
+      "video_id": "YVXZk3-kzcI",
+      "lane": "us-east",
+      "source_file": "reserve-qualified.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Fort Lauderdale Beach and A1A",
+      "video_id": "pXx3YQVSUGg",
+      "lane": "us-east",
+      "source_file": "us-east.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Fort Madison Mississippi River Rail",
+      "video_id": "L6eG4ahJc_Q",
+      "lane": "us-east",
+      "source_file": "reserve-qualified.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Fort Myers Beach",
+      "video_id": "spyttB6YiaU",
+      "lane": "us-east",
+      "source_file": "us-east.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Grand Marais Harbour Lake Superior MN",
+      "video_id": "n0H5FkWkjjs",
+      "lane": "us-east",
+      "source_file": "reserve-qualified.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Great Lakes Aquarium Harbor Plaza Duluth",
+      "video_id": "bBubIPZYVt0",
+      "lane": "us-east",
+      "source_file": "reserve-qualified.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Houston skyline from ABC13 tower",
+      "video_id": "wUQc3RoLAPs",
+      "lane": "us-east",
+      "source_file": "reserve-qualified.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Little Traverse Bay from Bay Harbor",
+      "video_id": "VwTFodAY_aE",
+      "lane": "us-east",
+      "source_file": "reserve-qualified.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Milwaukee RiverWalk Downtown Wisconsin",
+      "video_id": "JATo2lPJcaE",
+      "lane": "us-east",
+      "source_file": "reserve-qualified.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Miramar Beach, Destin",
+      "video_id": "_Zqi24i0fl4",
+      "lane": "us-east",
+      "source_file": "us-east.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Old Bahia Honda Bridge",
+      "video_id": "_RxQuhI8_TY",
+      "lane": "us-east",
+      "source_file": "us-east.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Panama City Beach from Sharky's",
+      "video_id": "EYs8y8gOwf0",
+      "lane": "us-east",
+      "source_file": "us-east.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Parkville Missouri River BNSF Rail",
+      "video_id": "nO81bQFql7M",
+      "lane": "us-east",
+      "source_file": "reserve-qualified.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Pentwater Channel and Pierheads",
+      "video_id": "l_PAXshd87g",
+      "lane": "us-east",
+      "source_file": "reserve-qualified.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Quincy Illinois BNSF Mississippi Rail",
+      "video_id": "a__yfG4PnxY",
+      "lane": "us-east",
+      "source_file": "reserve-qualified.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Radford University Heth Hall Green",
+      "video_id": "E8BuIzsVu2w",
+      "lane": "us-east",
+      "source_file": "us-east.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Siesta Key Beach",
+      "video_id": "NLhxcyzXQxM",
+      "lane": "us-east",
+      "source_file": "us-east.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Smith College Campus Athletic Fields",
+      "video_id": "gXXZowz38iM",
+      "lane": "us-east",
+      "source_file": "us-east.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Sombrero Beach, Marathon",
+      "video_id": "jE4og3o_SXs",
+      "lane": "us-east",
+      "source_file": "us-east.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Spanish Springs Town Square The Villages",
+      "video_id": "97T8hDEvtpg",
+      "lane": "us-east",
+      "source_file": "us-east.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Split Rock Lighthouse Cam",
+      "video_id": "9EnmgL3fXW8",
+      "lane": "us-east",
+      "source_file": "reserve-qualified.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "St. Clair River at Marysville",
+      "video_id": "utGfq6AkxiM",
+      "lane": "us-east",
+      "source_file": "us-east.json",
+      "quality_score": 3,
+      "reasons": []
+    }
+  ],
+  "reserve": [
+    {
+      "name": "St. Clair River from the Voyageur Restaurant",
+      "video_id": "yu0pKQSvYX8",
+      "lane": "us-east",
+      "source_file": "us-east.json",
+      "quality_score": 3,
+      "reasons": [
+        "Qualified but requested addition limit reached"
+      ]
+    },
+    {
+      "name": "St Lawrence River and Boldt Castle, Thousand Islands",
+      "video_id": "H_EbNSqfoso",
+      "lane": "us-east",
+      "source_file": "reserve-qualified.json",
+      "quality_score": 3,
+      "reasons": [
+        "Qualified but requested addition limit reached"
+      ]
+    },
+    {
+      "name": "St Louis Railcam Gateway Arch Corridor",
+      "video_id": "OHRc7YRmuTk",
+      "lane": "us-east",
+      "source_file": "reserve-qualified.json",
+      "quality_score": 3,
+      "reasons": [
+        "Qualified but requested addition limit reached"
+      ]
+    },
+    {
+      "name": "Tarpon dock at Robbie's Marina",
+      "video_id": "zfSst64NFcE",
+      "lane": "us-east",
+      "source_file": "us-east.json",
+      "quality_score": 3,
+      "reasons": [
+        "Qualified but requested addition limit reached"
+      ]
+    },
+    {
+      "name": "Thach Concourse Auburn University",
+      "video_id": "q4DuLov-blY",
+      "lane": "us-east",
+      "source_file": "us-east.json",
+      "quality_score": 3,
+      "reasons": [
+        "Qualified but requested addition limit reached"
+      ]
+    },
+    {
+      "name": "The Iron Triangle Rail Park Fostoria OH",
+      "video_id": "05MkbHUuVNM",
+      "lane": "us-east",
+      "source_file": "reserve-qualified.json",
+      "quality_score": 3,
+      "reasons": [
+        "Qualified but requested addition limit reached"
+      ]
+    },
+    {
+      "name": "Thomasville NC Norfolk Southern Rail",
+      "video_id": "JPdUQtZcuk8",
+      "lane": "us-east",
+      "source_file": "reserve-qualified.json",
+      "quality_score": 3,
+      "reasons": [
+        "Qualified but requested addition limit reached"
+      ]
+    },
+    {
+      "name": "Two Harbors Boat Launch Lake Superior MN",
+      "video_id": "sThx7mQM3Uc",
+      "lane": "us-east",
+      "source_file": "reserve-qualified.json",
+      "quality_score": 3,
+      "reasons": [
+        "Qualified but requested addition limit reached"
+      ]
+    },
+    {
+      "name": "Two Harbors Depot Lake Superior",
+      "video_id": "rCec9HDbFwA",
+      "lane": "us-east",
+      "source_file": "reserve-qualified.json",
+      "quality_score": 3,
+      "reasons": [
+        "Qualified but requested addition limit reached"
+      ]
+    },
+    {
+      "name": "Wichita Kansas Railcam Crossing",
+      "video_id": "iN7u2jKbDm0",
+      "lane": "us-east",
+      "source_file": "reserve-qualified.json",
+      "quality_score": 3,
+      "reasons": [
+        "Qualified but requested addition limit reached"
+      ]
+    },
+    {
+      "name": "Bailey Yard from the Golden Spike Tower",
+      "video_id": "laKzBnfVIsQ",
+      "lane": "us-west",
+      "source_file": "us-west.json",
+      "quality_score": 3,
+      "reasons": [
+        "Qualified but requested addition limit reached"
+      ]
+    },
+    {
+      "name": "Disneyland Mattercam, California Adventure overview",
+      "video_id": "FAeUBvRjAT8",
+      "lane": "us-west",
+      "source_file": "us-west.json",
+      "quality_score": 3,
+      "reasons": [
+        "Qualified but requested addition limit reached"
+      ]
+    },
+    {
+      "name": "Jackson Broadway from SeeJH headquarters",
+      "video_id": "aAXhT5FOoWk",
+      "lane": "us-west",
+      "source_file": "us-west.json",
+      "quality_score": 3,
+      "reasons": [
+        "Qualified but requested addition limit reached"
+      ]
+    },
+    {
+      "name": "Jackson Cache Street and Town Square",
+      "video_id": "FmoclK_hKz8",
+      "lane": "us-west",
+      "source_file": "us-west.json",
+      "quality_score": 3,
+      "reasons": [
+        "Qualified but requested addition limit reached"
+      ]
+    },
+    {
+      "name": "Leavenworth village from Kris Kringl",
+      "video_id": "TmtVbezZaqg",
+      "lane": "us-west",
+      "source_file": "us-west.json",
+      "quality_score": 3,
+      "reasons": [
+        "Qualified but requested addition limit reached"
+      ]
+    },
+    {
+      "name": "Manhattan Beach Pier California",
+      "video_id": "tBEIYdw1HeM",
+      "lane": "us-west",
+      "source_file": "us-west.json",
+      "quality_score": 3,
+      "reasons": [
+        "Qualified but requested addition limit reached"
+      ]
+    },
+    {
+      "name": "Morro Rock and the Harbor",
+      "video_id": "jpTWh9bKULw",
+      "lane": "us-west",
+      "source_file": "us-west.json",
+      "quality_score": 3,
+      "reasons": [
+        "Qualified but requested addition limit reached"
+      ]
+    },
+    {
+      "name": "Oregon State University Parker Plaza",
+      "video_id": "ykL6sStoKks",
+      "lane": "us-west",
+      "source_file": "us-west.json",
+      "quality_score": 3,
+      "reasons": [
+        "Qualified but requested addition limit reached"
+      ]
+    },
+    {
+      "name": "Reno Arch",
+      "video_id": "laopqyiYlxg",
+      "lane": "us-west",
+      "source_file": "us-west.json",
+      "quality_score": 3,
+      "reasons": [
+        "Qualified but requested addition limit reached"
+      ]
+    },
+    {
+      "name": "Revelstoke railway museum",
+      "video_id": "fIMbMz2P7Bs",
+      "lane": "us-west",
+      "source_file": "us-west.json",
+      "quality_score": 3,
+      "reasons": [
+        "Qualified but requested addition limit reached"
+      ]
+    },
+    {
+      "name": "San Clemente Beach",
+      "video_id": "2c7NV66YzKA",
+      "lane": "us-west",
+      "source_file": "us-west.json",
+      "quality_score": 3,
+      "reasons": [
+        "Qualified but requested addition limit reached"
+      ]
+    },
+    {
+      "name": "San Diego Harbor Island naval waterfront",
+      "video_id": "iaBfYxbmwXA",
+      "lane": "us-west",
+      "source_file": "us-west.json",
+      "quality_score": 3,
+      "reasons": [
+        "Qualified but requested addition limit reached"
+      ]
+    },
+    {
+      "name": "Seaside Beach and Tillamook Head",
+      "video_id": "Ce_vAKq1kUA",
+      "lane": "us-west",
+      "source_file": "us-west.json",
+      "quality_score": 3,
+      "reasons": [
+        "Qualified but requested addition limit reached"
+      ]
+    },
+    {
+      "name": "Sharp Park Beach",
+      "video_id": "lmec_rcEIL4",
+      "lane": "us-west",
+      "source_file": "us-west.json",
+      "quality_score": 3,
+      "reasons": [
+        "Qualified but requested addition limit reached"
+      ]
+    },
+    {
+      "name": "Vancouver Harbour cruise terminals",
+      "video_id": "DhkGXCgqWjg",
+      "lane": "us-west",
+      "source_file": "us-west.json",
+      "quality_score": 3,
+      "reasons": [
+        "Qualified but requested addition limit reached"
+      ]
+    },
+    {
+      "name": "Whistler Village from Sundial Hotel",
+      "video_id": "Cw5WFWDDlL0",
+      "lane": "us-west",
+      "source_file": "us-west.json",
+      "quality_score": 3,
+      "reasons": [
+        "Qualified but requested addition limit reached"
+      ]
+    }
+  ],
+  "rejected": [
+    {
+      "name": "London Heathrow Airport (LHR/EGLL)",
+      "video_id": "XfGD1i19T8g",
+      "lane": "europe-north",
+      "source_file": "europe-north.json",
+      "quality_score": 5,
+      "reasons": [
+        "Explicit import hold: candidate"
+      ]
+    }
+  ],
+  "duplicates": [],
+  "input_count": 461,
+  "lane_counts": {
+    "east-asia": {
+      "accepted": 27,
+      "reserve": 0,
+      "rejected": 0,
+      "duplicates": 0
+    },
+    "europe-north": {
+      "accepted": 54,
+      "reserve": 0,
+      "rejected": 1,
+      "duplicates": 0
+    },
+    "europe-south": {
+      "accepted": 109,
+      "reserve": 0,
+      "rejected": 0,
+      "duplicates": 0
+    },
+    "oceania": {
+      "accepted": 5,
+      "reserve": 0,
+      "rejected": 0,
+      "duplicates": 0
+    },
+    "south-asia": {
+      "accepted": 21,
+      "reserve": 0,
+      "rejected": 0,
+      "duplicates": 0
+    },
+    "south-world": {
+      "accepted": 110,
+      "reserve": 0,
+      "rejected": 0,
+      "duplicates": 0
+    },
+    "us-east": {
+      "accepted": 89,
+      "reserve": 10,
+      "rejected": 0,
+      "duplicates": 0
+    },
+    "us-west": {
+      "accepted": 19,
+      "reserve": 16,
+      "rejected": 0,
+      "duplicates": 0
+    }
+  },
+  "counts": {
+    "accepted": 434,
+    "reserve": 26,
+    "rejected": 1,
+    "duplicates": 0
+  },
+  "new_total": 674,
+  "shortfall": 0,
+  "rating_distribution": {
+    "3": 210,
+    "4": 195,
+    "5": 29
+  },
+  "existing_values_preserved": true,
+  "mode": "write",
+  "catalog_changed": true,
+  "backup": "cameras-7f7fcb039d06a1aa.json"
+}

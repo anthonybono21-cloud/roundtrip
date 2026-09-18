@@ -301,6 +301,17 @@ const CFG = {
   restR:        2.7,    // resting distance from the centre; the globe fills the frame
 };
 
+/* The largest step a per-frame accumulator will take in one go. It is here to
+   stop a backgrounded tab or a long stall from jumping the camera across the
+   sky in a single frame, and nothing else. It was 0.1s, which quietly made it
+   do a second job it should not have: every frame slower than 100ms advanced
+   the move by less than the time it really took, so below 10fps a departure
+   stretched in proportion to how slow the screen was, 1.7x at 6fps and over
+   3x at 3fps. A television is exactly the machine that renders a globe that
+   slowly. Half a second still catches a real stall and never bites at any
+   frame rate anyone watches. */
+const MAX_DT = 0.5;
+
 const R_EARTH = 6371000;
 const DEG = Math.PI / 180;
 const $  = s => document.querySelector(s);
@@ -1300,7 +1311,7 @@ function updateSpaceCam(){
     // wherever the turn has got to. Per second rather than per frame, so a
     // television and a desk display turn at the same rate.
     const now = clock();
-    state.orbit.lng += 2.1 * clamp(now - state.orbitT, 0, 0.1);
+    state.orbit.lng += 2.1 * clamp(now - state.orbitT, 0, MAX_DT);
     state.orbitT = now;
     if (state.orbit.lng > 180) state.orbit.lng -= 360;
     const { lat, lng, r } = state.orbit;
@@ -1378,7 +1389,7 @@ function tick(){
       // the clock: that is what stopped the camera backing off and coming in
       // again, and it keeps the move rate-independent besides.
       const now = clock();
-      state.departP = clamp(state.departP + clamp(now - state.lastT, 0, 0.1) / state.departDur, 0, 1);
+      state.departP = clamp(state.departP + clamp(now - state.lastT, 0, MAX_DT) / state.departDur, 0, 1);
       state.lastT = now;
       if (state.departP >= 1) setPhase('settle');
       break;

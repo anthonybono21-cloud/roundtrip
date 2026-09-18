@@ -49,6 +49,7 @@ finger drive exactly the same strip.
 | key | what it does |
 | --- | --- |
 | tap/click, `←`, `→` | show the actions |
+| `P` | pin map: every camera on the globe, pick one and stay on it |
 | `/` | open search: places, scenes and tags |
 | `N` | dive to the next camera now |
 | `Space` | hold this camera, cancel the rotation |
@@ -84,12 +85,60 @@ nothing unless the page decided it is on a television.
 | Play/Pause | stay on this one |
 | Back | pull out to orbit, rather than out of the app |
 
+While the pin map is open the D-pad steps from camera to camera and Select
+stays on the one you are looking at; Back closes the map. "Map of every
+camera" is a row on the Select menu.
+
 A Fire TV remote's Back button is wired to browser history rather than to
 Escape, so `tv.js` keeps a spare history entry to absorb it. The first press of
 anything also takes the page full screen, which is what loses Silk's title bar.
 
 `firetv/` is the app that puts Roundtrip on the home row without a browser;
 `firetv/README.md` covers what it is and how it is installed.
+## The pin map
+
+`P`, or **Map** on the action strip, stops the rotation and puts every camera
+on the globe at once. It is the same globe: the same sun, the same live
+clouds, the same night lights, the same sprites the orbit view already carries.
+What changes is who is flying it.
+
+- **Drag** to spin the earth, **wheel or pinch** to come closer, `+` and `-` do
+  the same. A flick coasts and settles.
+- **Hover or tap a pin** for the camera's name, where it is, the local time and
+  whether the sun is up there. A camera that is off air right now, because of
+  its `live_window`, is a dimmer blue dot and says so.
+- **Arrow keys step from pin to pin** in the direction pressed, and the globe
+  swings round when the next one is near the limb, so the whole world is
+  reachable from a Fire Stick remote without a pointer. `Enter` picks.
+- **Picking one dives to it and stays there.** No dwell timer, no next camera.
+  `Esc` leaves the feed and hands you back to the pin map you chose it from,
+  rather than to the rotation.
+- A camera thumbed down loses its pin too.
+
+Left alone for four seconds the globe turns very slowly on its own, about a
+degree every two seconds, so it still reads as alive without walking away from
+whatever you were pointing at. Everything in the mode is per second rather than
+per frame, so a flick travels the same distance on a 60Hz desk panel, a 120Hz
+tablet and a Fire Stick that is dropping frames.
+
+`CFG.mapSpin` is that idle turn in degrees per second.
+
+**Entry points**, for anything that wants to open the mode from outside:
+
+| from | call |
+| --- | --- |
+| keyboard | `P` |
+| the action strip | the `map` item, added the way `menu.js` documents |
+| a remote | `window.RoundtripPins` — `open`, `close`, `toggle`, `isOpen`, `step(dx,dy)`, `pick()`; `tv.js` drives these |
+| anywhere else | `Roundtrip.pinMap()` toggles; `pinMap(true)` / `pinMap(false)` force it |
+| ask | `Roundtrip.pinMapOn()` |
+
+`Roundtrip.pinMap(true)` from a feed is safe: it retreats to orbit first and
+opens the map when it lands there.
+
+While the map is up it owns the picture: a press on the globe is a drag or a
+pick, not a call for the action strip, and the D-pad steps between pins instead
+of skipping cameras. `Esc`, `P`, or Back on a remote hands the picture back.
 
 ## Thumbs up and thumbs down
 

@@ -89,6 +89,34 @@
      same rules those buttons were given: a target a finger can hit, a dark
      translucent panel rather than a pale one, and the safe-area inset. */
 
+  /* ── pin map ──────────────────────────────────────────────────────────
+     The same globe, stopped, with every camera on it. The chip that names
+     the pin under the cursor or the one the remote has, and the line at the
+     top that says what the mode is. Nothing here is a second scene: the
+     pins are the sprites the globe already carries. */
+  #mapbar{position:fixed;left:50%;top:26px;transform:translateX(-50%);display:none;
+    font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:#ffd479;
+    text-align:center;pointer-events:none;z-index:8;text-shadow:0 2px 14px rgba(0,0,0,.8)}
+  body.mapmode #mapbar{display:block}
+  #mapbar small{display:block;margin-top:6px;letter-spacing:.02em;text-transform:none;
+    font-size:11.5px;color:rgba(215,228,244,.78);
+    text-shadow:0 1px 3px #000,0 2px 16px rgba(0,0,0,.95)}
+  body.mapmode #stage{cursor:grab}
+  body.mapmode.dragging #stage{cursor:grabbing}
+  body.mapmode.overpin #stage{cursor:pointer}
+
+  #pinlab{position:fixed;left:0;top:0;transform:translate(-50%,-100%);pointer-events:none;
+    z-index:8;background:var(--panel);border:1px solid var(--edge);border-radius:10px;
+    padding:8px 12px;backdrop-filter:blur(8px);opacity:0;transition:opacity .16s;
+    white-space:nowrap;box-shadow:0 10px 34px rgba(0,0,0,.55);max-width:44ch}
+  #pinlab.on{opacity:1}
+  #pinlab .n{font-size:14.5px;font-weight:600;letter-spacing:-.01em}
+  #pinlab .w{font-size:11.5px;color:var(--dim);margin-top:2px}
+  #pinlab .t{font-size:11px;color:var(--dim);margin-top:5px;
+    font-variant-numeric:tabular-nums;display:flex;gap:10px;align-items:baseline}
+  #pinlab .t .s::before{content:"";display:inline-block;width:5px;height:5px;border-radius:50%;
+    margin-right:5px;vertical-align:1px;background:currentColor;box-shadow:0 0 7px currentColor}
+
   #attrib{position:fixed;right:12px;bottom:10px;font-size:10px;color:rgba(200,215,235,.42);
     text-align:right;line-height:1.5;pointer-events:none}
 
@@ -175,6 +203,9 @@
 
 <div id="phase">orbit</div>
 <div id="pinned">pinned</div>
+<div id="mapbar"></div>
+<div id="pinlab"><div class="n"></div><div class="w"></div>
+  <div class="t"><span class="c"></span><span class="s"></span></div></div>
 
 <div id="card">
   <div class="place"></div>
@@ -199,6 +230,7 @@
 <div id="help">
   <div><kbd>Tap</kbd>show the actions &middot; nothing moves on its own</div>
   <div><kbd>N</kbd>dive to the next camera</div>
+  <div><kbd>P</kbd>pin map: every camera on the globe</div>
   <div><kbd>/</kbd>search places, scenes and tags</div>
   <div><kbd>Space</kbd>hold this one</div>
   <div><kbd>&uarr;</kbd>good camera, show it more</div>
@@ -241,6 +273,7 @@ import * as THREE from './vendor/three.module.js';
 const CFG = {
   dwell:        90,     // seconds on a live feed before moving on
   orbitDwell:   2.6,    // seconds parked on the globe before the next dive
+  mapSpin:      0.55,   // pin map: degrees per second once the controls go idle
   depart:       3.4,    // orbit swing + drop, seconds
   handoff:      0.9,    // globe → ground crossfade
   descend:      3.6,    // ground drop to the camera pose
@@ -843,6 +876,7 @@ function buildPins(cams){
     m.scale.setScalar(0.022);
     m.position.copy(latLngToVec3(c.pose.lat, c.pose.lng, 1.004));
     m.userData.cam = c;
+    m.userData.onAir = true;         // refreshed whenever the pin map opens
     pins.add(m);
   });
   space.add(pins);
@@ -1419,7 +1453,7 @@ function castVote(dir){
   if (voteOf(cam) === dir){            // the same thumb again takes it back
     delete votes[key];
     state.rejects.delete(key);
-    saveRejects(); saveVotes(); paintVote();
+    saveRejects(); saveVotes(); paintVote(); refreshPins();
     note('Cleared the mark on ' + cam.name + '.');
     return;
   }
@@ -1438,6 +1472,7 @@ function castVote(dir){
   bag = bag.filter(c => c !== cam);
   if (upNext === cam) upNext = null;
   saveRejects();
+  refreshPins();                     // and off the pin map
   note('Thumbs down. ' + cam.name + ' is out of the rotation here.');
   if (state.phase === 'live' || state.phase === 'orbit') beginDive(pickNext());
   else backToOrbit();
@@ -1610,6 +1645,7 @@ function clearSet(quiet){
 
 function beginDive(cam){
   if (!cam) return;
+  if (mapState.on) exitPinMap(mapState.returnTo);
   if (cam === prefetched) prefetched = null;
   pushHistory(cam);
   state.cam = cam;
@@ -1698,6 +1734,7 @@ const _look = new THREE.Vector3(), _fwd = new THREE.Vector3(),
       _right = new THREE.Vector3(), _up = new THREE.Vector3();
 function updateSpaceCam(){
   if (state.phase === 'orbit'){
+    if (mapState.on) return updateMapCam();      // steered by hand, not by the sun
     state.sway += 0.00055;                       // a full sway takes ~3 minutes
     // Ease toward the sun-framed pose rather than snapping, so the shot recovers
     // smoothly after a dive instead of cutting back.
@@ -1831,8 +1868,11 @@ function tick(){
 
   switch (state.phase){
     case 'orbit':
+      // A dive asked for from the map, or a return to the map after one.
+      if (mapState.enterOnOrbit && !queued){ mapState.enterOnOrbit = false; enterPinMap(); }
       if (queued) beginDive(pickNext());
-      else if (!state.pinned && clock()-state.t0 > CFG.orbitDwell) beginDive(pickNext());
+      else if (!state.pinned && !mapState.on && clock()-state.t0 > CFG.orbitDwell)
+        beginDive(pickNext());
       break;
     case 'depart': {
       // Hold on the globe until the ground is actually ready. A dive into
@@ -1900,6 +1940,7 @@ function tick(){
   if (state.phase === 'live' && state.liveOn && !state.align) return;
 
   if (state.phase !== 'boot') updateSpaceCam();
+  if (mapState.on){ paintPins(); paintLabel(); }
 
   const onGround = state.cam && state.blend > 0;
   if (onGround) updateGroundCam();
@@ -1984,6 +2025,405 @@ async function copyPose(){
   } catch {}
 }
 
+/* ── pin map ────────────────────────────────────────────────────────────── */
+/* A second way into the same world. The globe does not change: same sun, same
+   clouds, same night lights, same sprites buildPins() already hung on it. What
+   changes is who is flying. The rotation stops, the camera takes its lat, lng
+   and radius from the hand on the mouse (or the thumb, or the remote), every
+   camera shows as a pin you can point at, and picking one dives there and
+   stays until you leave. Deliberately not a flat map: a projection would be
+   easier to click and would throw away the one thing this app is for.
+
+   Reached by the P key, by the pin button in the HUD, or from outside by
+   Roundtrip.pinMap(true) — that last one is the handle the tap-menu wires to. */
+
+const mapState = {
+  on: false,
+  hover: null,           // the pin under the pointer
+  focus: null,           // the pin the keyboard or the remote is holding
+  tgt: null,             // a lat/lng the globe is easing round to
+  drag: false,
+  vlng: 0, vlat: 0,      // flick momentum, degrees per second
+  touched: 0,            // when the controls were last used
+  enterOnOrbit: false,   // asked for mid-flight: open once the retreat lands
+  returnTo: false,       // this feed was picked from the map, so Esc goes back
+};
+
+const _pv = new THREE.Vector3(), _pc = new THREE.Vector3();
+
+/* In orbit a camera is a light on the night side, which is why the sprites are
+   an additive glow. On the map they are something to aim at, so they put on a
+   crisper skin: a solid dot inside a ring, blended normally so it stays a
+   marker over the lit half instead of blowing out to white. Same sprites,
+   same places, different clothes. */
+let dotMap = null;
+function dotTexture(){
+  if (dotMap) return dotMap;
+  const c = document.createElement('canvas'); c.width = c.height = 64;
+  const x = c.getContext('2d');
+  const g = x.createRadialGradient(32,32,10,32,32,32);
+  g.addColorStop(0,'rgba(255,255,255,0.40)'); g.addColorStop(1,'rgba(255,255,255,0)');
+  x.fillStyle = g; x.fillRect(0,0,64,64);
+  x.beginPath(); x.arc(32,32,13,0,7); x.fillStyle = 'rgba(255,255,255,0.97)'; x.fill();
+  x.beginPath(); x.arc(32,32,19.5,0,7); x.lineWidth = 3.4;
+  x.strokeStyle = 'rgba(255,255,255,0.62)'; x.stroke();
+  dotMap = new THREE.CanvasTexture(c);
+  dotMap.colorSpace = THREE.SRGBColorSpace;
+  return dotMap;
+}
+function wearSkin(p, skin){
+  if (p.userData.skin === skin) return;
+  p.userData.skin = skin;
+  const m = p.material;
+  if (skin === 'dot'){
+    m.userData.glow = m.userData.glow || m.map;
+    m.map = dotTexture(); m.blending = THREE.NormalBlending;
+    // The sprite is a screen-facing quad hanging 4km over a curved surface, so
+    // the globe's own depth slices a hard-edged marker into a crescent. Drawn
+    // on top it stays a full circle; the far half is hidden below instead.
+    m.depthTest = false; p.renderOrder = 6;
+  } else {
+    if (m.userData.glow) m.map = m.userData.glow;
+    m.blending = THREE.AdditiveBlending;
+    m.depthTest = true; p.renderOrder = 0;
+  }
+  m.needsUpdate = true;
+}
+
+/* 1 at the middle of the disc, 1/r at the limb, less than that round the back.
+   Cheaper than a raycast and it is the test that actually matters: a pin on
+   the far side is drawn behind the earth and must not be clickable. */
+function pinFacing(p){
+  _pc.copy(spaceCam.position).normalize();
+  return p.position.dot(_pc);
+}
+function pinOnScreen(p){
+  if (!p.visible) return null;
+  if (pinFacing(p) < 1/spaceCam.position.length() + 0.012) return null;
+  _pv.copy(p.position).project(spaceCam);
+  if (_pv.z > 1) return null;
+  return { x:(_pv.x*0.5+0.5)*innerWidth, y:(0.5-_pv.y*0.5)*innerHeight };
+}
+
+/* Which cameras are on the globe at all: a thumbs-down takes its pin with it,
+   and a camera that is off air right now stays but goes quiet. */
+function refreshPins(){
+  if (!pins) return;
+  pins.children.forEach(p => {
+    const c = p.userData.cam;
+    p.userData.off = state.rejects.has(camKey(c));   // thumbed down: gone
+    p.visible = !p.userData.off;
+    p.userData.onAir = isLiveNow(c);
+  });
+}
+
+function paintPins(){
+  if (!pins) return;
+  const horizon = 1/spaceCam.position.length() + 0.012;
+  pins.children.forEach(p => {
+    if (!mapState.on){
+      wearSkin(p, 'glow');
+      p.visible = !p.userData.off;
+      const on = p.userData.cam === state.cam;
+      p.material.color.set(on ? 0xffffff : 0xffd479);
+      p.material.opacity = on ? 1 : 0.55;
+      p.scale.setScalar(on ? 0.034 : 0.019);
+      return;
+    }
+    wearSkin(p, 'dot');
+    // Nothing depth-tests these any more, so the far side of the planet is
+    // cleared by hand rather than by the buffer.
+    p.visible = !p.userData.off && pinFacing(p) >= horizon;
+    if (!p.visible) return;
+    const hot = p === mapState.focus || p === mapState.hover;
+    const air = p.userData.onAir !== false;
+    p.material.color.set(hot ? 0xffffff : air ? 0xffd479 : 0x9ab4d6);
+    p.material.opacity = hot ? 1 : air ? 0.92 : 0.46;
+    p.scale.setScalar(hot ? 0.052 : air ? 0.032 : 0.024);
+  });
+}
+
+/* The chip that names the pin. Rebuilt only when the pin changes; moved every
+   frame, because the globe is still turning underneath it. */
+const labEl = $('#pinlab');
+function paintLabel(){
+  const p = mapState.focus || mapState.hover;
+  const s = p && pinOnScreen(p);
+  if (!s){ labEl.classList.remove('on'); labEl.dataset.key = ''; return; }
+  const c = p.userData.cam, key = camKey(c);
+  if (labEl.dataset.key !== key){
+    labEl.dataset.key = key;
+    labEl.querySelector('.n').textContent = c.name;
+    labEl.querySelector('.w').textContent = c.location || '';
+    let when = '';
+    try { when = new Intl.DateTimeFormat([], { hour:'2-digit', minute:'2-digit',
+                                               timeZone:c.timezone }).format(now()); } catch {}
+    const [label, colour] = lightLabel(sunElevation(c.pose.lat, c.pose.lng));
+    labEl.querySelector('.c').textContent = when + (p.userData.onAir === false ? '  ·  off air' : '');
+    const sun = labEl.querySelector('.s');
+    sun.textContent = label; sun.style.color = colour;
+  }
+  // Measured rather than guessed: a long name would otherwise run off the
+  // side of the screen when its pin sits near the limb.
+  const half = labEl.offsetWidth/2 + 14;
+  labEl.style.left = clamp(s.x, half, Math.max(half, innerWidth-half)) + 'px';
+  labEl.style.top  = Math.max(s.y - 22, labEl.offsetHeight + 74) + 'px';
+  labEl.classList.add('on');
+}
+
+function pinAt(x, y){
+  const reach = matchMedia('(pointer:coarse)').matches ? 36 : 24;
+  let best = null, bestD = reach;
+  for (const p of pins.children){
+    const s = pinOnScreen(p);
+    if (!s) continue;
+    const d = Math.hypot(s.x-x, s.y-y);
+    if (d < bestD){ bestD = d; best = p; }
+  }
+  return best;
+}
+function nearestToCentre(){
+  let best = null, bestD = Infinity;
+  for (const p of pins.children){
+    const s = pinOnScreen(p);
+    if (!s) continue;
+    const d = Math.hypot(s.x-innerWidth/2, s.y-innerHeight/2);
+    if (d < bestD){ bestD = d; best = p; }
+  }
+  return best;
+}
+
+/* The globe camera while the map has it. Momentum first, then the slow turn
+   that only starts once the controls have been left alone, so the planet still
+   reads as alive without ever walking away from what you were pointing at.
+
+   Everything here is per second rather than per frame: a flick has to travel
+   the same distance on the desk PC's 60Hz panel, on a 120Hz tablet and on a
+   Fire Stick that is dropping frames, or the globe feels like a different
+   weight on each of them. */
+let mapLast = 0;
+function updateMapCam(){
+  const o = state.orbit;
+  const t = clock(), dt = clamp(t - (mapLast || t), 0, 0.1);
+  mapLast = t;
+  if (mapState.tgt){
+    const k = 1 - Math.pow(0.001, dt);          // ~half the gap closed in 0.1s
+    o.lat = lerp(o.lat, mapState.tgt.lat, k);
+    o.lng = lerp(o.lng, shortestAngle(o.lng, mapState.tgt.lng), k);
+    if (Math.abs(o.lat - mapState.tgt.lat) < 0.15 &&
+        Math.abs(shortestAngle(o.lng, mapState.tgt.lng) - o.lng) < 0.15) mapState.tgt = null;
+  } else {
+    o.lng += mapState.vlng*dt;
+    o.lat = clamp(o.lat + mapState.vlat*dt, -85, 85);
+    const decay = Math.pow(0.012, dt);          // a flick coasts for ~a second
+    mapState.vlng *= decay; mapState.vlat *= decay;
+    if (Math.abs(mapState.vlng) < 0.15) mapState.vlng = 0;
+    if (Math.abs(mapState.vlat) < 0.15) mapState.vlat = 0;
+    if (!mapState.drag && !mapState.vlng && !mapState.vlat && t-mapState.touched > 4)
+      o.lng += CFG.mapSpin*dt;
+  }
+  o.lng = ((o.lng + 540) % 360) - 180;
+  spaceCam.position.copy(latLngToVec3(o.lat, o.lng, o.r));
+  spaceCam.up.set(0,1,0);
+  spaceCam.lookAt(0,0,0);
+  spaceCam.fov = 38;
+  setSpaceClip(o.r - 1);
+}
+
+/* Degrees of globe per pixel of drag, worked out rather than guessed: a point
+   under the camera subtends H/(2 tan(fov/2)) pixels per radian of turn at this
+   altitude, so dragging feels the same whether you are far out or close in. */
+const mapDegPerPx = () => (state.orbit.r - 1) / (0.0254 * innerHeight);
+
+function zoomMap(dir, factor){
+  state.orbit.r = clamp(state.orbit.r * (factor || Math.exp(dir*0.14)), 1.75, 6);
+  mapState.touched = clock();
+}
+
+function setFocus(p, centre){
+  mapState.focus = p || null;
+  mapState.hover = null;
+  mapState.touched = clock();
+  if (!p){ mapState.tgt = null; return; }
+  const s = pinOnScreen(p);
+  // Only swing the earth round when the pin is off near the limb or the edge
+  // of the frame. Recentring one that is already in front of you reads as the
+  // camera fidgeting.
+  const far = !s || pinFacing(p) < 0.62
+           || Math.abs(s.x - innerWidth/2)  > innerWidth*0.30
+           || Math.abs(s.y - innerHeight/2) > innerHeight*0.30;
+  mapState.tgt = (centre || far) ? { lat:p.userData.cam.pose.lat, lng:p.userData.cam.pose.lng } : null;
+}
+
+/* Arrow keys, for the desk and for the Fire Stick remote alike: step to the
+   nearest pin that actually lies the way you pressed. With nothing that way,
+   turn the globe instead, so the edge of the visible half is never a dead end. */
+function focusStep(dx, dy){
+  const from = mapState.focus && pinOnScreen(mapState.focus);
+  const ox = from ? from.x : innerWidth/2, oy = from ? from.y : innerHeight/2;
+  let best = null, bestScore = Infinity;
+  for (const p of pins.children){
+    if (p === mapState.focus) continue;
+    const s = pinOnScreen(p);
+    if (!s) continue;
+    const vx = s.x-ox, vy = s.y-oy, d = Math.hypot(vx, vy);
+    if (d < 6) continue;
+    const along = (vx*dx + vy*dy)/d;        // 1 = straight where you pressed
+    if (along < 0.45) continue;
+    const score = d/(along*along);          // near and straight ahead wins
+    if (score < bestScore){ bestScore = score; best = p; }
+  }
+  if (best){ setFocus(best); return; }
+  mapState.tgt = null;
+  mapState.vlng = mapState.vlat = 0;
+  state.orbit.lng += dx*14;
+  state.orbit.lat  = clamp(state.orbit.lat - dy*11, -85, 85);
+  mapState.touched = clock();
+}
+
+/* Picking one. This is the whole point of the mode: it dives, and then it
+   stays, because nothing pins a camera like having chosen it. */
+function pickPin(p){
+  if (!p) return;
+  const cam = p.userData.cam;
+  mapState.returnTo = true;
+  exitPinMap(true);
+  requestDive(cam);
+  state.pinned = true;                       // beginDive clears it, so after
+  $('#pinned').classList.add('on');
+  note('Staying on ' + cam.name + '. Esc goes back to the pin map.');
+}
+
+function enterPinMap(){
+  if (mapState.on || !pins) return;
+  Menu?.close();                             // the strip and the map both want the D-pad
+  if (state.phase !== 'orbit'){
+    // Mid-feed or mid-flight: come home first, then open.
+    mapState.enterOnOrbit = true;
+    if (state.phase !== 'retreat') backToOrbit();
+    return;
+  }
+  mapState.on = true;
+  mapState.drag = false;
+  mapState.vlng = mapState.vlat = 0;
+  mapState.tgt = null;
+  mapState.touched = clock();
+  state.orbit.r = clamp(state.orbit.r, 2.5, 3.4);
+  refreshPins();
+  document.body.classList.add('mapmode');
+  $('#phase').textContent = 'pin map';
+  const n = pins.children.filter(p => p.visible).length;
+  const remote = document.documentElement.classList.contains('tv');
+  $('#mapbar').innerHTML = n + ' cameras'
+    + '<small>' + (remote
+        ? 'D-pad to step from camera to camera, select to stay on one'
+        : 'Drag to spin, arrows to step pin to pin, Enter to stay there')
+    + '</small>';
+  setFocus(nearestToCentre());
+  mapState.tgt = null;                       // opening should not move anything
+  paintPins(); Menu?.sync();
+}
+
+function exitPinMap(keepReturn){
+  if (!mapState.on) return;
+  mapState.on = false;
+  mapState.hover = mapState.focus = mapState.tgt = null;
+  mapState.drag = false;
+  mapState.vlng = mapState.vlat = 0;
+  if (!keepReturn) mapState.returnTo = false;
+  document.body.classList.remove('mapmode','dragging','overpin');
+  labEl.classList.remove('on'); labEl.dataset.key = '';
+  $('#phase').textContent = state.phase;
+  state.t0 = clock();                        // a full dwell before the next dive
+  paintPins(); Menu?.sync();
+}
+const togglePinMap = on => (on === undefined ? !mapState.on : !!on) ? enterPinMap() : exitPinMap();
+
+/* The handle tv.js looks for. A remote has no pointer, so the map has to be
+   driveable entirely through these: the D-pad steps, select picks, back
+   closes. Published under the name the television build already asks for. */
+window.RoundtripPins = {
+  open: enterPinMap, close: exitPinMap, toggle: togglePinMap,
+  isOpen: () => mapState.on,
+  step: (dx, dy) => { if (mapState.on) focusStep(dx, dy); },
+  pick: () => { if (mapState.on) pickPin(mapState.focus || mapState.hover); },
+};
+
+/* Mouse, pen and touch, all through pointer events so one path covers the desk
+   PC, the tablet and anything else. A press that barely moves is a pick; one
+   that moves is a drag; two at once is a pinch. */
+{
+  const dom = renderer.domElement;
+  const ptrs = new Map();
+  let moved = 0, pinch0 = 0, r0 = 0, downAt = 0;
+  const spread = () => {
+    const [a, b] = [...ptrs.values()];
+    return Math.hypot(a.x-b.x, a.y-b.y);
+  };
+
+  dom.addEventListener('pointerdown', e => {
+    if (!mapState.on) return;
+    ptrs.set(e.pointerId, { x:e.clientX, y:e.clientY, t:clock() });
+    mapState.drag = true; mapState.tgt = null;
+    mapState.vlng = mapState.vlat = 0;
+    mapState.touched = clock();
+    moved = 0; downAt = clock();
+    document.body.classList.add('dragging');
+    if (ptrs.size === 2){ pinch0 = spread(); r0 = state.orbit.r; }
+    try { dom.setPointerCapture(e.pointerId); } catch {}
+  });
+
+  dom.addEventListener('pointermove', e => {
+    if (!mapState.on) return;
+    if (!ptrs.size){                                   // hovering, not dragging
+      const p = pinAt(e.clientX, e.clientY);
+      if (p !== mapState.hover){ mapState.hover = p; document.body.classList.toggle('overpin', !!p); }
+      return;
+    }
+    const prev = ptrs.get(e.pointerId);
+    if (!prev) return;
+    const dx = e.clientX - prev.x, dy = e.clientY - prev.y;
+    const dt = clamp(clock() - prev.t, 1/240, 0.1);
+    prev.x = e.clientX; prev.y = e.clientY; prev.t = clock();
+    moved += Math.hypot(dx, dy);
+    mapState.touched = clock();
+    if (ptrs.size === 2 && pinch0 > 0){
+      zoomMap(0, pinch0/Math.max(spread(), 1));
+      return;
+    }
+    // The globe follows the finger exactly; the speed it was moving at when
+    // the finger lifts is what carries on afterwards.
+    const k = mapDegPerPx();
+    state.orbit.lng += -dx*k;
+    state.orbit.lat  = clamp(state.orbit.lat + dy*k, -85, 85);
+    mapState.vlng = clamp(-dx*k/dt, -220, 220);
+    mapState.vlat = clamp( dy*k/dt, -160, 160);
+  });
+
+  const release = e => {
+    if (!ptrs.has(e.pointerId)) return;
+    ptrs.delete(e.pointerId);
+    if (ptrs.size) { pinch0 = 0; return; }
+    mapState.drag = false;
+    document.body.classList.remove('dragging');
+    if (moved < 9 && clock()-downAt < 0.7){
+      mapState.vlng = mapState.vlat = 0;
+      const p = pinAt(e.clientX, e.clientY);
+      if (p) pickPin(p);
+      else { mapState.focus = null; labEl.classList.remove('on'); }
+    }
+  };
+  dom.addEventListener('pointerup', release);
+  dom.addEventListener('pointercancel', e => { ptrs.delete(e.pointerId);
+    mapState.drag = false; document.body.classList.remove('dragging'); });
+
+  dom.addEventListener('wheel', e => {
+    if (!mapState.on) return;
+    e.preventDefault();
+    zoomMap(0, Math.exp(clamp(e.deltaY, -120, 120)*0.0013));
+  }, { passive:false });
+}
+
 /* ── input ──────────────────────────────────────────────────────────────── */
 
 addEventListener('keydown', e => {
@@ -2022,6 +2462,21 @@ addEventListener('keydown', e => {
     e.preventDefault();
     return;
   }
+  // The pin map owns the arrows, Enter and Escape while it is open. Everything
+  // it does not claim (N, M, /, F, H) falls through to the keys below.
+  if (mapState.on){
+    if (k==='ArrowLeft') { focusStep(-1, 0); e.preventDefault(); return; }
+    if (k==='ArrowRight'){ focusStep( 1, 0); e.preventDefault(); return; }
+    if (k==='ArrowUp')   { focusStep( 0,-1); e.preventDefault(); return; }
+    if (k==='ArrowDown') { focusStep( 0, 1); e.preventDefault(); return; }
+    if (k==='Enter' || k===' '){ pickPin(mapState.focus || mapState.hover);
+                                 e.preventDefault(); return; }
+    if (k==='+' || k==='='){ zoomMap(-1); e.preventDefault(); return; }
+    if (k==='-' || k==='_'){ zoomMap( 1); e.preventDefault(); return; }
+    if (k==='Escape' || k==='p' || k==='P'){ exitPinMap(); e.preventDefault(); return; }
+  }
+  else if (k==='p' || k==='P'){ togglePinMap(true); return; }
+
   /* Nothing is on screen to press, so the first push of a D-pad brings the
      strip up. Left and right, because up and down are the thumbs and a
      keyboard should keep them. */
@@ -2046,8 +2501,12 @@ addEventListener('keydown', e => {
   else if (k==='a' || k==='A'){ if (state.phase==='live') enterAlign(); }
   else if (k==='Escape'){
     // One key for 'get me out of here': it leaves the feed and, if a
-    // search narrowed the rotation, hands the whole world back.
+    // search narrowed the rotation, hands the whole world back. A camera
+    // chosen off the pin map goes back to the pin map rather than to the
+    // rotation, because that is where you were.
     clearSet();
+    if (mapState.returnTo){ mapState.returnTo = false; mapState.enterOnOrbit = true; }
+    state.pinned = false; $('#pinned').classList.remove('on');
     if (state.cam) backToOrbit();
   }
   else if (k==='f' || k==='F'){ document.fullscreenElement ? document.exitFullscreen() : document.body.requestFullscreen(); }
@@ -2114,6 +2573,11 @@ Menu?.init({
       state: () => ({ disabled: state.align || !state.cam || state.phase === 'orbit',
                       title:'Pull back out to the globe' }) },
 
+    { id:'map', label:'Map', icon:'map',
+      run: () => togglePinMap(true),
+      state: () => ({ pressed: mapState.on, disabled: state.align || !pins,
+                      title:'Every camera on the globe, pick one and stay' }) },
+
     { id:'full', label:'Full', icon:'full', close:false,
       run: () => { document.fullscreenElement ? document.exitFullscreen()
                                               : document.body.requestFullscreen(); },
@@ -2134,6 +2598,9 @@ addEventListener('fullscreenchange', () => Menu?.sync());
    away again. Presses inside the strip or the search panel are theirs. */
 addEventListener('pointerdown', e => {
   if (!Menu || state.align) return;
+  // While the pin map is up, the globe itself is the control: a press is a
+  // drag or a pick, not a call for the strip. Back or Escape leaves the map.
+  if (mapState.on) return;
   if (Search?.isOpen()) return;
   const t = e.target;
   if (t && t.closest && t.closest('#rt-menu,#rt-search,#rt-mag')) return;
@@ -2267,6 +2734,9 @@ const progress = v => { bar.style.width = (v*100)+'%'; };
     hold: on => { togglePinned(on === undefined ? undefined : !!on);
                   $('#pinned').classList.toggle('on', state.pinned);
                   return state.pinned; },
+    // Pin map. Roundtrip.pinMap() toggles, pinMap(true)/pinMap(false) force it.
+    // This is the handle anything outside the globe (a tap menu, a remote) uses.
+    pinMap: togglePinMap, pinMapOn: () => mapState.on, mapState,
     dive: q => { const c = state.cams.find(c => c.name.toLowerCase().includes(String(q).toLowerCase()));
                  if (c) beginDive(c); else console.warn('no camera matching', q); return c?.name; } };
 

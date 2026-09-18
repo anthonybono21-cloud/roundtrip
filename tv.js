@@ -300,6 +300,23 @@
       return;
     }
 
+    // The pin map draws its own selection on the globe, so while it is open
+    // the D-pad steps between cameras and select picks one, instead of the
+    // remote's usual next/previous. Translated here rather than left to the
+    // page, because on older Fire OS builds e.key is 'Unidentified' and only
+    // the key codes above identify the D-pad at all.
+    var pm = window.RoundtripPins;
+    if (pm && pm.isOpen && pm.isOpen()) {
+      e.preventDefault(); e.stopImmediatePropagation();
+      if (g === 'up') pm.step(0, -1);
+      else if (g === 'down') pm.step(0, 1);
+      else if (g === 'left') pm.step(-1, 0);
+      else if (g === 'right') pm.step(1, 0);
+      else if (g === 'ok' || g === 'play') pm.pick();
+      else if (g === 'back' || g === 'menu') pm.close();
+      return;
+    }
+
     if (open) {
       e.preventDefault(); e.stopImmediatePropagation();
       if (g === 'up') move(-1);

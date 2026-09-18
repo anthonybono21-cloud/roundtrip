@@ -303,6 +303,7 @@ const CFG = {
   breathe:      1.0,    // idle camera drift and roll, 0 turns it off
   volume:       15,     // percent, the level a feed's own sound settles at
   adHold:       6,      // seconds to hold the landing rather than reveal a pre-roll
+  adGrace:      1.2,    // seconds to let a slow player say whether it has one
   arriveR:      0.95,   // where the approach stops, in earth radii above the surface
   tempUnit:     'F',    // the card's temperature: 'F' or 'C'
   restR:        2.7,    // resting distance from the centre; the globe fills the frame
@@ -789,7 +790,8 @@ function toggleSound(){
    breaks YouTube's terms for embedded players, and a player that is fought
    with is a player that stops playing — the feed is the whole product. */
 const AD_KEY = 'roundtrip.adseen';
-const ads = { on:false, since:0, seen:{}, watching:null, knock:null };
+const ads = { on:false, since:0, seen:{}, watching:null, knock:null,
+              replied:false, silentRuns:0 };
 try { ads.seen = JSON.parse(localStorage.getItem(AD_KEY) || '{}') || {}; } catch {}
 
 /* The player says nothing until it is asked to (`enablejsapi=1` is already on
@@ -821,7 +823,13 @@ function adsWatch(frame){
 }
 function adsReset(){
   if (ads.knock){ clearInterval(ads.knock); ads.knock = null; }
-  ads.on = false; ads.since = 0; ads.watching = null;
+  // A player that was watched all the way through and never said a word is a
+  // player whose answers are not coming. Three of those in a row and the grace
+  // below stops being applied, so a handshake that has quietly stopped working
+  // costs a second on three landings rather than a second on every landing
+  // for ever.
+  if (ads.watching && !ads.replied) ads.silentRuns++;
+  ads.on = false; ads.since = 0; ads.watching = null; ads.replied = false;
 }
 
 /* A live stream has no length: the player reports 0, or a DVR window running
@@ -838,6 +846,7 @@ addEventListener('message', e => {
   if (!d || d.event !== 'infoDelivery' || !d.info) return;
   const len = Number(d.info.duration);
   if (!Number.isFinite(len)) return;
+  ads.replied = true; ads.silentRuns = 0;
   const advert = len > 0.5 && len <= AD_MAX_LEN;
   if (advert === ads.on) return;
   ads.on = advert;
@@ -1407,6 +1416,13 @@ function tick(){
       // Capped, because a long unskippable one is not worth stalling the whole
       // rotation for: past the cap the feed comes up regardless.
       if (ads.on && clock() - state.t0 < CFG.settle + CFG.adHold) break;
+      // And a shorter grace for a player that has not answered at all yet.
+      // The flight is about four seconds; an embed on a cold connection can
+      // take longer than that to exist, and then the first anyone hears of its
+      // advert is seeing it. This costs nothing in the normal case, where the
+      // player has answered well before the arrival.
+      if (!ads.replied && ads.silentRuns < 3 && liveFrame && liveFrame.tagName === 'IFRAME'
+          && clock() - state.t0 < CFG.settle + CFG.adGrace) break;
       if (phaseT(CFG.settle) >= 1){
         setPhase('reveal');
         liveEl.classList.add('on');

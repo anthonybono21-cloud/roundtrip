@@ -1,0 +1,8 @@
+# Copied in from the repo root by sync-web.mjs. The root is the source of
+# truth for the app; this is only ever a build input.
+www/
+
+node_modules/
+
+# macOS
+.DS_Store

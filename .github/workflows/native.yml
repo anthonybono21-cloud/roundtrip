@@ -1,0 +1,127 @@
+# Builds the Roundtrip apps.
+#
+# Android is built all the way to an installable APK and attached to the run.
+# The Apple targets are compiled — iPhone, iPad and Mac — which catches every
+# mistake a build can catch, but stops short of an .ipa or a .app anyone can
+# install: that needs an Apple developer account and a signing certificate,
+# which this repository does not have.
+
+name: Apps
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'native/**'
+      - 'index.html'
+      - 'search.js'
+      - 'cameras.json'
+      - 'assets/**'
+      - 'vendor/**'
+      - 'clouds/**'
+      - '.github/workflows/native.yml'
+  pull_request:
+    paths:
+      - 'native/**'
+      - '.github/workflows/native.yml'
+  workflow_dispatch:
+
+jobs:
+  android:
+    name: Android APK
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: native/package-lock.json
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+
+      - uses: android-actions/setup-android@v3
+
+      - name: Install
+        working-directory: native
+        run: npm ci
+
+      - name: Copy the web app into the shell
+        working-directory: native
+        run: npm run sync-web
+
+      - name: Sync Capacitor
+        working-directory: native
+        run: npx cap sync android
+
+      - name: Build the debug APK
+        working-directory: native/android
+        run: ./gradlew --no-daemon assembleDebug
+
+      - name: Name the APK after the commit
+        run: |
+          mkdir -p out
+          cp native/android/app/build/outputs/apk/debug/app-debug.apk \
+             "out/Roundtrip-${GITHUB_SHA::7}.apk"
+          ls -la out
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: roundtrip-android-apk
+          path: out/*.apk
+          if-no-files-found: error
+
+  apple:
+    name: iPhone, iPad and Mac
+    runs-on: macos-15
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: native/package-lock.json
+
+      - name: Install
+        working-directory: native
+        run: npm ci
+
+      - name: Copy the web app into the shell
+        working-directory: native
+        run: npm run sync-web
+
+      - name: Sync Capacitor
+        working-directory: native
+        run: npx cap sync ios
+
+      # Building for a simulator needs no certificate and no developer
+      # account, so this runs on every push while the real thing waits for
+      # someone to sign it.
+      - name: Compile for iPhone and iPad
+        working-directory: native/ios/App
+        run: |
+          xcodebuild \
+            -workspace App.xcworkspace \
+            -scheme App \
+            -configuration Debug \
+            -destination 'generic/platform=iOS Simulator' \
+            -derivedDataPath build \
+            CODE_SIGNING_ALLOWED=NO \
+            build
+
+      - name: Compile for Mac
+        working-directory: native/ios/App
+        run: |
+          xcodebuild \
+            -workspace App.xcworkspace \
+            -scheme App \
+            -configuration Debug \
+            -destination 'platform=macOS,variant=Mac Catalyst' \
+            -derivedDataPath build-mac \
+            CODE_SIGNING_ALLOWED=NO \
+            build

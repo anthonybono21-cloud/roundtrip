@@ -1,0 +1,22 @@
+{
+  "appId": "com.anthonybono.roundtrip",
+  "appName": "Roundtrip",
+  "webDir": "www",
+  "loggingBehavior": "none",
+  "backgroundColor": "#05070c",
+  "android": {
+    "backgroundColor": "#05070c",
+    "allowMixedContent": false,
+    "webContentsDebuggingEnabled": true
+  },
+  "ios": {
+    "backgroundColor": "#05070c",
+    "contentInset": "never",
+    "scrollEnabled": false,
+    "limitsNavigationsToAppBoundDomains": false
+  },
+  "server": {
+    "androidScheme": "https",
+    "iosScheme": "capacitor"
+  }
+}

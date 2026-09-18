@@ -131,17 +131,9 @@
   #help div{margin-top:5px}
 
   /* Alignment mode: match the render to the live frame, then copy the pose out. */
-  #align{position:fixed;left:50%;top:24px;transform:translateX(-50%);display:none;
     background:var(--panel);border:1px solid var(--edge);border-radius:10px;padding:10px 16px;
     backdrop-filter:blur(8px);font-variant-numeric:tabular-nums;font-size:13px;
     box-shadow:0 10px 40px rgba(0,0,0,.5)}
-  #align.on{display:block}
-  #align .row{display:flex;gap:18px}
-  #align span{color:var(--dim)}
-  #align b{color:var(--ink);font-weight:600;margin-left:5px}
-  #align .hint{margin-top:7px;font-size:11px;color:var(--dim);letter-spacing:.02em}
-  /* In align mode the live feed is held at half opacity so the two can be matched. */
-  #live.align{opacity:.5!important;transition:opacity .2s}
 
   #boot{position:fixed;inset:0;display:grid;place-items:center;background:#05070c;
     transition:opacity .8s ease;z-index:10}
@@ -215,16 +207,6 @@
   </div>
 </div>
 
-<div id="align">
-  <div class="row">
-    <span>head<b class="h"></b></span>
-    <span>pitch<b class="p"></b></span>
-    <span>fov<b class="f"></b></span>
-    <span>alt<b class="a"></b></span>
-    <span>lat<b class="la"></b></span>
-    <span>lng<b class="ln"></b></span>
-  </div>
-  <div class="hint">arrows heading/pitch &middot; [ ] fov &middot; PgUp/PgDn alt &middot; WASD nudge position &middot; S copy pose &middot; A exit</div>
 </div>
 
 <div id="help">
@@ -261,13 +243,10 @@ import * as THREE from './vendor/three.module.js';
 /* ─────────────────────────────────────────────────────────────────────────────
    Roundtrip — orbit-to-camera viewer for the ET45 desk app, entirely on free data.
      globe imagery   NASA Blue Marble + Black Marble (public domain, vendored)
-     descent imagery Esri World Imagery tiles (free, attribution required)
-     terrain         AWS open terrain tiles, terrarium encoding (free)
-     buildings       OpenStreetMap footprints via Overpass (free)
      live feeds      the project's verified YouTube cams
-   Two scenes are used on purpose: the globe works in earth radii, the ground
-   works in metres. One scene spanning both wrecks depth precision, so the
-   handoff between them is a crossfade hidden inside the descent.
+   One scene, the globe, working in earth radii. There used to be a second in
+   metres for the ground, with a crossfade between them hidden inside the
+   descent; the ground is gone and a dive now ends on the globe itself.
    ───────────────────────────────────────────────────────────────────────────*/
 
 const CFG = {
@@ -275,36 +254,14 @@ const CFG = {
   orbitDwell:   2.6,    // seconds parked on the globe before the next dive
   mapSpin:      0.55,   // pin map: degrees per second once the controls go idle
   depart:       3.4,    // orbit swing + drop, seconds
-  handoff:      0.9,    // globe → ground crossfade
-  descend:      3.6,    // ground drop to the camera pose
   settle:       0.55,   // hold the matched frame before the reveal
   reveal:       1.1,    // render → live crossfade
   retreat:      2.2,    // live → orbit on the way out
   lightBias:    0.25,   // 0 = pure random order, 1 = strongly prefer good light
-  handoffAlt:   6000,   // altitude, in metres, where globe hands over to ground
-  approachPitch:-52,    // degrees below horizontal at the start of the descent
-  prefetch:     true,   // warm the next camera's tiles while a feed plays
   breathe:      1.0,    // idle camera drift and roll, 0 turns it off
-  maxDepart:    8,      // seconds to wait for tiles before diving anyway
   volume:       15,     // percent, the level a feed's own sound settles at
   adHold:       6,      // seconds to hold the landing rather than reveal a pre-roll
-  buildings:    true,   // pull OSM footprints for the final approach
-  wideM:        11000,  // detailed ground, wide enough to carry the horizon
-  nearM:        900,    // sharp ground for the last stretch
-  imagery: {
-    // Free, keyless, attribution required. Swap the URL to change providers.
-    url: (z,x,y) => `https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/${z}/${y}/${x}`,
-    credit: 'Imagery: Esri, Maxar, Earthstar Geographics',
-    maxZoom: 19,
-  },
-  dem: {
-    url: (z,x,y) => `https://s3.amazonaws.com/elevation-tiles-prod/terrarium/${z}/${x}/${y}.png`,
-    credit: 'Terrain: AWS Open Data / Mapzen',
-    wide: { zoom:13, grid:5 },   // ~19m per sample over ~17km
-    near: { zoom:15, grid:3 },   // ~5m per sample over ~2.5km; z15 is the
-                                 // dataset's maximum, z16 returns 404
-  },
-  overpass: 'https://overpass-api.de/api/interpreter',
+  arriveR:      0.95,   // where the approach stops, in earth radii above the surface
 };
 
 const R_EARTH = 6371000;
@@ -341,18 +298,6 @@ function latLngToVec3(lat, lng, r=1){
      r*Math.cos(phi),
      r*Math.sin(phi)*Math.sin(theta));
 }
-const lng2tileX = (lng,z) => (lng+180)/360 * 2**z;
-const lat2tileY = (lat,z) => {
-  const s = Math.sin(lat*DEG);
-  return (0.5 - Math.log((1+s)/(1-s))/(4*Math.PI)) * 2**z;
-};
-const tileX2lng = (x,z) => x/2**z*360 - 180;
-const tileY2lat = (y,z) => {
-  const n = Math.PI - 2*Math.PI*y/2**z;
-  return Math.atan(0.5*(Math.exp(n)-Math.exp(-n)))/DEG;
-};
-
-/* Subsolar point, good to a fraction of a degree — enough for a terminator. */
 function sunPosition(date=now()){
   const d = (date - Date.UTC(2000,0,1,12)) / 86400000;          // days from J2000
   const g = (357.529 + 0.98560028*d) * DEG;                     // mean anomaly
@@ -382,119 +327,6 @@ function lightLabel(el){
   return ['high sun','#cfe6ff'];
 }
 
-/* ── tile fetching ──────────────────────────────────────────────────────── */
-
-function loadImage(url){
-  return new Promise((res, rej) => {
-    const im = new Image();
-    im.crossOrigin = 'anonymous';
-    im.onload = () => res(im);
-    im.onerror = () => rej(new Error('tile '+url));
-    im.src = url;
-  });
-}
-
-/* The sharpest zoom whose mosaic still fits a tile budget. Degrees of
-   longitude shrink toward the poles, so this has to be computed, not assumed. */
-function fitZoom(lat, lng, halfM, budget, maxZ){
-  for (let z = Math.min(maxZ, CFG.imagery.maxZoom); z >= 6; z--){
-    const dLat = halfM/111320, dLng = halfM/(111320*Math.cos(lat*DEG));
-    const nx = Math.floor(lng2tileX(lng+dLng,z)) - Math.floor(lng2tileX(lng-dLng,z)) + 1;
-    const ny = Math.floor(lat2tileY(lat-dLat,z)) - Math.floor(lat2tileY(lat+dLat,z)) + 1;
-    if (nx*ny <= budget) return z;
-  }
-  return 6;
-}
-
-/* Mosaic the imagery tiles covering a patch into one canvas texture.
-   Returns {canvas, bounds} so the mesh UVs can be mapped onto it exactly. */
-async function imageryMosaic(lat, lng, halfM, z){
-  z = Math.min(z, CFG.imagery.maxZoom);
-  const dLat = halfM / 111320;
-  const dLng = halfM / (111320 * Math.cos(lat*DEG));
-  const x0 = Math.floor(lng2tileX(lng-dLng, z)), x1 = Math.floor(lng2tileX(lng+dLng, z));
-  const y0 = Math.floor(lat2tileY(lat+dLat, z)), y1 = Math.floor(lat2tileY(lat-dLat, z));
-  const nx = x1-x0+1, ny = y1-y0+1;
-  if (nx*ny > 140) throw new Error(`mosaic too large: ${nx}x${ny} tiles at z${z}`);
-  const cv = document.createElement('canvas');
-  cv.width = nx*256; cv.height = ny*256;
-  const ctx = cv.getContext('2d');
-  ctx.fillStyle = '#1a2436'; ctx.fillRect(0,0,cv.width,cv.height);
-  const jobs = [];
-  for (let x=x0; x<=x1; x++) for (let y=y0; y<=y1; y++){
-    jobs.push(loadImage(CFG.imagery.url(z,x,y))
-      .then(im => ctx.drawImage(im,(x-x0)*256,(y-y0)*256,256,256))
-      .catch(()=>{}));                       // a missing tile leaves the backing colour
-  }
-  await Promise.all(jobs);
-  return { canvas: cv, bounds: {
-    west: tileX2lng(x0,z), east: tileX2lng(x1+1,z),
-    north: tileY2lat(y0,z), south: tileY2lat(y1+1,z) } };
-}
-
-/* Terrarium DEM → a metre-height sampler over the patch. */
-async function demSampler(lat, lng, z, g){
-  const r = (g-1)/2, side = g*256;
-  const cx = Math.floor(lng2tileX(lng,z)), cy = Math.floor(lat2tileY(lat,z));
-  const cv = document.createElement('canvas');
-  cv.width = cv.height = side;
-  const ctx = cv.getContext('2d', { willReadFrequently:true });
-  const range = [...Array(g)].map((_,i) => i - r);
-  let got = 0;
-  await Promise.all(range.flatMap(dx => range.map(dy =>
-    loadImage(CFG.dem.url(z, cx+dx, cy+dy))
-      .then(im => { ctx.drawImage(im,(dx+r)*256,(dy+r)*256,256,256); got++; })
-      .catch(()=>{}))));
-  if (!got) return null;
-  const px = ctx.getImageData(0,0,side,side).data;
-  const west = tileX2lng(cx-r,z), east = tileX2lng(cx+r+1,z);
-  const north = tileY2lat(cy-r,z), south = tileY2lat(cy+r+1,z);
-  const last = side-1;
-  return (la, ln) => {
-    const u = (ln-west)/(east-west), v = (north-la)/(north-south);
-    if (u<0||u>1||v<0||v>1) return NaN;      // NaN, not 0: sea level is real
-    // Bilinear, or the terrain steps in visible blocks at eye level.
-    const fx = u*last, fy = v*last;
-    const x0 = Math.min(last-1, fx|0), y0 = Math.min(last-1, fy|0);
-    const tx = fx-x0, ty = fy-y0;
-    const h = (x,y) => { const i=(y*side+x)*4; return px[i]*256 + px[i+1] + px[i+2]/256 - 32768; };
-    return lerp(lerp(h(x0,y0), h(x0+1,y0), tx),
-                lerp(h(x0,y0+1), h(x0+1,y0+1), tx), ty);
-  };
-}
-
-/* OSM building footprints near the camera, extruded for the final approach. */
-async function osmBuildings(lat, lng, radius=420){
-  const key = `et45.osm.${lat.toFixed(4)},${lng.toFixed(4)},${radius}`;
-  try { const hit = localStorage.getItem(key); if (hit) return JSON.parse(hit); } catch {}
-  const q = `[out:json][timeout:20];way["building"](around:${radius},${lat},${lng});(._;>;);out;`;
-  const ctrl = new AbortController();
-  const t = setTimeout(()=>ctrl.abort(), 12000);
-  let json;
-  try {
-    const r = await fetch(CFG.overpass, { method:'POST', body:'data='+encodeURIComponent(q),
-      headers:{'Content-Type':'application/x-www-form-urlencoded'}, signal: ctrl.signal });
-    if (!r.ok) throw new Error('overpass '+r.status);
-    json = await r.json();
-  } catch { clearTimeout(t); return []; }
-  clearTimeout(t);
-  const nodes = new Map();
-  for (const el of json.elements) if (el.type==='node') nodes.set(el.id, el);
-  const out = [];
-  for (const el of json.elements){
-    if (el.type!=='way' || !el.nodes || el.nodes.length<4) continue;
-    const ring = el.nodes.map(id=>nodes.get(id)).filter(Boolean).map(n=>[n.lat,n.lon]);
-    if (ring.length < 4) continue;
-    const tg = el.tags || {};
-    const h = parseFloat(tg.height) ||
-              (parseFloat(tg['building:levels']) || 0) * 3.2 || 11;
-    out.push({ ring, h: clamp(h, 3, 420) });
-  }
-  const trimmed = out.slice(0, 900);
-  try { localStorage.setItem(key, JSON.stringify(trimmed)); } catch {}
-  return trimmed;
-}
-
 /* ── renderer ───────────────────────────────────────────────────────────── */
 
 const renderer = new THREE.WebGLRenderer({ antialias:true, powerPreference:'high-performance' });
@@ -517,37 +349,12 @@ const loadTex = (p, srgb=true) => new Promise(res => tex.load(p, t => {
 const space = new THREE.Scene();
 const spaceCam = new THREE.PerspectiveCamera(38, 1, 0.001, 100);
 let earth, atmo, stars, pins;
-/* Detail levels laid on the globe near the destination. Two are enough: a wide
-   coarse one to carry the descent out of orbit, and a narrow sharp one at the
-   same zoom the ground stage starts with, so the handoff is a crossfade between
-   two renderings of the same imagery. altIn/altFull are camera altitudes in
-   earth radii (1 radius = 6371km). */
-/* Four mosaics, each sharp enough for the altitude it covers. The tile budget
-   is what actually picks the zoom — the maxZ caps almost never bind — so the
-   budgets are set from pixel arithmetic rather than by feel: at the altitude
-   where a level reaches full opacity, its ground resolution has to be at least
-   as fine as one screen pixel, or the globe reads as blurry however sharp the
-   source is. The last level is fit to the same grid as the ground scene's own
-   wide patch, so the two agree to the metre and the crossfade at 6km is not a
-   resolution jump. */
-const DETAIL_LEVELS = [
-  //  span         tiles      cap        fade in          full     span  m/px  screen
-  { spanDeg:5.40, budget: 96, maxZ:10, altIn:0.3400, altFull:0.04800 }, // 601km  429   361
-  { spanDeg:1.10, budget: 72, maxZ:12, altIn:0.0520, altFull:0.01300 }, // 122km   74    98
-  { spanDeg:0.24, budget:100, maxZ:14, altIn:0.0135, altFull:0.00320 }, //  27km   13    24
-  { spanDeg:0.09, budget: 72, maxZ:15, altIn:0.0034, altFull:0.00105 }, //  10km    7     8
-];
-const detail = [];
 let clouds = null;                 // the live cloud layer, if it attaches
 const sunDir = new THREE.Vector3(1,0,0);
 const camAlt = { value: 2.1 };     // camera altitude in earth radii, for shaders
-// The same haze the ground scene applies, in earth radii, so the detail patches
-// can wear it on approach and the crossfade at 6km matches top to bottom.
 // A single transparent pixel, so a sampler uniform is never null.
 const blankTex = () => { const t = new THREE.DataTexture(new Uint8Array([255,255,255,0]),1,1);
                          t.needsUpdate = true; return t; };
-const detFog    = { value: new THREE.Vector2(1, 2) };
-const detFogCol = { value: new THREE.Color(0x9fc0e4) };
 const uTime  = { value: 0 };       // seconds, for the city-light flicker
 
 async function buildSpace(progress){
@@ -672,114 +479,6 @@ async function buildSpace(progress){
    globe turns to mush well before the handoff. This lays a real satellite
    mosaic on the sphere around the destination and fades it in on approach,
    which is what keeps the zoom sharp all the way down. */
-function buildDetail(){
-  DETAIL_LEVELS.forEach((lv, i) => {
-  const mesh = new THREE.Mesh(
-    new THREE.SphereGeometry(1, 8, 8, 0, 0.1, 0, 0.1),
-    new THREE.ShaderMaterial({
-      uniforms:{ map:{value:null}, sunDir:{value:sunDir}, fade:{value:0}, alt:camAlt,
-                 fog:detFog, fogCol:detFogCol },
-      vertexShader:`varying vec2 vUv; varying vec3 vW;
-        void main(){ vUv=uv; vec4 w=modelMatrix*vec4(position,1.); vW=w.xyz;
-          gl_Position=projectionMatrix*viewMatrix*w; }`,
-      fragmentShader:`
-        uniform sampler2D map; uniform vec3 sunDir; uniform float fade; uniform float alt;
-        uniform vec2 fog; uniform vec3 fogCol;
-        varying vec2 vUv; varying vec3 vW;
-        // The exposure the ground scene's own sun and hemisphere light produce
-        // on flat ground, sampled at the same elevations as SKY_STOPS. Without
-        // this the globe hands off to a ground twice as bright as itself, which
-        // reads as a flash at 6km. d is sin(sun elevation) at this pixel.
-        float groundLight(float d){
-          float l = 0.218;
-          l = mix(l, 0.269, smoothstep(-0.309, -0.139, d));
-          l = mix(l, 0.416, smoothstep(-0.139, -0.035, d));
-          l = mix(l, 0.500, smoothstep(-0.035,  0.052, d));
-          l = mix(l, 0.756, smoothstep( 0.052,  0.208, d));
-          l = mix(l, 1.827, smoothstep( 0.208,  0.766, d));
-          l = mix(l, 2.225, smoothstep( 0.766,  1.000, d));
-          return l;
-        }
-        void main(){
-          vec3 c=texture2D(map,vUv).rgb;
-          float d=dot(normalize(vW),normalize(sunDir));
-          float day=smoothstep(-0.14,0.20,d);
-          float golden=exp(-pow((d-0.04)/0.15,2.0));
-          c*=mix(vec3(1.0),vec3(1.28,1.04,0.82),golden*0.8);
-          // Seen as part of the globe the patch has to match the globe, and on
-          // approach it has to match the scene it is about to become. Night
-          // keeps some ambient either way, or the patch reads as a hole.
-          // 0.02 earth radii is 127km, 0.0015 is 9.6km.
-          float k=smoothstep(0.02,0.0015,alt);
-          float lit=mix(mix(0.12,1.12,day), groundLight(d), k);
-          // Feather the border. Without this a level's edge is a visible
-          // square against the coarser level underneath it.
-          float e=min(min(vUv.x,1.-vUv.x),min(vUv.y,1.-vUv.y));
-          // The ground scene hazes its far distance. Without the same haze here
-          // the top of the frame steps in brightness at the crossfade even when
-          // the geometry lines up perfectly.
-          float h=clamp((length(vW-cameraPosition)-fog.x)/max(fog.y-fog.x,1e-6),0.0,1.0);
-          gl_FragColor=vec4(mix(c*lit,fogCol,h*k),fade*smoothstep(0.0,0.09,e));
-        }`,
-      transparent:true, depthWrite:false,
-      polygonOffset:true, polygonOffsetFactor:-(4 + i*4), polygonOffsetUnits:-(4 + i*4),
-    }));
-    mesh.visible = false;
-    mesh.renderOrder = 1 + i;
-    mesh.userData.level = lv;
-    mesh.userData.shown = 0;
-    detail.push(mesh);
-    space.add(mesh);
-  });
-}
-
-/* Point the detail patch at one place and load its imagery. A sphere section
-   built to the mosaic's own bounds needs no UV remapping: three.js lays out
-   phi/theta exactly the way latLngToVec3 does. */
-function stageDetail(pose){
-  // Every level, before the dive starts. Leaving with only the top two staged
-  // saved a second or so in orbit and spent it where it actually shows: the
-  // last stretch of the descent arriving soft while L2 and L3 were still on
-  // their way. The departure now covers the wait smoothly instead of
-  // stuttering through it, so there is nothing left to gain by going early.
-  return Promise.all(detail.map((mesh, i) => stageOneDetail(mesh, i, pose).catch(()=>{})));
-}
-function stageOneDetail(mesh, i, pose){
-  return (async () => {
-    const lv = DETAIL_LEVELS[i];
-    // Deliberately not blanked first. Hiding the old mosaic here leaves the
-    // sphere on blue marble for as long as the new one takes to arrive, which
-    // is most of the upper descent. The old patch is over the previous place,
-    // so it is off-frame anyway, and holding it costs nothing.
-    const halfM = lv.spanDeg/2 * 111320;
-    const z = fitZoom(pose.lat, pose.lng, halfM, lv.budget, lv.maxZ);
-    let mosaic;
-    try { mosaic = await imageryMosaic(pose.lat, pose.lng, halfM, z); }
-    catch { return; }
-
-    const { west, east, north, south } = mosaic.bounds;
-    mesh.geometry.dispose();
-    // Enough segments that the patch follows the curve at low altitude; the
-    // widest level needs the most because it spans hundreds of kilometres.
-    const seg = i === 0 ? 128 : i === 1 ? 96 : 64;
-    mesh.geometry = new THREE.SphereGeometry(1, seg, seg,
-      (west+180)*DEG, (east-west)*DEG, (90-north)*DEG, (north-south)*DEG);
-
-    const t = new THREE.CanvasTexture(mosaic.canvas);
-    t.colorSpace = THREE.SRGBColorSpace;
-    t.anisotropy = renderer.capabilities.getMaxAnisotropy();
-    t.wrapS = t.wrapT = THREE.ClampToEdgeWrapping;
-    renderer.initTexture(t);
-    mesh.material.uniforms.map.value?.dispose();
-    mesh.material.uniforms.map.value = t;
-    // Only a level appearing from nothing needs the ease; one that was already
-    // up is a swap of imagery at the same opacity.
-    if (!mesh.visible){ mesh.userData.shown = clock(); mesh.visible = true; }
-  })();
-}
-
-/* Small markers so the next destination is visible from orbit. Sprites with
-   size attenuation off stay a constant few pixels at any altitude. */
 function glowTexture(){
   const c = document.createElement('canvas'); c.width = c.height = 64;
   const g = c.getContext('2d').createRadialGradient(32,32,0,32,32,32);
@@ -805,269 +504,21 @@ function buildPins(cams){
   space.add(pins);
 }
 
-/* The camera pose the globe hands over at, expressed in globe space. The
-   ground stage starts from the identical pose, which is what makes the
-   crossfade read as one continuous move rather than a cut. */
-function handoffPose(pose){
-  const alt = CFG.handoffAlt, pitch = CFG.approachPitch*DEG;
-  const back = alt/Math.tan(-pitch);            // so the target sits dead centre
-  const mLat = 111320, mLng = 111320*Math.cos(pose.lat*DEG);
-  const h = pose.heading*DEG;
-  const lat = pose.lat - Math.cos(h)*back/mLat;
-  const lng = pose.lng - Math.sin(h)*back/mLng;
-  const d = 4000;
+/* Where a dive ends, in globe space. */
+function arrivalPose(pose){
+  // Where the globe camera comes to a stop before the feed takes over. There
+  // is no ground stage to hand to any more, so this is simply the closest the
+  // globe is worth looking at: the day texture is 4096 across, about 10km a
+  // pixel, so anything nearer than a couple of thousand kilometres is mush. It
+  // stops where the place is clearly the subject and the curve of the earth is
+  // still in shot, and the feed crossfades over it there.
   return {
-    lat, lng, alt,
-    pos:  latLngToVec3(lat, lng, 1 + alt/R_EARTH),
-    look: latLngToVec3(lat + Math.cos(h)*d/mLat,
-                       lng + Math.sin(h)*d/mLng,
-                       1 + (alt + Math.tan(pitch)*d)/R_EARTH),
-    back,
+    lat: pose.lat, lng: pose.lng, alt: CFG.arriveR * R_EARTH,
+    pos:  latLngToVec3(pose.lat, pose.lng, 1 + CFG.arriveR),
+    // Aim at the place itself rather than the earth's centre, so the approach
+    // leans in on it instead of sliding past it.
+    look: latLngToVec3(pose.lat, pose.lng, 1),
   };
-}
-
-/* ── the ground, in metres, local ENU with the camera at the origin ─────── */
-
-const ground = new THREE.Scene();
-const groundCam = new THREE.PerspectiveCamera(60, 1, 1, 90000);
-let patch, closePatch, skyDome, bldGroup, groundSun, groundAmb, farFloor;
-
-/* Sky, light and haze by sun elevation, so the last rendered frame is in the
-   same light as the live frame it hands over to. */
-const SKY_STOPS = [
-  { el:-18, top:0x070d18, bot:0x191a22, haze:0.38, amb:0.42, sun:0.05, glow:1.00 },
-  { el: -8, top:0x0b1526, bot:0x2a2334, haze:0.50, amb:0.50, sun:0.12, glow:0.75 },
-  { el: -2, top:0x1b3a63, bot:0x8a4a3a, haze:0.68, amb:0.72, sun:0.35, glow:0.40 },
-  { el:  3, top:0x2f6ea8, bot:0xd9834a, haze:0.72, amb:0.90, sun:0.95, glow:0.15 },
-  { el: 12, top:0x2e7bc4, bot:0xa9c6e0, haze:0.52, amb:0.95, sun:1.35, glow:0.00 },
-  { el: 50, top:0x2f86d8, bot:0xbcd8ef, haze:0.36, amb:1.05, sun:1.70, glow:0.00 },
-];
-function skyFor(el){
-  const S = SKY_STOPS;
-  if (el <= S[0].el) return { ...S[0], top:new THREE.Color(S[0].top), bot:new THREE.Color(S[0].bot) };
-  for (let i=1;i<S.length;i++){
-    if (el <= S[i].el){
-      const a=S[i-1], b=S[i], f=(el-a.el)/(b.el-a.el);
-      return { top:new THREE.Color(a.top).lerp(new THREE.Color(b.top), f),
-               bot:new THREE.Color(a.bot).lerp(new THREE.Color(b.bot), f),
-               haze:lerp(a.haze,b.haze,f), amb:lerp(a.amb,b.amb,f),
-               sun:lerp(a.sun,b.sun,f), glow:lerp(a.glow,b.glow,f) };
-    }
-  }
-  const L=S[S.length-1];
-  return { ...L, top:new THREE.Color(L.top), bot:new THREE.Color(L.bot) };
-}
-
-function buildGroundShell(){
-  skyDome = new THREE.Mesh(
-    new THREE.SphereGeometry(60000, 40, 24),
-    new THREE.ShaderMaterial({
-      uniforms:{ top:{value:new THREE.Color(0x0a1a3a)}, bot:{value:new THREE.Color(0xff9a55)},
-                 haze:{value:0.5} },
-      vertexShader:`varying float vh; void main(){ vh=normalize(position).y;
-        gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.); }`,
-      fragmentShader:`uniform vec3 top,bot; uniform float haze; varying float vh;
-        void main(){ float t=clamp(vh*1.25+0.16,0.,1.);
-          vec3 c=mix(bot,top,pow(t,0.62));
-          gl_FragColor=vec4(mix(c,bot,haze*pow(1.0-t,5.0)),1.0); }`,
-      side:THREE.BackSide, depthWrite:false }));
-  ground.add(skyDome);
-
-  groundSun = new THREE.DirectionalLight(0xffffff, 1.5);
-  groundAmb = new THREE.HemisphereLight(0xbcd4ff, 0x2a2622, 0.85);
-  ground.add(groundSun, groundAmb);
-
-  // Beyond the detailed patch, a plain floor so the horizon is ground and not
-  // sky. Fog takes it to the sky colour, which hides the patch's own edge.
-  // Everything past the detailed patch. Draped in coarse satellite imagery and
-   // parked just below the patch's lowest point, so it fills the distance
-   // without ever poking through the detailed ground.
-  farFloor = new THREE.Mesh(
-    new THREE.PlaneGeometry(120000, 120000, 1, 1),
-    new THREE.MeshLambertMaterial({ color:0x6e7360 }));
-  farFloor.rotation.x = -Math.PI/2;
-  farFloor.position.y = -12;
-  ground.add(farFloor);
-
-  ground.fog = new THREE.Fog(0x8899aa, 400, 9000);   // re-set per frame by altitude
-
-  bldGroup = new THREE.Group();
-  ground.add(bldGroup);
-}
-
-/* Rebuild the ground stage around one camera. Imagery arrives in passes so the
-   descent starts immediately and sharpens as it drops. */
-async function stageGround(cam, onPass, detailJob){
-  const { lat, lng } = cam.pose;
-
-  for (const old of [patch, closePatch]){
-    if (!old) continue;
-    ground.remove(old); old.geometry.dispose();
-    old.material.map?.dispose(); old.material.dispose();
-  }
-  patch = closePatch = null;
-  for (const m of bldGroup.children){ m.geometry.dispose(); m.material.dispose(); }
-  bldGroup.clear();
-
-  // Sky and sun for this place and this minute, so the render matches the feed.
-  const el = sunElevation(lat, lng);
-  const az = (() => { const s = sunPosition();
-    const y = Math.sin((s.lng-lng)*DEG)*Math.cos(s.lat*DEG);
-    const x = Math.cos(lat*DEG)*Math.sin(s.lat*DEG)
-            - Math.sin(lat*DEG)*Math.cos(s.lat*DEG)*Math.cos((s.lng-lng)*DEG);
-    return Math.atan2(y,x); })();
-  const sky = skyFor(el);
-  skyDome.material.uniforms.top.value.copy(sky.top);
-  skyDome.material.uniforms.bot.value.copy(sky.bot);
-  skyDome.material.uniforms.haze.value = sky.haze;
-  // Match the dome's own colour where it meets the horizon exactly, including
-  // its haze term, or the fogged distance shows as a faint band against the sky.
-  ground.fog.color.copy(sky.bot).lerp(sky.top, 0.321*(1 - sky.haze*0.418));
-  if (!farFloor.material.map) farFloor.material.color.set(0x6e7360).lerp(sky.bot, 0.25);
-  groundSun.position.set(Math.sin(az)*Math.cos(el*DEG), Math.max(0.16,Math.sin(el*DEG)), Math.cos(az)*Math.cos(el*DEG))
-    .multiplyScalar(20000);
-  groundSun.intensity = sky.sun;
-  // Low sun is warm and weak, high sun is white and hard.
-  const warm = clamp((el+4)/16, 0, 1);
-  groundSun.color.setHSL(lerp(0.045,0.12,warm), lerp(0.60,0.05,warm), lerp(0.55,1.0,warm));
-  groundAmb.intensity = sky.amb;
-  groundAmb.color.copy(sky.top).lerp(new THREE.Color(0xffffff), 0.35);
-  // At night the scene is lit from below by the place itself. Without this the
-  // dive is four seconds of black before a brightly lit feed.
-  groundAmb.groundColor.set(0x2a2622).lerp(new THREE.Color(0x6b4a24), sky.glow);
-
-  // Two elevation samplers: one coarse and wide enough to carry the horizon,
-  // one fine over the last couple of kilometres.
-  const [demWide, demNear] = await Promise.all([
-    demSampler(lat, lng, CFG.dem.wide.zoom, CFG.dem.wide.grid).catch(()=>null),
-    demSampler(lat, lng, CFG.dem.near.zoom, CFG.dem.near.grid).catch(()=>null),
-  ]);
-  const dem = (demNear || demWide) && ((la, ln) => {
-    const n = demNear?.(la, ln);
-    if (Number.isFinite(n)) return n;
-    const w = demWide?.(la, ln);
-    return Number.isFinite(w) ? w : 0;
-  });
-  const h0 = dem ? dem(lat,lng) : 0;
-  if (!dem) note('Terrain tiles unavailable — the ground will be flat.');
-
-  const mPerDegLat = 111320, mPerDegLng = 111320*Math.cos(lat*DEG);
-
-  /* One tessellated, DEM-displaced, imagery-draped square of ground. Built
-     twice: a wide one for the approach and a small sharp one for the last
-     hundred metres, because a single texture cannot be both. */
-  const makePatch = (sizeM, budget, maxZ, N, sampler, pending) => {
-    const geo = new THREE.PlaneGeometry(sizeM, sizeM, N, N);
-    geo.rotateX(-Math.PI/2);
-    const pos = geo.attributes.position;
-    for (let i=0;i<pos.count;i++){
-      const ex = pos.getX(i), nz = -pos.getZ(i);     // +x east, -z north
-      const la = lat + nz/mPerDegLat, ln = lng + ex/mPerDegLng;
-      pos.setY(i, sampler ? sampler(la,ln) - h0 : 0);
-    }
-    geo.computeVertexNormals();
-    let minY = Infinity;
-    for (let i=0;i<pos.count;i++) minY = Math.min(minY, pos.getY(i));
-    const mat = new THREE.MeshStandardMaterial({ color:0x8a8f86, roughness:0.96, metalness:0 });
-    const mesh = new THREE.Mesh(geo, mat);
-    mesh.userData.minY = minY;
-
-    const z = fitZoom(lat, lng, sizeM/2, budget, maxZ);
-    const job = imageryMosaic(lat, lng, sizeM/2, z).then(({ canvas, bounds }) => {
-      const t = new THREE.CanvasTexture(canvas);
-      t.colorSpace = THREE.SRGBColorSpace;
-      t.anisotropy = renderer.capabilities.getMaxAnisotropy();
-      t.wrapS = t.wrapT = THREE.ClampToEdgeWrapping;
-      // Remap the plane's UVs onto the mosaic's real bounds, since the tiles
-      // that cover the patch never line up with its edges.
-      const uv = geo.attributes.uv, pp = geo.attributes.position;
-      for (let i=0;i<uv.count;i++){
-        const la = lat + (-pp.getZ(i))/mPerDegLat, ln = lng + pp.getX(i)/mPerDegLng;
-        uv.setXY(i, (ln-bounds.west)/(bounds.east-bounds.west),
-                    1-(bounds.north-la)/(bounds.north-bounds.south));
-      }
-      uv.needsUpdate = true;
-      mat.map = t; mat.color.set(0xffffff); mat.needsUpdate = true;
-      // Force the upload now, while the globe is still on screen. Left to the
-      // renderer it happens on the first frame the patch is visible, which is a
-      // hitch in the middle of the descent.
-      renderer.initTexture(t);
-      onPass?.(z);
-    }).catch(e => note('Imagery unavailable ('+e.message+').'));
-    pending?.push(job);
-
-    return mesh;
-  };
-
-  // Wide enough that the horizon is real terrain and not the edge of a slab.
-  // Both patches must be textured AND uploaded before the descent starts.
-  const pending = [];
-  patch = makePatch(CFG.wideM, 96, 15, 192, dem, pending);
-  ground.add(patch);
-
-  // The far plane only stops you seeing under the world past the patch edge.
-  // At that distance it is pure haze, so it stays a flat colour.
-  farFloor.position.y = patch.userData.minY - 40;
-
-  // The sharp near ground, lifted a hair so it wins the depth test against the
-  // wide patch it sits on.
-  closePatch = makePatch(CFG.nearM, 64, 19, 128, dem, pending);
-  closePatch.position.y = 0.2;
-  closePatch.renderOrder = 1;
-  // Faded in by altitude, or it reads as a sharp square pasted on the middle
-  // of the coarse patch all the way down.
-  closePatch.material.transparent = true;
-  closePatch.material.opacity = 0;
-  ground.add(closePatch);
-
-  Promise.all([...pending, detailJob]).then(() => { state.ready = true; });
-
-  // Buildings, in the background — the dive should never wait on Overpass.
-  // Every footprint is extruded, baked into one buffer and thrown away again.
-  // A mesh each was 900 draw calls at the altitude where frame time matters
-  // most, and Group.clear() detached them without freeing their buffers, so an
-  // all-day display shed 900 live geometries per dive until it ran out.
-  if (CFG.buildings) (async () => {
-    const bs = await osmBuildings(lat, lng);
-    if (!bs.length) return;
-    // Color.set already lands in the renderer's linear working space, and a
-    // vertex colour is read from there too, so no conversion belongs here.
-    const tint = [0x9aa0a6, 0xa8a49c, 0x8f959b].map(c => new THREE.Color(c));
-    const pos = [], nrm = [], col = [];
-    bs.forEach((b,i) => {
-      const shape = new THREE.Shape();
-      b.ring.forEach(([la,ln],k) => {
-        const x = (ln-lng)*mPerDegLng, y = (la-lat)*mPerDegLat;
-        k ? shape.lineTo(x,y) : shape.moveTo(x,y);
-      });
-      let g;
-      try { g = new THREE.ExtrudeGeometry(shape, { depth:b.h, bevelEnabled:false }); }
-      catch { return; }
-      g.rotateX(-Math.PI/2);
-      const c = b.ring[0];
-      g.translate(0, dem ? dem(c[0],c[1]) - h0 : 0, 0);
-      // Flat shading came from a per-mesh material flag that a merged buffer
-      // cannot carry, so the facet normals are baked in instead.
-      const flat = g.index ? g.toNonIndexed() : g;
-      if (flat !== g) g.dispose();
-      flat.computeVertexNormals();
-      const P = flat.attributes.position.array, N = flat.attributes.normal.array;
-      const t = tint[i % 3];
-      for (let k = 0; k < P.length; k++){ pos.push(P[k]); nrm.push(N[k]); }
-      for (let k = 0; k < P.length; k += 3){ col.push(t.r, t.g, t.b); }
-      flat.dispose();
-    });
-    if (!pos.length) return;
-    const geo = new THREE.BufferGeometry();
-    geo.setAttribute('position', new THREE.BufferAttribute(new Float32Array(pos), 3));
-    geo.setAttribute('normal',   new THREE.BufferAttribute(new Float32Array(nrm), 3));
-    geo.setAttribute('color',    new THREE.BufferAttribute(new Float32Array(col), 3));
-    geo.computeBoundingSphere();
-    bldGroup.add(new THREE.Mesh(geo, new THREE.MeshStandardMaterial(
-      { vertexColors:true, roughness:0.85, metalness:0 })));
-  })();
-
-  return { h0, dem };
 }
 
 /* ── live feed layer ────────────────────────────────────────────────────── */
@@ -1190,9 +641,9 @@ function toggleSound(){
    2. Nothing is revealed over an advert that can simply be waited out. The
       player is asked to report on itself and an advert gives itself away by
       having a short, finite length where a live stream has none. While one is
-      running the landing holds on the matched ground render for up to
-      CFG.adHold and the sound stays down, so what is on screen is the place
-      rather than a car commercial.
+      running the arrival holds on the globe for up to CFG.adHold and the
+      sound stays down, so what is on screen is the place rather than a car
+      commercial.
 
    3. Whatever still gets through is remembered. Every advert seen is counted
       against that camera on this device and the rotation deals those cameras
@@ -1315,19 +766,15 @@ const state = {
   phase: 'boot',
   t0: 0,                      // phase start, seconds
   pinned: false,
-  align: false,
   rejects: new Set(),
   // globe camera as lat/lng/altitude in earth radii
   orbit: { lat: 18, lng: 8, r: 3.1 },
   orbitT: 0,                  // last idle frame, so the drift is per second
   sway: 0,                    // phase of the idle drift
-  from: null, handoff: null,
+  from: null, arrive: null,
   departDur: 0,
   departP: 0,                  // accumulated, so extending the wait never rewinds it
   lastT: 0,
-  ready: false,               // ground stage textured and uploaded
-  ground: null,
-  blend: 0,                   // 0 = globe, 1 = ground
   liveOn: false,
   // A search can narrow the rotation to the cameras it matched. null is
   // the whole list; a Set of camera keys is "play these until Esc".
@@ -1480,7 +927,7 @@ function saveRejects(){
 
 function castVote(dir){
   const cam = state.cam;
-  if (!cam || state.align) return;
+  if (!cam) return;
   const key = camKey(cam);
 
   if (voteOf(cam) === dir){            // the same thumb again takes it back
@@ -1514,7 +961,7 @@ function castVote(dir){
 
 /* The thumbs are items in the strip, and they are only offered with a
    camera actually on screen. */
-const voteReady = () => !!state.cam && !state.align
+const voteReady = () => !!state.cam
                      && (state.phase === 'live' || state.phase === 'reveal');
 function paintVote(){ Menu?.sync(); }
 
@@ -1583,37 +1030,6 @@ function pickNext(){
    next destination's tiles into the browser cache so its dive starts instantly
    instead of waiting on the first mosaic. */
 let prefetched = null;
-function prefetchNext(){
-  if (!CFG.prefetch) return;
-  const cam = peekNext();
-  if (!cam || cam === prefetched) return;
-  prefetched = cam;
-  const { lat, lng } = cam.pose;
-  const warm = url => { const im = new Image(); im.crossOrigin='anonymous'; im.src = url; };
-  for (const [size, budget, maxZ] of [[CFG.wideM,96,15],[CFG.nearM,64,19]]){
-    const z = fitZoom(lat, lng, size/2, budget, maxZ);
-    const half = size/2;
-    const dLat = half/111320, dLng = half/(111320*Math.cos(lat*DEG));
-    const x0 = Math.floor(lng2tileX(lng-dLng,z)), x1 = Math.floor(lng2tileX(lng+dLng,z));
-    const y0 = Math.floor(lat2tileY(lat+dLat,z)), y1 = Math.floor(lat2tileY(lat-dLat,z));
-    for (let x=x0;x<=x1;x++) for (let y=y0;y<=y1;y++) warm(CFG.imagery.url(z,x,y));
-  }
-  for (const lv of DETAIL_LEVELS){
-    const half = lv.spanDeg/2 * 111320;
-    const z = fitZoom(lat, lng, half, lv.budget, lv.maxZ);
-    const dLat = half/111320, dLng = half/(111320*Math.cos(lat*DEG));
-    const x0 = Math.floor(lng2tileX(lng-dLng,z)), x1 = Math.floor(lng2tileX(lng+dLng,z));
-    const y0 = Math.floor(lat2tileY(lat+dLat,z)), y1 = Math.floor(lat2tileY(lat-dLat,z));
-    for (let x=x0;x<=x1;x++) for (let y=y0;y<=y1;y++) warm(CFG.imagery.url(z,x,y));
-  }
-  for (const k of ['wide','near']){
-    const { zoom:z, grid:g } = CFG.dem[k], r = (g-1)/2;
-    const cx = Math.floor(lng2tileX(lng,z)), cy = Math.floor(lat2tileY(lat,z));
-    for (let dx=-r;dx<=r;dx++) for (let dy=-r;dy<=r;dy++) warm(CFG.dem.url(z,cx+dx,cy+dy));
-  }
-  if (CFG.buildings) osmBuildings(lat, lng).catch(()=>{});
-}
-
 /* A camera asked for from outside the rotation. From orbit or from a feed
    it starts right away; mid-flight it queues, because restarting a descent
    from the globe halfway down is a visible cut. */
@@ -1638,7 +1054,7 @@ function pushHistory(cam){
 }
 const canGoBack = () => hist.length >= 2;
 function divePrev(){
-  if (!canGoBack() || state.align) return;
+  if (!canGoBack()) return;
   hist.pop();
   requestDive(hist.pop());
 }
@@ -1646,7 +1062,6 @@ function divePrev(){
 /* The explicit skip. Unlike the N key it works mid-flight too, by queueing,
    because an action asked for on screen should never simply do nothing. */
 function skipNext(){
-  if (state.align) return;
   requestDive(pickNext());
 }
 
@@ -1690,18 +1105,10 @@ function beginDive(cam){
     p.scale.setScalar(on ? 0.034 : 0.019);
   });
   state.from = { ...state.orbit };
-  state.handoff = handoffPose(cam.pose);
-  state.ground = null;
-  state.ready = false;
+  state.arrive = arrivalPose(cam.pose);
   state.departDur = CFG.depart;
   state.departP = 0;
   state.lastT = clock();
-  const detailJob = stageDetail(cam.pose).catch(()=>{});
-  stageGround(cam, null, detailJob).then(g => { state.ground = g; }).catch(e => {
-    note('Ground stage failed: '+e.message);
-    state.ground = { h0:0, dem:null };
-    state.ready = true;
-  });
   mountLive(cam);              // buffers through the whole dive
   hideCard();
   setPhase('depart');
@@ -1718,8 +1125,8 @@ function backToOrbit(){
 }
 
 /* The globe camera. In orbit it drifts and looks at the centre of the earth;
-   on a dive it flies an arc to the handoff pose and takes on its orientation,
-   so the last globe frame and the first ground frame are the same shot. */
+   on a dive it flies an arc in to the place and leans onto it, and the feed
+   crossfades over that shot. */
 const _look = new THREE.Vector3(), _fwd = new THREE.Vector3(),
       _right = new THREE.Vector3(), _up = new THREE.Vector3();
 function updateSpaceCam(){
@@ -1751,14 +1158,18 @@ function updateSpaceCam(){
             : state.phase === 'depart' ? state.departP
             : 1;
   const e = ease(raw);
-  const a = state.from, b = state.handoff;
+  const a = state.from, b = state.arrive;
 
   const lat = lerp(a.lat, b.lat, e);
   const lng = lerp(a.lng, shortestAngle(a.lng, b.lng), e);
-  // Pull back a little before dropping in: the altitude arc is what makes it
-  // read as a camera move instead of a zoom.
-  const arc = Math.sin(Math.PI*raw) * 0.42;
-  const r = lerp(a.r, 1 + b.alt/R_EARTH, e) + arc*(1-e)*1.6;
+  // Pull back a little before leaning in: the altitude arc is what makes it
+  // read as a camera move instead of a zoom. It is small now. The arc was set
+  // when a dive fell from orbit to six kilometres and needed to cover that
+  // whole range; against the much shorter move it became a visible retreat
+  // before the approach, so it is scaled to the distance actually travelled.
+  const span = Math.max(a.r - (1 + b.alt/R_EARTH), 0.001);
+  const arc = Math.sin(Math.PI*raw) * 0.12 * span;
+  const r = lerp(a.r, 1 + b.alt/R_EARTH, e) + arc*(1-e);
 
   spaceCam.position.copy(latLngToVec3(lat, lng, r));
   spaceCam.up.set(0,1,0);         // level through the dive
@@ -1766,7 +1177,9 @@ function updateSpaceCam(){
   // weighted late so the tilt happens on the way in, not on departure.
   _look.set(0,0,0).lerp(b.look, easeOut(clamp((e-0.25)/0.75, 0, 1)));
   spaceCam.lookAt(_look);
-  spaceCam.fov = lerp(38, 46, e);
+  // Hold the lens where orbit holds it. Widening on arrival pushed the place
+  // back out just as the camera reached it, which fought the whole move.
+  spaceCam.fov = 38;
   setSpaceClip(r-1);
   if (state.phase === 'depart' || retreating){
     state.orbit.lat = lat; state.orbit.lng = lng; state.orbit.r = r;
@@ -1783,47 +1196,6 @@ function setSpaceClip(alt){
   spaceCam.updateProjectionMatrix();
 }
 
-/* The ground camera, from a few km up down to the camera's own pose. */
-function updateGroundCam(){
-  const pose = state.cam.pose;
-  const startAlt = CFG.handoffAlt, startBack = state.handoff.back;
-  let t = 0, live = false;
-  if (state.phase === 'descend')      t = ease(phaseT(CFG.descend));
-  else if (state.phase === 'handoff') t = 0;
-  else if (state.phase === 'settle' || state.phase === 'reveal' ||
-           state.phase === 'live'    || state.phase === 'align') { t = 1; live = true; }
-  else if (state.phase === 'retreat') t = 1 - ease(phaseT(CFG.retreat*0.5));
-
-  const head = pose.heading*DEG, pitch = pose.pitch*DEG;
-  const alt  = lerp(startAlt, pose.alt_m, t);
-  const back = lerp(startBack, 0, t);
-  // Sit back along the heading at altitude, so the dive comes in over the
-  // camera's own shoulder and lands exactly in its frame.
-  groundCam.position.set(-Math.sin(head)*back, alt, Math.cos(head)*back);
-  // Aim relative to where the camera actually is. Built from the origin it
-  // came out at a twelfth of the intended angle once `back` grew, which
-  // pointed the approach at the horizon instead of at the ground.
-  const pit = lerp(CFG.approachPitch*DEG, pitch, t);
-  groundCam.lookAt(
-    groundCam.position.x + Math.sin(head)*Math.cos(pit)*1000,
-    groundCam.position.y + Math.sin(pit)*1000,
-    groundCam.position.z - Math.cos(head)*Math.cos(pit)*1000);
-  groundCam.fov = lerp(46, pose.fov, t);
-  groundCam.near = lerp(20, 0.6, t); groundCam.far = 80000;
-  groundCam.updateProjectionMatrix();
-  if (skyDome) skyDome.position.copy(groundCam.position);
-  if (farFloor) farFloor.position.x = groundCam.position.x, farFloor.position.z = groundCam.position.z;
-  // Haze exists to hide the far edge of the patch, so it is placed by the
-  // distance to that edge rather than by altitude. Keyed to altitude instead
-  // it either fogged the middle of the frame on the way down or left the
-  // patch's straight edge showing against the sky at the bottom.
-  const edge = Math.hypot(alt, CFG.wideM/2 + back);
-  ground.fog.near = edge*0.62;
-  ground.fog.far  = edge*1.02;
-  if (closePatch) closePatch.material.opacity = clamp((CFG.nearM-alt)/(CFG.nearM*0.55), 0, 1);
-  return live;
-}
-
 function tick(){
   requestAnimationFrame(tick);
 
@@ -1831,26 +1203,6 @@ function tick(){
   sunDir.copy(latLngToVec3(s.lat, s.lng, 1));
   if (stars) stars.rotation.y += 0.00002;
   camAlt.value = Math.max(spaceCam.position.length() - 1, 0);
-  // Haze placed by the distance to the far edge of the ground patch, exactly as
-  // updateGroundCam places it, so the two agree the moment they cross over.
-  if (state.cam){
-    const edgeM = Math.hypot(camAlt.value*R_EARTH, CFG.wideM/2 + (state.handoff?.back || 0));
-    detFog.value.set(edgeM*0.62/R_EARTH, edgeM*1.02/R_EARTH);
-    detFogCol.value.copy(ground.fog.color);
-  }
-  // Each level fades up over its own altitude window, so the surface sharpens
-  // continuously instead of swapping in one visible step.
-  for (const mesh of detail){
-    if (!mesh.visible) continue;
-    const { altIn, altFull } = mesh.userData.level;
-    const byAlt = clamp((altIn - camAlt.value) / (altIn - altFull), 0, 1);
-    // A mosaic can finish loading below the altitude at which it would already
-    // be fully opaque, and then it appears in a single frame. Cap it by how
-    // long it has been up, so a late arrival is a short crossfade instead.
-    const eased = clamp((clock() - mesh.userData.shown) / 0.7, 0, 1);
-    mesh.material.uniforms.fade.value = Math.min(byAlt, eased);
-  }
-
   switch (state.phase){
     case 'orbit':
       // A dive asked for from the map, or a return to the map after one.
@@ -1860,43 +1212,20 @@ function tick(){
         beginDive(pickNext());
       break;
     case 'depart': {
-      // Hold on the globe until the ground is actually ready. A dive into
-      // untextured grey, or a texture upload mid-descent, is the one thing
-      // that breaks the illusion, so the departure stretches to cover it.
-      //
-      // The stretch used to grow departDur while the progress through it was
-      // recomputed from the clock, so every extension threw that progress
-      // backwards and the camera visibly backed off and came in again, over
-      // and over, right where the satellite photo appears. That was the
-      // judder on the way down. Progress is accumulated per frame instead, so
-      // waiting can only slow the remaining travel, never undo travel already
-      // made. That reads as easing in rather than stuttering.
+      // The approach out of orbit. There is no ground stage to wait for now,
+      // so this is a plain eased move that always takes CFG.depart seconds.
+      // Progress is still accumulated per frame rather than recomputed from
+      // the clock: that is what stopped the camera backing off and coming in
+      // again, and it keeps the move rate-independent besides.
       const now = clock();
-      const dt = clamp(now - state.lastT, 0, 0.1);
+      state.departP = clamp(state.departP + clamp(now - state.lastT, 0, 0.1) / state.departDur, 0, 1);
       state.lastT = now;
-      const waiting = !state.ready && now - state.t0 < CFG.maxDepart;
-      // Brake before the travel runs out, or there is nothing left to slow
-      // down and the approach stops dead instead of easing. The brake is a
-      // rate multiplier, not a growing duration: at worst the last 0.38 of
-      // the descent runs at a quarter speed, which caps the whole departure
-      // at about 7.3 s, and it returns to full speed the instant the ground
-      // reports ready.
-      const slow = (waiting && state.departP > 0.62) ? 0.25 : 1;
-      state.departP = clamp(state.departP + dt * slow / state.departDur, 0, 1);
-      if (state.departP >= 1) setPhase('handoff');
+      if (state.departP >= 1) setPhase('settle');
       break;
     }
-    case 'handoff':
-      state.blend = phaseT(CFG.handoff);
-      if (state.blend >= 1) setPhase('descend');
-      break;
-    case 'descend':
-      state.blend = 1;
-      if (phaseT(CFG.descend) >= 1) setPhase('settle');
-      break;
     case 'settle':
-      // Hold on the matched ground render while a pre-roll plays itself out,
-      // so the landing never reveals an advert that was about to end anyway.
+      // Hold on the globe while a pre-roll plays itself out, so the arrival
+      // never reveals an advert that was about to end anyway.
       // Capped, because a long unskippable one is not worth stalling the whole
       // rotation for: past the cap the feed comes up regardless.
       if (ads.on && clock() - state.t0 < CFG.settle + CFG.adHold) break;
@@ -1906,7 +1235,6 @@ function tick(){
         state.liveOn = true;
         audio.target = 1;              // the feed's own sound, if it has any
         showCard(state.cam);
-        setTimeout(prefetchNext, 1500);   // warm the next one while this plays
       }
       break;
     case 'reveal':
@@ -1919,100 +1247,20 @@ function tick(){
       const t = phaseT(CFG.retreat);
       audio.target = 0;
       if (state.liveOn && t > 0.05){ liveEl.classList.remove('on'); state.liveOn = false; hideCard(); }
-      state.blend = clamp(1 - t*2.2, 0, 1);
-      if (t >= 1){ unmountLive(); state.blend = 0; setPhase('orbit'); }
+      if (t >= 1){ unmountLive(); setPhase('orbit'); }
       break;
     }
   }
 
   // While the live feed covers the screen there is nothing to draw underneath,
   // so the 3D stages idle instead of competing with the video decoder.
-  if (state.phase === 'live' && state.liveOn && !state.align) return;
+  if (state.phase === 'live' && state.liveOn) return;
 
   if (state.phase !== 'boot') updateSpaceCam();
   if (mapState.on){ paintPins(); paintLabel(); }
 
-  const onGround = state.cam && state.blend > 0;
-  if (onGround) updateGroundCam();
-
   renderer.clear();
-  if (state.blend < 1) renderer.render(space, spaceCam);
-  if (onGround){
-    // Crossfade by drawing the ground over the globe with a rising alpha.
-    if (state.blend < 1){
-      renderer.getContext().enable(renderer.getContext().BLEND);
-      fadeQuad(state.blend);
-    } else {
-      renderer.clearDepth();
-      renderer.render(ground, groundCam);
-    }
-  }
-  if (state.align) drawAlign();
-}
-
-/* Ground drawn into a target, then composited at the handoff alpha. */
-let rt = null, fadeScene = null, fadeCam = null, fadeMat = null;
-function ensureFade(){
-  if (rt) return;
-  rt = new THREE.WebGLRenderTarget(innerWidth, innerHeight, { samples:4 });
-  rt.texture.colorSpace = THREE.SRGBColorSpace;
-  fadeMat = new THREE.MeshBasicMaterial({ map:rt.texture, transparent:true, depthTest:false });
-  fadeScene = new THREE.Scene();
-  fadeScene.add(new THREE.Mesh(new THREE.PlaneGeometry(2,2), fadeMat));
-  fadeCam = new THREE.Camera();
-}
-function fadeQuad(alpha){
-  ensureFade();
-  const prev = renderer.getRenderTarget();
-  renderer.setRenderTarget(rt);
-  renderer.clear();
-  renderer.render(ground, groundCam);
-  renderer.setRenderTarget(prev);
-  fadeMat.opacity = easeOut(alpha);
-  renderer.render(fadeScene, fadeCam);
-}
-
-/* ── alignment mode ─────────────────────────────────────────────────────── */
-
-function drawAlign(){
-  const p = state.cam.pose, a = $('#align');
-  a.querySelector('.h').textContent  = p.heading.toFixed(1);
-  a.querySelector('.p').textContent  = p.pitch.toFixed(1);
-  a.querySelector('.f').textContent  = p.fov.toFixed(1);
-  a.querySelector('.a').textContent  = p.alt_m.toFixed(0)+'m';
-  a.querySelector('.la').textContent = p.lat.toFixed(5);
-  a.querySelector('.ln').textContent = p.lng.toFixed(5);
-}
-function enterAlign(){
-  if (!state.cam) return;
-  state.align = true; state.pinned = true;
-  setPhase('align'); state.blend = 1;
-  $('#align').classList.add('on');
-  $('#pinned').classList.add('on');
-  liveEl.classList.add('align','on');
-  state.liveOn = true;
-}
-function exitAlign(){
-  state.align = false;
-  $('#align').classList.remove('on');
-  liveEl.classList.remove('align');
-  setPhase('live');
-}
-async function copyPose(){
-  const c = state.cam;
-  const out = { name:c.name, video_id:c.video_id,
-                pose:{ ...c.pose, aligned:true,
-                       lat:+c.pose.lat.toFixed(5), lng:+c.pose.lng.toFixed(5),
-                       heading:+c.pose.heading.toFixed(1), pitch:+c.pose.pitch.toFixed(1),
-                       fov:+c.pose.fov.toFixed(1), alt_m:Math.round(c.pose.alt_m) } };
-  const txt = JSON.stringify(out, null, 2);
-  try { await navigator.clipboard.writeText(txt); note('Pose copied to clipboard.'); }
-  catch { console.log(txt); note('Clipboard blocked — pose logged to the console instead.'); }
-  try {
-    const saved = JSON.parse(localStorage.getItem('et45.poses')||'{}');
-    saved[c.video_id||c.name] = out.pose;
-    localStorage.setItem('et45.poses', JSON.stringify(saved));
-  } catch {}
+  renderer.render(space, spaceCam);
 }
 
 /* ── pin map ────────────────────────────────────────────────────────────── */
@@ -2425,30 +1673,9 @@ addEventListener('keydown', e => {
   // is up, so a remote can drive it without the app's shortcuts firing
   // underneath.
   if (Menu?.isOpen() && Menu.key(e)){ e.preventDefault(); return; }
-  if (k === '/' && Search && !state.align){
+  if (k === '/' && Search){
     Menu?.close();
     Search.open('');          // always opens on the tag list
-    e.preventDefault();
-    return;
-  }
-  if (state.align){
-    const p = state.cam.pose, fine = e.shiftKey ? 0.1 : 1;
-    if (k==='ArrowLeft')  p.heading = (p.heading - fine + 360)%360;
-    else if (k==='ArrowRight') p.heading = (p.heading + fine)%360;
-    else if (k==='ArrowUp')    p.pitch = clamp(p.pitch + fine, -89, 60);
-    else if (k==='ArrowDown')  p.pitch = clamp(p.pitch - fine, -89, 60);
-    else if (k==='[')  p.fov = clamp(p.fov - fine, 15, 110);
-    else if (k===']')  p.fov = clamp(p.fov + fine, 15, 110);
-    else if (k==='PageUp')   p.alt_m = clamp(p.alt_m + fine*5, 1, 4000);
-    else if (k==='PageDown') p.alt_m = clamp(p.alt_m - fine*5, 1, 4000);
-    else if (k==='w') p.lat += 0.00008*fine;
-    else if (k==='s' && !e.ctrlKey && !e.metaKey) p.lat -= 0.00008*fine;
-    else if (k==='a') p.lng -= 0.00008*fine;
-    else if (k==='d') p.lng += 0.00008*fine;
-    else if (k==='S' || (k==='s' && e.shiftKey)) copyPose();
-    else if (k==='A' || k==='a' && e.altKey) exitAlign();
-    else if (k==='Escape') exitAlign();
-    else return;
     e.preventDefault();
     return;
   }
@@ -2488,7 +1715,6 @@ addEventListener('keydown', e => {
   else if (k==='ArrowDown'){ if (state.cam){ castVote(-1); e.preventDefault(); } }
   else if (k==='r' || k==='R'){ castVote(-1); }   // the older spelling of a thumbs down
   else if (k==='X'){ console.log('votes:', votes); note('Vote list printed to the console.'); }
-  else if (k==='a' || k==='A'){ if (state.phase==='live') enterAlign(); }
   else if (k==='Escape'){
     // One key for 'get me out of here': it leaves the feed and, if a
     // search narrowed the rotation, hands the whole world back. A camera
@@ -2522,12 +1748,12 @@ Menu?.init({
   items: [
     { id:'skip', label:'Skip', icon:'skip',
       run: () => skipNext(),
-      state: () => ({ disabled: state.align || !state.cams.length,
+      state: () => ({ disabled: !state.cams.length,
                       title:'Skip to the next camera' }) },
 
     { id:'prev', label:'Back', icon:'prev',
       run: () => divePrev(),
-      state: () => ({ disabled: !canGoBack() || state.align,
+      state: () => ({ disabled: !canGoBack(),
                       title:'Back to the camera before this one' }) },
 
     { id:'stay', label:'Stay', icon:'stay', toggle:true, close:false,
@@ -2560,12 +1786,12 @@ Menu?.init({
 
     { id:'globe', label:'Globe', icon:'globe',
       run: () => backToOrbit(),
-      state: () => ({ disabled: state.align || !state.cam || state.phase === 'orbit',
+      state: () => ({ disabled: !state.cam || state.phase === 'orbit',
                       title:'Pull back out to the globe' }) },
 
     { id:'map', label:'Map', icon:'map',
       run: () => togglePinMap(true),
-      state: () => ({ pressed: mapState.on, disabled: state.align || !pins,
+      state: () => ({ pressed: mapState.on, disabled: !pins,
                       title:'Every camera on the globe, pick one and stay' }) },
 
     { id:'full', label:'Full', icon:'full', close:false,
@@ -2598,7 +1824,7 @@ addEventListener('fullscreenchange', () => Menu?.sync());
    shows what can be done and changes nothing, and a second press puts it
    away again. Presses inside the strip or the search panel are theirs. */
 addEventListener('pointerdown', e => {
-  if (!Menu || state.align) return;
+  if (!Menu) return;
   // While the pin map is up, the globe itself is the control: a press is a
   // drag or a pick, not a call for the strip. Back or Escape leaves the map.
   if (mapState.on) return;
@@ -2614,9 +1840,8 @@ $('#help').classList.add('on');
 function resize(){
   const w = innerWidth, h = innerHeight;
   renderer.setSize(w, h, false);
-  spaceCam.aspect = groundCam.aspect = w/h;
-  spaceCam.updateProjectionMatrix(); groundCam.updateProjectionMatrix();
-  if (rt) rt.setSize(w, h);
+  spaceCam.aspect = w/h;
+  spaceCam.updateProjectionMatrix();
 }
 addEventListener('resize', resize);
 
@@ -2646,17 +1871,10 @@ const progress = v => { bar.style.width = (v*100)+'%'; };
   state.cams = (data.cameras||[]).filter(c => c.pose);
   if (!state.cams.length){ note('No cameras with a pose block in cameras.json.'); return; }
 
-  // Apply any locally aligned poses over the shipped ones.
-  try {
-    const saved = JSON.parse(localStorage.getItem('et45.poses')||'{}');
-    state.cams.forEach(c => { const p = saved[c.video_id||c.name]; if (p) Object.assign(c.pose, p); });
-  } catch {}
-
   const attrib = () => {
     $('#attrib').innerHTML =
-      `Globe: NASA Blue Marble &amp; Black Marble &middot; ${CFG.imagery.credit}<br>`
-      + `${CFG.dem.credit} &middot; Buildings: &copy; OpenStreetMap contributors`
-      + (clouds ? `<br>${clouds.credit()}` : '');
+      `Globe: NASA Blue Marble &amp; Black Marble`
+      + (clouds ? ` &middot; ${clouds.credit()}` : '');
     // Sit the help panel above the credits rather than on top of them. Both
     // are anchored bottom-right, and the panel was covering the tail of the
     // first credit line, which Esri and OpenStreetMap both require to stay
@@ -2669,7 +1887,6 @@ const progress = v => { bar.style.width = (v*100)+'%'; };
   await buildSpace(progress);
   attrib();                          // the earth build may have attached clouds
   if (clouds) clouds.ready.then(attrib).catch(()=>{});
-  buildDetail();
   buildPins(state.cams);
   // Search reads the same list the globe does, tags and all.
   Search?.init({
@@ -2680,7 +1897,6 @@ const progress = v => { bar.style.width = (v*100)+'%'; };
     onPick: cam => requestDive(cam),
     onPlaySet: (list, label) => playSet(list, label),
   });
-  buildGroundShell();
   resize();
   progress(1);
   setPhase('orbit');
@@ -2689,21 +1905,15 @@ const progress = v => { bar.style.width = (v*100)+'%'; };
   // fades out on its own like any other time.
   setTimeout(()=>Menu?.open(), 900);
 
-  // The first dive used to be the only cold one: nothing prefetches until a
-  // feed has played, so it alone paid full network time and stretched its
-  // departure to cover it, which is the long wait on the globe you notice
-  // right after opening the page. Warm it here instead.
-  prefetchNext();
-
   // Handle for the console: Roundtrip.dive('Rialto') jumps straight to a
   // camera, Roundtrip.CFG tunes timings live while you watch.
   window.Roundtrip = { state, CFG, beginDive, pickNext, sunElevation, sunPosition,
     // Preview another moment: ET45.setTime('2026-09-17T06:20:00Z'), or null to
     // go back to the real clock.
     setTime: iso => { timeWarp = iso ? (new Date(iso) - Date.now()) : 0;
-                      if (state.cam) stageGround(state.cam); return now().toISOString(); },
+                      return now().toISOString(); },
     now,
-    parts: () => ({ space, ground, spaceCam, groundCam, patch, closePatch, farFloor, skyDome, bldGroup }),
+    parts: () => ({ space, spaceCam, earth, atmo, stars, pins }),
     name: 'Roundtrip',
     // Roundtrip.order() shows the rest of this cycle; Roundtrip.CFG.lightBias
     // changes how much the light skews it.

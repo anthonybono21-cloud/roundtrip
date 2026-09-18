@@ -78,19 +78,19 @@
      every line carries a tight shadow under the wide one: a soft glow alone
      disappears against white surf. */
   /* Place first: approved layout 01. The original white logo stays static. */
-  #card{position:fixed;left:4.3vw;bottom:6.9vh;right:4.3vw;
-    display:flex;align-items:flex-end;gap:2.3vw;
+  #card{position:fixed;left:4.3vw;bottom:5.5vh;right:4.3vw;
+    display:flex;align-items:flex-end;gap:clamp(12px,1.6vw,34px);
     opacity:0;transform:translateY(10px);transition:opacity .9s ease,transform .9s ease;
     text-shadow:0 1px 3px rgba(0,0,0,.95),0 2px 22px rgba(0,0,0,.9);pointer-events:none}
   #card.on,#card.rest{opacity:1;transform:none}
-  #card .lockup{flex:none;width:11.4vw;height:auto;
+  #card .lockup{flex:none;width:clamp(76px,8vw,170px);height:auto;
     filter:drop-shadow(0 2px 20px rgba(0,0,0,.9))}
   #card .lines{min-width:0;max-width:72vw}
-  #card .place{font-size:3.15vw;font-weight:720;letter-spacing:-.02em;line-height:1.15;text-wrap:balance}
+  #card .place{font-size:clamp(22px,2.2vw,46px);font-weight:650;letter-spacing:-.02em;line-height:1.15;text-wrap:balance}
   #card .country{font-size:.85em;font-weight:590}
-  #card .where{color:#eaf1fb;margin-top:.38vw;font-size:1.7vw;font-weight:500;line-height:1.45}
-  #card .meta{margin-top:1.15vw;display:flex;gap:2.2vw;align-items:baseline;flex-wrap:wrap}
-  #card .temp,#card .clock{font-variant-numeric:tabular-nums;color:#fff;font-size:4.65vw;
+  #card .where{color:#eaf1fb;margin-top:.28vw;font-size:clamp(14px,1.2vw,25px);font-weight:500;line-height:1.45}
+  #card .meta{margin-top:.8vw;display:flex;gap:1.55vw;align-items:baseline;flex-wrap:wrap}
+  #card .temp,#card .clock{font-variant-numeric:tabular-nums;color:#fff;font-size:clamp(30px,3.25vw,68px);
     font-weight:650;letter-spacing:-.02em;line-height:1;white-space:nowrap}
   #card .clock small{font-size:.5em;letter-spacing:0;font-weight:550}
   #card .temp:empty{display:none}
@@ -183,7 +183,7 @@
      These rules also cancel the coarse-pointer block above, which a TV
      browser matches (it cannot hover) and which was meant for a thumb. */
   /* Share the approved hierarchy on TV; only the safe edge inset differs. */
-  .tv #card{left:5vw;right:5vw;bottom:6.9vh}
+  .tv #card{left:5vw;right:5vw;bottom:5.5vh}
   .tv #phase{left:5vw;top:5vh;font-size:clamp(8px,1.15vh,15px)}
   .tv #pinned,.tv #rt-set{right:5vw;top:5vh;font-size:clamp(8px,1.15vh,15px)}
   .tv #attrib{right:5vw;bottom:4.6vh;font-size:clamp(7px,1vh,13px);max-width:38vw}
@@ -284,7 +284,7 @@ import { createJourney, createRetreat } from './journey.js';
 /* Bumped by hand with each push. It shows in the corner with the credits, so
    a page that is not doing what a change says it should can be told apart from
    a page a browser or a television is still serving from yesterday. */
-const BUILD = 'Place first · 2026-09-18';
+const BUILD = 'Place first compact · 2026-09-18';
 
 const CFG = {
   dwell:        90,     // seconds on a live feed before moving on

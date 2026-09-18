@@ -283,6 +283,17 @@
       return;
     }
 
+    // The tap menu, when the build has one, owns the D-pad while it is up:
+    // it is the same strip a finger gets, and the page's own handler walks
+    // it. Without this, Right would skip a camera underneath it.
+    var m = window.RoundtripMenu;
+    if (m && m.isOpen && m.isOpen()) {
+      if (g === 'back' && e.key !== 'Escape') {
+        e.preventDefault(); e.stopImmediatePropagation(); m.close();
+      }
+      return;
+    }
+
     if (open) {
       e.preventDefault(); e.stopImmediatePropagation();
       if (g === 'up') move(-1);

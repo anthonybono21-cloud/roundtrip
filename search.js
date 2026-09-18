@@ -105,6 +105,124 @@
     volcano: ['crater', 'lava', 'eruption'],
   };
 
+  /* Places people type that are not the words in the data. Unlike the
+     synonyms above these are the same place under another name, so they are
+     scored at nearly full strength rather than at a discount: "nyc" is New
+     York, it is not merely related to it.
+
+     Camera files already carry some of these, because tag.py writes the
+     aliases it knows into the tags of any camera whose location it
+     recognises. This table is the other half of that: it works on what is
+     typed, so it covers a camera whose location tag.py did not recognise,
+     and it covers cameras added to the list by hand. Keeping both means a
+     new camera in Los Angeles answers to "LA" the day it lands, whether or
+     not it has been through the tagger. */
+  const PLACES = {
+    nyc: ['new york city', 'new york', 'manhattan'],
+    ny: ['new york'],
+    'new york': ['nyc', 'new york city', 'manhattan'],
+    'big apple': ['new york city', 'new york', 'nyc'],
+    manhattan: ['new york city', 'new york'],
+    brooklyn: ['new york city', 'new york'],
+    la: ['los angeles'],
+    socal: ['los angeles', 'california', 'san diego'],
+    'los angeles': ['la', 'socal', 'california'],
+    lax: ['los angeles'],
+    sf: ['san francisco'],
+    frisco: ['san francisco'],
+    'bay area': ['san francisco'],
+    'san fran': ['san francisco'],
+    dc: ['washington', 'district of columbia'],
+    'washington dc': ['washington', 'district of columbia'],
+    philly: ['philadelphia'],
+    vegas: ['las vegas'],
+    nola: ['new orleans'],
+    chitown: ['chicago'],
+    cdmx: ['mexico city'],
+    us: ['usa', 'united states'],
+    america: ['usa', 'united states'],
+    american: ['usa', 'united states'],
+    'the states': ['usa', 'united states'],
+    'united states': ['usa'],
+    uk: ['united kingdom', 'britain', 'england', 'scotland'],
+    britain: ['united kingdom', 'england', 'scotland'],
+    'great britain': ['united kingdom'],
+    gb: ['united kingdom'],
+    eire: ['ireland'],
+    holland: ['netherlands'],
+    deutschland: ['germany'],
+    brasil: ['brazil'],
+    nippon: ['japan'],
+    oz: ['australia'],
+    aussie: ['australia'],
+    'down under': ['australia', 'new zealand'],
+    aotearoa: ['new zealand'],
+    nz: ['new zealand'],
+    korea: ['south korea'],
+    ph: ['philippines'],
+    pinoy: ['philippines'],
+    roma: ['rome'],
+    firenze: ['florence'],
+    venezia: ['venice'],
+    napoli: ['naples'],
+    milano: ['milan'],
+    torino: ['turin'],
+    sicilia: ['sicily'],
+    sardegna: ['sardinia'],
+    koln: ['cologne'],
+    munchen: ['munich'],
+    wien: ['vienna'],
+    praha: ['prague'],
+    lisboa: ['lisbon'],
+    mecca: ['makkah'],
+    kaaba: ['makkah', 'mecca'],
+    hajj: ['makkah', 'mecca'],
+    kotel: ['western wall', 'jerusalem'],
+    'wailing wall': ['western wall', 'kotel', 'jerusalem'],
+    'holy land': ['jerusalem', 'israel'],
+    rio: ['rio de janeiro'],
+    bombay: ['mumbai'],
+    calcutta: ['kolkata'],
+    peking: ['beijing'],
+    saigon: ['ho chi minh'],
+    swiss: ['switzerland', 'alps'],
+    dolomites: ['south tyrol', 'alps'],
+    scandinavia: ['norway', 'sweden', 'finland', 'denmark', 'iceland'],
+    nordic: ['norway', 'sweden', 'finland', 'iceland'],
+    'middle east': ['israel', 'saudi arabia', 'oman', 'jerusalem'],
+    hi: ['hawaii'],
+    oahu: ['hawaii'],
+    waikiki: ['honolulu', 'hawaii'],
+    bc: ['british columbia'],
+    rockies: ['alberta', 'banff', 'rocky mountains'],
+    pnw: ['oregon', 'washington'],
+    'up north': ['michigan', 'minnesota', 'alaska'],
+    mackinaw: ['mackinac'],
+  };
+
+  /* Two-word names have to survive being chopped into words, so the
+     tokenizer is told which sequences to keep whole. */
+  const PHRASES = new Set(
+    [...Object.keys(PLACES), ...Object.keys(SYNONYMS)].filter(k => k.includes(' ')));
+  const PHRASE_MAX = [...PHRASES].reduce((m, k) => Math.max(m, k.split(' ').length), 0);
+
+  /* Words first, then the longest phrase that starts at each position:
+     "new york city skyline" is New York City and skyline, not four words. */
+  function terms(q) {
+    const w = words(q);
+    const out = [];
+    for (let i = 0; i < w.length;) {
+      let took = 0;
+      for (let n = Math.min(PHRASE_MAX, w.length - i); n >= 2; n--) {
+        const cand = w.slice(i, i + n).join(' ');
+        if (PHRASES.has(cand)) { out.push(cand); took = n; break; }
+      }
+      if (!took) { out.push(w[i]); took = 1; }
+      i += took;
+    }
+    return out;
+  }
+
   /* Chips shown before anything is typed - the whole point being that the
      tags are browsable without knowing a single one of them. */
   const BROWSE = [
@@ -144,7 +262,11 @@
     const hit = v => { if (v > best) best = v; };
 
     if (e.tagSet.has(term)) hit(110);
-    if (best < 110) {
+    // A one or two letter term is an abbreviation, not the start of a word:
+    // "la" means Los Angeles, and matching it against lake, landmark and
+    // lava buries the one camera meant by it.
+    const tiny = term.length < 3;
+    if (best < 110 && !tiny) {
       for (const t of e.tags) {
         if (t.startsWith(term)) { hit(term.length >= 3 ? 82 : 70); continue; }
         if (t.includes(' ' + term)) hit(68);
@@ -153,12 +275,12 @@
     }
     for (const w of e.nameWords) {
       if (w === term) hit(74);
-      else if (w.startsWith(term)) hit(58);
+      else if (!tiny && w.startsWith(term)) hit(58);
     }
     if (term.length >= 3 && e.name.includes(term)) hit(44);
     for (const w of e.whereWords) {
       if (w === term) hit(70);
-      else if (w.startsWith(term)) hit(54);
+      else if (!tiny && w.startsWith(term)) hit(54);
     }
     if (term.length >= 3 && e.where.includes(term)) hit(40);
 
@@ -173,10 +295,15 @@
     return best * (discount || 1);
   }
 
-  function score(e, terms) {
+  function score(e, list) {
     let total = 0;
-    for (const term of terms) {
+    for (const term of list) {
       let best = termScore(e, term, 1);
+      // The same place under another name, then merely related words.
+      for (const alt of (PLACES[term] || [])) {
+        const v = termScore(e, alt, 0.97);
+        if (v > best) best = v;
+      }
       for (const syn of (SYNONYMS[term] || [])) {
         const v = termScore(e, syn, 0.62);
         if (v > best) best = v;
@@ -188,12 +315,14 @@
   }
 
   function search(q) {
-    const terms = words(q);
-    if (!terms.length) return [];
-    const out = [];
-    for (const e of index) {
-      const s = score(e, terms);
-      if (s > 0) out.push({ cam: e.cam, score: s, entry: e });
+    let list = terms(q);
+    if (!list.length) return [];
+    let out = run(list);
+    // A phrase that meant nothing here should not swallow the words inside
+    // it: "middle east coast" falls back to three ordinary words.
+    if (!out.length && list.some(t => t.includes(' '))) {
+      list = words(q);
+      out = run(list);
     }
     // Score first; on a tie, the ones actually on air, then alphabetical, so
     // the order is the same every time you type the same thing.
@@ -201,6 +330,14 @@
       b.score - a.score ||
       (live(b.cam) - live(a.cam)) ||
       a.cam.name.localeCompare(b.cam.name));
+    return out;
+  }
+  function run(list) {
+    const out = [];
+    for (const e of index) {
+      const s = score(e, list);
+      if (s > 0) out.push({ cam: e.cam, score: s, entry: e });
+    }
     return out;
   }
   const live = cam => { try { return hooks.isLiveNow ? (hooks.isLiveNow(cam) ? 1 : 0) : 1; }
@@ -344,27 +481,36 @@
     playEl = root.querySelector('.play');
     browseEl = root.querySelector('.browse');
 
-    magEl = el('div'); magEl.id = 'rt-mag';
-    magEl.setAttribute('role', 'button');
-    magEl.tabIndex = 0;
-    magEl.title = 'Search cameras  /';
-    magEl.setAttribute('aria-label', 'Search cameras');
-    magEl.innerHTML = MAG;
-    document.body.appendChild(magEl);
+    // The corner magnifier. The host page can ask for it to be left off
+    // (init({ mag:false })) when it offers its own way in, which Roundtrip
+    // does now: the action strip carries a Search item. This file still
+    // stands alone, so the button and its styles stay here.
+    if (hooks.mag !== false) {
+      magEl = el('div'); magEl.id = 'rt-mag';
+      magEl.setAttribute('role', 'button');
+      magEl.tabIndex = 0;
+      magEl.title = 'Search cameras  /';
+      magEl.setAttribute('aria-label', 'Search cameras');
+      magEl.innerHTML = MAG;
+      document.body.appendChild(magEl);
+    }
 
     setEl = el('div'); setEl.id = 'rt-set';
     document.body.appendChild(setEl);
 
-    magEl.addEventListener('click', () => toggle());
-    magEl.addEventListener('keydown', e => {
-      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(); }
-    });
+    if (magEl) {
+      magEl.addEventListener('click', () => toggle());
+      magEl.addEventListener('keydown', e => {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(); }
+      });
+    }
     input.addEventListener('input', render);
     input.addEventListener('keydown', onKey);
     playEl.addEventListener('click', playThese);
     root.addEventListener('mousedown', e => e.stopPropagation());
     document.addEventListener('mousedown', e => {
-      if (open && !root.contains(e.target) && e.target !== magEl && !magEl.contains(e.target))
+      if (open && !root.contains(e.target)
+          && !(magEl && (e.target === magEl || magEl.contains(e.target))))
         close();
     });
 
@@ -384,12 +530,12 @@
 
   function render() {
     const q = input.value;
-    const terms = words(q);
-    lastTerms = terms;
+    const list = terms(q);
+    lastTerms = list;
     listEl.textContent = '';
     rows = []; sel = -1;
 
-    if (!terms.length) {
+    if (!list.length) {
       lastResults = [];
       countEl.textContent = cams.length + ' cameras';
       playEl.hidden = true;
@@ -423,7 +569,7 @@
       row.appendChild(t);
       if (!onAir) row.appendChild(el('span', 'off-air', 'off air'));
       const tags = el('div', 'tags');
-      for (const tag of chipsFor(r.entry, terms)) {
+      for (const tag of chipsFor(r.entry, list)) {
         const c = el('button', 'chip', escape(tag));
         c.type = 'button';
         c.addEventListener('click', ev => {

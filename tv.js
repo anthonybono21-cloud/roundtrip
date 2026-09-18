@@ -331,11 +331,64 @@
       '<div><b>Back</b> &nbsp;pull out to orbit</div>';
   }
 
+  /* ── how fast is it actually going ──────────────────────────────────────
+     Not measurable from a project session: a headless browser here rasterises
+     in software, so every millisecond it reports is its own. On the real
+     stick it is measurable, and this is the only place that can do it.
+
+     Its own requestAnimationFrame loop does not ask for extra frames — a
+     callback fires once per frame that the page was going to draw anyway — so
+     it samples the real cadence at no cost. `?fps=1` puts a line a second on
+     the console, which is what comes out of `adb logcat -s chromium`. */
+  var frames = [], last = 0;
+  function sample(t) {
+    // A gap of a second is not a slow frame, it is the page having been left
+    // alone: a backgrounded tab, a paused app, the first frames after a load.
+    // Counting those makes every reading look catastrophic.
+    if (last && t - last < 1000) {
+      frames.push(t - last);
+      if (frames.length > 600) frames.shift();
+    }
+    last = t;
+    requestAnimationFrame(sample);
+  }
+  function stats(n) {
+    var a = frames.slice(-(n || 120)).sort(function (x, y) { return x - y; });
+    if (a.length < 8) return null;
+    var med = a[a.length >> 1];
+    return { fps: Math.round(1000 / med),
+             median_ms: +med.toFixed(1),
+             worst_ms: +a[a.length - 1].toFixed(1),
+             // The frame a tenth of the way from the slow end: one bad frame
+             // is a hiccup, a bad tenth is a stutter you can see.
+             p90_ms: +a[Math.floor(a.length * 0.9)].toFixed(1),
+             frames: a.length };
+  }
+
   /* ── boot ───────────────────────────────────────────────────────────── */
   function start() {
     style();
     armBack();
     retitleHelp();
+    requestAnimationFrame(sample);
+    // One line at boot, so a log off the device says which layout it took and
+    // on what. Without it there is no way to tell a television that failed to
+    // be recognised from one that was.
+    try {
+      console.log('Roundtrip TV: layout on, ' + innerWidth + 'x' + innerHeight +
+                  ' css, dpr ' + (devicePixelRatio || 1) +
+                  (/\bfiretv\b/.test(root.className) ? ', fire tv' : ''));
+    } catch (e) {}
+    try {
+      if (new URLSearchParams(location.search).get('fps') === '1') {
+        setInterval(function () {
+          var s = stats(120);
+          if (s) console.log('Roundtrip fps: ' + s.fps + ' median ' + s.median_ms +
+                             'ms, p90 ' + s.p90_ms + 'ms, worst ' + s.worst_ms +
+                             'ms, phase ' + (app() ? app().state.phase : '?'));
+        }, 1000);
+      }
+    } catch (e) {}
     // Keep the trail of cameras for the Previous action. Cheap, and it needs
     // no hook inside the build, which several threads are editing at once.
     setInterval(function () {
@@ -349,6 +402,9 @@
 
   window.RoundtripRemote = {
     open: show, close: hide, isOpen: function () { return open; },
-    actions: Act, keyName: nameOf, seen: function () { return seen.slice(); }
+    actions: Act, keyName: nameOf, seen: function () { return seen.slice(); },
+    // RoundtripRemote.fps() over adb is how the dive gets judged on the
+    // television rather than guessed at from here.
+    fps: stats
   };
 })();

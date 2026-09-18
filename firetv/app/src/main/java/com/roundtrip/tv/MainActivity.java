@@ -34,6 +34,7 @@ public class MainActivity extends Activity {
       "https://anthonybono21-cloud.github.io/roundtrip/?tv=1";
 
   private WebView web;
+  private String home = HOME;
   private final Handler ui = new Handler(Looper.getMainLooper());
   private boolean failed = false;
 
@@ -42,6 +43,18 @@ public class MainActivity extends Activity {
   protected void onCreate(Bundle saved) {
     super.onCreate(saved);
     getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+
+    // `adb shell am start -n com.roundtrip.tv/.MainActivity --ez fps true`
+    // turns on the page's frame log, which comes back out through logcat.
+    // firetv/CHECK.md is what uses this.
+    if (getIntent() != null && getIntent().getBooleanExtra("fps", false)) home = HOME + "&fps=1";
+
+    // Without this there is no devtools socket, and then there is no way to
+    // ask the page anything from a machine that can reach the stick. This is
+    // a sideloaded app on one television; there is nothing here to protect.
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+      WebView.setWebContentsDebuggingEnabled(true);
+    }
 
     web = new WebView(this);
     web.setLayoutParams(new ViewGroup.LayoutParams(
@@ -83,7 +96,7 @@ public class MainActivity extends Activity {
     web.requestFocus();
 
     if (saved != null) web.restoreState(saved);
-    else web.loadUrl(HOME);
+    else web.loadUrl(home);
 
     immersive();
   }
@@ -99,7 +112,7 @@ public class MainActivity extends Activity {
     ui.postDelayed(new Runnable() {
       @Override public void run() {
         failed = false;
-        web.loadUrl(HOME);
+        web.loadUrl(home);
       }
     }, 6000);
   }
@@ -145,6 +158,14 @@ public class MainActivity extends Activity {
       return true;
     }
     return super.onKeyUp(code, e);
+  }
+
+  /** singleTask, so a second `am start` arrives here rather than in onCreate. */
+  @Override protected void onNewIntent(android.content.Intent intent) {
+    super.onNewIntent(intent);
+    setIntent(intent);
+    String want = intent.getBooleanExtra("fps", false) ? HOME + "&fps=1" : HOME;
+    if (!want.equals(home)) { home = want; web.loadUrl(home); }
   }
 
   @Override protected void onSaveInstanceState(Bundle out) {

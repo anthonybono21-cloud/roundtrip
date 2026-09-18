@@ -1,0 +1,2100 @@
+{
+  "generated_at": "2026-09-18T19:11:39.163210+00:00",
+  "existing_count": 674,
+  "requested_additions": 500,
+  "accepted": [
+    {
+      "name": "Brooklyn and Manhattan Bridges over the East River",
+      "video_id": "tErYxn2UM5Y",
+      "lane": "inputs",
+      "source_file": "na-east.json",
+      "quality_score": 5,
+      "reasons": []
+    },
+    {
+      "name": "DogMode daycare, big dog hall",
+      "video_id": "K7QejokBxWg",
+      "lane": "inputs",
+      "source_file": "indoor-activity.json",
+      "quality_score": 5,
+      "reasons": []
+    },
+    {
+      "name": "DogMode daycare, north big dog hall",
+      "video_id": "1suAgaip2GY",
+      "lane": "inputs",
+      "source_file": "indoor-activity.json",
+      "quality_score": 5,
+      "reasons": []
+    },
+    {
+      "name": "Godzilla plaza crossing, Kabukicho",
+      "video_id": "TObte08ESr0",
+      "lane": "inputs",
+      "source_file": "streets-worldwide.json",
+      "quality_score": 5,
+      "reasons": []
+    },
+    {
+      "name": "Henry Africa's Bar, Soi Green Mango, Chaweng",
+      "video_id": "Ajo0iFkX3EY",
+      "lane": "inputs",
+      "source_file": "vacation-asia-pacific.json",
+      "quality_score": 5,
+      "reasons": []
+    },
+    {
+      "name": "Kaanapali Beach from the Sheraton Maui",
+      "video_id": "YXji6UQ0bwY",
+      "lane": "inputs",
+      "source_file": "na-west.json",
+      "quality_score": 5,
+      "reasons": []
+    },
+    {
+      "name": "Kipster hen barn, indoor garden",
+      "video_id": "O0dTcBXnawk",
+      "lane": "inputs",
+      "source_file": "indoor-activity.json",
+      "quality_score": 5,
+      "reasons": []
+    },
+    {
+      "name": "Kitten nursery playroom, Kitten Rescue",
+      "video_id": "gBdqOuhj2P4",
+      "lane": "inputs",
+      "source_file": "indoor-activity.json",
+      "quality_score": 5,
+      "reasons": []
+    },
+    {
+      "name": "La Jolla Shores kayak launch",
+      "video_id": "YQovPWtgydY",
+      "lane": "inputs",
+      "source_file": "na-west.json",
+      "quality_score": 5,
+      "reasons": []
+    },
+    {
+      "name": "La Parva ski school slope with Andes view",
+      "video_id": "zXTw4u1kgfg",
+      "lane": "inputs",
+      "source_file": "vacation-africa-latam.json",
+      "quality_score": 5,
+      "reasons": []
+    },
+    {
+      "name": "Liberty Bell Center, bell chamber",
+      "video_id": "F1EQEDL4ddU",
+      "lane": "inputs",
+      "source_file": "indoor-activity.json",
+      "quality_score": 5,
+      "reasons": []
+    },
+    {
+      "name": "Medano Beach looking east",
+      "video_id": "anmRfKwtPAc",
+      "lane": "inputs",
+      "source_file": "na-west.json",
+      "quality_score": 5,
+      "reasons": []
+    },
+    {
+      "name": "Nevsky Prospekt at Sadovaya Street, St Petersburg",
+      "video_id": "RDchI1SLh4Q",
+      "lane": "inputs",
+      "source_file": "streets-worldwide.json",
+      "quality_score": 5,
+      "reasons": []
+    },
+    {
+      "name": "Port d'Andratx harbour at golden hour",
+      "video_id": "MqVlAR3L2Q4",
+      "lane": "inputs",
+      "source_file": "vacation-europe.json",
+      "quality_score": 5,
+      "reasons": []
+    },
+    {
+      "name": "Praia de Calhetas cove from Bar do Artur",
+      "video_id": "sCmXpBwHvqY",
+      "lane": "inputs",
+      "source_file": "vacation-africa-latam.json",
+      "quality_score": 5,
+      "reasons": []
+    },
+    {
+      "name": "Sam Sharpe Square street corner, Montego Bay",
+      "video_id": "UwhOP-H-P0c",
+      "lane": "inputs",
+      "source_file": "streets-worldwide.json",
+      "quality_score": 5,
+      "reasons": []
+    },
+    {
+      "name": "Seaside Heights boardwalk and Casino Pier",
+      "video_id": "OBgCrw-IyhE",
+      "lane": "inputs",
+      "source_file": "na-east.json",
+      "quality_score": 5,
+      "reasons": []
+    },
+    {
+      "name": "Sloppy Joe's Bar on Duval Street",
+      "video_id": "rbMK4p6zUwI",
+      "lane": "inputs",
+      "source_file": "na-east.json",
+      "quality_score": 5,
+      "reasons": []
+    },
+    {
+      "name": "SnowWorld Zoetermeer indoor slope, Piste 1",
+      "video_id": "NQ9r6Mk9L1s",
+      "lane": "inputs",
+      "source_file": "indoor-activity.json",
+      "quality_score": 5,
+      "reasons": []
+    },
+    {
+      "name": "Soi Green Mango bar lane at Hush Bar, Chaweng",
+      "video_id": "DwKCna1mumk",
+      "lane": "inputs",
+      "source_file": "vacation-asia-pacific.json",
+      "quality_score": 5,
+      "reasons": []
+    },
+    {
+      "name": "Sukhumvit Soi 11 nightlife street, Bangkok",
+      "video_id": "UemFRPrl1hk",
+      "lane": "inputs",
+      "source_file": "streets-worldwide.json",
+      "quality_score": 5,
+      "reasons": []
+    },
+    {
+      "name": "Terazije and Knez Mihailova at night, Belgrade",
+      "video_id": "NfQ0aDgnqIE",
+      "lane": "inputs",
+      "source_file": "streets-worldwide.json",
+      "quality_score": 5,
+      "reasons": []
+    },
+    {
+      "name": "The Wedge shorebreak",
+      "video_id": "YTHMolT2PTM",
+      "lane": "inputs",
+      "source_file": "na-west.json",
+      "quality_score": 5,
+      "reasons": []
+    },
+    {
+      "name": "Valle Nevado gondola base and ski slope",
+      "video_id": "qd2Zr8gE8Sw",
+      "lane": "inputs",
+      "source_file": "vacation-africa-latam.json",
+      "quality_score": 5,
+      "reasons": []
+    },
+    {
+      "name": "Vittoriano and the Capitoline steps",
+      "video_id": null,
+      "lane": "inputs",
+      "source_file": "vacation-europe.json",
+      "quality_score": 5,
+      "reasons": []
+    },
+    {
+      "name": "West Parade street market, Downtown Kingston",
+      "video_id": "dbCVL1ul1QQ",
+      "lane": "inputs",
+      "source_file": "streets-worldwide.json",
+      "quality_score": 5,
+      "reasons": []
+    },
+    {
+      "name": "Wildwood sign and boardwalk entrance",
+      "video_id": "cK71xhMRtds",
+      "lane": "inputs",
+      "source_file": "na-east.json",
+      "quality_score": 5,
+      "reasons": []
+    },
+    {
+      "name": "Acapulco Bay over Playa Condesa from Fiesta Americana",
+      "video_id": "Ozvr21XUhfY",
+      "lane": "inputs",
+      "source_file": "na-west.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Allegiant Stadium, Mandalay Bay and I-15 traffic",
+      "video_id": "_rmUXOHSf0w",
+      "lane": "inputs",
+      "source_file": "na-west.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Anglers on Johnnie Mercer's Fishing Pier",
+      "video_id": "yQG1M1GU_pI",
+      "lane": "inputs",
+      "source_file": "na-east.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Antelope Point Marina, Lake Powell",
+      "video_id": "rSEpoAdnKjQ",
+      "lane": "inputs",
+      "source_file": "na-west.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Atlantic City Boardwalk and Steel Pier from Resorts",
+      "video_id": "vVyBOU9Huvo",
+      "lane": "inputs",
+      "source_file": "na-east.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Avenida Peru seafront promenade, Vina del Mar",
+      "video_id": "RGCk4_A9hJs",
+      "lane": "inputs",
+      "source_file": "vacation-africa-latam.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Balcon de Europa promenade at sunset, Nerja",
+      "video_id": "liW4_fLCE5A",
+      "lane": "inputs",
+      "source_file": "streets-worldwide.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Barra da Lagoa beach bar and surf, Florianopolis",
+      "video_id": "N5_mSm7h_bw",
+      "lane": "inputs",
+      "source_file": "vacation-africa-latam.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Beach and pool at Grand Park Royal, south Puerto Vallarta",
+      "video_id": "V6Co4YdL25Q",
+      "lane": "inputs",
+      "source_file": "na-west.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Bourbon Street at St. Peter from a balcony",
+      "video_id": "6lFBKxt8kIo",
+      "lane": "inputs",
+      "source_file": "na-east.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Bowen's Wharf docks and crowds, Newport",
+      "video_id": "yvJlIBJ5m1o",
+      "lane": "inputs",
+      "source_file": "na-east.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Bremen Marktplatz, Town Hall and Roland",
+      "video_id": "SsyiWrkUjy4",
+      "lane": "inputs",
+      "source_file": "streets-worldwide.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Cala Agulla swimmers and straw umbrellas",
+      "video_id": "C0SfQHiGlSo",
+      "lane": "inputs",
+      "source_file": "vacation-europe.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Calheta bay, beach and marina from above",
+      "video_id": "t4x0u0ARLwo",
+      "lane": "inputs",
+      "source_file": "vacation-europe.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Calvert Marine Museum river otters, indoor room",
+      "video_id": "3wLJoSa5KBE",
+      "lane": "inputs",
+      "source_file": "indoor-activity.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Campiello by Teatro La Fenice at night, Venice",
+      "video_id": "C9EKnYzYt9o",
+      "lane": "inputs",
+      "source_file": "streets-worldwide.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Campo Santa Maria Formosa, Venice",
+      "video_id": "CJLrYIS7NFg",
+      "lane": "inputs",
+      "source_file": "streets-worldwide.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Can Pastilla beach between the palms",
+      "video_id": "VsQekhPeUKs",
+      "lane": "inputs",
+      "source_file": "vacation-europe.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Canada Place cruise ships from North Vancouver",
+      "video_id": "GHEmhcWjiTE",
+      "lane": "inputs",
+      "source_file": "na-west.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Caorle old town piazza",
+      "video_id": null,
+      "lane": "inputs",
+      "source_file": "vacation-europe.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Casino Beach from the Pensacola Beach pier",
+      "video_id": "HKIc6CYlMzI",
+      "lane": "inputs",
+      "source_file": "na-east.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Cerro Castor base area near Ushuaia",
+      "video_id": "O_JAplYN4AA",
+      "lane": "inputs",
+      "source_file": "vacation-africa-latam.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Cerro Castor ski base, Tierra del Fuego",
+      "video_id": "KSqDfxhRENo",
+      "lane": "inputs",
+      "source_file": "vacation-africa-latam.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Chaweng Beach Road at Bondi Aussie Bar",
+      "video_id": "Jv_2vPCbZUo",
+      "lane": "inputs",
+      "source_file": "vacation-asia-pacific.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Circuit Avenue, Oak Bluffs",
+      "video_id": "UEKbeFKVUEg",
+      "lane": "inputs",
+      "source_file": "na-east.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Collingwood Hurontario Street downtown",
+      "video_id": "EPKWu223XEg",
+      "lane": "inputs",
+      "source_file": "na-east.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Collins Avenue at 23rd Street, Miami Beach",
+      "video_id": "atwnD7ccsm4",
+      "lane": "inputs",
+      "source_file": "na-east.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Council Square food fair at dusk, Brasov",
+      "video_id": "HmBsPGMdxwY",
+      "lane": "inputs",
+      "source_file": "streets-worldwide.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Cox Bay surf beach from Long Beach Lodge",
+      "video_id": "JZ3UV60ykqc",
+      "lane": "inputs",
+      "source_file": "na-west.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Cozumel coast and cruise pier",
+      "video_id": "Cmzo6T9lz40",
+      "lane": "inputs",
+      "source_file": "na-east.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Crown Reef beach, pier and waterslide",
+      "video_id": "yTfNMKMnK2Y",
+      "lane": "inputs",
+      "source_file": "na-east.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Dobo ter main square at dusk, Eger",
+      "video_id": "HKVZx5EdnIs",
+      "lane": "inputs",
+      "source_file": "streets-worldwide.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "DogMode indoor dog pool",
+      "video_id": "cdj2v6ignuE",
+      "lane": "inputs",
+      "source_file": "indoor-activity.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Douro river and Gaia waterfront from Ribeira, Porto",
+      "video_id": "WtoC1jpo6dI",
+      "lane": "inputs",
+      "source_file": "streets-worldwide.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Edge Hotel rooftop infinity pool over Clearwater Pass",
+      "video_id": "V7sUbjD_e3I",
+      "lane": "inputs",
+      "source_file": "na-east.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "El Aleman restaurant deck, Farellones village",
+      "video_id": "XMSj64qslWc",
+      "lane": "inputs",
+      "source_file": "vacation-africa-latam.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "El Colorado lift base from the Mirador",
+      "video_id": "9aFWhm5XRJo",
+      "lane": "inputs",
+      "source_file": "vacation-africa-latam.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "El Porto surf break, Manhattan Beach",
+      "video_id": "tBEIYdw1HeM",
+      "lane": "inputs",
+      "source_file": "na-west.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Elbo Room main bar",
+      "video_id": "wVNt3l657X0",
+      "lane": "inputs",
+      "source_file": "indoor-activity.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Galveston Seawall and Pleasure Pier",
+      "video_id": "HkHhXsWci7Q",
+      "lane": "inputs",
+      "source_file": "na-east.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Gandia beach from the water's edge",
+      "video_id": "pjzMaHgcn7M",
+      "lane": "inputs",
+      "source_file": "vacation-europe.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Gatlinburg SkyPark overlook, Smoky Mountains",
+      "video_id": "Exaxsl-pg84",
+      "lane": "inputs",
+      "source_file": "na-east.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Gran Via boulevard at Lepanto, Vigo",
+      "video_id": "KmcLujr7PU0",
+      "lane": "inputs",
+      "source_file": "streets-worldwide.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Grand Harbour, Valletta and the Three Cities",
+      "video_id": "DSCy97qUXeE",
+      "lane": "inputs",
+      "source_file": "vacation-europe.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Grote Markt and City Hall, Groningen",
+      "video_id": "ZjfFGJlkjmE",
+      "lane": "inputs",
+      "source_file": "streets-worldwide.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Harbor square and San Nicolas island, Lekeitio",
+      "video_id": "KTvzATgyRik",
+      "lane": "inputs",
+      "source_file": "streets-worldwide.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Hen barn full of chickens, Zapf farm",
+      "video_id": "0Y3yNq123R0",
+      "lane": "inputs",
+      "source_file": "indoor-activity.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Hog's Breath Saloon bar room",
+      "video_id": "S605ycm0Vlk",
+      "lane": "inputs",
+      "source_file": "indoor-activity.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Hotel Zone, giant flag and Nichupté lagoon",
+      "video_id": "albRLCpp2b8",
+      "lane": "inputs",
+      "source_file": "na-east.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Inn Street pedestrian mall, Newburyport",
+      "video_id": "4vMn1XPEO54",
+      "lane": "inputs",
+      "source_file": "streets-worldwide.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Isla Verde beach and Royal Sonesta pool",
+      "video_id": "taI7GiyvDxE",
+      "lane": "inputs",
+      "source_file": "na-east.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Jena Markt old town square",
+      "video_id": "0UbGQoCOlsY",
+      "lane": "inputs",
+      "source_file": "streets-worldwide.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Jericoacoara beach and kite gear lawn, Vila Kalango",
+      "video_id": "vlF11mhf-90",
+      "lane": "inputs",
+      "source_file": "vacation-africa-latam.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Kabukicho Ichibangai at night, Shinjuku",
+      "video_id": "DjdUEyjx8GM",
+      "lane": "inputs",
+      "source_file": "streets-worldwide.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Kitesurfers off Costa da Caparica",
+      "video_id": "oDbKeeojgyk",
+      "lane": "inputs",
+      "source_file": "vacation-europe.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Kitten playroom, Kitkat Playroom rescue",
+      "video_id": "Wfgx1Z39fcU",
+      "lane": "inputs",
+      "source_file": "indoor-activity.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "La Concha Bay and Monte Urgull, San Sebastian",
+      "video_id": "6Pk_8BViotw",
+      "lane": "inputs",
+      "source_file": "vacation-europe.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "La Parva Alpha chairlift base",
+      "video_id": "MnefJMWt8tc",
+      "lane": "inputs",
+      "source_file": "vacation-africa-latam.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Las Lenas base village and slopes",
+      "video_id": null,
+      "lane": "inputs",
+      "source_file": "vacation-africa-latam.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Leavenworth Bavarian village and Front Street Park",
+      "video_id": "TmtVbezZaqg",
+      "lane": "inputs",
+      "source_file": "na-west.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Lido pool complex on the Atlantic, Funchal",
+      "video_id": "K8Fl1Bm365M",
+      "lane": "inputs",
+      "source_file": "vacation-europe.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Linda Mar surf beach, Pacifica",
+      "video_id": "TDcKozRHlKs",
+      "lane": "inputs",
+      "source_file": "na-west.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Lloret de Mar main beach and promenade",
+      "video_id": null,
+      "lane": "inputs",
+      "source_file": "vacation-europe.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Lyubinsky Prospekt pedestrian street at night, Omsk",
+      "video_id": "sUrF-CEn3ag",
+      "lane": "inputs",
+      "source_file": "streets-worldwide.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Main Beach, East Hampton",
+      "video_id": "xM1-e429Y3A",
+      "lane": "inputs",
+      "source_file": "na-east.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Main Street cobblestones, Nantucket town",
+      "video_id": "sp-FHZY95QM",
+      "lane": "inputs",
+      "source_file": "na-east.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Markt and Gothic town hall at blue hour, Oudenaarde",
+      "video_id": "TTrzSdVej30",
+      "lane": "inputs",
+      "source_file": "streets-worldwide.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Medano Beach and Land's End arch",
+      "video_id": "POijZWZ1qwc",
+      "lane": "inputs",
+      "source_file": "na-west.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Monte Hermoso seafront and beach",
+      "video_id": null,
+      "lane": "inputs",
+      "source_file": "vacation-africa-latam.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Morro Bay harbor and Morro Rock from the Yacht Club",
+      "video_id": "jpTWh9bKULw",
+      "lane": "inputs",
+      "source_file": "na-west.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "New England Aquarium penguin colony",
+      "video_id": "_bdNFTNqHws",
+      "lane": "inputs",
+      "source_file": "indoor-activity.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Ohrid town centre by night",
+      "video_id": null,
+      "lane": "inputs",
+      "source_file": "vacation-europe.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Palau ferry port and La Maddalena islands",
+      "video_id": null,
+      "lane": "inputs",
+      "source_file": "vacation-europe.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Peneco beach from Hotel Sol e Mar, Albufeira",
+      "video_id": "GeQVAs9N490",
+      "lane": "inputs",
+      "source_file": "vacation-europe.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Piazza IV Novembre and Fontana Maggiore, Perugia",
+      "video_id": "8TZ8YRt9nYc",
+      "lane": "inputs",
+      "source_file": "streets-worldwide.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Piazza Matteotti at blue hour, Sarzana",
+      "video_id": "0m4qDGzGN7k",
+      "lane": "inputs",
+      "source_file": "vacation-europe.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Pineapple Willy's beach and Gulf",
+      "video_id": "-rSXsJuGQ3M",
+      "lane": "inputs",
+      "source_file": "na-east.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Placa del Mercadal, Reus",
+      "video_id": "L9HyLjRVN8E",
+      "lane": "inputs",
+      "source_file": "streets-worldwide.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Plage du Midi beach at Quai Laubeuf, Cannes",
+      "video_id": "asO_10T0k2k",
+      "lane": "inputs",
+      "source_file": "vacation-europe.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Playa Acapulco and the Vergara pier, Vina del Mar",
+      "video_id": "OustE0b7y7Q",
+      "lane": "inputs",
+      "source_file": "vacation-africa-latam.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Playa Langosta swimmers and boat pier",
+      "video_id": "Kp9gH_N7wdE",
+      "lane": "inputs",
+      "source_file": "na-east.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Playa Norte swimmers and yachts",
+      "video_id": "UnlUBl62aWA",
+      "lane": "inputs",
+      "source_file": "na-east.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Poetto beach and the Devil's Saddle",
+      "video_id": null,
+      "lane": "inputs",
+      "source_file": "vacation-europe.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Ponta Negra beach and Morro do Careca dune",
+      "video_id": "pY75jOvfcIc",
+      "lane": "inputs",
+      "source_file": "vacation-africa-latam.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Ponza port and harbour front",
+      "video_id": null,
+      "lane": "inputs",
+      "source_file": "vacation-europe.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Praca Major Nicoletti from Igreja Sao Pedro, Gramado",
+      "video_id": "TSvnN0xUJW4",
+      "lane": "inputs",
+      "source_file": "vacation-africa-latam.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Praia do Forte beach and promenade, Cabo Frio",
+      "video_id": "1VlP_fQwOyc",
+      "lane": "inputs",
+      "source_file": "vacation-africa-latam.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Praia Grande beach tables and surf, Baguari",
+      "video_id": "Ryz49vCa8Qk",
+      "lane": "inputs",
+      "source_file": "vacation-africa-latam.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Presidente InterContinental beach cove",
+      "video_id": "woxBe4VS0XY",
+      "lane": "inputs",
+      "source_file": "na-east.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Queen's Beach and Kalakaua Avenue, Waikiki",
+      "video_id": "kCPppYpcY_s",
+      "lane": "inputs",
+      "source_file": "na-west.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Rynek market square at dusk, Kazimierz Dolny",
+      "video_id": "6EwviT2usa8",
+      "lane": "inputs",
+      "source_file": "streets-worldwide.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Sainamyen Road, Patong",
+      "video_id": "_nvG0c9keWI",
+      "lane": "inputs",
+      "source_file": "vacation-asia-pacific.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "San Diego Bay from Tom Ham's Lighthouse",
+      "video_id": "iaBfYxbmwXA",
+      "lane": "inputs",
+      "source_file": "na-west.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Santa Monica Pier, Ferris wheel and beach",
+      "video_id": "v97JpT3ZA0w",
+      "lane": "inputs",
+      "source_file": "na-west.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Sea otters, Seattle Aquarium",
+      "video_id": "NqOmHpwMUxs",
+      "lane": "inputs",
+      "source_file": "na-west.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Sea Pines Beach Club boardwalk to the beach",
+      "video_id": "QIJku1LZGRE",
+      "lane": "inputs",
+      "source_file": "na-east.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Sheep and lambs in the barn, Schapenboerderij Texel",
+      "video_id": "0KAaRLr6d2M",
+      "lane": "inputs",
+      "source_file": "indoor-activity.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Shelter cat room, Woody's Veilige Haven",
+      "video_id": "25EMHxUwiKY",
+      "lane": "inputs",
+      "source_file": "indoor-activity.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Shinjuku Ogado crossing at night, Tokyo",
+      "video_id": "6dp-bvQ7RWo",
+      "lane": "inputs",
+      "source_file": "streets-worldwide.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "South Padre beach and Clayton's pier",
+      "video_id": "dzylsC0KcOE",
+      "lane": "inputs",
+      "source_file": "na-east.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Spanish Town street life, Jamaica",
+      "video_id": "KBnlexbryqE",
+      "lane": "inputs",
+      "source_file": "streets-worldwide.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Sunny Isles shoreline and condo towers",
+      "video_id": "bi7B4EmyHHs",
+      "lane": "inputs",
+      "source_file": "na-east.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Sunset Grille pool and Seven Mile Bridge",
+      "video_id": "SXMC-MzSncI",
+      "lane": "inputs",
+      "source_file": "na-east.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Surfers at Somo and Loredo, facing Santander",
+      "video_id": "bV_ltoX7Jy8",
+      "lane": "inputs",
+      "source_file": "vacation-europe.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Surfers on East Strand, Portrush",
+      "video_id": "wtOr7D5pztI",
+      "lane": "inputs",
+      "source_file": "vacation-europe.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Syman Says Farms goat barn",
+      "video_id": "xNw-aQ3RwQI",
+      "lane": "inputs",
+      "source_file": "indoor-activity.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Tarpon feeding dock at Robbie's Marina",
+      "video_id": "zfSst64NFcE",
+      "lane": "inputs",
+      "source_file": "na-east.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "The Genevieve pool and reef, East End",
+      "video_id": "Xw8CoRwNfXs",
+      "lane": "inputs",
+      "source_file": "na-east.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Venice Beach boardwalk, south side",
+      "video_id": "D33ZD6sRvnA",
+      "lane": "inputs",
+      "source_file": "na-west.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Walworth Road high street, London",
+      "video_id": "YUP57y2iye8",
+      "lane": "inputs",
+      "source_file": "streets-worldwide.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Whale-watch boats at MacMillan Wharf",
+      "video_id": "Yy-Eo5NMkVE",
+      "lane": "inputs",
+      "source_file": "na-east.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Windy palm promenade on Altea beach",
+      "video_id": "hvsK8Fvz4rE",
+      "lane": "inputs",
+      "source_file": "vacation-europe.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Woods Hole ferry terminal plaza and Vineyard ferries",
+      "video_id": "TE6N2eDrsR0",
+      "lane": "inputs",
+      "source_file": "na-east.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Zelny trh market square at dusk, Brno",
+      "video_id": "UkoqCxne5Y8",
+      "lane": "inputs",
+      "source_file": "streets-worldwide.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "730 Intersection, Ishigaki",
+      "video_id": "JDpmH2kZKhk",
+      "lane": "inputs",
+      "source_file": "vacation-asia-pacific.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Alligator lagoon at the St. Augustine Alligator Farm",
+      "video_id": "LHtzZf4T7xw",
+      "lane": "inputs",
+      "source_file": "na-east.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Angel de la Independencia roundabout, Paseo de la Reforma",
+      "video_id": "ZH3jB650mcI",
+      "lane": "inputs",
+      "source_file": "streets-worldwide.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Anglers wading the Salmon River in Pulaski",
+      "video_id": "1LKfIz99wBQ",
+      "lane": "inputs",
+      "source_file": "na-east.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Arillas beach at sunset, Corfu",
+      "video_id": "CcnlJI_UXyM",
+      "lane": "inputs",
+      "source_file": "vacation-europe.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Ashland downtown Plaza",
+      "video_id": "OLrV_Hgl5Wo",
+      "lane": "inputs",
+      "source_file": "na-west.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Bar Harbor Shore Path and town pier",
+      "video_id": "OteVW3af3BU",
+      "lane": "inputs",
+      "source_file": "na-east.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Bibione shopping street",
+      "video_id": null,
+      "lane": "inputs",
+      "source_file": "vacation-europe.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Big Bear Village entrance at Pine Knot Avenue",
+      "video_id": "zfIRoGngFSc",
+      "lane": "inputs",
+      "source_file": "na-west.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Boats on Paugus Bay from Winni Marine, near Weirs Beach",
+      "video_id": "ohJeIx8vqZo",
+      "lane": "inputs",
+      "source_file": "na-east.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Body Beach, Lake Havasu",
+      "video_id": "1bppvyEwnAw",
+      "lane": "inputs",
+      "source_file": "na-west.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Boulevard du Midi beach and pier, Cannes",
+      "video_id": "z6BNMoj9Pyo",
+      "lane": "inputs",
+      "source_file": "vacation-europe.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Cafe del Mar sunset over Sant Antoni bay",
+      "video_id": "HP2PhJbLevY",
+      "lane": "inputs",
+      "source_file": "vacation-europe.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Cala Gavetta harbour, La Maddalena",
+      "video_id": null,
+      "lane": "inputs",
+      "source_file": "vacation-europe.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Calle Madero pedestrian street from above, Mexico City",
+      "video_id": "BDFuERGc-Us",
+      "lane": "inputs",
+      "source_file": "streets-worldwide.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Campus Point surf break",
+      "video_id": "-Q20DkjKgpM",
+      "lane": "inputs",
+      "source_file": "na-west.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Carlsbad State Beach surf line",
+      "video_id": "mgl2gTIQ30A",
+      "lane": "inputs",
+      "source_file": "na-west.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Cascata do Caracol waterfall from Parque Bondinhos",
+      "video_id": "F0fcZNbvRGg",
+      "lane": "inputs",
+      "source_file": "vacation-africa-latam.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Castlepoint Lighthouse",
+      "video_id": "t0nYqriNf-w",
+      "lane": "inputs",
+      "source_file": "vacation-asia-pacific.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Catopia cat room downstairs, Furry Friends",
+      "video_id": "B0IT9rhoHss",
+      "lane": "inputs",
+      "source_file": "indoor-activity.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Chapel of the Black Madonna, Jasna Gora",
+      "video_id": "yMxD3gdeXmk",
+      "lane": "inputs",
+      "source_file": "indoor-activity.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Chapel of the Holy Cross in the red rocks",
+      "video_id": "JlxDI6rGH-U",
+      "lane": "inputs",
+      "source_file": "na-west.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Confederation Bridge deck to the horizon",
+      "video_id": "baWRGSBBWhw",
+      "lane": "inputs",
+      "source_file": "na-east.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Coronado Bridge and Barrio Logan marina from Seaport Village",
+      "video_id": "OAk3giBu5_k",
+      "lane": "inputs",
+      "source_file": "na-west.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Crab Island boat sandbar, Destin",
+      "video_id": "BFn4D3uOK88",
+      "lane": "inputs",
+      "source_file": "na-east.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Dawlish sea wall railway and seafront",
+      "video_id": "8g_AgbaTkmw",
+      "lane": "inputs",
+      "source_file": "vacation-europe.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Doca do Cavacas sea pools, Funchal",
+      "video_id": "8ZmLLUPqlPM",
+      "lane": "inputs",
+      "source_file": "vacation-europe.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Downtown Traverse City and West Grand Traverse Bay",
+      "video_id": "8-V9uEqFLwE",
+      "lane": "inputs",
+      "source_file": "na-east.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Downtown waterfront avenue, Angra dos Reis",
+      "video_id": "CsQ1RRjk3qU",
+      "lane": "inputs",
+      "source_file": "vacation-africa-latam.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "East Main Street and the courthouse, Jonesborough",
+      "video_id": "PmXKd2Z_TVA",
+      "lane": "inputs",
+      "source_file": "streets-worldwide.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "EcoCamp Patagonia domes below the Paine massif",
+      "video_id": "ljaqazAaUBE",
+      "lane": "inputs",
+      "source_file": "vacation-africa-latam.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Elbo Room patio and A1A at Las Olas",
+      "video_id": "bM0GplM_vPY",
+      "lane": "inputs",
+      "source_file": "na-east.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Elvis' Beach Bar, Sandy Ground",
+      "video_id": "SPj4hMttgJM",
+      "lane": "inputs",
+      "source_file": "na-east.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Falmouth Heights Beach, Cape Cod",
+      "video_id": "XTlwxO5bCUA",
+      "lane": "inputs",
+      "source_file": "na-east.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Flagstaff depot and BNSF main line",
+      "video_id": "7xdHH9KMSVk",
+      "lane": "inputs",
+      "source_file": "na-west.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Friends of Felines cat rescue room",
+      "video_id": "uDj1I0Brtd8",
+      "lane": "inputs",
+      "source_file": "indoor-activity.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Gavrio ferry port at night, Andros",
+      "video_id": "GohgKKZBxvk",
+      "lane": "inputs",
+      "source_file": "vacation-europe.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Grote Markt from the town hall tower, Sint-Niklaas",
+      "video_id": "7gOLLJGudNo",
+      "lane": "inputs",
+      "source_file": "streets-worldwide.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Haad Rin Sunrise Beach from House of Sanskara",
+      "video_id": "MW3fisTCXRQ",
+      "lane": "inputs",
+      "source_file": "vacation-asia-pacific.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Hanga Roa coast, Rapa Nui (Easter Island)",
+      "video_id": "qnz08E9WjSY",
+      "lane": "inputs",
+      "source_file": "vacation-africa-latam.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Hildesheim Marktplatz and the Butchers' Guild Hall",
+      "video_id": "671yJ4jELFg",
+      "lane": "inputs",
+      "source_file": "streets-worldwide.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Hollywood Boulevard at Ovation Hollywood",
+      "video_id": "YHWJd_DNgKY",
+      "lane": "inputs",
+      "source_file": "na-west.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Hubbard's Marina dock at John's Pass",
+      "video_id": "DmVk9uAQ28M",
+      "lane": "inputs",
+      "source_file": "na-east.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Jalan Pantai Kuta beach road",
+      "video_id": null,
+      "lane": "inputs",
+      "source_file": "vacation-asia-pacific.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Kalapaki Bay and resort pools",
+      "video_id": "M6kN1wlNSk4",
+      "lane": "inputs",
+      "source_file": "na-west.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Kedonganan beach seafood tables",
+      "video_id": null,
+      "lane": "inputs",
+      "source_file": "vacation-asia-pacific.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Kitty Hawk beach, Outer Banks",
+      "video_id": "WEhuDqlxHmM",
+      "lane": "inputs",
+      "source_file": "na-east.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Kokusai-dori at Makishi, Naha",
+      "video_id": "se05Vc8g_TY",
+      "lane": "inputs",
+      "source_file": "vacation-asia-pacific.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Kusatsu Onsen Yubatake hot-spring field",
+      "video_id": "GrEEoEmmrKs",
+      "lane": "inputs",
+      "source_file": "vacation-asia-pacific.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "La Baule bay from Pornichet",
+      "video_id": "Rst3kvq9B8Y",
+      "lane": "inputs",
+      "source_file": "vacation-europe.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Licheń Basilica high altar",
+      "video_id": "DyRLA_JWqoo",
+      "lane": "inputs",
+      "source_file": "indoor-activity.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Logan Circle and the Free Library, Philadelphia",
+      "video_id": "9mMnqO1UuIU",
+      "lane": "inputs",
+      "source_file": "streets-worldwide.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Long Island Aquarium shark tank",
+      "video_id": "NbEDrHAGCjE",
+      "lane": "inputs",
+      "source_file": "indoor-activity.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Long Sands Beach, York Beach",
+      "video_id": "V5ZGle1_tAI",
+      "lane": "inputs",
+      "source_file": "na-east.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Lower Broadway and downtown Nashville from above",
+      "video_id": "ICva1RPK6Do",
+      "lane": "inputs",
+      "source_file": "na-east.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Main Street, Sag Harbor",
+      "video_id": "i3is63To-cE",
+      "lane": "inputs",
+      "source_file": "na-east.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Malibu surf and Pacific Coast Highway",
+      "video_id": "E0TZTmTK-Ws",
+      "lane": "inputs",
+      "source_file": "na-west.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Manu Bay surf break, Raglan",
+      "video_id": "7N_KlxHzrkg",
+      "lane": "inputs",
+      "source_file": "vacation-asia-pacific.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Maresias surf break",
+      "video_id": "iZxXdVrlnTY",
+      "lane": "inputs",
+      "source_file": "vacation-africa-latam.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Mazatlan Golden Zone coastline from El Cid",
+      "video_id": "WkLcLO5uPow",
+      "lane": "inputs",
+      "source_file": "na-west.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Midtown Ruidoso, Sudderth Drive",
+      "video_id": "XoANQufSSXY",
+      "lane": "inputs",
+      "source_file": "na-west.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Muttville senior dog adoption center",
+      "video_id": "7AnfOS9Bmr0",
+      "lane": "inputs",
+      "source_file": "indoor-activity.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Newport Avenue, Ocean Beach",
+      "video_id": "1SbYsth6VQY",
+      "lane": "inputs",
+      "source_file": "na-west.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Newton Navarro bridge and Praia do Meio, Natal",
+      "video_id": "8quWDK9i-v0",
+      "lane": "inputs",
+      "source_file": "vacation-africa-latam.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "North Conway station and Conway Scenic Railroad",
+      "video_id": "3w3tepBwtRI",
+      "lane": "inputs",
+      "source_file": "na-east.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Nudie's Honky Tonk stage",
+      "video_id": "JIB0hReR7qA",
+      "lane": "inputs",
+      "source_file": "indoor-activity.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Ocean Boulevard and the Seashell, Hampton Beach",
+      "video_id": "h-e0HcDBnBU",
+      "lane": "inputs",
+      "source_file": "na-east.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Ocean City beach at 29th Street",
+      "video_id": "zGima24vRHM",
+      "lane": "inputs",
+      "source_file": "na-east.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Ocean City boardwalk at Ninth Street",
+      "video_id": "YhMRKNSkLDE",
+      "lane": "inputs",
+      "source_file": "na-east.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Old Orchard Beach sand and surf",
+      "video_id": "HSQpqIWLViI",
+      "lane": "inputs",
+      "source_file": "na-east.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Orange Beach from Turquoise Place",
+      "video_id": "pJqrjIuvGFE",
+      "lane": "inputs",
+      "source_file": "na-east.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Pacifica Pier and Sharp Park seawall",
+      "video_id": "bJ3iYpvbC5Y",
+      "lane": "inputs",
+      "source_file": "na-west.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Piazza Unita and church, Tarvisio",
+      "video_id": null,
+      "lane": "inputs",
+      "source_file": "vacation-europe.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Pigeon River rafting stretch, Hartford",
+      "video_id": "6tq8S2pp8PQ",
+      "lane": "inputs",
+      "source_file": "na-east.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Platja de l'Alguer seafront, L'Ametlla de Mar",
+      "video_id": "W9DP0Je5rKU",
+      "lane": "inputs",
+      "source_file": "vacation-europe.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Playa de La Barrosa at sunset",
+      "video_id": "w6FUEH7JJ3Y",
+      "lane": "inputs",
+      "source_file": "vacation-europe.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Playa de Los Locos, Torrevieja",
+      "video_id": "q7rnZo_z-ro",
+      "lane": "inputs",
+      "source_file": "vacation-europe.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Playa El Morro, Acapulco, from Hotel Emporio",
+      "video_id": "sFVDzXOpx0o",
+      "lane": "inputs",
+      "source_file": "na-west.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Playa Guiones surf from the hills",
+      "video_id": "_W_lH0Pugg4",
+      "lane": "inputs",
+      "source_file": "na-east.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Plaza de Armas street, Huaraz",
+      "video_id": "WCpy039qQiE",
+      "lane": "inputs",
+      "source_file": "vacation-africa-latam.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Plaza of Santo Domingo church, Oaxaca",
+      "video_id": "YC13-sQ6pbg",
+      "lane": "inputs",
+      "source_file": "streets-worldwide.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Plaza Principal and Santa Maria de la Asuncion church, Tequisquiapan",
+      "video_id": "LS099g1c8o0",
+      "lane": "inputs",
+      "source_file": "streets-worldwide.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Polo Beach palms from Fairmont Kea Lani",
+      "video_id": "G1zgkkguCyc",
+      "lane": "inputs",
+      "source_file": "na-west.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Pony mare and foal in a barn stall, Little Hooves Farm",
+      "video_id": "WvEDJPPb5I8",
+      "lane": "inputs",
+      "source_file": "indoor-activity.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Port Erin bay at sunset",
+      "video_id": "d8C5u3PFgSM",
+      "lane": "inputs",
+      "source_file": "vacation-europe.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Port Isaac harbour and fishing boats",
+      "video_id": "D38HQbFbMzs",
+      "lane": "inputs",
+      "source_file": "vacation-europe.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Port of Noirmoutier at low tide",
+      "video_id": "Pj84-0bRazs",
+      "lane": "inputs",
+      "source_file": "vacation-europe.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Porto Moniz lava rock pools",
+      "video_id": "QcMxxAIo8CI",
+      "lane": "inputs",
+      "source_file": "vacation-europe.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Prumirim beach, left corner",
+      "video_id": "IQK8iqxCiQw",
+      "lane": "inputs",
+      "source_file": "vacation-africa-latam.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Redondo Beach Esplanade south of the pier",
+      "video_id": "TuVOKRP7IBA",
+      "lane": "inputs",
+      "source_file": "na-west.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Reloj Monumental and Plaza de la Independencia, Pachuca",
+      "video_id": "Nqy5YyxpUFI",
+      "lane": "inputs",
+      "source_file": "streets-worldwide.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Reno Arch on Virginia Street",
+      "video_id": "laopqyiYlxg",
+      "lane": "inputs",
+      "source_file": "na-west.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Revelstoke main line and Victoria Road",
+      "video_id": "fIMbMz2P7Bs",
+      "lane": "inputs",
+      "source_file": "na-west.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Rhodes west-coast hotels and seafront road at night",
+      "video_id": "h8ZGGzCcL5g",
+      "lane": "inputs",
+      "source_file": "vacation-europe.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Riomaggiore village and coast, Cinque Terre",
+      "video_id": "A7oGJdUmVkg",
+      "lane": "inputs",
+      "source_file": "vacation-europe.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Rua Coberta covered street, Gramado",
+      "video_id": "pUkZHG2WBiA",
+      "lane": "inputs",
+      "source_file": "streets-worldwide.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "San Carlos marina and Tetakawi from Marinaterra Hotel",
+      "video_id": "wdwUguy8T8s",
+      "lane": "inputs",
+      "source_file": "na-west.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Santa Cruz Bay from Hotel Binniguenda, Huatulco",
+      "video_id": "OW_kgsqvZkI",
+      "lane": "inputs",
+      "source_file": "na-west.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Seaside beach and Tillamook Head",
+      "video_id": "Ce_vAKq1kUA",
+      "lane": "inputs",
+      "source_file": "na-west.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "SnowWorld Landgraaf indoor ski slope, Piste 1",
+      "video_id": "pLBRmzuvQjw",
+      "lane": "inputs",
+      "source_file": "indoor-activity.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Steamboat Gondola base terminal",
+      "video_id": "oKKj_upaoCI",
+      "lane": "inputs",
+      "source_file": "na-west.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Teatro Amazonas and Largo de Sao Sebastiao, Manaus",
+      "video_id": "zQk5FOcP0f0",
+      "lane": "inputs",
+      "source_file": "streets-worldwide.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "The Cobb and harbour boat park, Lyme Regis",
+      "video_id": "rulGLEdCHZU",
+      "lane": "inputs",
+      "source_file": "vacation-europe.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Tinos new port with ferry",
+      "video_id": "PAK2GoHG7Hs",
+      "lane": "inputs",
+      "source_file": "vacation-europe.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Tofino Harbour and Lone Cone from Tofino Sea Kayaking",
+      "video_id": "_qN4aao5kWc",
+      "lane": "inputs",
+      "source_file": "na-west.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Unirii Square and St Michael's Church at night, Cluj-Napoca",
+      "video_id": "WC3CkcTYCYY",
+      "lane": "inputs",
+      "source_file": "streets-worldwide.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Vila Vella walls of Tossa de Mar",
+      "video_id": "nWFcWooDAxI",
+      "lane": "inputs",
+      "source_file": "vacation-europe.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Villa Gesell pier and boardwalk",
+      "video_id": null,
+      "lane": "inputs",
+      "source_file": "vacation-africa-latam.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Virginia Beach oceanfront from the fishing pier",
+      "video_id": "zrZ0273FcU8",
+      "lane": "inputs",
+      "source_file": "na-east.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Volcan Osorno ski center stairs and parking over Lake Llanquihue",
+      "video_id": "2bammq8s89w",
+      "lane": "inputs",
+      "source_file": "vacation-africa-latam.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Waikiki towers and Diamond Head from a lanai",
+      "video_id": "pv2RBs3PwCs",
+      "lane": "inputs",
+      "source_file": "na-west.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "White Bay beach at the Soggy Dollar Bar",
+      "video_id": "V_I168MM-ik",
+      "lane": "inputs",
+      "source_file": "na-east.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "White Rock promenade and pier",
+      "video_id": "4MK3E9EWDSY",
+      "lane": "inputs",
+      "source_file": "na-west.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Winter Park base village and gondola",
+      "video_id": "vyWAzJAWv4w",
+      "lane": "inputs",
+      "source_file": "na-west.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Xel-Há inlet snorkelers",
+      "video_id": "RNnegygsAc8",
+      "lane": "inputs",
+      "source_file": "na-east.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Yacht anchorage off Son Maties, Palmanova",
+      "video_id": "SCXirfESCck",
+      "lane": "inputs",
+      "source_file": "vacation-europe.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Zurriola Beach and Monte Ulia, San Sebastian",
+      "video_id": "TSPxixZUmPA",
+      "lane": "inputs",
+      "source_file": "vacation-europe.json",
+      "quality_score": 3,
+      "reasons": []
+    }
+  ],
+  "reserve": [],
+  "rejected": [],
+  "duplicates": [],
+  "input_count": 258,
+  "lane_counts": {
+    "inputs": {
+      "accepted": 258,
+      "reserve": 0,
+      "rejected": 0,
+      "duplicates": 0
+    }
+  },
+  "counts": {
+    "accepted": 258,
+    "reserve": 0,
+    "rejected": 0,
+    "duplicates": 0
+  },
+  "new_total": 932,
+  "shortfall": 242,
+  "rating_distribution": {
+    "3": 117,
+    "4": 114,
+    "5": 27
+  },
+  "existing_values_preserved": true,
+  "mode": "write",
+  "catalog_changed": true,
+  "backup": "cameras-9f2175760648e3ac.json"
+}

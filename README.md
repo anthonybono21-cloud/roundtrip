@@ -103,16 +103,43 @@ keeps the camera and nudges it a little earlier in the shuffle - gently, and
 only within a cycle, so the deck still deals every camera exactly once and a
 favourite crowds nothing out. The same thumb again takes the mark off.
 
-Votes stay in the browser that cast them, in `localStorage` under
-`roundtrip.votes`, and go nowhere else. `Roundtrip.votes()` prints them as a
-list, each entry carrying the camera's key, name, location and the moment of
-the verdict:
+Votes are kept in `localStorage` under `roundtrip.votes`, so a browser holds
+its own verdicts for good. `Roundtrip.votes()` prints them as a list, each
+entry carrying the camera's key, name, location and the moment of the verdict:
 
     [{ key: "2umaXl_TvIg", vote: -1, name: "...", location: "...",
        url: "...", at: "2026-09-17T22:24:51.383Z" }]
 
-That is the list to prune `cameras.json` from: a `vote: -1` becomes an entry in
-`rejects` with a `reject_reason` and a `rejected_at`.
+That is the list `cameras.json` is pruned from: a `vote: -1` becomes an entry
+in `rejects` with a `reject_reason` and a `rejected_at`.
+
+### Where the votes go
+
+So that pruning does not wait on anyone exporting anything, the page also sends
+the ledger to a public [ntfy.sh](https://ntfy.sh) topic:
+
+    https://ntfy.sh/roundtrip-cam-votes-et45-9k4m2x
+
+No account, no key and nothing secret in the page, which is the only sort of
+endpoint a page served straight off GitHub Pages can safely talk to. It is a
+public channel and the contents are camera names and a thumb - nothing about
+the person watching. Read it back with:
+
+    curl -s 'https://ntfy.sh/roundtrip-cam-votes-et45-9k4m2x/json?poll=1&since=all'
+
+Each message is one snapshot from one browser: `{ app, kind, device, at, up,
+down, votes }`, where `device` is a short random id kept in `localStorage` so
+the desk PC's ledger and the tablet's can be told apart. Take the newest
+snapshot per `device` and merge; older ones are supersets of nothing and can be
+dropped.
+
+Two details make that reliable. Every message carries the **whole** ledger
+rather than a change, and one goes out shortly after each load as well as after
+each vote, so the topic's roughly twelve-hour retention cannot lose a verdict a
+browser still remembers. And sending is best-effort and silent - a plain body
+with no custom headers, so there is no CORS preflight to fail, and a vote that
+cannot leave now leaves on the next load. Nothing about it can affect what is
+on screen.
 
 ## Search
 

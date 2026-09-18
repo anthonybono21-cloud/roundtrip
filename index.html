@@ -1338,15 +1338,41 @@ function isLiveNow(cam){
    cycle, so a favourite crowds nothing out. The same thumb again clears the
    mark.
 
-   Votes stay on the machine that cast them, in localStorage, and go nowhere
-   else. Each one records enough to act on later — the camera's key, its name,
+   Votes are kept in localStorage, so a browser holds its own verdicts for
+   good. Each one records enough to act on later — the camera's key, its name,
    where it is and when the verdict was given — so `Roundtrip.votes()` is a
-   list the camera file can be pruned from. */
+   list the camera file can be pruned from.
 
-const VOTE_KEY = 'roundtrip.votes';
+   They are also sent out, on Anthony's say-so (Sep 18, 2026), so that pruning
+   does not wait on anyone exporting anything. The destination is a public
+   ntfy.sh topic: no account, no key and nothing secret in this page, which is
+   the only sort of endpoint a page served straight off GitHub Pages can
+   safely talk to. It is a public channel, and the contents are camera names
+   and a thumb, nothing about the person watching.
+
+   Two details that matter. Every message is the *whole* ledger rather than a
+   change, and one goes out shortly after each load as well as after each
+   vote, so the topic's roughly twelve-hour retention can never lose a verdict
+   a browser still remembers. And sending is best-effort and silent: a plain
+   body with no custom headers, so there is no CORS preflight to fail, and a
+   vote that cannot leave now leaves on the next load. Nothing here is ever
+   allowed to touch what is on screen. */
+
+const VOTE_KEY   = 'roundtrip.votes';
+const VOTE_TOPIC = 'https://ntfy.sh/roundtrip-cam-votes-et45-9k4m2x';
 
 let votes = {};
 try { votes = JSON.parse(localStorage.getItem(VOTE_KEY) || '{}') || {}; } catch {}
+
+// A short id so the desk PC's ledger and the tablet's can be told apart.
+let deviceId = 'unknown';
+try {
+  deviceId = localStorage.getItem('roundtrip.device') || '';
+  if (!deviceId){
+    deviceId = Math.random().toString(36).slice(2, 10);
+    localStorage.setItem('roundtrip.device', deviceId);
+  }
+} catch {}
 
 const voteOf = cam => (cam && votes[camKey(cam)]?.vote) || 0;
 
@@ -1354,9 +1380,31 @@ const voteOf = cam => (cam && votes[camKey(cam)]?.vote) || 0;
    like the light bias does. */
 const voteWeight = cam => voteOf(cam) > 0 ? 1.4 : 1;
 
+const voteList = () => Object.entries(votes).map(([key, v]) => ({ key, ...v }));
+
+let publishTimer = null;
+function publishVotes(){
+  const list = voteList();
+  const body = JSON.stringify({
+    app: 'roundtrip', kind: 'cam-votes', device: deviceId,
+    at: new Date().toISOString(),
+    up:   list.filter(v => v.vote > 0).length,
+    down: list.filter(v => v.vote < 0).length,
+    votes: list,
+  });
+  // keepalive so a vote cast on the way out of the page still leaves.
+  try { fetch(VOTE_TOPIC, { method:'POST', body, keepalive:true }).catch(()=>{}); } catch {}
+}
+
 function saveVotes(){
   try { localStorage.setItem(VOTE_KEY, JSON.stringify(votes)); } catch {}
+  clearTimeout(publishTimer);
+  publishTimer = setTimeout(publishVotes, 1200);
 }
+
+// Send what this browser knows a little after every load, so a ledger stays
+// readable through a week in which nothing new is voted on.
+setTimeout(() => { if (Object.keys(votes).length) publishVotes(); }, 8000);
 
 function saveRejects(){
   try { localStorage.setItem('et45.rejects', JSON.stringify([...state.rejects])); } catch {}
@@ -2192,9 +2240,9 @@ const progress = v => { bar.style.width = (v*100)+'%'; };
     menu: Menu, skipNext, divePrev, togglePinned,
     history: () => hist.map(c => c.name),
     // Roundtrip.votes() is every thumb cast in this browser, as a list the
-    // camera file can be pruned from.
-    votes: () => Object.entries(votes).map(([key, v]) => ({ key, ...v })),
-    castVote,
+    // camera file can be pruned from; Roundtrip.publishVotes() sends that
+    // list out again by hand.
+    votes: voteList, publishVotes, castVote,
     silenced: () => [...silenced],
     // Roundtrip.find('beach') is what the search box runs.
     find: q => (Search ? Search.search(q).map(r => r.cam.name) : []),

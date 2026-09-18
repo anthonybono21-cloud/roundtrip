@@ -7,3 +7,6 @@ firetv/.gradle/
 firetv/build/
 firetv/app/build/
 firetv/local.properties
+
+# Refreshed satellite imagery is a deployment artifact, never binary Git history.
+assets/satellite/

@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Roundtrip · Overlay studio</title><link rel="stylesheet" href="style.css"></head>
+<body>
+<header><a class="brand" href="../">Roundtrip <span>Overlay studio</span></a><span class="review">Design preview · ET401</span></header>
+<main>
+<div class="intro"><div><p class="eyebrow">A little more place. A little less interface.</p><h1>Where are we?</h1><p>City first. The specific spot beneath it. A bigger Roundtrip, with the time and temperature you liked.</p></div><span class="sample">Sample labels & values<br>Camera thumbnail · no live video</span></div>
+<nav class="layouts" aria-label="Overlay layout"><button data-layout="a" aria-pressed="true"><b>01</b> Place first <span>Recommended</span></button><button data-layout="b" aria-pressed="false"><b>02</b> Wide rail</button><button data-layout="c" aria-pressed="false"><b>03</b> Open corners</button></nav>
+<div class="stage a" id="stage">
+<img class="scene" src="https://i.ytimg.com/vi/AKGqd20ik_A/maxresdefault.jpg" alt="Camera preview of the Western Wall" onerror="this.src='https://i.ytimg.com/vi/AKGqd20ik_A/hqdefault.jpg';this.onerror=null">
+<div class="shade"></div>
+<div class="overlay">
+<div class="logo" aria-label="Roundtrip"><img class="lockup" src="../assets/brand/handle-flight-white.png" alt=""><img class="flyer" src="plane.svg" alt=""></div>
+<div class="place"><div class="city">Jerusalem <span>· Israel</span></div><div class="micro">Old City · The Kotel</div></div>
+<div class="conditions"><span class="temp">76°</span><span class="time">04:55 <small>PM</small></span></div>
+</div>
+</div>
+<section class="toolbar"><div><h2 id="layout-name">01 · Place first</h2><p id="layout-copy">One calm cluster, low on the left. Easy to scan across the room, leaving the scene open.</p></div><div class="actions"><button id="flight">Preview plane flight</button><button id="pause" aria-pressed="false">Pause motion</button><button id="compare">Compare all three</button></div></section>
+<p class="motion-note" id="motion-note">A brief flight on arrival, with at least 90 seconds of rest. This study animates a copy of the approved plane shape; the original logo stays intact. Reduced motion keeps everything still.</p>
+<section class="comparison" id="comparison" aria-label="All layouts compared" hidden></section>
+<section class="detail"><h2>Why start with Place first?</h2><p>The location leads without spreading your attention across the screen. The larger logo feels intentional beside the information; the temperature and time keep their prominence. Wide rail suits a desk display. Open corners gives each element room, but asks your eyes to travel farther.</p><p class="fine">This is a layout review, not a change to the live app. Label examples use the existing camera record. In the app, state/province can sit between city and country when available; keep the camera name on the second line.</p></section>
+</main><script src="studio.js"></script></body></html>

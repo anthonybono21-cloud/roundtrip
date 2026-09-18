@@ -1,0 +1,1602 @@
+[
+  {
+    "video_id": "v7xySvhug0Y",
+    "name": "Wellington Airport",
+    "country": "New Zealand",
+    "place": "Wellington, New Zealand",
+    "lat": -41.318,
+    "lng": 174.813,
+    "timezone": "Pacific/Auckland",
+    "tags": [
+      "airport",
+      "live",
+      "public-webcam",
+      "outdoor"
+    ],
+    "provider": "Camview NZ",
+    "watch_url": "https://www.youtube.com/watch?v=v7xySvhug0Y",
+    "source_url": "https://www.youtube.com/live/v7xySvhug0Y",
+    "notes": "Live public stream metadata verified; in-app playback, current frame motion, and camera alignment not yet visually verified. Activity varies by hour.",
+    "source_evidence": {
+      "stream_title": "Camview: Wellington Airport Webcam Live Stream (Secondary 1080p)",
+      "source_catalog": "D:\\Personal\\desk-companion\\earth\\tour\\places.json",
+      "provider_listing": "https://www.youtube.com/live/v7xySvhug0Y",
+      "geolocation_basis": "Inherited approximate site position from original desk-companion places.json; camera mounting point and orientation have not been verified."
+    },
+    "coordinate_confidence": "estimated-site",
+    "aligned": false,
+    "heading": null,
+    "pitch": null,
+    "validation": {
+      "level": "metadata",
+      "checked_at": "2026-09-18T14:00:16.887957+00:00",
+      "endpoint": "https://www.youtube.com/live/v7xySvhug0Y",
+      "playabilityStatus": "OK",
+      "playableInEmbed": true,
+      "isLiveNow": true,
+      "actual_frame_checked": false,
+      "existing_catalog_checked": "remote main cameras.json 127 entries; exact IDs and obvious same-view/landmark aliases excluded",
+      "excluded_previous_11": true
+    }
+  },
+  {
+    "video_id": "MH0_mPt-VXE",
+    "name": "New Orleans airport",
+    "country": "United States",
+    "place": "Kenner, Louisiana",
+    "lat": 29.9998,
+    "lng": -90.2735,
+    "timezone": "America/Chicago",
+    "tags": [
+      "airport",
+      "live",
+      "public-webcam",
+      "outdoor"
+    ],
+    "provider": "Flightradar24",
+    "watch_url": "https://www.youtube.com/watch?v=MH0_mPt-VXE",
+    "source_url": "https://www.youtube.com/live/MH0_mPt-VXE",
+    "notes": "Live public stream metadata verified; in-app playback, current frame motion, and camera alignment not yet visually verified. Activity varies by hour.",
+    "source_evidence": {
+      "stream_title": "FR24 - MSY New Orleans LIVE 24/7",
+      "source_catalog": "D:\\Personal\\desk-companion\\earth\\tour\\places.json",
+      "provider_listing": "https://www.youtube.com/live/MH0_mPt-VXE",
+      "geolocation_basis": "Inherited approximate site position from original desk-companion places.json; camera mounting point and orientation have not been verified."
+    },
+    "coordinate_confidence": "estimated-site",
+    "aligned": false,
+    "heading": null,
+    "pitch": null,
+    "validation": {
+      "level": "metadata",
+      "checked_at": "2026-09-18T14:00:17.618403+00:00",
+      "endpoint": "https://www.youtube.com/live/MH0_mPt-VXE",
+      "playabilityStatus": "OK",
+      "playableInEmbed": true,
+      "isLiveNow": true,
+      "actual_frame_checked": false,
+      "existing_catalog_checked": "remote main cameras.json 127 entries; exact IDs and obvious same-view/landmark aliases excluded",
+      "excluded_previous_11": true
+    }
+  },
+  {
+    "video_id": "0lox0s8zNcU",
+    "name": "Bridge of Lions",
+    "country": "United States",
+    "place": "St. Augustine, Florida",
+    "lat": 29.8918,
+    "lng": -81.3103,
+    "timezone": "America/New_York",
+    "tags": [
+      "bridge",
+      "live",
+      "public-webcam",
+      "outdoor"
+    ],
+    "provider": "See St. Augustine",
+    "watch_url": "https://www.youtube.com/watch?v=0lox0s8zNcU",
+    "source_url": "https://www.youtube.com/live/0lox0s8zNcU",
+    "notes": "Live public stream metadata verified; in-app playback, current frame motion, and camera alignment not yet visually verified. Activity varies by hour.",
+    "source_evidence": {
+      "stream_title": "Bridge of Lions LIVE - 24/7 - St. Augustine, Florida",
+      "source_catalog": "D:\\Personal\\desk-companion\\earth\\tour\\places.json",
+      "provider_listing": "https://www.youtube.com/live/0lox0s8zNcU",
+      "geolocation_basis": "Inherited approximate site position from original desk-companion places.json; camera mounting point and orientation have not been verified."
+    },
+    "coordinate_confidence": "estimated-site",
+    "aligned": false,
+    "heading": null,
+    "pitch": null,
+    "validation": {
+      "level": "metadata",
+      "checked_at": "2026-09-18T14:00:17.859631+00:00",
+      "endpoint": "https://www.youtube.com/live/0lox0s8zNcU",
+      "playabilityStatus": "OK",
+      "playableInEmbed": true,
+      "isLiveNow": true,
+      "actual_frame_checked": false,
+      "existing_catalog_checked": "remote main cameras.json 127 entries; exact IDs and obvious same-view/landmark aliases excluded",
+      "excluded_previous_11": true
+    }
+  },
+  {
+    "video_id": "7wHgYc_kN98",
+    "name": "Brickell Avenue Bridge, Miami River",
+    "country": "United States",
+    "place": "Miami, Florida",
+    "lat": 25.7722,
+    "lng": -80.1903,
+    "timezone": "America/New_York",
+    "tags": [
+      "harbor",
+      "live",
+      "public-webcam",
+      "outdoor"
+    ],
+    "provider": "Miami River Camera",
+    "watch_url": "https://www.youtube.com/watch?v=7wHgYc_kN98",
+    "source_url": "https://www.youtube.com/live/7wHgYc_kN98",
+    "notes": "Live public stream metadata verified; in-app playback, current frame motion, and camera alignment not yet visually verified. Activity varies by hour.",
+    "source_evidence": {
+      "stream_title": "Miami River Camera",
+      "source_catalog": "D:\\Personal\\desk-companion\\earth\\tour\\places.json",
+      "provider_listing": "https://www.youtube.com/live/7wHgYc_kN98",
+      "geolocation_basis": "Inherited approximate site position from original desk-companion places.json; camera mounting point and orientation have not been verified."
+    },
+    "coordinate_confidence": "estimated-site",
+    "aligned": false,
+    "heading": null,
+    "pitch": null,
+    "validation": {
+      "level": "metadata",
+      "checked_at": "2026-09-18T14:00:18.256158+00:00",
+      "endpoint": "https://www.youtube.com/live/7wHgYc_kN98",
+      "playabilityStatus": "OK",
+      "playableInEmbed": true,
+      "isLiveNow": true,
+      "actual_frame_checked": false,
+      "existing_catalog_checked": "remote main cameras.json 127 entries; exact IDs and obvious same-view/landmark aliases excluded",
+      "excluded_previous_11": true
+    }
+  },
+  {
+    "video_id": "m1R-LmvVt30",
+    "name": "PortMiami cruise terminals",
+    "country": "United States",
+    "place": "Miami, Florida",
+    "lat": 25.777,
+    "lng": -80.167,
+    "timezone": "America/New_York",
+    "tags": [
+      "harbor",
+      "live",
+      "public-webcam",
+      "outdoor"
+    ],
+    "provider": "Cruise Ships Live",
+    "watch_url": "https://www.youtube.com/watch?v=m1R-LmvVt30",
+    "source_url": "https://www.youtube.com/live/m1R-LmvVt30",
+    "notes": "Live public stream metadata verified; in-app playback, current frame motion, and camera alignment not yet visually verified. Activity varies by hour.",
+    "source_evidence": {
+      "stream_title": "🔴 LIVE Port Miami Cruise Ship Departures and Arrivals | ICON of the Seas",
+      "source_catalog": "D:\\Personal\\desk-companion\\earth\\tour\\places.json",
+      "provider_listing": "https://www.youtube.com/live/m1R-LmvVt30",
+      "geolocation_basis": "Inherited approximate site position from original desk-companion places.json; camera mounting point and orientation have not been verified."
+    },
+    "coordinate_confidence": "estimated-site",
+    "aligned": false,
+    "heading": null,
+    "pitch": null,
+    "validation": {
+      "level": "metadata",
+      "checked_at": "2026-09-18T14:00:18.841936+00:00",
+      "endpoint": "https://www.youtube.com/live/m1R-LmvVt30",
+      "playabilityStatus": "OK",
+      "playableInEmbed": true,
+      "isLiveNow": true,
+      "actual_frame_checked": false,
+      "existing_catalog_checked": "remote main cameras.json 127 entries; exact IDs and obvious same-view/landmark aliases excluded",
+      "excluded_previous_11": true
+    }
+  },
+  {
+    "video_id": "Jm8wRjD3xVA",
+    "name": "Kennedy Space Center pads",
+    "country": "United States",
+    "place": "Cape Canaveral, Florida",
+    "lat": 28.5857,
+    "lng": -80.651,
+    "timezone": "America/New_York",
+    "tags": [
+      "spaceport",
+      "live",
+      "public-webcam",
+      "outdoor"
+    ],
+    "provider": "NASASpaceflight",
+    "watch_url": "https://www.youtube.com/watch?v=Jm8wRjD3xVA",
+    "source_url": "https://www.youtube.com/live/Jm8wRjD3xVA",
+    "notes": "Live public stream metadata verified; in-app playback, current frame motion, and camera alignment not yet visually verified. Activity varies by hour.",
+    "source_evidence": {
+      "stream_title": "Space Coast Live: 24/7 Views of NASA, SpaceX Falcon 9 Operations, and Starship Pad Construction",
+      "source_catalog": "D:\\Personal\\desk-companion\\earth\\tour\\places.json",
+      "provider_listing": "https://www.youtube.com/live/Jm8wRjD3xVA",
+      "geolocation_basis": "Inherited approximate site position from original desk-companion places.json; camera mounting point and orientation have not been verified."
+    },
+    "coordinate_confidence": "estimated-site",
+    "aligned": false,
+    "heading": null,
+    "pitch": null,
+    "validation": {
+      "level": "metadata",
+      "checked_at": "2026-09-18T14:00:19.673891+00:00",
+      "endpoint": "https://www.youtube.com/live/Jm8wRjD3xVA",
+      "playabilityStatus": "OK",
+      "playableInEmbed": true,
+      "isLiveNow": true,
+      "actual_frame_checked": false,
+      "existing_catalog_checked": "remote main cameras.json 127 entries; exact IDs and obvious same-view/landmark aliases excluded",
+      "excluded_previous_11": true
+    }
+  },
+  {
+    "video_id": "iHJbTrQSZys",
+    "name": "Key West Harbor",
+    "country": "United States",
+    "place": "Key West, Florida",
+    "lat": 24.5607,
+    "lng": -81.8085,
+    "timezone": "America/New_York",
+    "tags": [
+      "harbor",
+      "live",
+      "public-webcam",
+      "outdoor"
+    ],
+    "provider": "PTZtv",
+    "watch_url": "https://www.youtube.com/watch?v=iHJbTrQSZys",
+    "source_url": "https://www.youtube.com/live/iHJbTrQSZys",
+    "notes": "Live public stream metadata verified; in-app playback, current frame motion, and camera alignment not yet visually verified. Activity varies by hour.",
+    "source_evidence": {
+      "stream_title": "LIVE - Key West Harbor Webcam from PTZtv.",
+      "source_catalog": "D:\\Personal\\desk-companion\\earth\\tour\\places.json",
+      "provider_listing": "https://www.youtube.com/live/iHJbTrQSZys",
+      "geolocation_basis": "Inherited approximate site position from original desk-companion places.json; camera mounting point and orientation have not been verified."
+    },
+    "coordinate_confidence": "estimated-site",
+    "aligned": false,
+    "heading": null,
+    "pitch": null,
+    "validation": {
+      "level": "metadata",
+      "checked_at": "2026-09-18T14:00:20.239960+00:00",
+      "endpoint": "https://www.youtube.com/live/iHJbTrQSZys",
+      "playabilityStatus": "OK",
+      "playableInEmbed": true,
+      "isLiveNow": true,
+      "actual_frame_checked": false,
+      "existing_catalog_checked": "remote main cameras.json 127 entries; exact IDs and obvious same-view/landmark aliases excluded",
+      "excluded_previous_11": true
+    }
+  },
+  {
+    "video_id": "OmyDLXvaus4",
+    "name": "Hamburg harbour and the Elbphilharmonie",
+    "country": "Germany",
+    "place": "Hamburg, Germany",
+    "lat": 53.5482,
+    "lng": 9.9788,
+    "timezone": "Europe/Berlin",
+    "tags": [
+      "harbor",
+      "live",
+      "public-webcam",
+      "outdoor"
+    ],
+    "provider": "livespotting",
+    "watch_url": "https://www.youtube.com/watch?v=OmyDLXvaus4",
+    "source_url": "https://www.youtube.com/live/OmyDLXvaus4",
+    "notes": "Live public stream metadata verified; in-app playback, current frame motion, and camera alignment not yet visually verified. Activity varies by hour.",
+    "source_evidence": {
+      "stream_title": "🔴 LIVE: Hamburg Michel – Webcam mit Panoramablick auf Hafen",
+      "source_catalog": "D:\\Personal\\desk-companion\\earth\\tour\\places.json",
+      "provider_listing": "https://www.youtube.com/live/OmyDLXvaus4",
+      "geolocation_basis": "Inherited approximate site position from original desk-companion places.json; camera mounting point and orientation have not been verified."
+    },
+    "coordinate_confidence": "estimated-site",
+    "aligned": false,
+    "heading": null,
+    "pitch": null,
+    "validation": {
+      "level": "metadata",
+      "checked_at": "2026-09-18T14:00:21.619802+00:00",
+      "endpoint": "https://www.youtube.com/live/OmyDLXvaus4",
+      "playabilityStatus": "OK",
+      "playableInEmbed": true,
+      "isLiveNow": true,
+      "actual_frame_checked": false,
+      "existing_catalog_checked": "remote main cameras.json 127 entries; exact IDs and obvious same-view/landmark aliases excluded",
+      "excluded_previous_11": true
+    }
+  },
+  {
+    "video_id": "RRrizxBud1A",
+    "name": "Port de la Darse",
+    "country": "France",
+    "place": "Villefranche-sur-Mer, France",
+    "lat": 43.694,
+    "lng": 7.3093,
+    "timezone": "Europe/Paris",
+    "tags": [
+      "harbor",
+      "live",
+      "public-webcam",
+      "outdoor"
+    ],
+    "provider": "Ports Départementaux de Villefranche-sur-Mer",
+    "watch_url": "https://www.youtube.com/watch?v=RRrizxBud1A",
+    "source_url": "https://www.youtube.com/live/RRrizxBud1A",
+    "notes": "Live public stream metadata verified; in-app playback, current frame motion, and camera alignment not yet visually verified. Activity varies by hour.",
+    "source_evidence": {
+      "stream_title": "Port de la Darse",
+      "source_catalog": "D:\\Personal\\desk-companion\\earth\\tour\\places.json",
+      "provider_listing": "https://www.youtube.com/live/RRrizxBud1A",
+      "geolocation_basis": "Inherited approximate site position from original desk-companion places.json; camera mounting point and orientation have not been verified."
+    },
+    "coordinate_confidence": "estimated-site",
+    "aligned": false,
+    "heading": null,
+    "pitch": null,
+    "validation": {
+      "level": "metadata",
+      "checked_at": "2026-09-18T14:00:21.896717+00:00",
+      "endpoint": "https://www.youtube.com/live/RRrizxBud1A",
+      "playabilityStatus": "OK",
+      "playableInEmbed": true,
+      "isLiveNow": true,
+      "actual_frame_checked": false,
+      "existing_catalog_checked": "remote main cameras.json 127 entries; exact IDs and obvious same-view/landmark aliases excluded",
+      "excluded_previous_11": true
+    }
+  },
+  {
+    "video_id": "RbI8JwrBZQA",
+    "name": "Vesuvius at dusk",
+    "country": "Italy",
+    "place": "Naples, Italy",
+    "lat": 40.822,
+    "lng": 14.426,
+    "timezone": "Europe/Rome",
+    "tags": [
+      "volcano",
+      "live",
+      "public-webcam",
+      "outdoor"
+    ],
+    "provider": "Paesaggi Digitali",
+    "watch_url": "https://www.youtube.com/watch?v=RbI8JwrBZQA",
+    "source_url": "https://www.youtube.com/live/RbI8JwrBZQA",
+    "notes": "Live public stream metadata verified; in-app playback, current frame motion, and camera alignment not yet visually verified. Activity varies by hour. Low-motion volcano panorama; lower priority than transport feeds.",
+    "source_evidence": {
+      "stream_title": "Webcam Live Vulcano Vesuvio (NA)",
+      "source_catalog": "D:\\Personal\\desk-companion\\earth\\tour\\places.json",
+      "provider_listing": "https://www.youtube.com/live/RbI8JwrBZQA",
+      "geolocation_basis": "Inherited approximate site position from original desk-companion places.json; camera mounting point and orientation have not been verified."
+    },
+    "coordinate_confidence": "estimated-site",
+    "aligned": false,
+    "heading": null,
+    "pitch": null,
+    "validation": {
+      "level": "metadata",
+      "checked_at": "2026-09-18T13:58:00.216128+00:00",
+      "endpoint": "https://www.youtube.com/live/RbI8JwrBZQA",
+      "playabilityStatus": "OK",
+      "playableInEmbed": true,
+      "isLiveNow": true,
+      "actual_frame_checked": false,
+      "existing_catalog_checked": "remote main cameras.json 127 entries; exact IDs and obvious same-view/landmark aliases excluded",
+      "excluded_previous_11": true
+    }
+  },
+  {
+    "video_id": "1oNQ9HoxAEE",
+    "name": "Tokyo Station Platforms",
+    "country": "Japan",
+    "place": "Tokyo, Japan",
+    "lat": 35.6812,
+    "lng": 139.7671,
+    "timezone": "Asia/Tokyo",
+    "tags": [
+      "railway",
+      "live",
+      "public-webcam",
+      "outdoor"
+    ],
+    "provider": "日テレ鉄道部",
+    "watch_url": "https://www.youtube.com/watch?v=1oNQ9HoxAEE",
+    "source_url": "https://www.youtube.com/live/1oNQ9HoxAEE",
+    "notes": "Live public stream metadata verified; in-app playback, current frame motion, and camera alignment not yet visually verified. Activity varies by hour.",
+    "source_evidence": {
+      "stream_title": "【東京駅 ライブ】天カメを見ながら鉄道について語り合う雑談部屋です！  Train, Tokyo Station Live Camera [日テレ鉄道部]",
+      "source_catalog": "D:\\Personal\\desk-companion\\earth\\tour\\places.json",
+      "provider_listing": "https://www.youtube.com/live/1oNQ9HoxAEE",
+      "geolocation_basis": "Inherited approximate site position from original desk-companion places.json; camera mounting point and orientation have not been verified."
+    },
+    "coordinate_confidence": "estimated-site",
+    "aligned": false,
+    "heading": null,
+    "pitch": null,
+    "validation": {
+      "level": "metadata",
+      "checked_at": "2026-09-18T13:58:00.239277+00:00",
+      "endpoint": "https://www.youtube.com/live/1oNQ9HoxAEE",
+      "playabilityStatus": "OK",
+      "playableInEmbed": true,
+      "isLiveNow": true,
+      "actual_frame_checked": false,
+      "existing_catalog_checked": "remote main cameras.json 127 entries; exact IDs and obvious same-view/landmark aliases excluded",
+      "excluded_previous_11": true
+    }
+  },
+  {
+    "video_id": "tusny7uGPS8",
+    "name": "Kansai Airport Light Field",
+    "country": "Japan",
+    "place": "Osaka, Japan",
+    "lat": 34.4347,
+    "lng": 135.244,
+    "timezone": "Asia/Tokyo",
+    "tags": [
+      "airport",
+      "live",
+      "public-webcam",
+      "outdoor"
+    ],
+    "provider": "カンテレNEWS",
+    "watch_url": "https://www.youtube.com/watch?v=tusny7uGPS8",
+    "source_url": "https://www.youtube.com/live/tusny7uGPS8",
+    "notes": "Live public stream metadata verified; in-app playback, current frame motion, and camera alignment not yet visually verified. Activity varies by hour.",
+    "source_evidence": {
+      "stream_title": "【LIVE】関西国際空港(KIX)ライブカメラ　第1ターミナル｜ Kansai International Airport - Osaka, Japan＜カンテレNEWS＞",
+      "source_catalog": "D:\\Personal\\desk-companion\\earth\\tour\\places.json",
+      "provider_listing": "https://www.youtube.com/live/tusny7uGPS8",
+      "geolocation_basis": "Inherited approximate site position from original desk-companion places.json; camera mounting point and orientation have not been verified."
+    },
+    "coordinate_confidence": "estimated-site",
+    "aligned": false,
+    "heading": null,
+    "pitch": null,
+    "validation": {
+      "level": "metadata",
+      "checked_at": "2026-09-18T13:58:00.581829+00:00",
+      "endpoint": "https://www.youtube.com/live/tusny7uGPS8",
+      "playabilityStatus": "OK",
+      "playableInEmbed": true,
+      "isLiveNow": true,
+      "actual_frame_checked": false,
+      "existing_catalog_checked": "remote main cameras.json 127 entries; exact IDs and obvious same-view/landmark aliases excluded",
+      "excluded_previous_11": true
+    }
+  },
+  {
+    "video_id": "wWEnxWA7nnY",
+    "name": "Taoyuan Airport Ramp",
+    "country": "Taiwan",
+    "place": "Taoyuan, Taiwan",
+    "lat": 25.0797,
+    "lng": 121.2342,
+    "timezone": "Asia/Taipei",
+    "tags": [
+      "airport",
+      "live",
+      "public-webcam",
+      "outdoor"
+    ],
+    "provider": "Taoyuan Airport",
+    "watch_url": "https://www.youtube.com/watch?v=wWEnxWA7nnY",
+    "source_url": "https://www.youtube.com/live/wWEnxWA7nnY",
+    "notes": "Live public stream metadata verified; in-app playback, current frame motion, and camera alignment not yet visually verified. Activity varies by hour.",
+    "source_evidence": {
+      "stream_title": "🔴 TPE 4K桃園國際機場 北跑道觀景台即時影像｜Taoyuan International Airport North Runway Live plane spotting",
+      "source_catalog": "D:\\Personal\\desk-companion\\earth\\tour\\places.json",
+      "provider_listing": "https://www.youtube.com/live/wWEnxWA7nnY",
+      "geolocation_basis": "Inherited approximate site position from original desk-companion places.json; camera mounting point and orientation have not been verified."
+    },
+    "coordinate_confidence": "estimated-site",
+    "aligned": false,
+    "heading": null,
+    "pitch": null,
+    "validation": {
+      "level": "metadata",
+      "checked_at": "2026-09-18T14:00:23.252022+00:00",
+      "endpoint": "https://www.youtube.com/live/wWEnxWA7nnY",
+      "playabilityStatus": "OK",
+      "playableInEmbed": true,
+      "isLiveNow": true,
+      "actual_frame_checked": false,
+      "existing_catalog_checked": "remote main cameras.json 127 entries; exact IDs and obvious same-view/landmark aliases excluded",
+      "excluded_previous_11": true
+    }
+  },
+  {
+    "video_id": "2iB-pHJQcak",
+    "name": "Nanaimo harbour and Newcastle Island",
+    "country": "Canada",
+    "place": "Nanaimo, British Columbia",
+    "lat": 49.1655,
+    "lng": -123.9355,
+    "timezone": "America/Vancouver",
+    "tags": [
+      "harbor",
+      "live",
+      "public-webcam",
+      "outdoor"
+    ],
+    "provider": "CHEK Media",
+    "watch_url": "https://www.youtube.com/watch?v=2iB-pHJQcak",
+    "source_url": "https://www.youtube.com/live/2iB-pHJQcak",
+    "notes": "Live public stream metadata verified; in-app playback, current frame motion, and camera alignment not yet visually verified. Activity varies by hour.",
+    "source_evidence": {
+      "stream_title": "CHEK News | Nanaimo Harbour Cam 24/7 Livestream",
+      "source_catalog": "D:\\Personal\\desk-companion\\earth\\tour\\places.json",
+      "provider_listing": "https://www.youtube.com/live/2iB-pHJQcak",
+      "geolocation_basis": "Inherited approximate site position from original desk-companion places.json; camera mounting point and orientation have not been verified."
+    },
+    "coordinate_confidence": "estimated-site",
+    "aligned": false,
+    "heading": null,
+    "pitch": null,
+    "validation": {
+      "level": "metadata",
+      "checked_at": "2026-09-18T14:00:25.911536+00:00",
+      "endpoint": "https://www.youtube.com/live/2iB-pHJQcak",
+      "playabilityStatus": "OK",
+      "playableInEmbed": true,
+      "isLiveNow": true,
+      "actual_frame_checked": false,
+      "existing_catalog_checked": "remote main cameras.json 127 entries; exact IDs and obvious same-view/landmark aliases excluded",
+      "excluded_previous_11": true
+    }
+  },
+  {
+    "video_id": "tmlE1ct0cYk",
+    "name": "Prague Main Station",
+    "country": "Czechia",
+    "place": "Prague, Czechia",
+    "lat": 50.0832,
+    "lng": 14.4357,
+    "timezone": "Europe/Prague",
+    "tags": [
+      "railway",
+      "live",
+      "public-webcam",
+      "outdoor"
+    ],
+    "provider": "SlowTV",
+    "watch_url": "https://www.youtube.com/watch?v=tmlE1ct0cYk",
+    "source_url": "https://www.youtube.com/live/tmlE1ct0cYk",
+    "notes": "Live public stream metadata verified; in-app playback, current frame motion, and camera alignment not yet visually verified. Activity varies by hour.",
+    "source_evidence": {
+      "stream_title": "🔴 4K LIVE: Trainspotting on Prague Main Station | 24/7 LIVE",
+      "source_catalog": "D:\\Personal\\desk-companion\\earth\\tour\\places.json",
+      "provider_listing": "https://www.youtube.com/live/tmlE1ct0cYk",
+      "geolocation_basis": "Inherited approximate site position from original desk-companion places.json; camera mounting point and orientation have not been verified."
+    },
+    "coordinate_confidence": "estimated-site",
+    "aligned": false,
+    "heading": null,
+    "pitch": null,
+    "validation": {
+      "level": "metadata",
+      "checked_at": "2026-09-18T14:00:26.843010+00:00",
+      "endpoint": "https://www.youtube.com/live/tmlE1ct0cYk",
+      "playabilityStatus": "OK",
+      "playableInEmbed": true,
+      "isLiveNow": true,
+      "actual_frame_checked": false,
+      "existing_catalog_checked": "remote main cameras.json 127 entries; exact IDs and obvious same-view/landmark aliases excluded",
+      "excluded_previous_11": true
+    }
+  },
+  {
+    "video_id": "0imghdHjEks",
+    "name": "Nijmegen Station Works",
+    "country": "Netherlands",
+    "place": "Nijmegen, Netherlands",
+    "lat": 51.8437,
+    "lng": 5.8515,
+    "timezone": "Europe/Amsterdam",
+    "tags": [
+      "construction",
+      "live",
+      "public-webcam",
+      "outdoor"
+    ],
+    "provider": "ProRail",
+    "watch_url": "https://www.youtube.com/watch?v=0imghdHjEks",
+    "source_url": "https://www.youtube.com/live/0imghdHjEks",
+    "notes": "Live public stream metadata verified; in-app playback, current frame motion, and camera alignment not yet visually verified. Activity varies by hour. Station construction; remove when works and broadcast finish.",
+    "source_evidence": {
+      "stream_title": "Werkzaamheden station Nijmegen I Livestream ProRail",
+      "source_catalog": "D:\\Personal\\desk-companion\\earth\\tour\\places.json",
+      "provider_listing": "https://www.youtube.com/live/0imghdHjEks",
+      "geolocation_basis": "Inherited approximate site position from original desk-companion places.json; camera mounting point and orientation have not been verified."
+    },
+    "coordinate_confidence": "estimated-site",
+    "aligned": false,
+    "heading": null,
+    "pitch": null,
+    "validation": {
+      "level": "metadata",
+      "checked_at": "2026-09-18T14:00:27.218877+00:00",
+      "endpoint": "https://www.youtube.com/live/0imghdHjEks",
+      "playabilityStatus": "OK",
+      "playableInEmbed": true,
+      "isLiveNow": true,
+      "actual_frame_checked": false,
+      "existing_catalog_checked": "remote main cameras.json 127 entries; exact IDs and obvious same-view/landmark aliases excluded",
+      "excluded_previous_11": true
+    }
+  },
+  {
+    "video_id": "vukolcrIkzc",
+    "name": "Elbe Shipspotting, Grauerort",
+    "country": "Germany",
+    "place": "Stade, Germany",
+    "lat": 53.684,
+    "lng": 9.488,
+    "timezone": "Europe/Berlin",
+    "tags": [
+      "harbor",
+      "live",
+      "public-webcam",
+      "outdoor"
+    ],
+    "provider": "Elbcam Shipspotting",
+    "watch_url": "https://www.youtube.com/watch?v=vukolcrIkzc",
+    "source_url": "https://www.youtube.com/live/vukolcrIkzc",
+    "notes": "Live public stream metadata verified; in-app playback, current frame motion, and camera alignment not yet visually verified. Activity varies by hour.",
+    "source_evidence": {
+      "stream_title": "🔴 Elbe Shipspotting Live von der Landungsbrücke vor der Festung Grauerort 🌊⚓",
+      "source_catalog": "D:\\Personal\\desk-companion\\earth\\tour\\places.json",
+      "provider_listing": "https://www.youtube.com/live/vukolcrIkzc",
+      "geolocation_basis": "Inherited approximate site position from original desk-companion places.json; camera mounting point and orientation have not been verified."
+    },
+    "coordinate_confidence": "estimated-site",
+    "aligned": false,
+    "heading": null,
+    "pitch": null,
+    "validation": {
+      "level": "metadata",
+      "checked_at": "2026-09-18T14:00:27.752291+00:00",
+      "endpoint": "https://www.youtube.com/live/vukolcrIkzc",
+      "playabilityStatus": "OK",
+      "playableInEmbed": true,
+      "isLiveNow": true,
+      "actual_frame_checked": false,
+      "existing_catalog_checked": "remote main cameras.json 127 entries; exact IDs and obvious same-view/landmark aliases excluded",
+      "excluded_previous_11": true
+    }
+  },
+  {
+    "video_id": "_KVWehizoNU",
+    "name": "Nieuwe Waterweg Ship Channel",
+    "country": "Netherlands",
+    "place": "Rotterdam, Netherlands",
+    "lat": 51.98,
+    "lng": 4.09,
+    "timezone": "Europe/Amsterdam",
+    "tags": [
+      "harbor",
+      "live",
+      "public-webcam",
+      "outdoor"
+    ],
+    "provider": "Port of Rotterdam",
+    "watch_url": "https://www.youtube.com/watch?v=_KVWehizoNU",
+    "source_url": "https://www.youtube.com/live/_KVWehizoNU",
+    "notes": "Live public stream metadata verified; in-app playback, current frame motion, and camera alignment not yet visually verified. Activity varies by hour.",
+    "source_evidence": {
+      "stream_title": "Live stream | Nieuwe Waterweg",
+      "source_catalog": "D:\\Personal\\desk-companion\\earth\\tour\\places.json",
+      "provider_listing": "https://www.youtube.com/live/_KVWehizoNU",
+      "geolocation_basis": "Inherited approximate site position from original desk-companion places.json; camera mounting point and orientation have not been verified."
+    },
+    "coordinate_confidence": "estimated-site",
+    "aligned": false,
+    "heading": null,
+    "pitch": null,
+    "validation": {
+      "level": "metadata",
+      "checked_at": "2026-09-18T14:00:27.915658+00:00",
+      "endpoint": "https://www.youtube.com/live/_KVWehizoNU",
+      "playabilityStatus": "OK",
+      "playableInEmbed": true,
+      "isLiveNow": true,
+      "actual_frame_checked": false,
+      "existing_catalog_checked": "remote main cameras.json 127 entries; exact IDs and obvious same-view/landmark aliases excluded",
+      "excluded_previous_11": true
+    }
+  },
+  {
+    "video_id": "1P0feVMNX5s",
+    "name": "Colorado Model Railroad Museum",
+    "country": "United States",
+    "place": "Greeley, Colorado",
+    "lat": 40.4208,
+    "lng": -104.6935,
+    "timezone": "America/Denver",
+    "tags": [
+      "model-railway",
+      "live",
+      "public-webcam",
+      "indoor"
+    ],
+    "provider": "Virtual Railfan",
+    "watch_url": "https://www.youtube.com/watch?v=1P0feVMNX5s",
+    "source_url": "https://www.youtube.com/live/1P0feVMNX5s",
+    "notes": "Live public stream metadata verified; in-app playback, current frame motion, and camera alignment not yet visually verified. Activity varies by hour. Indoor model railroad; activity depends on museum operating hours.",
+    "source_evidence": {
+      "stream_title": "Colorado Model Railroad Museum, Greeley, CO, USA | Virtual Railfan LIVE !",
+      "source_catalog": "D:\\Personal\\desk-companion\\earth\\tour\\places.json",
+      "provider_listing": "https://www.youtube.com/live/1P0feVMNX5s",
+      "geolocation_basis": "Inherited approximate site position from original desk-companion places.json; camera mounting point and orientation have not been verified."
+    },
+    "coordinate_confidence": "estimated-site",
+    "aligned": false,
+    "heading": null,
+    "pitch": null,
+    "validation": {
+      "level": "metadata",
+      "checked_at": "2026-09-18T13:58:02.214424+00:00",
+      "endpoint": "https://www.youtube.com/live/1P0feVMNX5s",
+      "playabilityStatus": "OK",
+      "playableInEmbed": true,
+      "isLiveNow": true,
+      "actual_frame_checked": false,
+      "existing_catalog_checked": "remote main cameras.json 127 entries; exact IDs and obvious same-view/landmark aliases excluded",
+      "excluded_previous_11": true
+    }
+  },
+  {
+    "video_id": "RZpIX6cq7Os",
+    "name": "Strasburg Rail Road",
+    "country": "United States",
+    "place": "Strasburg, Pennsylvania",
+    "lat": 40.0015,
+    "lng": -76.1462,
+    "timezone": "America/New_York",
+    "tags": [
+      "railway",
+      "live",
+      "public-webcam",
+      "outdoor"
+    ],
+    "provider": "Virtual Railfan",
+    "watch_url": "https://www.youtube.com/watch?v=RZpIX6cq7Os",
+    "source_url": "https://www.youtube.com/live/RZpIX6cq7Os",
+    "notes": "Live public stream metadata verified; in-app playback, current frame motion, and camera alignment not yet visually verified. Activity varies by hour.",
+    "source_evidence": {
+      "stream_title": "Strasburg, Pennsylvania, USA | LIVE Train Camera (PTZ)",
+      "source_catalog": "D:\\Personal\\desk-companion\\earth\\tour\\places.json",
+      "provider_listing": "https://www.youtube.com/live/RZpIX6cq7Os",
+      "geolocation_basis": "Inherited approximate site position from original desk-companion places.json; camera mounting point and orientation have not been verified."
+    },
+    "coordinate_confidence": "estimated-site",
+    "aligned": false,
+    "heading": null,
+    "pitch": null,
+    "validation": {
+      "level": "metadata",
+      "checked_at": "2026-09-18T14:00:28.628836+00:00",
+      "endpoint": "https://www.youtube.com/live/RZpIX6cq7Os",
+      "playabilityStatus": "OK",
+      "playableInEmbed": true,
+      "isLiveNow": true,
+      "actual_frame_checked": false,
+      "existing_catalog_checked": "remote main cameras.json 127 entries; exact IDs and obvious same-view/landmark aliases excluded",
+      "excluded_previous_11": true
+    }
+  },
+  {
+    "video_id": "8lbAbc2REyQ",
+    "name": "Cowes Floating Bridge",
+    "country": "United Kingdom",
+    "place": "Cowes, England",
+    "lat": 50.7565,
+    "lng": -1.293,
+    "timezone": "Europe/London",
+    "tags": [
+      "ferry",
+      "live",
+      "public-webcam",
+      "outdoor"
+    ],
+    "provider": "Isle of Wight",
+    "watch_url": "https://www.youtube.com/watch?v=8lbAbc2REyQ",
+    "source_url": "https://www.youtube.com/live/8lbAbc2REyQ",
+    "notes": "Live public stream metadata verified; in-app playback, current frame motion, and camera alignment not yet visually verified. Activity varies by hour.",
+    "source_evidence": {
+      "stream_title": "🔴 Cowes Floating Bridge 4K Camera | Yachting & Chain Ferry | River Medina | Isle of Wight Webcams UK",
+      "source_catalog": "D:\\Personal\\desk-companion\\earth\\tour\\places.json",
+      "provider_listing": "https://www.youtube.com/live/8lbAbc2REyQ",
+      "geolocation_basis": "Inherited approximate site position from original desk-companion places.json; camera mounting point and orientation have not been verified."
+    },
+    "coordinate_confidence": "estimated-site",
+    "aligned": false,
+    "heading": null,
+    "pitch": null,
+    "validation": {
+      "level": "metadata",
+      "checked_at": "2026-09-18T14:00:28.596216+00:00",
+      "endpoint": "https://www.youtube.com/live/8lbAbc2REyQ",
+      "playabilityStatus": "OK",
+      "playableInEmbed": true,
+      "isLiveNow": true,
+      "actual_frame_checked": false,
+      "existing_catalog_checked": "remote main cameras.json 127 entries; exact IDs and obvious same-view/landmark aliases excluded",
+      "excluded_previous_11": true
+    }
+  },
+  {
+    "video_id": "CXYr04BWvmc",
+    "name": "Bay Bridge West Span",
+    "country": "United States",
+    "place": "San Francisco, California",
+    "lat": 37.7905,
+    "lng": -122.3865,
+    "timezone": "America/Los_Angeles",
+    "tags": [
+      "bridge",
+      "live",
+      "public-webcam",
+      "outdoor"
+    ],
+    "provider": "ABC7 News Bay Area",
+    "watch_url": "https://www.youtube.com/watch?v=CXYr04BWvmc",
+    "source_url": "https://www.youtube.com/live/CXYr04BWvmc",
+    "notes": "Live public stream metadata verified; in-app playback, current frame motion, and camera alignment not yet visually verified. Activity varies by hour.",
+    "source_evidence": {
+      "stream_title": "San Francisco-Oakland Bay Bridge Live Camera | 24/7 Stream",
+      "source_catalog": "D:\\Personal\\desk-companion\\earth\\tour\\places.json",
+      "provider_listing": "https://www.youtube.com/live/CXYr04BWvmc",
+      "geolocation_basis": "Inherited approximate site position from original desk-companion places.json; camera mounting point and orientation have not been verified."
+    },
+    "coordinate_confidence": "estimated-site",
+    "aligned": false,
+    "heading": null,
+    "pitch": null,
+    "validation": {
+      "level": "metadata",
+      "checked_at": "2026-09-18T14:00:29.545749+00:00",
+      "endpoint": "https://www.youtube.com/live/CXYr04BWvmc",
+      "playabilityStatus": "OK",
+      "playableInEmbed": true,
+      "isLiveNow": true,
+      "actual_frame_checked": false,
+      "existing_catalog_checked": "remote main cameras.json 127 entries; exact IDs and obvious same-view/landmark aliases excluded",
+      "excluded_previous_11": true
+    }
+  },
+  {
+    "video_id": "pr2p_uvmXh8",
+    "name": "Friday Harbor Marina",
+    "country": "United States",
+    "place": "San Juan Island, Washington",
+    "lat": 48.537,
+    "lng": -123.013,
+    "timezone": "America/Los_Angeles",
+    "tags": [
+      "harbor",
+      "live",
+      "public-webcam",
+      "outdoor"
+    ],
+    "provider": "Port of Friday Harbor",
+    "watch_url": "https://www.youtube.com/watch?v=pr2p_uvmXh8",
+    "source_url": "https://www.youtube.com/live/pr2p_uvmXh8",
+    "notes": "Live public stream metadata verified; in-app playback, current frame motion, and camera alignment not yet visually verified. Activity varies by hour.",
+    "source_evidence": {
+      "stream_title": "Port of Friday Harbor Live Stream",
+      "source_catalog": "D:\\Personal\\desk-companion\\earth\\tour\\places.json",
+      "provider_listing": "https://www.youtube.com/live/pr2p_uvmXh8",
+      "geolocation_basis": "Inherited approximate site position from original desk-companion places.json; camera mounting point and orientation have not been verified."
+    },
+    "coordinate_confidence": "estimated-site",
+    "aligned": false,
+    "heading": null,
+    "pitch": null,
+    "validation": {
+      "level": "metadata",
+      "checked_at": "2026-09-18T13:58:02.522813+00:00",
+      "endpoint": "https://www.youtube.com/live/pr2p_uvmXh8",
+      "playabilityStatus": "OK",
+      "playableInEmbed": true,
+      "isLiveNow": true,
+      "actual_frame_checked": false,
+      "existing_catalog_checked": "remote main cameras.json 127 entries; exact IDs and obvious same-view/landmark aliases excluded",
+      "excluded_previous_11": true
+    }
+  },
+  {
+    "video_id": "jpTWh9bKULw",
+    "name": "Morro Rock and the Harbor",
+    "country": "United States",
+    "place": "Morro Bay, California",
+    "lat": 35.3653,
+    "lng": -120.853,
+    "timezone": "America/Los_Angeles",
+    "tags": [
+      "harbor",
+      "live",
+      "public-webcam",
+      "outdoor"
+    ],
+    "provider": "SeeCam",
+    "watch_url": "https://www.youtube.com/watch?v=jpTWh9bKULw",
+    "source_url": "https://www.youtube.com/live/jpTWh9bKULw",
+    "notes": "Live public stream metadata verified; in-app playback, current frame motion, and camera alignment not yet visually verified. Activity varies by hour.",
+    "source_evidence": {
+      "stream_title": "Morro Bay Yacht Club - See.Cam",
+      "source_catalog": "D:\\Personal\\desk-companion\\earth\\tour\\places.json",
+      "provider_listing": "https://www.youtube.com/live/jpTWh9bKULw",
+      "geolocation_basis": "Inherited approximate site position from original desk-companion places.json; camera mounting point and orientation have not been verified."
+    },
+    "coordinate_confidence": "estimated-site",
+    "aligned": false,
+    "heading": null,
+    "pitch": null,
+    "validation": {
+      "level": "metadata",
+      "checked_at": "2026-09-18T14:00:30.402204+00:00",
+      "endpoint": "https://www.youtube.com/live/jpTWh9bKULw",
+      "playabilityStatus": "OK",
+      "playableInEmbed": true,
+      "isLiveNow": true,
+      "actual_frame_checked": false,
+      "existing_catalog_checked": "remote main cameras.json 127 entries; exact IDs and obvious same-view/landmark aliases excluded",
+      "excluded_previous_11": true
+    }
+  },
+  {
+    "video_id": "HYAfFvdRvdA",
+    "name": "Las Palmas Port",
+    "country": "Spain",
+    "place": "Las Palmas, Gran Canaria",
+    "lat": 28.143,
+    "lng": -15.413,
+    "timezone": "Atlantic/Canary",
+    "tags": [
+      "harbor",
+      "live",
+      "public-webcam",
+      "outdoor"
+    ],
+    "provider": "WingCam",
+    "watch_url": "https://www.youtube.com/watch?v=HYAfFvdRvdA",
+    "source_url": "https://wingcamlive.com/",
+    "notes": "Live public stream metadata verified; in-app playback, current frame motion, and camera alignment not yet visually verified. Activity varies by hour.",
+    "source_evidence": {
+      "stream_title": "LIVE WEBCAM LAS PALMAS PORT | CANARY ISLANDS | SPAIN",
+      "source_catalog": null,
+      "provider_listing": "https://wingcamlive.com/",
+      "geolocation_basis": "Estimated site/area position, not camera mounting point; named place matched to operator stream title. Verify before a camera-aligned descent."
+    },
+    "coordinate_confidence": "estimated-site",
+    "aligned": false,
+    "heading": null,
+    "pitch": null,
+    "validation": {
+      "level": "metadata",
+      "checked_at": "2026-09-18T14:01:10.713595+00:00",
+      "endpoint": "https://www.youtube.com/live/HYAfFvdRvdA",
+      "playabilityStatus": "OK",
+      "playableInEmbed": true,
+      "isLiveNow": true,
+      "actual_frame_checked": false,
+      "existing_catalog_checked": "remote main cameras.json 127 entries; exact IDs and obvious same-view/landmark aliases excluded",
+      "excluded_previous_11": true
+    }
+  },
+  {
+    "video_id": "hRw1_JQMQoE",
+    "name": "Palma Harbor and Airport",
+    "country": "Spain",
+    "place": "Palma, Mallorca",
+    "lat": 39.554,
+    "lng": 2.628,
+    "timezone": "Europe/Madrid",
+    "tags": [
+      "harbor",
+      "live",
+      "public-webcam",
+      "outdoor"
+    ],
+    "provider": "WingCam",
+    "watch_url": "https://www.youtube.com/watch?v=hRw1_JQMQoE",
+    "source_url": "https://wingcamlive.com/",
+    "notes": "Live public stream metadata verified; in-app playback, current frame motion, and camera alignment not yet visually verified. Activity varies by hour.",
+    "source_evidence": {
+      "stream_title": "LIVE MALLORCA – PORT | AIRPORT | CITY | BEACH",
+      "source_catalog": null,
+      "provider_listing": "https://wingcamlive.com/",
+      "geolocation_basis": "Estimated site/area position, not camera mounting point; named place matched to operator stream title. Verify before a camera-aligned descent."
+    },
+    "coordinate_confidence": "estimated-site",
+    "aligned": false,
+    "heading": null,
+    "pitch": null,
+    "validation": {
+      "level": "metadata",
+      "checked_at": "2026-09-18T14:01:11.617937+00:00",
+      "endpoint": "https://www.youtube.com/live/hRw1_JQMQoE",
+      "playabilityStatus": "OK",
+      "playableInEmbed": true,
+      "isLiveNow": true,
+      "actual_frame_checked": false,
+      "existing_catalog_checked": "remote main cameras.json 127 entries; exact IDs and obvious same-view/landmark aliases excluded",
+      "excluded_previous_11": true
+    }
+  },
+  {
+    "video_id": "yVfFVNmE0LE",
+    "name": "Tehachapi Depot",
+    "country": "United States",
+    "place": "Tehachapi, California",
+    "lat": 35.132,
+    "lng": -118.448,
+    "timezone": "America/Los_Angeles",
+    "tags": [
+      "railway",
+      "live",
+      "public-webcam",
+      "outdoor"
+    ],
+    "provider": "Tehachapi Live Train Cams",
+    "watch_url": "https://www.youtube.com/watch?v=yVfFVNmE0LE",
+    "source_url": "https://tehachapidepot.com/live-cams",
+    "notes": "Live public stream metadata verified; in-app playback, current frame motion, and camera alignment not yet visually verified. Activity varies by hour.",
+    "source_evidence": {
+      "stream_title": "Tehachapi Live Train Cams at the Tehachapi Depot Railroad Museum 🚉",
+      "source_catalog": null,
+      "provider_listing": "https://tehachapidepot.com/live-cams",
+      "geolocation_basis": "Estimated site/area position, not camera mounting point; named place matched to operator stream title. Verify before a camera-aligned descent."
+    },
+    "coordinate_confidence": "estimated-site",
+    "aligned": false,
+    "heading": null,
+    "pitch": null,
+    "validation": {
+      "level": "metadata",
+      "checked_at": "2026-09-18T14:01:12.574552+00:00",
+      "endpoint": "https://www.youtube.com/live/yVfFVNmE0LE",
+      "playabilityStatus": "OK",
+      "playableInEmbed": true,
+      "isLiveNow": true,
+      "actual_frame_checked": false,
+      "existing_catalog_checked": "remote main cameras.json 127 entries; exact IDs and obvious same-view/landmark aliases excluded",
+      "excluded_previous_11": true
+    }
+  },
+  {
+    "video_id": "Bzd0z0YqTEw",
+    "name": "Tehachapi Pass at West Cable",
+    "country": "United States",
+    "place": "Tehachapi Pass, California",
+    "lat": 35.166,
+    "lng": -118.493,
+    "timezone": "America/Los_Angeles",
+    "tags": [
+      "railway",
+      "live",
+      "public-webcam",
+      "outdoor"
+    ],
+    "provider": "Tehachapi Live Train Cams",
+    "watch_url": "https://www.youtube.com/watch?v=Bzd0z0YqTEw",
+    "source_url": "https://tehachapidepot.com/live-cams",
+    "notes": "Live public stream metadata verified; in-app playback, current frame motion, and camera alignment not yet visually verified. Activity varies by hour.",
+    "source_evidence": {
+      "stream_title": "Tehachapi Live Train Cams at West Cable",
+      "source_catalog": null,
+      "provider_listing": "https://tehachapidepot.com/live-cams",
+      "geolocation_basis": "Estimated site/area position, not camera mounting point; named place matched to operator stream title. Verify before a camera-aligned descent."
+    },
+    "coordinate_confidence": "estimated-site",
+    "aligned": false,
+    "heading": null,
+    "pitch": null,
+    "validation": {
+      "level": "metadata",
+      "checked_at": "2026-09-18T14:01:13.193564+00:00",
+      "endpoint": "https://www.youtube.com/live/Bzd0z0YqTEw",
+      "playabilityStatus": "OK",
+      "playableInEmbed": true,
+      "isLiveNow": true,
+      "actual_frame_checked": false,
+      "existing_catalog_checked": "remote main cameras.json 127 entries; exact IDs and obvious same-view/landmark aliases excluded",
+      "excluded_previous_11": true
+    }
+  },
+  {
+    "video_id": "PH-jf0kdsf8",
+    "name": "Mojave Rail Junction",
+    "country": "United States",
+    "place": "Mojave, California",
+    "lat": 35.052,
+    "lng": -118.172,
+    "timezone": "America/Los_Angeles",
+    "tags": [
+      "railway",
+      "live",
+      "public-webcam",
+      "outdoor"
+    ],
+    "provider": "Tehachapi Live Train Cams",
+    "watch_url": "https://www.youtube.com/watch?v=PH-jf0kdsf8",
+    "source_url": "https://tehachapidepot.com/live-cams",
+    "notes": "Live public stream metadata verified; in-app playback, current frame motion, and camera alignment not yet visually verified. Activity varies by hour.",
+    "source_evidence": {
+      "stream_title": "Tehachapi Live Train Cams at Gardner Realty in Mojave CA 🚂",
+      "source_catalog": null,
+      "provider_listing": "https://tehachapidepot.com/live-cams",
+      "geolocation_basis": "Estimated site/area position, not camera mounting point; named place matched to operator stream title. Verify before a camera-aligned descent."
+    },
+    "coordinate_confidence": "estimated-site",
+    "aligned": false,
+    "heading": null,
+    "pitch": null,
+    "validation": {
+      "level": "metadata",
+      "checked_at": "2026-09-18T14:01:13.325965+00:00",
+      "endpoint": "https://www.youtube.com/live/PH-jf0kdsf8",
+      "playabilityStatus": "OK",
+      "playableInEmbed": true,
+      "isLiveNow": true,
+      "actual_frame_checked": false,
+      "existing_catalog_checked": "remote main cameras.json 127 entries; exact IDs and obvious same-view/landmark aliases excluded",
+      "excluded_previous_11": true
+    }
+  },
+  {
+    "video_id": "K0dU05muXdE",
+    "name": "Edison Railway at Giumarra Vineyards",
+    "country": "United States",
+    "place": "Edison, California",
+    "lat": 35.346,
+    "lng": -118.871,
+    "timezone": "America/Los_Angeles",
+    "tags": [
+      "railway",
+      "live",
+      "public-webcam",
+      "outdoor"
+    ],
+    "provider": "Tehachapi Live Train Cams",
+    "watch_url": "https://www.youtube.com/watch?v=K0dU05muXdE",
+    "source_url": "https://tehachapidepot.com/live-cams",
+    "notes": "Live public stream metadata verified; in-app playback, current frame motion, and camera alignment not yet visually verified. Activity varies by hour.",
+    "source_evidence": {
+      "stream_title": "Tehachapi Live Train Cams at Giumarra Vineyards 🍇 in Edison CA.",
+      "source_catalog": null,
+      "provider_listing": "https://tehachapidepot.com/live-cams",
+      "geolocation_basis": "Estimated site/area position, not camera mounting point; named place matched to operator stream title. Verify before a camera-aligned descent."
+    },
+    "coordinate_confidence": "estimated-site",
+    "aligned": false,
+    "heading": null,
+    "pitch": null,
+    "validation": {
+      "level": "metadata",
+      "checked_at": "2026-09-18T14:01:14.050715+00:00",
+      "endpoint": "https://www.youtube.com/live/K0dU05muXdE",
+      "playabilityStatus": "OK",
+      "playableInEmbed": true,
+      "isLiveNow": true,
+      "actual_frame_checked": false,
+      "existing_catalog_checked": "remote main cameras.json 127 entries; exact IDs and obvious same-view/landmark aliases excluded",
+      "excluded_previous_11": true
+    }
+  },
+  {
+    "video_id": "4nC8r5neaow",
+    "name": "Lanzarote Airport",
+    "country": "Spain",
+    "place": "Lanzarote, Canary Islands",
+    "lat": 28.945,
+    "lng": -13.605,
+    "timezone": "Atlantic/Canary",
+    "tags": [
+      "airport",
+      "live",
+      "public-webcam",
+      "outdoor"
+    ],
+    "provider": "Flightradar24",
+    "watch_url": "https://www.youtube.com/watch?v=4nC8r5neaow",
+    "source_url": "https://www.youtube.com/@Flightradar24DotCom/streams",
+    "notes": "Live public stream metadata verified; in-app playback, current frame motion, and camera alignment not yet visually verified. Activity varies by hour.",
+    "source_evidence": {
+      "stream_title": "ACE Lanzarote Airport LIVE 24/7 - Canary Islands SPAIN",
+      "source_catalog": null,
+      "provider_listing": "https://www.youtube.com/@Flightradar24DotCom/streams",
+      "geolocation_basis": "Estimated site/area position, not camera mounting point; named place matched to operator stream title. Verify before a camera-aligned descent."
+    },
+    "coordinate_confidence": "estimated-site",
+    "aligned": false,
+    "heading": null,
+    "pitch": null,
+    "validation": {
+      "level": "metadata",
+      "checked_at": "2026-09-18T14:02:51.326083+00:00",
+      "endpoint": "https://www.youtube.com/live/4nC8r5neaow",
+      "playabilityStatus": "OK",
+      "playableInEmbed": true,
+      "isLiveNow": true,
+      "actual_frame_checked": false,
+      "existing_catalog_checked": "remote main cameras.json 127 entries; exact IDs and obvious same-view/landmark aliases excluded",
+      "excluded_previous_11": true
+    }
+  },
+  {
+    "video_id": "V7_orOtu-oo",
+    "name": "Las Vegas Airport",
+    "country": "United States",
+    "place": "Las Vegas, Nevada",
+    "lat": 36.084,
+    "lng": -115.152,
+    "timezone": "America/Los_Angeles",
+    "tags": [
+      "airport",
+      "live",
+      "public-webcam",
+      "outdoor"
+    ],
+    "provider": "Flightradar24",
+    "watch_url": "https://www.youtube.com/watch?v=V7_orOtu-oo",
+    "source_url": "https://www.youtube.com/@Flightradar24DotCom/streams",
+    "notes": "Live public stream metadata verified; in-app playback, current frame motion, and camera alignment not yet visually verified. Activity varies by hour.",
+    "source_evidence": {
+      "stream_title": "LAS Vegas Airport LIVE 24/7 with views of 26R & 26L",
+      "source_catalog": null,
+      "provider_listing": "https://www.youtube.com/@Flightradar24DotCom/streams",
+      "geolocation_basis": "Estimated site/area position, not camera mounting point; named place matched to operator stream title. Verify before a camera-aligned descent."
+    },
+    "coordinate_confidence": "estimated-site",
+    "aligned": false,
+    "heading": null,
+    "pitch": null,
+    "validation": {
+      "level": "metadata",
+      "checked_at": "2026-09-18T14:02:51.474154+00:00",
+      "endpoint": "https://www.youtube.com/live/V7_orOtu-oo",
+      "playabilityStatus": "OK",
+      "playableInEmbed": true,
+      "isLiveNow": true,
+      "actual_frame_checked": false,
+      "existing_catalog_checked": "remote main cameras.json 127 entries; exact IDs and obvious same-view/landmark aliases excluded",
+      "excluded_previous_11": true
+    }
+  },
+  {
+    "video_id": "OUBslrCqREs",
+    "name": "LaGuardia Airport",
+    "country": "United States",
+    "place": "Queens, New York",
+    "lat": 40.777,
+    "lng": -73.873,
+    "timezone": "America/New_York",
+    "tags": [
+      "airport",
+      "live",
+      "public-webcam",
+      "outdoor"
+    ],
+    "provider": "Flightradar24",
+    "watch_url": "https://www.youtube.com/watch?v=OUBslrCqREs",
+    "source_url": "https://www.youtube.com/@Flightradar24DotCom/streams",
+    "notes": "Live public stream metadata verified; in-app playback, current frame motion, and camera alignment not yet visually verified. Activity varies by hour.",
+    "source_evidence": {
+      "stream_title": "LGA Airport LIVE 24/7 • LaGuardia, New York",
+      "source_catalog": null,
+      "provider_listing": "https://www.youtube.com/@Flightradar24DotCom/streams",
+      "geolocation_basis": "Estimated site/area position, not camera mounting point; named place matched to operator stream title. Verify before a camera-aligned descent."
+    },
+    "coordinate_confidence": "estimated-site",
+    "aligned": false,
+    "heading": null,
+    "pitch": null,
+    "validation": {
+      "level": "metadata",
+      "checked_at": "2026-09-18T14:02:52.260856+00:00",
+      "endpoint": "https://www.youtube.com/live/OUBslrCqREs",
+      "playabilityStatus": "OK",
+      "playableInEmbed": true,
+      "isLiveNow": true,
+      "actual_frame_checked": false,
+      "existing_catalog_checked": "remote main cameras.json 127 entries; exact IDs and obvious same-view/landmark aliases excluded",
+      "excluded_previous_11": true
+    }
+  },
+  {
+    "video_id": "fFl0qD108sk",
+    "name": "Reno Airport",
+    "country": "United States",
+    "place": "Reno, Nevada",
+    "lat": 39.499,
+    "lng": -119.768,
+    "timezone": "America/Los_Angeles",
+    "tags": [
+      "airport",
+      "live",
+      "public-webcam",
+      "outdoor"
+    ],
+    "provider": "Flightradar24",
+    "watch_url": "https://www.youtube.com/watch?v=fFl0qD108sk",
+    "source_url": "https://www.youtube.com/@Flightradar24DotCom/streams",
+    "notes": "Live public stream metadata verified; in-app playback, current frame motion, and camera alignment not yet visually verified. Activity varies by hour.",
+    "source_evidence": {
+      "stream_title": "RNO Reno Airport LIVE 24/7",
+      "source_catalog": null,
+      "provider_listing": "https://www.youtube.com/@Flightradar24DotCom/streams",
+      "geolocation_basis": "Estimated site/area position, not camera mounting point; named place matched to operator stream title. Verify before a camera-aligned descent."
+    },
+    "coordinate_confidence": "estimated-site",
+    "aligned": false,
+    "heading": null,
+    "pitch": null,
+    "validation": {
+      "level": "metadata",
+      "checked_at": "2026-09-18T14:02:52.300146+00:00",
+      "endpoint": "https://www.youtube.com/live/fFl0qD108sk",
+      "playabilityStatus": "OK",
+      "playableInEmbed": true,
+      "isLiveNow": true,
+      "actual_frame_checked": false,
+      "existing_catalog_checked": "remote main cameras.json 127 entries; exact IDs and obvious same-view/landmark aliases excluded",
+      "excluded_previous_11": true
+    }
+  },
+  {
+    "video_id": "q5BQRwSh41Q",
+    "name": "Tucson Railway",
+    "country": "United States",
+    "place": "Tucson, Arizona",
+    "lat": 32.223,
+    "lng": -110.966,
+    "timezone": "America/Phoenix",
+    "tags": [
+      "railway",
+      "live",
+      "public-webcam",
+      "outdoor"
+    ],
+    "provider": "Virtual Railfan",
+    "watch_url": "https://www.youtube.com/watch?v=q5BQRwSh41Q",
+    "source_url": "https://www.youtube.com/@VirtualRailfan/streams",
+    "notes": "Live public stream metadata verified; in-app playback, current frame motion, and camera alignment not yet visually verified. Activity varies by hour.",
+    "source_evidence": {
+      "stream_title": "Tucson, Arizona, USA | LIVE Train Camera (PTZ)",
+      "source_catalog": null,
+      "provider_listing": "https://www.youtube.com/@VirtualRailfan/streams",
+      "geolocation_basis": "Estimated site/area position, not camera mounting point; named place matched to operator stream title. Verify before a camera-aligned descent."
+    },
+    "coordinate_confidence": "estimated-site",
+    "aligned": false,
+    "heading": null,
+    "pitch": null,
+    "validation": {
+      "level": "metadata",
+      "checked_at": "2026-09-18T14:02:53.163091+00:00",
+      "endpoint": "https://www.youtube.com/live/q5BQRwSh41Q",
+      "playabilityStatus": "OK",
+      "playableInEmbed": true,
+      "isLiveNow": true,
+      "actual_frame_checked": false,
+      "existing_catalog_checked": "remote main cameras.json 127 entries; exact IDs and obvious same-view/landmark aliases excluded",
+      "excluded_previous_11": true
+    }
+  },
+  {
+    "video_id": "NP-bvAcswIM",
+    "name": "Salt Lake City Railway",
+    "country": "United States",
+    "place": "Salt Lake City, Utah",
+    "lat": 40.762,
+    "lng": -111.908,
+    "timezone": "America/Denver",
+    "tags": [
+      "railway",
+      "live",
+      "public-webcam",
+      "outdoor"
+    ],
+    "provider": "Virtual Railfan",
+    "watch_url": "https://www.youtube.com/watch?v=NP-bvAcswIM",
+    "source_url": "https://www.youtube.com/@VirtualRailfan/streams",
+    "notes": "Live public stream metadata verified; in-app playback, current frame motion, and camera alignment not yet visually verified. Activity varies by hour.",
+    "source_evidence": {
+      "stream_title": "Salt Lake City, Utah, USA | LIVE Train Camera (Fixed View - South)",
+      "source_catalog": null,
+      "provider_listing": "https://www.youtube.com/@VirtualRailfan/streams",
+      "geolocation_basis": "Estimated site/area position, not camera mounting point; named place matched to operator stream title. Verify before a camera-aligned descent."
+    },
+    "coordinate_confidence": "estimated-site",
+    "aligned": false,
+    "heading": null,
+    "pitch": null,
+    "validation": {
+      "level": "metadata",
+      "checked_at": "2026-09-18T14:02:53.013283+00:00",
+      "endpoint": "https://www.youtube.com/live/NP-bvAcswIM",
+      "playabilityStatus": "OK",
+      "playableInEmbed": true,
+      "isLiveNow": true,
+      "actual_frame_checked": false,
+      "existing_catalog_checked": "remote main cameras.json 127 entries; exact IDs and obvious same-view/landmark aliases excluded",
+      "excluded_previous_11": true
+    }
+  },
+  {
+    "video_id": "p9CJkmVgxp0",
+    "name": "Cheyenne Railway",
+    "country": "United States",
+    "place": "Cheyenne, Wyoming",
+    "lat": 41.132,
+    "lng": -104.813,
+    "timezone": "America/Denver",
+    "tags": [
+      "railway",
+      "live",
+      "public-webcam",
+      "outdoor"
+    ],
+    "provider": "Virtual Railfan",
+    "watch_url": "https://www.youtube.com/watch?v=p9CJkmVgxp0",
+    "source_url": "https://www.youtube.com/@VirtualRailfan/streams",
+    "notes": "Live public stream metadata verified; in-app playback, current frame motion, and camera alignment not yet visually verified. Activity varies by hour.",
+    "source_evidence": {
+      "stream_title": "Cheyenne, Wyoming, USA | LIVE Train Camera (Fixed View - West)",
+      "source_catalog": null,
+      "provider_listing": "https://www.youtube.com/@VirtualRailfan/streams",
+      "geolocation_basis": "Estimated site/area position, not camera mounting point; named place matched to operator stream title. Verify before a camera-aligned descent."
+    },
+    "coordinate_confidence": "estimated-site",
+    "aligned": false,
+    "heading": null,
+    "pitch": null,
+    "validation": {
+      "level": "metadata",
+      "checked_at": "2026-09-18T14:02:53.749833+00:00",
+      "endpoint": "https://www.youtube.com/live/p9CJkmVgxp0",
+      "playabilityStatus": "OK",
+      "playableInEmbed": true,
+      "isLiveNow": true,
+      "actual_frame_checked": false,
+      "existing_catalog_checked": "remote main cameras.json 127 entries; exact IDs and obvious same-view/landmark aliases excluded",
+      "excluded_previous_11": true
+    }
+  },
+  {
+    "video_id": "FHYqepozgiQ",
+    "name": "Folkston Depot",
+    "country": "United States",
+    "place": "Folkston, Georgia",
+    "lat": 30.831,
+    "lng": -82.01,
+    "timezone": "America/New_York",
+    "tags": [
+      "railway",
+      "live",
+      "public-webcam",
+      "outdoor"
+    ],
+    "provider": "Virtual Railfan",
+    "watch_url": "https://www.youtube.com/watch?v=FHYqepozgiQ",
+    "source_url": "https://www.youtube.com/@VirtualRailfan/streams",
+    "notes": "Live public stream metadata verified; in-app playback, current frame motion, and camera alignment not yet visually verified. Activity varies by hour.",
+    "source_evidence": {
+      "stream_title": "Folkston, Georgia, USA  |  LIVE Train Camera (Depot PTZ)",
+      "source_catalog": null,
+      "provider_listing": "https://www.youtube.com/@VirtualRailfan/streams",
+      "geolocation_basis": "Estimated site/area position, not camera mounting point; named place matched to operator stream title. Verify before a camera-aligned descent."
+    },
+    "coordinate_confidence": "estimated-site",
+    "aligned": false,
+    "heading": null,
+    "pitch": null,
+    "validation": {
+      "level": "metadata",
+      "checked_at": "2026-09-18T14:02:53.996316+00:00",
+      "endpoint": "https://www.youtube.com/live/FHYqepozgiQ",
+      "playabilityStatus": "OK",
+      "playableInEmbed": true,
+      "isLiveNow": true,
+      "actual_frame_checked": false,
+      "existing_catalog_checked": "remote main cameras.json 127 entries; exact IDs and obvious same-view/landmark aliases excluded",
+      "excluded_previous_11": true
+    }
+  },
+  {
+    "video_id": "INCxBjBFbMw",
+    "name": "Kidderminster Station Concourse",
+    "country": "United Kingdom",
+    "place": "Kidderminster, England",
+    "lat": 52.384,
+    "lng": -2.238,
+    "timezone": "Europe/London",
+    "tags": [
+      "railway",
+      "live",
+      "public-webcam",
+      "indoor"
+    ],
+    "provider": "Severn Valley Railway",
+    "watch_url": "https://www.youtube.com/watch?v=INCxBjBFbMw",
+    "source_url": "https://www.youtube.com/@SevernValleyRailwayOfficial/streams",
+    "notes": "Live public stream metadata verified; in-app playback, current frame motion, and camera alignment not yet visually verified. Activity varies by hour. Indoor public station concourse; passenger foot traffic during service hours.",
+    "source_evidence": {
+      "stream_title": "LIVE CAM - Kidderminster Station Concourse Camera on the Severn Valley Railway",
+      "source_catalog": null,
+      "provider_listing": "https://www.youtube.com/@SevernValleyRailwayOfficial/streams",
+      "geolocation_basis": "Estimated site/area position, not camera mounting point; named place matched to operator stream title. Verify before a camera-aligned descent."
+    },
+    "coordinate_confidence": "estimated-site",
+    "aligned": false,
+    "heading": null,
+    "pitch": null,
+    "validation": {
+      "level": "metadata",
+      "checked_at": "2026-09-18T14:03:28.379274+00:00",
+      "endpoint": "https://www.youtube.com/live/INCxBjBFbMw",
+      "playabilityStatus": "OK",
+      "playableInEmbed": true,
+      "isLiveNow": true,
+      "actual_frame_checked": false,
+      "existing_catalog_checked": "remote main cameras.json 127 entries; exact IDs and obvious same-view/landmark aliases excluded",
+      "excluded_previous_11": true
+    }
+  },
+  {
+    "video_id": "Hk7KWsPI_XI",
+    "name": "Bridgnorth Steam Railway",
+    "country": "United Kingdom",
+    "place": "Bridgnorth, England",
+    "lat": 52.53,
+    "lng": -2.422,
+    "timezone": "Europe/London",
+    "tags": [
+      "railway",
+      "live",
+      "public-webcam",
+      "outdoor"
+    ],
+    "provider": "Severn Valley Railway",
+    "watch_url": "https://www.youtube.com/watch?v=Hk7KWsPI_XI",
+    "source_url": "https://www.youtube.com/@SevernValleyRailwayOfficial/streams",
+    "notes": "Live public stream metadata verified; in-app playback, current frame motion, and camera alignment not yet visually verified. Activity varies by hour.",
+    "source_evidence": {
+      "stream_title": "LIVE CAM Bridgnorth Station on the Severn Valley Railway",
+      "source_catalog": null,
+      "provider_listing": "https://www.youtube.com/@SevernValleyRailwayOfficial/streams",
+      "geolocation_basis": "Estimated site/area position, not camera mounting point; named place matched to operator stream title. Verify before a camera-aligned descent."
+    },
+    "coordinate_confidence": "estimated-site",
+    "aligned": false,
+    "heading": null,
+    "pitch": null,
+    "validation": {
+      "level": "metadata",
+      "checked_at": "2026-09-18T14:03:29.082157+00:00",
+      "endpoint": "https://www.youtube.com/live/Hk7KWsPI_XI",
+      "playabilityStatus": "OK",
+      "playableInEmbed": true,
+      "isLiveNow": true,
+      "actual_frame_checked": false,
+      "existing_catalog_checked": "remote main cameras.json 127 entries; exact IDs and obvious same-view/landmark aliases excluded",
+      "excluded_previous_11": true
+    }
+  }
+]

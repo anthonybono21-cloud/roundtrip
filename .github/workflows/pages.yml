@@ -1,0 +1,68 @@
+name: Website and satellite imagery
+
+on:
+  push:
+    branches: [main]
+  schedule:
+    - cron: '7,27,47 * * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# One Pages deployment at a time. Do not cancel a publish halfway through.
+concurrency:
+  group: roundtrip-pages
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install image decoder
+        run: python -m pip install Pillow==11.3.0
+      - name: Cache key
+        id: clock
+        run: echo "hour=$(date -u +%Y%m%d%H)" >> "$GITHUB_OUTPUT"
+      - uses: actions/cache/restore@v4
+        id: satellite-cache
+        with:
+          path: ${{ runner.temp }}/roundtrip-satellite
+          key: satellite-v1-${{ steps.clock.outputs.hour }}
+          restore-keys: satellite-v1-
+      - name: Refresh satellite images
+        run: python tools/update-satellite.py --output "$RUNNER_TEMP/roundtrip-satellite" --timeout 240
+      - uses: actions/cache/save@v4
+        if: steps.satellite-cache.outputs.cache-hit != 'true'
+        with:
+          path: ${{ runner.temp }}/roundtrip-satellite
+          key: satellite-v1-${{ steps.clock.outputs.hour }}
+      - name: Assemble public site without adding imagery to Git
+        run: |
+          set -eu
+          mkdir -p "$RUNNER_TEMP/roundtrip-site"
+          git archive HEAD | tar -x -C "$RUNNER_TEMP/roundtrip-site"
+          mkdir -p "$RUNNER_TEMP/roundtrip-site/assets/satellite"
+          cp "$RUNNER_TEMP/roundtrip-satellite/"* "$RUNNER_TEMP/roundtrip-site/assets/satellite/"
+          test -s "$RUNNER_TEMP/roundtrip-site/assets/satellite/manifest.json"
+          test -s "$RUNNER_TEMP/roundtrip-site/index.html"
+          # Keep the existing public rt.apk and phone.apk download addresses.
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: ${{ runner.temp }}/roundtrip-site
+          retention-days: 1
+      - name: Deploy existing Pages site
+        id: deploy
+        uses: actions/deploy-pages@v4

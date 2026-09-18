@@ -279,7 +279,7 @@
 <div id="boot"><div class="b"><div class="t">Roundtrip</div><div class="bar"><i></i></div></div></div>
 
 <!-- Live clouds. Self-contained, publishes window.ET45Clouds, never throws. -->
-<script src="./clouds/et45-clouds-inline.js"></script>
+
 <!-- Search. Self-contained, publishes window.RoundtripSearch. -->
 <script src="./search.js"></script>
 <!-- The action strip a tap brings up. Self-contained, publishes window.RoundtripMenu. -->
@@ -290,6 +290,9 @@
 <script src="./tv.js"></script>
 <script type="module">
 import * as THREE from './vendor/three.module.js';
+import { createSatelliteEarth } from './satellite-earth.js';
+import { createSpaceScene } from './space-scene.js';
+import { createJourney, createRetreat } from './journey.js';
 
 /* ─────────────────────────────────────────────────────────────────────────────
    Roundtrip — orbit-to-camera viewer for the ET45 desk app, entirely on free data.
@@ -303,20 +306,20 @@ import * as THREE from './vendor/three.module.js';
 /* Bumped by hand with each push. It shows in the corner with the credits, so
    a page that is not doing what a change says it should can be told apart from
    a page a browser or a television is still serving from yesterday. */
-const BUILD = 'build 2026-09-18 13:45';
+const BUILD = 'Satellite journey preview · 2026-09-18';
 
 const CFG = {
   dwell:        90,     // seconds on a live feed before moving on
   orbitDwell:   2.6,    // seconds parked on the globe before the next dive
   mapSpin:      0.55,   // pin map: degrees per second once the controls go idle
-  depart:       6.5,    // the whole zoom, orbit down to the place, seconds.
+  depart:       9.0,    // the whole zoom, orbit down to the place, seconds.
                         // The old sequence spent 3.4s getting to 6km and then
                         // another 3.6s on a ground stage; with the imagery
                         // doing all of it the one number has to cover both, or
                         // the levels flash past instead of sharpening.
   settle:       0.55,   // hold the matched frame before the reveal
   reveal:       1.1,    // render → live crossfade
-  retreat:      2.2,    // live → orbit on the way out
+  retreat:      5.0,    // live → orbit on the way out
   lightBias:    0.25,   // 0 = pure random order, 1 = strongly prefer good light
   breathe:      1.0,    // idle camera drift and roll, 0 turns it off
   volume:       15,     // percent, the level a feed's own sound settles at
@@ -324,7 +327,7 @@ const CFG = {
   adGrace:      1.2,    // seconds to let a slow player say whether it has one
   arriveR:      0.0013, // where the zoom stops, in earth radii above the surface: 8km
   prefetch:     true,   // warm the next camera's tiles while a feed plays
-  maxDepart:    8,      // seconds to wait for imagery before going anyway
+  maxDepart:    13,      // seconds to wait for imagery before going anyway
   imagery: {
     // Free, keyless, attribution required. Swap the URL to change providers.
     url: (z,x,y) => `https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/${z}/${y}/${x}`,
@@ -366,6 +369,7 @@ const CFG = {
    slowly. Half a second still catches a real stall and never bites at any
    frame rate anyone watches. */
 const MAX_DT = 0.5;
+const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
 
 const R_EARTH = 6371000;
 const DEG = Math.PI / 180;
@@ -444,14 +448,31 @@ function lightLabel(el){
 
 /* ── tile fetching ──────────────────────────────────────────────────────── */
 
+// Bound network/decode pressure; repeated requests share a promise and cache.
+const tileCache = new Map(), tileQueue = [];
+let tileActive = 0;
 function loadImage(url){
-  return new Promise((res, rej) => {
-    const im = new Image();
-    im.crossOrigin = 'anonymous';
-    im.onload = () => res(im);
-    im.onerror = () => rej(new Error('tile '+url));
-    im.src = url;
+  if (tileCache.has(url)) return tileCache.get(url);
+  const promise = new Promise((resolve,reject) => {
+    tileQueue.push(() => {
+      const im = new Image(); im.crossOrigin = 'anonymous';
+      const finish = (error) => {
+        clearTimeout(timer); im.onload = im.onerror = null;
+        tileActive--; pumpTiles();
+        if(error){tileCache.delete(url);reject(error);}else resolve(im);
+      };
+      const timer = setTimeout(() => { im.src=''; finish(new Error('tile timeout')); },15000);
+      im.onload=()=>finish();im.onerror=()=>finish(new Error('tile unavailable'));
+      im.src=url;
+    });
+    pumpTiles();
   });
+  tileCache.set(url,promise);
+  while(tileCache.size>96) tileCache.delete(tileCache.keys().next().value);
+  return promise;
+}
+function pumpTiles(){
+  while(tileActive<8 && tileQueue.length){tileActive++;tileQueue.shift()();}
 }
 
 /* The sharpest zoom whose mosaic still fits a tile budget. Degrees of
@@ -502,12 +523,15 @@ async function imageryMosaic(lat, lng, halfM, z){
   const ctx = cv.getContext('2d');
   ctx.fillStyle = '#1a2436'; ctx.fillRect(0,0,cv.width,cv.height);
   const jobs = [];
+  let loaded=0;
+  const wrapX=x=>((x%(2**z))+(2**z))%(2**z);
   for (let x=x0; x<=x1; x++) for (let y=y0; y<=y1; y++){
-    jobs.push(loadImage(CFG.imagery.url(z,x,y))
-      .then(im => ctx.drawImage(im,(x-x0)*256,(y-y0)*256,256,256))
+    jobs.push(loadImage(CFG.imagery.url(z,wrapX(x),y))
+      .then(im => {ctx.drawImage(im,(x-x0)*256,(y-y0)*256,256,256);loaded++;})
       .catch(()=>{}));                       // a missing tile leaves the backing colour
   }
   await Promise.all(jobs);
+  if (loaded/jobs.length < .9) throw new Error('Incomplete satellite detail');
 
   /* Names and borders go on after the imagery, so they sit over it. They are
      decoration and the descent does not wait for them: this returns as soon as
@@ -525,7 +549,7 @@ async function imageryMosaic(lat, lng, halfM, z){
       if (!src) return;
       const jobs2 = [];
       for (let x=x0; x<=x1; x++) for (let y=y0; y<=y1; y++){
-        jobs2.push(loadImage(src.url(z,x,y))
+        jobs2.push(loadImage(src.url(z,wrapX(x),y))
           .then(im => { ctx.drawImage(im,(x-x0)*256,(y-y0)*256,256,256);
                         if (marks.onPaint) marks.onPaint(); })
           .catch(()=>{}));            // no tile there is normal: open sea, or past the cache
@@ -594,209 +618,13 @@ const detFog    = { value: new THREE.Vector2(1, 2) };
 const detFogCol = { value: new THREE.Color(0x9fc0e4) };
 const uTime  = { value: 0 };       // seconds, for the city-light flicker
 
+let satelliteEarth, celestial;
 async function buildSpace(progress){
-  const day   = await loadTex('./assets/earth-day.jpg');        progress(.25);
-  const night = await loadTex('./assets/earth-night.jpg');      progress(.45);
-  const topo  = await loadTex('./assets/earth-topo.png', false); progress(.6);
-  const sky   = await loadTex('./assets/stars.png');            progress(.7);
-
-  earth = new THREE.Mesh(
-    new THREE.SphereGeometry(1, 160, 96),
-    new THREE.ShaderMaterial({
-      uniforms:{ dayMap:{value:day}, nightMap:{value:night}, topoMap:{value:topo},
-                 sunDir:{value:sunDir}, hasTopo:{value: topo?1:0}, time:uTime,
-                 nightLift:{value:CFG.nightLift},
-                 alt:camAlt,
-                 // Filled in by the cloud layer if it attaches. The samplers
-                 // start on a transparent pixel so the shader is valid without
-                 // it, and hasClouds gates the whole thing off.
-                 cloudA:{value:blankTex()}, cloudB:{value:blankTex()},
-                 cloudModeA:{value:0}, cloudModeB:{value:0}, cloudBlend:{value:0},
-                 cloudDrift:{value:0}, hasClouds:{value:0},
-                 cloudSoft:{value:new THREE.Vector2(0.05,0.92)},
-                 cloudDensity:{value:0.94}, cloudShadow:{value:0.42},
-                 cloudFade:{value:new THREE.Vector2(0.012,0.047)} },
-      vertexShader:`
-        varying vec2 vUv; varying vec3 vN; varying vec3 vW;
-        void main(){ vUv=uv; vN=normalize(normalMatrix*normal);
-          vec4 w=modelMatrix*vec4(position,1.); vW=w.xyz;
-          gl_Position=projectionMatrix*viewMatrix*w; }`,
-      fragmentShader:`
-        uniform sampler2D dayMap,nightMap,topoMap; uniform vec3 sunDir;
-        uniform float nightLift;
-        uniform float hasTopo; uniform float time; uniform float alt;
-        uniform sampler2D cloudA,cloudB;
-        uniform float cloudModeA,cloudModeB,cloudBlend,cloudDrift,hasClouds;
-        uniform float cloudDensity,cloudShadow;
-        uniform vec2 cloudSoft,cloudFade;
-        varying vec2 vUv; varying vec3 vN; varying vec3 vW;
-        float luma(vec3 c){ return dot(c, vec3(0.2126,0.7152,0.0722)); }
-        float cloudAt(sampler2D m, vec2 uv, float mode){
-          vec4 t=texture2D(m,uv);
-          return mix(t.a, dot(t.rgb, vec3(0.2126,0.7152,0.0722)), mode);
-        }
-        /* The deck's shadow, thrown along the ground away from the sun. The
-           offset is the real thing — cloud height over the sine of the sun's
-           elevation — which is under a map pixel at noon and stretches out
-           toward the terminator, where it is capped so it stops before it
-           becomes a smear. */
-        float cloudShade(vec3 nw, vec3 S, float d){
-          if (hasClouds < 0.5) return 0.0;
-          vec3 tg = nw*d - S;                        // -S along the surface
-          float tl = length(tg);
-          if (tl < 1e-4) return 0.0;
-          tg /= tl;
-          vec3 east  = normalize(cross(vec3(0.0,1.0,0.0), nw));
-          vec3 north = cross(nw, east);
-          float cl = max(sqrt(max(1.0-nw.y*nw.y, 0.0)), 0.08);
-          float ds = 0.0015/max(d, 0.25);            // 9.6km of deck height
-          vec2 uv = vec2(vUv.x - cloudDrift, vUv.y)
-                  + vec2(dot(tg,east)*ds/(6.2832*cl), dot(tg,north)*ds/3.1416);
-          float c = mix(cloudAt(cloudA,uv,cloudModeA), cloudAt(cloudB,uv,cloudModeB), cloudBlend);
-          // Leaves exactly when the deck itself does, or a grey smudge would
-          // survive onto the sharp imagery after the clouds have gone.
-          return smoothstep(cloudSoft.x, cloudSoft.y, c) * cloudDensity
-               * smoothstep(cloudFade.x, cloudFade.y, alt);
-        }
-        float hash21(vec2 p){ return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453); }
-        void main(){
-          vec3 n=normalize(vN);
-          vec3 sn=normalize((viewMatrix*vec4(sunDir,0.)).xyz);
-          float d=dot(n,sn);
-
-          vec3 dayC=texture2D(dayMap,vUv).rgb;
-          vec3 nitC=texture2D(nightMap,vUv).rgb;
-
-          // Blue Marble's oceans are all but black. Pick water out of the map's
-          // own colour, blue-dominant and dark, and lift it into something that
-          // actually reads as sea from orbit.
-          float water=smoothstep(0.0,0.10,dayC.b-dayC.r*1.55)
-                     *smoothstep(0.34,0.14,luma(dayC));
-          // Lift deep water hard and shallow shelves barely at all. The gain
-          // is on a colour that is already blue-dominant, so it multiplies the
-          // hue as well as the level: left at shelf brightness it turns every
-          // coast electric. Roll it off fast, then pull the result part way
-          // toward its own luminance, which is what deep water actually looks
-          // like from orbit — dark and desaturated, not saturated blue.
-          float wl=smoothstep(0.015,0.130,luma(dayC));
-          vec3 lift=dayC*mix(2.95,0.96,wl)+vec3(0.006,0.024,0.050);
-          lift=mix(lift, vec3(luma(lift)), 0.30)+vec3(0.005,0.011,0.017);
-          dayC=mix(dayC*1.18, lift, water);
-
-          // Relief shading, land only.
-          if(hasTopo>0.5){
-            float t =texture2D(topoMap,vUv).r;
-            float tx=texture2D(topoMap,vUv+vec2(0.0016,0.)).r;
-            float ty=texture2D(topoMap,vUv+vec2(0.,0.0016)).r;
-            float sh=clamp(1.0+((tx-t)+(ty-t))*9.0,0.72,1.30);
-            dayC*=mix(1.0,sh,1.0-water);
-          }
-
-          float day=smoothstep(-0.14,0.20,d);
-
-          // Under cloud the ground is in shade, which is what makes the deck
-          // sit above the earth rather than on it.
-          dayC *= 1.0 - cloudShade(normalize(vW), normalize(sunDir), d)*cloudShadow*day;
-
-          // Warm the grazing light so the terminator glows instead of fading.
-          float golden=exp(-pow((d-0.04)/0.15,2.0));
-          dayC*=mix(vec3(1.0),vec3(1.30,1.04,0.80),golden*0.85);
-
-          // Sun glint off the water: what makes an ocean look wet.
-          vec3 vd=normalize(cameraPosition-vW);
-          vec3 vdv=normalize((viewMatrix*vec4(vd,0.)).xyz);
-          float spec=pow(max(dot(reflect(-sn,n),vdv),0.0),34.0);
-          dayC+=vec3(1.0,0.96,0.86)*spec*water*0.6*day;
-
-          // City lights are the warm part of the night map; its blue cast is
-          // just the map's own ocean, which must not be added as light.
-          float lights=clamp((nitC.r-nitC.b*0.55)*2.4,0.0,1.0);
-
-          // Cities do not all switch on together. Ignition lags dusk and is
-          // staggered per place, so a band of light creeps west across the
-          // night side instead of the whole hemisphere fading up at once.
-          vec2 cell=floor(vUv*vec2(720.0,360.0));
-          float jitter=(hash21(cell)-0.5)*0.085;
-          float ignite=smoothstep(0.02+jitter,-0.21+jitter,d);
-          // A shimmer confined to the ignition band: lights popping on, not a
-          // whole continent flickering.
-          float band=1.0-abs(ignite*2.0-1.0);
-          float flick=1.0+0.30*band*sin(time*2.3+hash21(cell+3.0)*43.0);
-
-          // The night side used to be a flat near-black wash, so everything
-          // that was not a city simply vanished: no ocean, no coastline, and
-          // no cloud to catch the eye. Light it with the surface's own colour
-          // instead, cooled toward moonlight and turned right down. The sea
-          // reads as sea after dark and the deck above it has something to
-          // sit on, which is the difference between a dark planet and a hole.
-          vec3 moon=dayC*vec3(0.62,0.78,1.0)*nightLift;
-          vec3 col=dayC*day
-                 + vec3(1.0,0.82,0.52)*lights*ignite*flick*1.6
-                 + moon*(1.0-day)
-                 + vec3(0.012,0.018,0.035)*(1.0-day);
-
-          // Atmospheric limb, strongest around the terminator.
-          float rim=pow(1.0-abs(dot(normalize(vW),vd)),3.0);
-          col+=vec3(0.24,0.46,0.86)*rim*smoothstep(-0.35,0.45,d)*0.58;
-
-          gl_FragColor=vec4(col,1.0);
-        }`,
-    }));
-  earth.rotation.y = 0;   // texture UVs already align with latLngToVec3
-  space.add(earth);
-
-  /* Today's real clouds, on their own shell just above the surface, fetched
-     and refreshed by their own module. The earth shader is handed the same
-     maps so the deck casts a shadow on the ground beneath it; sunDir and
-     camAlt are shared by reference, so nothing here has to drive it. */
-  try {
-    if (typeof ET45Clouds !== 'undefined'){
-      clouds = ET45Clouds.attach({ THREE, renderer, scene: space, sunDir, camAlt,
-        // Weather moves about 30km/h, which is a third of a degree an hour.
-        // The shipped default is four times that and reads as a spin.
-        driftDegPerHour: 0.3 });
-      const u = earth.material.uniforms, c = clouds.uniforms;
-      u.cloudA = c.mapA;        u.cloudB = c.mapB;
-      u.cloudModeA = c.modeA;   u.cloudModeB = c.modeB;
-      u.cloudBlend = c.blend;   u.cloudDrift = c.drift;
-      u.cloudDensity = c.density;
-      u.cloudSoft.value.set(c.softLow.value, c.softHigh.value);
-      u.cloudFade.value.set(c.fadeLowAlt.value, c.fadeHighAlt.value);
-      u.hasClouds.value = 1;
-    }
-  } catch (e){ console.warn('clouds unavailable', e); }
-
-  atmo = new THREE.Mesh(
-    new THREE.SphereGeometry(1.028, 96, 64),
-    new THREE.ShaderMaterial({
-      uniforms:{ sunDir:{value:sunDir}, camAlt:camAlt },
-      vertexShader:`varying vec3 vN; varying vec3 vW;
-        void main(){ vN=normalize(normalMatrix*normal);
-          vec4 w=modelMatrix*vec4(position,1.); vW=w.xyz;
-          gl_Position=projectionMatrix*viewMatrix*w; }`,
-      fragmentShader:`
-        uniform vec3 sunDir; uniform float camAlt; varying vec3 vN; varying vec3 vW;
-        void main(){
-          vec3 vd=normalize(cameraPosition-vW);
-          float i=pow(clamp(0.78-dot(normalize(vN),vd),0.,1.),2.4);
-          float lit=smoothstep(-0.55,0.35,dot(normalize(vW),normalize(sunDir)));
-          // Once the camera is inside the shell this is only a grey veil over
-          // the surface, so it fades out below roughly 120km.
-          float outside=smoothstep(0.004,0.019,camAlt);
-          gl_FragColor=vec4(vec3(0.32,0.58,1.0)*i*(0.20+lit*0.85),i*0.72)*outside;
-        }`,
-      transparent:true, blending:THREE.AdditiveBlending,
-      side:THREE.BackSide, depthWrite:false,
-    }));
-  space.add(atmo);
-
-  if (sky){
-    sky.mapping = THREE.EquirectangularReflectionMapping;
-    stars = new THREE.Mesh(
-      new THREE.SphereGeometry(60, 48, 32),
-      new THREE.MeshBasicMaterial({ map:sky, side:THREE.BackSide, color:0x8899bb }));
-    space.add(stars);
-  }
+  satelliteEarth = await createSatelliteEarth({ THREE, renderer, scene:space, altitude:camAlt, sunDir, canInstall:()=>state.phase==='boot' || (state.phase==='live' && state.liveOn) });
+  earth = satelliteEarth.mesh;
+  progress(.65);
+  celestial = await createSpaceScene({ THREE, scene:space, camera:spaceCam });
+  stars = celestial.group;
   progress(.8);
 }
 
@@ -815,44 +643,15 @@ function buildDetail(){
         void main(){ vUv=uv; vec4 w=modelMatrix*vec4(position,1.); vW=w.xyz;
           gl_Position=projectionMatrix*viewMatrix*w; }`,
       fragmentShader:`
-        uniform sampler2D map; uniform vec3 sunDir; uniform float fade; uniform float alt;
-        uniform vec2 fog; uniform vec3 fogCol;
+        uniform sampler2D map; uniform float fade;
         varying vec2 vUv; varying vec3 vW;
-        // The exposure the ground scene's own sun and hemisphere light produce
-        // on flat ground, sampled at the same elevations as SKY_STOPS. Without
-        // this the globe hands off to a ground twice as bright as itself, which
-        // reads as a flash at 6km. d is sin(sun elevation) at this pixel.
-        float groundLight(float d){
-          float l = 0.218;
-          l = mix(l, 0.269, smoothstep(-0.309, -0.139, d));
-          l = mix(l, 0.416, smoothstep(-0.139, -0.035, d));
-          l = mix(l, 0.500, smoothstep(-0.035,  0.052, d));
-          l = mix(l, 0.756, smoothstep( 0.052,  0.208, d));
-          l = mix(l, 1.827, smoothstep( 0.208,  0.766, d));
-          l = mix(l, 2.225, smoothstep( 0.766,  1.000, d));
-          return l;
-        }
         void main(){
           vec3 c=texture2D(map,vUv).rgb;
-          float d=dot(normalize(vW),normalize(sunDir));
-          float day=smoothstep(-0.14,0.20,d);
-          float golden=exp(-pow((d-0.04)/0.15,2.0));
-          c*=mix(vec3(1.0),vec3(1.28,1.04,0.82),golden*0.8);
-          // Seen as part of the globe the patch has to match the globe, and on
-          // approach it has to match the scene it is about to become. Night
-          // keeps some ambient either way, or the patch reads as a hole.
-          // 0.02 earth radii is 127km, 0.0015 is 9.6km.
-          float k=smoothstep(0.02,0.0015,alt);
-          float lit=mix(mix(0.12,1.12,day), groundLight(d), k);
-          // Feather the border. Without this a level's edge is a visible
-          // square against the coarser level underneath it.
-          float e=min(min(vUv.x,1.-vUv.x),min(vUv.y,1.-vUv.y));
-          // The ground scene hazes its far distance. Without the same haze here
-          // the top of the frame steps in brightness at the crossfade even when
-          // the geometry lines up perfectly.
-          float h=clamp((length(vW-cameraPosition)-fog.x)/max(fog.y-fog.x,1e-6),0.0,1.0);
-          gl_FragColor=vec4(mix(c*lit,fogCol,h*k),fade*smoothstep(0.0,0.09,e));
+          float edge=min(min(vUv.x,1.-vUv.x),min(vUv.y,1.-vUv.y));
+          gl_FragColor=vec4(c,fade*smoothstep(0.0,0.09,edge));
+          #include <colorspace_fragment>
         }`,
+      toneMapped:false,
       transparent:true, depthWrite:false,
       polygonOffset:true, polygonOffsetFactor:-(4 + i*4), polygonOffsetUnits:-(4 + i*4),
     }));
@@ -868,49 +667,52 @@ function buildDetail(){
 /* Point the detail patch at one place and load its imagery. A sphere section
    built to the mosaic's own bounds needs no UV remapping: three.js lays out
    phi/theta exactly the way latLngToVec3 does. */
-function stageDetail(pose){
-  // Every level, before the dive starts. Leaving with only the top two staged
-  // saved a second or so in orbit and spent it where it actually shows: the
-  // last stretch of the descent arriving soft while L2 and L3 were still on
-  // their way. The departure now covers the wait smoothly instead of
-  // stuttering through it, so there is nothing left to gain by going early.
-  return Promise.all(detail.map((mesh, i) => stageOneDetail(mesh, i, pose).catch(()=>{})));
+let detailGeneration=0, preparedDetail=null;
+function detailTexture(canvas){
+  const t=new THREE.CanvasTexture(canvas);
+  t.colorSpace=THREE.SRGBColorSpace;
+  t.anisotropy=Math.min(8,renderer.capabilities.getMaxAnisotropy());
+  t.wrapS=t.wrapT=THREE.ClampToEdgeWrapping;
+  renderer.initTexture(t);return t;
 }
-function stageOneDetail(mesh, i, pose){
-  return (async () => {
-    const lv = DETAIL_LEVELS[i];
-    // Deliberately not blanked first. Hiding the old mosaic here leaves the
-    // sphere on blue marble for as long as the new one takes to arrive, which
-    // is most of the upper descent. The old patch is over the previous place,
-    // so it is off-frame anyway, and holding it costs nothing.
-    const halfM = lv.spanDeg/2 * 111320;
-    const z = fitZoom(pose.lat, pose.lng, halfM, lv.budget, lv.maxZ);
-    let mosaic;
-    try { mosaic = await imageryMosaic(pose.lat, pose.lng, halfM, z); }
-    catch { return; }
-
-    const { west, east, north, south } = mosaic.bounds;
-    mesh.geometry.dispose();
-    // Enough segments that the patch follows the curve at low altitude; the
-    // widest level needs the most because it spans hundreds of kilometres.
-    const seg = i === 0 ? 128 : i === 1 ? 96 : 64;
-    mesh.geometry = new THREE.SphereGeometry(1, seg, seg,
-      (west+180)*DEG, (east-west)*DEG, (90-north)*DEG, (north-south)*DEG);
-
-    const t = new THREE.CanvasTexture(mosaic.canvas);
-    t.colorSpace = THREE.SRGBColorSpace;
-    t.anisotropy = renderer.capabilities.getMaxAnisotropy();
-    t.wrapS = t.wrapT = THREE.ClampToEdgeWrapping;
-    renderer.initTexture(t);
-    mesh.material.uniforms.map.value?.dispose();
-    mesh.material.uniforms.map.value = t;
-    // Labels are still arriving into the same canvas; each one that lands has
-    // to be pushed to the GPU again, or the patch keeps the bare imagery.
-    if (mosaic.marks) mosaic.marks.onPaint = () => { t.needsUpdate = true; };
-    // Only a level appearing from nothing needs the ease; one that was already
-    // up is a swap of imagery at the same opacity.
-    if (!mesh.visible){ mesh.userData.shown = clock(); mesh.visible = true; }
-  })();
+function prepareDetail(pose){
+  const key=`${pose.lat},${pose.lng}`;
+  if(preparedDetail?.key===key) return preparedDetail.promise;
+  preparedDetail?.promise.then(rows=>rows.forEach(row=>row?.preparedTexture?.dispose()));
+  const promise=Promise.all(DETAIL_LEVELS.map(async lv=>{
+    const halfM=lv.spanDeg/2*111320;
+    const z=fitZoom(pose.lat,pose.lng,halfM,lv.budget,lv.maxZ);
+    try {
+      const mosaic=await imageryMosaic(pose.lat,pose.lng,halfM,z);
+      // Preloaded labels finish before this texture reaches the screen.
+      await mosaic.marks?.done;
+      await new Promise(resolve=>setTimeout(resolve,20));
+      mosaic.preparedTexture=detailTexture(mosaic.canvas);
+      return mosaic;
+    } catch {return null;}
+  }));
+  preparedDetail={key,promise};return promise;
+}
+async function stageDetail(pose){
+  const generation=++detailGeneration;
+  const mosaics=await prepareDetail(pose);
+  if(generation!==detailGeneration) return;
+  for(const [i,mesh] of detail.entries()){
+    const mosaic=mosaics[i];
+    if(!mosaic){mesh.visible=false;continue;}
+    const {west,east,north,south}=mosaic.bounds;
+    const seg=i===0?128:i===1?96:64;
+    const geometry=new THREE.SphereGeometry(1,seg,seg,
+      (west+180)*DEG,(east-west)*DEG,(90-north)*DEG,(north-south)*DEG);
+    const t=mosaic.preparedTexture || detailTexture(mosaic.canvas);
+    mosaic.preparedTexture=null; // ownership moves from the preload to the mesh
+    mesh.geometry.dispose();mesh.geometry=geometry;
+    mesh.material.uniforms.map.value?.dispose();mesh.material.uniforms.map.value=t;
+    mesh.userData.shown=clock();mesh.visible=true;
+    // Yield between GPU uploads so a complete stack is not one long frame.
+    await new Promise(resolve=>setTimeout(resolve,0));
+    if(generation!==detailGeneration)return;
+  }
 }
 
 /* Small markers so the next destination is visible from orbit. Sprites with
@@ -1034,7 +836,7 @@ function applyVolume(){
    out. This runs on its own timer because the render loop idles while a feed
    is playing, which is the whole time the sound matters. */
 setInterval(() => {
-  const want = (audio.on && audio.armed && state.liveOn && !ads.on && camHasSound(state.cam))
+  const want = (audio.on && audio.armed && state.liveOn && !state.suspended && !ads.on && camHasSound(state.cam))
              ? audio.target : 0;
   if (Math.abs(want - audio.vol) < 0.004){
     if (audio.vol !== want){ audio.vol = want; applyVolume(); }
@@ -1093,7 +895,7 @@ function toggleSound(){
    with is a player that stops playing — the feed is the whole product. */
 const AD_KEY = 'roundtrip.adseen';
 const ads = { on:false, since:0, seen:{}, watching:null, knock:null,
-              replied:false, silentRuns:0 };
+              replied:false, silentRuns:0, playerState:null, error:null };
 try { ads.seen = JSON.parse(localStorage.getItem(AD_KEY) || '{}') || {}; } catch {}
 
 /* The player says nothing until it is asked to (`enablejsapi=1` is already on
@@ -1118,6 +920,8 @@ function adsWatch(frame){
     try {
       frame.contentWindow?.postMessage(JSON.stringify(
         { event:'listening', id:'roundtrip', channel:'widget' }), 'https://www.youtube.com');
+      for(const event of ['onStateChange','onError'])frame.contentWindow?.postMessage(JSON.stringify(
+        {event:'command',func:'addEventListener',args:[event]}),'https://www.youtube.com');
     } catch {}
   };
   knock();                      // not 250ms from now: the flight is short
@@ -1132,6 +936,7 @@ function adsReset(){
   // for ever.
   if (ads.watching && !ads.replied) ads.silentRuns++;
   ads.on = false; ads.since = 0; ads.watching = null; ads.replied = false;
+  ads.playerState=null;ads.error=null;
 }
 
 /* A live stream has no length: the player reports 0, or a DVR window running
@@ -1145,7 +950,11 @@ addEventListener('message', e => {
   if (e.origin !== 'https://www.youtube.com' || !ads.watching) return;
   if (e.source !== ads.watching.contentWindow) return;
   let d; try { d = JSON.parse(e.data); } catch { return; }
-  if (!d || d.event !== 'infoDelivery' || !d.info) return;
+  if(!d)return;
+  if(d.event==='onStateChange')ads.playerState=Number(d.info);
+  if(d.event==='onError')ads.error=d.info;
+  if (d.event !== 'infoDelivery' || !d.info) return;
+  if(Number.isFinite(d.info.playerState))ads.playerState=d.info.playerState;
   const len = Number(d.info.duration);
   if (!Number.isFinite(len)) return;
   ads.replied = true; ads.silentRuns = 0;
@@ -1225,13 +1034,21 @@ function showCard(cam){
   // the category were dropped on Anthony's word: they read as loose tags
   // over the picture. lightLabel is still what the rotation uses to prefer
   // a well-lit camera; it is simply not written on screen.
+  let weatherAt=0;
   const tick = () => {
+    if(document.hidden)return;
+    if(Date.now()-weatherAt>=WX_TTL){
+      weatherAt=Date.now();
+      temperature(cam.pose).then(t=>{
+        if(state.cam===cam)card.querySelector('.temp').textContent=Math.round(t)+'\u00b0';
+      }).catch(()=>{});
+    }
     try {
       card.querySelector('.clock').textContent = new Intl.DateTimeFormat([], {
         hour:'2-digit', minute:'2-digit', timeZone: cam.timezone }).format(now());
     } catch { card.querySelector('.clock').textContent = ''; }
   };
-  tick();
+  weatherAt=Date.now();tick();
   clearInterval(clockTimer); clockTimer = setInterval(tick, 15000);
 
   // A reading that arrives after the next camera has landed belongs to the
@@ -1258,19 +1075,37 @@ const state = {
   pinned: false,
   rejects: new Set(),
   // globe camera as lat/lng/altitude in earth radii
-  orbit: { lat: 18, lng: 8, r: 2.7 },
+  orbit: { lat: 18, lng: -75.2, r: 2.7 },
   orbitT: 0,                  // last idle frame, so the drift is per second
   sway: 0,                    // phase of the idle drift
   from: null, arrive: null,
+  journey: null, retreatPath: null, displayed: null,
   ready: false,               // the destination's imagery is staged
   departDur: 0,
   departP: 0,                  // accumulated, so extending the wait never rewinds it
   lastT: 0,
   liveOn: false,
+  suspended: false,
   // A search can narrow the rotation to the cameras it matched. null is
   // the whole list; a Set of camera keys is "play these until Esc".
   set: null, setLabel: '',
 };
+
+let externalCover=false,suspendedAt=0;
+function setCovered(covered){
+  externalCover=!!covered;
+  const suspend=externalCover||document.hidden;
+  if(suspend===state.suspended)return;
+  state.suspended=suspend;
+  if(suspend){
+    suspendedAt=clock();ytCmd('pauseVideo');liveFrame?.pause?.();
+  }else{
+    const elapsed=clock()-suspendedAt;
+    state.t0+=elapsed;state.lastT=state.orbitT=clock();
+    ytCmd('playVideo');liveFrame?.play?.()?.catch?.(()=>{});
+  }
+}
+document.addEventListener('visibilitychange',()=>setCovered(externalCover));
 
 /* search.js, loaded above. Optional: the app runs without it. */
 const Search = window.RoundtripSearch || null;
@@ -1445,7 +1280,7 @@ function castVote(dir){
   saveRejects();
   refreshPins();                     // and off the pin map
   note('Thumbs down. ' + cam.name + ' is out of the rotation here.');
-  if (state.phase === 'live' || state.phase === 'orbit') beginDive(pickNext());
+  if (state.phase === 'live' || state.phase === 'orbit') requestDive(pickNext());
   else backToOrbit();
   paintVote();
 }
@@ -1522,21 +1357,12 @@ function pickNext(){
    instead of waiting on the first mosaic. */
 let prefetched = null;
 function prefetchNext(){
-  if (!CFG.prefetch) return;
-  const cam = peekNext();
-  if (!cam || cam === prefetched) return;
-  prefetched = cam;
-  const { lat, lng } = cam.pose;
-  const warm = url => { const im = new Image(); im.crossOrigin='anonymous'; im.src = url; };
-
-  for (const lv of DETAIL_LEVELS){
-    const half = lv.spanDeg/2 * 111320;
-    const z = fitZoom(lat, lng, half, lv.budget, lv.maxZ);
-    const dLat = half/111320, dLng = half/(111320*Math.cos(lat*DEG));
-    const x0 = Math.floor(lng2tileX(lng-dLng,z)), x1 = Math.floor(lng2tileX(lng+dLng,z));
-    const y0 = Math.floor(lat2tileY(lat+dLat,z)), y1 = Math.floor(lat2tileY(lat-dLat,z));
-    for (let x=x0;x<=x1;x++) for (let y=y0;y<=y1;y++) warm(CFG.imagery.url(z,x,y));
-  }
+  if (!CFG.prefetch || state.phase!=='live' || document.hidden) return;
+  const cam=peekNext();
+  if(!cam || cam===prefetched)return;
+  prefetched=cam;
+  prepareDetail(cam.pose).catch(()=>{});
+  satelliteEarth?.refresh();
 }
 
 
@@ -1546,7 +1372,7 @@ function prefetchNext(){
 let queued = null;
 function requestDive(cam){
   if (!cam) return;
-  if (state.phase === 'orbit' || state.phase === 'live') beginDive(cam);
+  if (state.phase === 'orbit') beginDive(cam);
   else { queued = cam; if (state.phase !== 'retreat') backToOrbit(); }
 }
 
@@ -1572,6 +1398,8 @@ function divePrev(){
 /* The explicit skip. Unlike the N key it works mid-flight too, by queueing,
    because an action asked for on screen should never simply do nothing. */
 function skipNext(){
+  // Repeated Next during a retreat advances the pending destination as well.
+  queued = null;
   requestDive(pickNext());
 }
 
@@ -1616,96 +1444,52 @@ function beginDive(cam){
   });
   state.from = { ...state.orbit };
   state.arrive = arrivalPose(cam.pose);
-  state.departDur = CFG.depart;
+  state.from = state.displayed || {...state.orbit,look:{x:0,y:0,z:0},fov:38};
+  state.journey = createJourney({from:state.from,to:state.arrive,restR:CFG.restR});
+  state.departDur = reducedMotion.matches ? 0.01 : CFG.depart;
   state.departP = 0;
   state.lastT = clock();
   state.ready = false;
-  stageDetail(cam.pose).then(()=>{ state.ready = true; }).catch(()=>{ state.ready = true; });
+  const destination=cam;
+  stageDetail(cam.pose).finally(()=>{ if(state.cam===destination)state.ready=true; });
   mountLive(cam);              // buffers through the whole dive
   hideCard();
   setPhase('depart');
 }
 
 function backToOrbit(){
-  // Come to rest on the turn itself. The retreat runs the departure backwards,
-  // so state.from is where it ends up; leaving it on the idle pose means the
-  // pull-out hands straight back to the spin rather than flying home to a
-  // fixed view of the same part of the world.
-  state.from = { lat: state.orbit.lat, lng: state.orbit.lng, r: CFG.restR };
-  state.orbitT = clock();
+  if(state.phase==='retreat' || state.phase==='orbit')return;
+  state.retreatPath=createRetreat({from:state.displayed || {...state.orbit,look:{x:0,y:0,z:0},fov:38},restR:CFG.restR});
+  state.orbitT=clock();
   setPhase('retreat');
 }
 
-/* The globe camera. In orbit it drifts and looks at the centre of the earth;
-   on a dive it flies an arc in to the place and leans onto it, and the feed
-   crossfades over that shot. */
-const _look = new THREE.Vector3(), _fwd = new THREE.Vector3(),
-      _right = new THREE.Vector3(), _up = new THREE.Vector3();
+function applyCameraPose(pose){
+  state.displayed=pose;
+  state.orbit.lat=pose.lat;state.orbit.lng=pose.lng;state.orbit.r=pose.r;
+  spaceCam.position.copy(latLngToVec3(pose.lat,pose.lng,pose.r));
+  if(pose.up)spaceCam.up.set(pose.up.x,pose.up.y,pose.up.z);
+  else spaceCam.up.set(0,1,0);
+  spaceCam.lookAt(pose.look.x,pose.look.y,pose.look.z);
+  spaceCam.fov=pose.fov;
+  setSpaceClip(pose.r-1);
+}
 function updateSpaceCam(){
-  if (state.phase === 'orbit'){
-    if (mapState.on) return updateMapCam();      // steered by hand, not by the sun
-    // The original idle camera, and the one Anthony asked for back: a steady
-    // eastward drift at a fixed height, no framing, no sway, no roll, no
-    // breathing on the lens. It never resets to a home view because it never
-    // has one - it simply keeps turning, and the next dive sets off from
-    // wherever the turn has got to. Per second rather than per frame, so a
-    // television and a desk display turn at the same rate.
-    const now = clock();
-    state.orbit.lng += 2.1 * clamp(now - state.orbitT, 0, MAX_DT);
-    state.orbitT = now;
-    if (state.orbit.lng > 180) state.orbit.lng -= 360;
-    const { lat, lng, r } = state.orbit;
-    spaceCam.position.copy(latLngToVec3(lat, lng, r));
-    spaceCam.up.set(0,1,0);
-    spaceCam.lookAt(0,0,0);
-    spaceCam.fov = 38;
-    setSpaceClip(r-1);
-    return;
-  }
-
-  const retreating = state.phase === 'retreat';
-  // Retreat runs the identical path backwards, so leaving looks like arriving.
-  // Every phase after the departure holds the camera at the handoff pose.
-  const raw = retreating ? 1 - phaseT(CFG.retreat)
-            : state.phase === 'depart' ? state.departP
-            : 1;
-  const e = ease(raw);
-  const a = state.from, b = state.arrive;
-
-  const lat = lerp(a.lat, b.lat, e);
-  const lng = lerp(a.lng, shortestAngle(a.lng, b.lng), e);
-  // Altitude moves geometrically, not in a straight line. Height above the
-  // ground goes from about 17,000km to 8, and interpolating that linearly
-  // means the picture hardly changes for the first half and then the last
-  // hundred kilometres arrive in a rush: at the midpoint you are still
-  // 8,000km up, which looks like orbit. Each step being the same fraction of
-  // the height left is what makes a zoom read as one steady move all the way
-  // in, and it is the whole of what he called the magic of it.
-  const altA = Math.max(a.r - 1, 1e-6), altB = Math.max(b.alt/R_EARTH, 1e-6);
-  // The shared ease is a quintic, which is right for a swing but far too
-  // sharp for a descent: it leaves you at 8,000km a third of the way in and
-  // then drops the last 200km almost at once. The height gets its own, gentle
-  // curve so the zoom starts and stops softly and runs at a steady rate in
-  // between. The swing in latitude and longitude keeps the quintic.
-  const eZoom = raw*raw*(3 - 2*raw);
-  const alt = altA * Math.pow(altB/altA, eZoom);
-  // Pull back a little before leaning in: the arc is what makes the start read
-  // as a camera move rather than a zoom. Scaled to the height it starts from,
-  // and gone by the time the imagery matters.
-  const arc = Math.sin(Math.PI*raw) * 0.30 * altA;
-  const r = 1 + alt + arc*(1-e);
-
-  spaceCam.position.copy(latLngToVec3(lat, lng, r));
-  spaceCam.up.set(0,1,0);         // level through the dive
-  // Swing the aim from the earth's centre to the handoff's own look point,
-  // weighted late so the tilt happens on the way in, not on departure.
-  _look.set(0,0,0).lerp(b.look, easeOut(clamp((e-0.25)/0.75, 0, 1)));
-  spaceCam.lookAt(_look);
-  // The lens as it was when this earth was live: it opens up on the way in.
-  spaceCam.fov = lerp(38, 46, e);
-  setSpaceClip(r-1);
-  if (state.phase === 'depart' || retreating){
-    state.orbit.lat = lat; state.orbit.lng = lng; state.orbit.r = r;
+  if(state.phase==='orbit'){
+    if(mapState.on){
+      updateMapCam();
+      state.displayed={...state.orbit,look:{x:0,y:0,z:0},fov:spaceCam.fov};
+      return;
+    }
+    const t=clock();
+    if(!reducedMotion.matches)state.orbit.lng+=2.1*clamp(t-state.orbitT,0,MAX_DT);
+    state.orbitT=t;
+    state.orbit.lng=((state.orbit.lng+180)%360+360)%360-180;
+    applyCameraPose({...state.orbit,look:{x:0,y:0,z:0},fov:38});
+  }else if(state.phase==='retreat'){
+    applyCameraPose(state.retreatPath.sample(phaseT(reducedMotion.matches ? 0.3 : CFG.retreat)));
+  }else if(state.journey){
+    applyCameraPose(state.journey.sample(state.phase==='depart'?state.departP:1));
   }
 }
 
@@ -1719,12 +1503,87 @@ function setSpaceClip(alt){
   spaceCam.updateProjectionMatrix();
 }
 
+let lastSunUpdate=-Infinity;
 function tick(){
-  requestAnimationFrame(tick);
+  // Video playback has its own clock. No 60Hz globe work while it covers us.
+  if(document.hidden || state.suspended){setTimeout(tick,250);return;}
+  if(state.phase==='live' && state.liveOn)setTimeout(tick,100);
+  else requestAnimationFrame(tick);
 
-  const s = sunPosition();
-  sunDir.copy(latLngToVec3(s.lat, s.lng, 1));
-  if (stars) stars.rotation.y += 0.00002;
+  switch (state.phase){
+    case 'orbit':
+      // A dive asked for from the map, or a return to the map after one.
+      if (mapState.enterOnOrbit && !queued){ mapState.enterOnOrbit = false; enterPinMap(); }
+      if (queued) beginDive(pickNext());
+      else if (!state.pinned && !mapState.on && clock()-state.t0 > CFG.orbitDwell)
+        beginDive(pickNext());
+      break;
+    case 'depart': {
+      // The zoom out of orbit and down through the imagery. It holds off a
+      // little near the bottom if the mosaics are still arriving, because
+      // reaching the end before they do is how you land on a blurred globe.
+      //
+      // The brake is a rate multiplier, not a growing duration, so it cannot
+      // run away, and progress is accumulated per frame rather than recomputed
+      // from the clock: that is what stopped the camera backing off and coming
+      // in again, and it keeps the move rate-independent besides.
+      const now = clock();
+      const waiting = !state.ready && now - state.t0 < CFG.maxDepart;
+      const slow = (waiting && state.departP > state.journey.descentStart+.25) ? 0.4 : 1;
+      state.departP = clamp(state.departP + clamp(now - state.lastT, 0, MAX_DT) * slow / state.departDur, 0, 1);
+      state.lastT = now;
+      if (state.departP >= 1) setPhase('settle');
+      break;
+    }
+    case 'settle':
+      // Hold the geographical view briefly while a responding player buffers.
+      // Some embeds never answer; retain a bounded fallback for those devices.
+      if(ads.playerState!==null && ads.playerState!==1 && !ads.error
+          && clock()-state.t0<7)break;
+      // Hold on the globe while a pre-roll plays itself out, so the arrival
+      // never reveals an advert that was about to end anyway.
+      // Capped, because a long unskippable one is not worth stalling the whole
+      // rotation for: past the cap the feed comes up regardless.
+      if (ads.on && clock() - state.t0 < CFG.settle + CFG.adHold) break;
+      // And a shorter grace for a player that has not answered at all yet.
+      // The flight is about four seconds; an embed on a cold connection can
+      // take longer than that to exist, and then the first anyone hears of its
+      // advert is seeing it. This costs nothing in the normal case, where the
+      // player has answered well before the arrival.
+      if (!ads.replied && ads.silentRuns < 3 && liveFrame && liveFrame.tagName === 'IFRAME'
+          && clock() - state.t0 < CFG.settle + CFG.adGrace) break;
+      if (phaseT(CFG.settle) >= 1){
+        setPhase('reveal');
+        liveEl.classList.add('on');
+        state.liveOn = true;
+        audio.target = 1;              // the feed's own sound, if it has any
+        showCard(state.cam);
+        setTimeout(prefetchNext, Math.max(1500,CFG.reveal*1000+100));   // warm the next one while this plays
+      }
+      break;
+    case 'reveal':
+      if (phaseT(CFG.reveal) >= 1) setPhase('live');
+      break;
+    case 'live':
+      if (!state.pinned && clock()-state.t0 > CFG.dwell) backToOrbit();
+      break;
+    case 'retreat': {
+      const t = phaseT(reducedMotion.matches ? 0.3 : CFG.retreat);
+      audio.target = 0;
+      if (state.liveOn && t > 0.05){ liveEl.classList.remove('on'); state.liveOn = false; hideCard(); }
+      if (t >= 1){ applyCameraPose(state.retreatPath.sample(1)); unmountLive(); state.orbitT=clock(); setPhase('orbit'); }
+      break;
+    }
+  }
+
+  // While the live feed covers the screen there is nothing to draw underneath,
+  // so the 3D stages idle instead of competing with the video decoder.
+  if (state.phase === 'live' && state.liveOn){satelliteEarth?.installPending();return;}
+
+  if (state.phase !== 'boot') updateSpaceCam();
+  if(clock()-lastSunUpdate>30){
+    const s=sunPosition();sunDir.copy(latLngToVec3(s.lat,s.lng,1));lastSunUpdate=clock();
+  }
   camAlt.value = Math.max(spaceCam.position.length() - 1, 0);
   // The haze the low levels wear on the way in, so the last stretch does not
   // read as a flat photo pasted on a sphere. The colour is fixed now: there is
@@ -1746,73 +1605,8 @@ function tick(){
     mesh.material.uniforms.fade.value = Math.min(byAlt, eased);
   }
 
-  switch (state.phase){
-    case 'orbit':
-      // A dive asked for from the map, or a return to the map after one.
-      if (mapState.enterOnOrbit && !queued){ mapState.enterOnOrbit = false; enterPinMap(); }
-      if (queued) beginDive(pickNext());
-      else if (!state.pinned && !mapState.on && clock()-state.t0 > CFG.orbitDwell)
-        beginDive(pickNext());
-      break;
-    case 'depart': {
-      // The zoom out of orbit and down through the imagery. It holds off a
-      // little near the bottom if the mosaics are still arriving, because
-      // reaching the end before they do is how you land on a blurred globe.
-      //
-      // The brake is a rate multiplier, not a growing duration, so it cannot
-      // run away, and progress is accumulated per frame rather than recomputed
-      // from the clock: that is what stopped the camera backing off and coming
-      // in again, and it keeps the move rate-independent besides.
-      const now = clock();
-      const waiting = !state.ready && now - state.t0 < CFG.maxDepart;
-      const slow = (waiting && state.departP > 0.62) ? 0.25 : 1;
-      state.departP = clamp(state.departP + clamp(now - state.lastT, 0, MAX_DT) * slow / state.departDur, 0, 1);
-      state.lastT = now;
-      if (state.departP >= 1) setPhase('settle');
-      break;
-    }
-    case 'settle':
-      // Hold on the globe while a pre-roll plays itself out, so the arrival
-      // never reveals an advert that was about to end anyway.
-      // Capped, because a long unskippable one is not worth stalling the whole
-      // rotation for: past the cap the feed comes up regardless.
-      if (ads.on && clock() - state.t0 < CFG.settle + CFG.adHold) break;
-      // And a shorter grace for a player that has not answered at all yet.
-      // The flight is about four seconds; an embed on a cold connection can
-      // take longer than that to exist, and then the first anyone hears of its
-      // advert is seeing it. This costs nothing in the normal case, where the
-      // player has answered well before the arrival.
-      if (!ads.replied && ads.silentRuns < 3 && liveFrame && liveFrame.tagName === 'IFRAME'
-          && clock() - state.t0 < CFG.settle + CFG.adGrace) break;
-      if (phaseT(CFG.settle) >= 1){
-        setPhase('reveal');
-        liveEl.classList.add('on');
-        state.liveOn = true;
-        audio.target = 1;              // the feed's own sound, if it has any
-        showCard(state.cam);
-        setTimeout(prefetchNext, 1500);   // warm the next one while this plays
-      }
-      break;
-    case 'reveal':
-      if (phaseT(CFG.reveal) >= 1) setPhase('live');
-      break;
-    case 'live':
-      if (!state.pinned && clock()-state.t0 > CFG.dwell) backToOrbit();
-      break;
-    case 'retreat': {
-      const t = phaseT(CFG.retreat);
-      audio.target = 0;
-      if (state.liveOn && t > 0.05){ liveEl.classList.remove('on'); state.liveOn = false; hideCard(); }
-      if (t >= 1){ unmountLive(); setPhase('orbit'); }
-      break;
-    }
-  }
-
-  // While the live feed covers the screen there is nothing to draw underneath,
-  // so the 3D stages idle instead of competing with the video decoder.
-  if (state.phase === 'live' && state.liveOn) return;
-
-  if (state.phase !== 'boot') updateSpaceCam();
+  celestial?.update(now(),sunDir,camAlt.value);
+  if(pins)pins.visible=mapState.on;
   if (mapState.on){ paintPins(); paintLabel(); }
 
   renderer.clear();
@@ -2013,7 +1807,7 @@ function updateMapCam(){
     mapState.vlng *= decay; mapState.vlat *= decay;
     if (Math.abs(mapState.vlng) < 0.15) mapState.vlng = 0;
     if (Math.abs(mapState.vlat) < 0.15) mapState.vlat = 0;
-    if (!mapState.drag && !mapState.vlng && !mapState.vlat && t-mapState.touched > 4)
+    if (!reducedMotion.matches && !mapState.drag && !mapState.vlng && !mapState.vlat && t-mapState.touched > 4)
       o.lng += CFG.mapSpin*dt;
   }
   o.lng = ((o.lng + 540) % 360) - 180;
@@ -2256,7 +2050,7 @@ addEventListener('keydown', e => {
   if (Menu && !Menu.isOpen() && (k==='Enter' || k==='ArrowLeft' || k==='ArrowRight')){
     Menu.open(); e.preventDefault(); return;
   }
-  if (k==='n' || k==='N'){ if (state.phase==='live'||state.phase==='orbit') beginDive(pickNext()); }
+  if (k==='n' || k==='N'){ if (state.phase==='live'||state.phase==='orbit') requestDive(pickNext()); }
   else if (k===' '){ togglePinned(); e.preventDefault(); }
   else if (k==='M' || (k==='m' && e.shiftKey)){
     // Silence this camera for good: a music bed or a radio loop, not ambience.
@@ -2429,7 +2223,7 @@ const progress = v => { bar.style.width = (v*100)+'%'; };
 
   const attrib = () => {
     $('#attrib').innerHTML =
-      `Globe: NASA Blue Marble &amp; Black Marble &middot; ${CFG.imagery.credit}`
+      `Globe: ${satelliteEarth?.status.mode === 'geocolor' ? 'NOAA/CIRA GeoColor · JMA · EUMETSAT' : 'NASA Blue Marble (satellite images unavailable)'} &middot; ${CFG.imagery.credit}`
       + (overlayCredit ? ` &middot; ${overlayCredit}` : '')
       + (clouds ? `<br>${clouds.credit()}` : '')
       // Which build is actually on the screen. Small, in the corner with the
@@ -2476,7 +2270,7 @@ const progress = v => { bar.style.width = (v*100)+'%'; };
     setTime: iso => { timeWarp = iso ? (new Date(iso) - Date.now()) : 0;
                       return now().toISOString(); },
     now,
-    parts: () => ({ space, spaceCam, earth, atmo, stars, pins, detail }),
+    parts: () => ({ space, spaceCam, earth, atmo, stars, pins, detail, satelliteEarth, celestial, renderer }),
     name: 'Roundtrip', build: BUILD,
     // Roundtrip.order() shows the rest of this cycle; Roundtrip.CFG.lightBias
     // changes how much the light skews it.
@@ -2504,7 +2298,7 @@ const progress = v => { bar.style.width = (v*100)+'%'; };
     search: Search, playSet, clearSet, requestDive,
     // What the Fire TV remote drives (tv.js). backToOrbit is Escape,
     // hold is the Space bar, note puts a line on screen.
-    backToOrbit, note,
+    backToOrbit, note, setCovered,
     hold: on => { togglePinned(on === undefined ? undefined : !!on);
                   $('#pinned').classList.toggle('on', state.pinned);
                   return state.pinned; },
@@ -2512,7 +2306,7 @@ const progress = v => { bar.style.width = (v*100)+'%'; };
     // This is the handle anything outside the globe (a tap menu, a remote) uses.
     pinMap: togglePinMap, pinMapOn: () => mapState.on, mapState,
     dive: q => { const c = state.cams.find(c => c.name.toLowerCase().includes(String(q).toLowerCase()));
-                 if (c) beginDive(c); else console.warn('no camera matching', q); return c?.name; } };
+                 if (c) requestDive(c); else console.warn('no camera matching', q); return c?.name; } };
 
   window.ET45 = window.Roundtrip;    // old console handle, kept as an alias
 

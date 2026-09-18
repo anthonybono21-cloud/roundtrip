@@ -14,11 +14,16 @@ on:
   push:
     # Work branches build too: an app that only gets compiled once it is on
     # main is an app nobody finds out is broken until it is too late.
-    branches: [main, 'claude/**']
+    branches: [main, 'claude/**', 'codex/**']
     paths:
       - 'native/**'
       - 'index.html'
       - 'search.js'
+      - 'menu.js'
+      - 'tv.js'
+      - 'satellite-earth.js'
+      - 'space-scene.js'
+      - 'journey.js'
       - 'cameras.json'
       - 'assets/**'
       - 'vendor/**'
@@ -27,6 +32,17 @@ on:
   pull_request:
     paths:
       - 'native/**'
+      - 'index.html'
+      - 'search.js'
+      - 'menu.js'
+      - 'tv.js'
+      - 'satellite-earth.js'
+      - 'space-scene.js'
+      - 'journey.js'
+      - 'cameras.json'
+      - 'assets/**'
+      - 'vendor/**'
+      - 'clouds/**'
       - '.github/workflows/native.yml'
   workflow_dispatch:
 

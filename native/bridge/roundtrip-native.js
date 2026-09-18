@@ -72,6 +72,7 @@
   function show() {
     if (open || !app) return;
     open = true;
+    if(app.setCovered)app.setCovered(true);
     // Hold the rotation: the dive timer runs on regardless of what is drawn on
     // top of it, and coming back to a feed you never chose is disorienting.
     // Set directly rather than through Roundtrip.hold(), which also lights the
@@ -80,6 +81,7 @@
     try { wasPinned = !!app.state.pinned; app.state.pinned = true; } catch (e) {}
     Map.show({ pins: pins(), focus: focus() }).catch(function (err) {
       open = false;
+      if(app.setCovered)app.setCovered(false);
       try { app.state.pinned = wasPinned; } catch (e) {}
       console.warn('[roundtrip-native] map failed to open', err);
     });
@@ -88,6 +90,7 @@
   function hide() {
     if (!open) return;
     open = false;
+    if(app.setCovered)app.setCovered(false);
     try { app.state.pinned = wasPinned; } catch (e) {}
     Map.hide().catch(function () {});
   }
@@ -184,6 +187,7 @@
     // Closed from the native side (the back button, a swipe, the done button).
     Map.addListener('mapClosed', function () {
       open = false;
+      if(app.setCovered)app.setCovered(false);
       try { app.state.pinned = wasPinned; } catch (e) {}
     });
   }

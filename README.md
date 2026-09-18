@@ -1,5 +1,34 @@
 # Roundtrip
 
+## Satellite journeys (September 18)
+
+The globe now uses actual NOAA/CIRA GeoColor imagery from GOES East/West,
+Himawari and Meteosat. These images already contain clouds and day/night
+appearance; no additional cloud or lighting effect is painted over them.
+The NOAA regional image carries the original US state outlines, then Esri
+imagery sharpens the approach. Satellite weather is periodically updated;
+ground imagery is historical, and GeoColor city lights are a static reference.
+
+Travel leaves the current webcam, rises above that location, pans to the next
+destination and descends. Camera orientation remains continuous across poles.
+The Sun, approximate lunar position/phase, and Yale catalog stars surround the
+Earth. Their visibility depends on the viewing direction.
+
+The camera expansion adds 111 entries (the earlier 11 plus 100 new), bringing
+the catalog to 238. Current live/embedding metadata is documented in
+`research/camera-expansion-plan.json`; 15 representative embeds also passed a
+desktop Chrome playback check. Device performance and animal occupancy are
+not implied by these checks. New camera mount coordinates are approximate.
+
+Network concurrency is bounded. The next destination's imagery is prepared
+while video plays, texture updates wait until the Earth is covered, and the
+covered globe stops rendering. Reduced-motion preferences shorten travel.
+
+See [Satellite deployment](SATELLITE-DEPLOYMENT.md) for the image refresh and
+Pages publishing setup, and [space sources](SPACE-SOURCES.md) for astronomy
+and image credits. Overlay alternatives remain a separate design review at
+`overlay-concepts/`; this update does not pick a new overlay for the user.
+
 The viewer for the ET45 desk app: a spinning earth in space that flies down
 into each live webcam and hands over to the feed. Built entirely on free, keyless data.
 

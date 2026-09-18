@@ -1,0 +1,262 @@
+{
+  "author": "codex",
+  "run_started_at": "2026-09-18T14:18:23.654Z",
+  "run_finished_at": "2026-09-18T14:19:11.799Z",
+  "page": "http://localhost:8876/tools/embed-check.html",
+  "browser": "Chrome Person 1 through CUA extension",
+  "iab_available": false,
+  "method": "Sequential single muted YouTube iframe, using the app's exact query parameters, allowlist and referrer policy. Subscribed to official iframe postMessage events. PASS requires PLAYING (state 1), a positive media timeline advance >=1.5 seconds ignoring initial zero-to-live seek, and >=2.5 seconds elapsed.",
+  "iframe_url_template": "https://www.youtube.com/embed/{video_id}?autoplay=1&mute=1&playsinline=1&controls=0&modestbranding=1&rel=0&iv_load_policy=3&enablejsapi=1",
+  "allow": "autoplay; encrypted-media; picture-in-picture",
+  "referrer_policy": "origin-when-cross-origin",
+  "summary": {
+    "tested": 15,
+    "passed": 15,
+    "player_errors": 0,
+    "timeouts": 0
+  },
+  "limitations": [
+    "Tests prove player playback in the local desktop Chrome context, not every device or production deployment.",
+    "API playback does not certify that a live stream is showing current footage rather than recorded highlights.",
+    "No per-camera visual content or animal-presence claim is made; screenshot during loading was black.",
+    "The first exploratory run used an insufficient time-delta threshold including startup zeros; it was discarded and these results are from the corrected rerun."
+  ],
+  "results": [
+    {
+      "name": "Lubee flying foxes",
+      "video_id": "EXSoa7sQTzQ",
+      "watch_url": "https://www.youtube.com/watch?v=EXSoa7sQTzQ",
+      "result": "playing-and-time-advances",
+      "states": [
+        -1,
+        3,
+        1
+      ],
+      "errors": [],
+      "first_positive_media_time": 86921.5,
+      "last_media_time": 86923.051603,
+      "observed_time_advance_seconds": 1.5516029999998864,
+      "elapsed_ms": 2503
+    },
+    {
+      "name": "Moody Gardens penguins",
+      "video_id": "HHp4rjhJsWI",
+      "watch_url": "https://www.youtube.com/watch?v=HHp4rjhJsWI",
+      "result": "playing-and-time-advances",
+      "states": [
+        -1,
+        1
+      ],
+      "errors": [],
+      "first_positive_media_time": 2992981.7666666666,
+      "last_media_time": 2992983.335047,
+      "observed_time_advance_seconds": 1.5683803334832191,
+      "elapsed_ms": 2516
+    },
+    {
+      "name": "Vancouver sea otters",
+      "video_id": "_KXHUb0wFRE",
+      "watch_url": "https://www.youtube.com/watch?v=_KXHUb0wFRE",
+      "result": "playing-and-time-advances",
+      "states": [
+        -1,
+        1
+      ],
+      "errors": [],
+      "first_positive_media_time": 85081.17174603174,
+      "last_media_time": 85082.72727100001,
+      "observed_time_advance_seconds": 1.5555249682656722,
+      "elapsed_ms": 2517
+    },
+    {
+      "name": "Kitkat kitten rescue",
+      "video_id": "cswFQYam8Ic",
+      "watch_url": "https://www.youtube.com/watch?v=cswFQYam8Ic",
+      "result": "playing-and-time-advances",
+      "states": [
+        -1,
+        3,
+        1
+      ],
+      "errors": [],
+      "first_positive_media_time": 497727.9,
+      "last_media_time": 497729.704438,
+      "observed_time_advance_seconds": 1.804437999962829,
+      "elapsed_ms": 2513
+    },
+    {
+      "name": "Bellagio Conservatory",
+      "video_id": "KJuGU7v5oYw",
+      "watch_url": "https://www.youtube.com/watch?v=KJuGU7v5oYw",
+      "result": "playing-and-time-advances",
+      "states": [
+        -1,
+        3,
+        1
+      ],
+      "errors": [],
+      "first_positive_media_time": 26820.16929705215,
+      "last_media_time": 26821.731324,
+      "observed_time_advance_seconds": 1.5620269478495175,
+      "elapsed_ms": 3015
+    },
+    {
+      "name": "SnowWorld indoor skiing",
+      "video_id": "wl7Ykwi0UJs",
+      "watch_url": "https://www.youtube.com/watch?v=wl7Ykwi0UJs",
+      "result": "playing-and-time-advances",
+      "states": [
+        -1,
+        3,
+        1
+      ],
+      "errors": [],
+      "first_positive_media_time": 16130469.379637187,
+      "last_media_time": 16130470.953045188,
+      "observed_time_advance_seconds": 1.5734080001711845,
+      "elapsed_ms": 2517
+    },
+    {
+      "name": "UW Quad",
+      "video_id": "JfQTgK0k8XE",
+      "watch_url": "https://www.youtube.com/watch?v=JfQTgK0k8XE",
+      "result": "playing-and-time-advances",
+      "states": [
+        -1,
+        1
+      ],
+      "errors": [],
+      "first_positive_media_time": 16523232.311882086,
+      "last_media_time": 16523233.876568,
+      "observed_time_advance_seconds": 1.5646859146654606,
+      "elapsed_ms": 2516
+    },
+    {
+      "name": "Wake Forest Hearn Plaza",
+      "video_id": "a89gExUKAu4",
+      "watch_url": "https://www.youtube.com/watch?v=a89gExUKAu4",
+      "result": "playing-and-time-advances",
+      "states": [
+        -1,
+        3,
+        1
+      ],
+      "errors": [],
+      "first_positive_media_time": 16751905.1,
+      "last_media_time": 16751906.923592,
+      "observed_time_advance_seconds": 1.8235919997096062,
+      "elapsed_ms": 2516
+    },
+    {
+      "name": "Illinois Main Quad",
+      "video_id": "WyrkXojtRXk",
+      "watch_url": "https://www.youtube.com/watch?v=WyrkXojtRXk",
+      "result": "playing-and-time-advances",
+      "states": [
+        -1,
+        3,
+        1
+      ],
+      "errors": [],
+      "first_positive_media_time": 16350796.911609976,
+      "last_media_time": 16350798.721192,
+      "observed_time_advance_seconds": 1.8095820248126984,
+      "elapsed_ms": 2504
+    },
+    {
+      "name": "Church Street Marketplace",
+      "video_id": "zl1woMXGGmQ",
+      "watch_url": "https://www.youtube.com/watch?v=zl1woMXGGmQ",
+      "result": "playing-and-time-advances",
+      "states": [
+        -1,
+        3,
+        1
+      ],
+      "errors": [],
+      "first_positive_media_time": 16000385.3,
+      "last_media_time": 16000386.849788,
+      "observed_time_advance_seconds": 1.549788000062108,
+      "elapsed_ms": 2509
+    },
+    {
+      "name": "Market Square Portsmouth",
+      "video_id": "VsuSbXPN93o",
+      "watch_url": "https://www.youtube.com/watch?v=VsuSbXPN93o",
+      "result": "playing-and-time-advances",
+      "states": [
+        -1,
+        3,
+        1
+      ],
+      "errors": [],
+      "first_positive_media_time": 16468425.366666667,
+      "last_media_time": 16468426.92509,
+      "observed_time_advance_seconds": 1.5584233328700066,
+      "elapsed_ms": 2509
+    },
+    {
+      "name": "Prague Main Station",
+      "video_id": "tmlE1ct0cYk",
+      "watch_url": "https://www.youtube.com/watch?v=tmlE1ct0cYk",
+      "result": "playing-and-time-advances",
+      "states": [
+        -1,
+        3,
+        1
+      ],
+      "errors": [],
+      "first_positive_media_time": 17507153.439501137,
+      "last_media_time": 17507155.004918,
+      "observed_time_advance_seconds": 1.5654168650507927,
+      "elapsed_ms": 2513
+    },
+    {
+      "name": "New Orleans airport",
+      "video_id": "MH0_mPt-VXE",
+      "watch_url": "https://www.youtube.com/watch?v=MH0_mPt-VXE",
+      "result": "playing-and-time-advances",
+      "states": [
+        -1,
+        1
+      ],
+      "errors": [],
+      "first_positive_media_time": 10977524.7,
+      "last_media_time": 10977526.278809,
+      "observed_time_advance_seconds": 1.5788090005517006,
+      "elapsed_ms": 2508
+    },
+    {
+      "name": "Cowes Floating Bridge",
+      "video_id": "8lbAbc2REyQ",
+      "watch_url": "https://www.youtube.com/watch?v=8lbAbc2REyQ",
+      "result": "playing-and-time-advances",
+      "states": [
+        -1,
+        1
+      ],
+      "errors": [],
+      "first_positive_media_time": 9766288.3,
+      "last_media_time": 9766289.851169,
+      "observed_time_advance_seconds": 1.5511689987033606,
+      "elapsed_ms": 2512
+    },
+    {
+      "name": "Colorado Model Railroad Museum",
+      "video_id": "1P0feVMNX5s",
+      "watch_url": "https://www.youtube.com/watch?v=1P0feVMNX5s",
+      "result": "playing-and-time-advances",
+      "states": [
+        -1,
+        3,
+        1
+      ],
+      "errors": [],
+      "first_positive_media_time": 15805867.166666666,
+      "last_media_time": 15805868.719539,
+      "observed_time_advance_seconds": 1.552872333675623,
+      "elapsed_ms": 2520
+    }
+  ],
+  "signature": "Signed: Codex"
+}

@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en"><meta charset="utf-8"><title>Roundtrip embed playback check</title>
+<style>body{font:16px system-ui;background:#111827;color:#eee;margin:20px}iframe{width:640px;height:360px;border:0}button{padding:12px}pre{white-space:pre-wrap;font:12px monospace}#status{padding:12px}</style>
+<h1>Roundtrip embed playback check</h1>
+<p>One muted publisher iframe at a time. Mirrors the app's embed URL, autoplay allowlist and referrer policy. Passing means PLAYING plus advancing video time; it does not certify that a live channel is not replaying footage.</p>
+<button id="start">Start 15-camera check</button><div id="status">Ready</div><div id="stage"></div><pre id="results">[]</pre>
+<script>
+const suite=[
+ ['Lubee flying foxes','EXSoa7sQTzQ'],['Moody Gardens penguins','HHp4rjhJsWI'],['Vancouver sea otters','_KXHUb0wFRE'],['Kitkat kitten rescue','cswFQYam8Ic'],
+ ['Bellagio Conservatory','KJuGU7v5oYw'],['SnowWorld indoor skiing','wl7Ykwi0UJs'],['UW Quad','JfQTgK0k8XE'],['Wake Forest Hearn Plaza','a89gExUKAu4'],['Illinois Main Quad','WyrkXojtRXk'],
+ ['Church Street Marketplace','zl1woMXGGmQ'],['Market Square Portsmouth','VsuSbXPN93o'],['Prague Main Station','tmlE1ct0cYk'],['New Orleans airport','MH0_mPt-VXE'],['Cowes Floating Bridge','8lbAbc2REyQ'],['Colorado Model Railroad Museum','1P0feVMNX5s']
+];
+let results=[],active=null,index=0,timer=null;
+const show=()=>document.querySelector('#results').textContent=JSON.stringify(results,null,2);
+function finish(reason){
+ if(!active)return;
+ active.result=reason;active.finished_at=new Date().toISOString();active.elapsed_ms=Date.now()-active.startedMs;delete active.startedMs;
+ clearInterval(timer);results.push(active);active=null;show();
+ document.querySelector('#stage').replaceChildren();
+ if(index<suite.length)setTimeout(next,700);else document.querySelector('#status').textContent='Complete: '+results.length+' checks';
+}
+function send(f,event,func,args){f.contentWindow.postMessage(JSON.stringify({event,func,args,id:'qa-player'}),'https://www.youtube.com');}
+function next(){
+ const [name,id]=suite[index++];
+ active={name,video_id:id,started_at:new Date().toISOString(),startedMs:Date.now(),states:[],errors:[],times:[],events:[]};
+ document.querySelector('#status').textContent=index+'/'+suite.length+' — '+name;
+ const f=document.createElement('iframe');f.id='qa-player';f.title=name;f.allow='autoplay; encrypted-media; picture-in-picture';f.referrerPolicy='origin-when-cross-origin';
+ f.src='https://www.youtube.com/embed/'+id+'?autoplay=1&mute=1&playsinline=1&controls=0&modestbranding=1&rel=0&iv_load_policy=3&enablejsapi=1';
+ document.querySelector('#stage').replaceChildren(f);
+ timer=setInterval(()=>{
+   if(!active)return;
+   send(f,'listening');
+   for(const event of ['onReady','onStateChange','onError'])send(f,'command','addEventListener',[event]);
+   const t=active.times.filter(v=>v>0);
+   const advance=t.length>1?t[t.length-1]-t[0]:0;
+   if(active.states.includes(1)&&advance>=1.5&&advance<12&&Date.now()-active.startedMs>=2500){active.observed_time_advance_seconds=advance;finish('playing-and-time-advances');}
+   else if(Date.now()-active.startedMs>24000)finish('timeout-no-playback-proof');
+ },500);
+}
+window.addEventListener('message',ev=>{
+ if(!active||!/^https:\/\/(www\.)?youtube\.com$/.test(ev.origin))return;
+ let d;try{d=typeof ev.data==='string'?JSON.parse(ev.data):ev.data}catch{return}
+ if(!d)return;
+ if(d.event&&!active.events.includes(d.event))active.events.push(d.event);
+ if(d.event==='onStateChange'&&!active.states.includes(d.info))active.states.push(d.info);
+ if(d.event==='onError'){active.errors.push(d.info);finish('player-error');return}
+ if(d.info&&typeof d.info==='object'){
+  if(typeof d.info.playerState==='number'&&!active.states.includes(d.info.playerState))active.states.push(d.info.playerState);
+  if(typeof d.info.currentTime==='number')active.times.push(d.info.currentTime);
+  if(d.info.videoData&&d.info.videoData.title)active.player_title=d.info.videoData.title;
+ }
+ document.querySelector('#status').textContent=index+'/'+suite.length+' — '+active.name+'; states '+active.states.join(',')+'; time samples '+active.times.length;
+});
+document.querySelector('#start').onclick=()=>{if(active)return;results=[];index=0;show();document.querySelector('#start').disabled=true;next()};
+</script></html>

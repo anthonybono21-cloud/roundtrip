@@ -1,0 +1,42 @@
+{
+  "generated_at": "2026-09-18T15:37:09.243671+00:00",
+  "existing_count": 239,
+  "requested_additions": 1,
+  "accepted": [
+    {
+      "name": "Cologne Bonn cargo apron, FedEx hub",
+      "video_id": null,
+      "lane": "research",
+      "source_file": "fedex-locations.json",
+      "quality_score": 3,
+      "reasons": []
+    }
+  ],
+  "reserve": [],
+  "rejected": [],
+  "duplicates": [],
+  "input_count": 1,
+  "lane_counts": {
+    "research": {
+      "accepted": 1,
+      "reserve": 0,
+      "rejected": 0,
+      "duplicates": 0
+    }
+  },
+  "counts": {
+    "accepted": 1,
+    "reserve": 0,
+    "rejected": 0,
+    "duplicates": 0
+  },
+  "new_total": 240,
+  "shortfall": 0,
+  "rating_distribution": {
+    "3": 1
+  },
+  "existing_values_preserved": true,
+  "mode": "write",
+  "catalog_changed": true,
+  "backup": "cameras-77036281829f1ed1.json"
+}

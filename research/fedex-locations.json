@@ -1,0 +1,47 @@
+{
+  "candidates": [
+    {
+      "name": "Cologne Bonn cargo apron, FedEx hub",
+      "location": "Cologne, North Rhine-Westphalia",
+      "country": "Germany",
+      "category": "airport",
+      "provider": "Cologne Bonn Airport",
+      "kind": "hls",
+      "url": "https://stream-5gw.1000eyes.de/cupertino/cgnCDB73A.stream/playlist.m3u8",
+      "watch_url": "https://www.koeln-bonn-airport.de/fluggaeste/flughafen-erleben/webcams.html?nr=5&cHash=1612c133f6ac6a2b22b3e811a72fabf6",
+      "attribution_url": "https://www.koeln-bonn-airport.de/fluggaeste/flughafen-erleben/webcams.html?nr=5&cHash=1612c133f6ac6a2b22b3e811a72fabf6",
+      "attribution_text": "Camera: Cologne Bonn Airport",
+      "lat": 50.8659,
+      "lng": 7.1427,
+      "coordinate_confidence": "Approximate airport scene anchor; camera mount and view alignment unverified.",
+      "timezone": "Europe/Berlin",
+      "tags": ["fedex", "fed ex", "federal express", "fedex express", "fedex hub", "cargo", "logistics", "airport", "aviation", "planes", "aircraft", "ground crew", "ground handling", "trucks", "outdoor", "cologne", "koln", "koeln", "bonn", "cgn", "eddk", "germany", "deutschland", "north rhine-westphalia", "nrw", "europe"],
+      "quality_score": 3,
+      "quality_reason": "Direct view of the clearly branded FedEx building and parked FedEx aircraft, with ground service vehicles changing position. Strong relevance, but the source is only 640x480 and aircraft activity varies.",
+      "quality_evidence": {
+        "method": "actual_playback",
+        "visual_inspected": true,
+        "motion_observed": true,
+        "checked_at": "2026-09-18T15:35:00Z",
+        "source": "Official cargo webcam browser observations at video times 25.207601 and 120.937614 seconds.",
+        "observations": "FedEx logo visible on hub building and aircraft; foreground service truck and equipment positions change between observations. Public airport page explicitly identifies FedEx building."
+      },
+      "validation": {
+        "checked_at": "2026-09-18T15:35:00Z",
+        "is_live": true,
+        "playable": true,
+        "motion_observed": true,
+        "method": "Official browser HLS playback with currentTime advancing, readyState4; playlist HTTP200 and CORS wildcard.",
+        "resolution": [640, 480],
+        "limitations": "Desktop browser verification; no ET401 hardware test."
+      },
+      "notes": "Public airport-operated cargo camera directly overlooking FedEx; other carriers and terminal ground activity also appear. Preserve source resolution; do not label HD.",
+      "source_provenance": "Official airport webcam caption: Blick auf das Cargo Vorfeld und dem Fedex Gebaeude."
+    }
+  ],
+  "research_notes": [
+    "Minneapolis-St. Paul MNCam wWm-kbryDDQ plays live at1080p. Camscape identifies a FedEx loading-bay view, but the current observed stream uses a split-screen airport/cargo view; FedEx-specific angle not personally confirmed. Retained as a lead, not admitted here.",
+    "Indianapolis, Anchorage, Oakland and Paris-CDG were searched. No additional verified public camera directly showing a FedEx facility found in this bounded pass. Lake Hood is already in the app and is a seaplane view, not a verified FedEx ramp camera.",
+    "FedExForum search surfaced obsolete2003 construction-camera coverage, not a current live source."
+  ]
+}

@@ -1001,6 +1001,7 @@ async function temperature(pose){
 }
 
 function showCard(cam){
+  window.dispatchEvent(new Event('rt-credit'));
   const country = cam.country || '';
   const aliases = { 'United States':'USA', 'United Kingdom':'UK' };
   const countryLabel = aliases[country] || country;
@@ -2233,6 +2234,20 @@ const progress = v => { bar.style.width = (v*100)+'%'; };
       // other credits, and the only way to tell a stale page in a television's
       // cache from a change that did not work.
       + `<br>${BUILD}`;
+    const source = state.cam?.attribution_url;
+    if(source){
+      try {
+        const url = new URL(source);
+        if(url.protocol === 'https:'){
+          const link = document.createElement('a');
+          link.href = url.href;link.target = '_blank';link.rel = 'noopener noreferrer';
+          link.textContent = state.cam.attribution_text || state.cam.provider || 'Camera source';
+          link.style.cssText = 'color:inherit;pointer-events:auto';
+          link.addEventListener('click',event=>event.stopPropagation());
+          $('#attrib').append(document.createElement('br'),link);
+        }
+      } catch { /* Invalid optional publisher link must not break the viewer. */ }
+    }
     // Sit the help panel above the credits rather than on top of them. Both
     // are anchored bottom-right, and the panel was covering the tail of the
     // first credit line, which Esri and OpenStreetMap both require to stay

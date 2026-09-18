@@ -95,8 +95,11 @@
   #card .where{color:#d3dfef;margin-top:5px;font-size:16px}
   #card .meta{margin-top:9px;font-size:15px;color:#d3dfef;
     display:flex;gap:14px;align-items:baseline;flex-wrap:wrap}
-  #card .clock{font-variant-numeric:tabular-nums;color:var(--ink);font-size:17px;font-weight:600;
-    letter-spacing:.01em}
+  #card .clock,#card .temp{font-variant-numeric:tabular-nums;color:var(--ink);font-size:17px;
+    font-weight:600;letter-spacing:.01em}
+  /* Empty until the reading arrives, and empty for good if it never does:
+     the row simply has one item in it, and nothing says so on the picture. */
+  #card .temp:empty{display:none}
 
   @media (max-width:620px){
     #card{gap:12px;max-width:calc(100vw - 80px)}
@@ -186,7 +189,7 @@
   .tv #card .place{font-size:clamp(18px,3vh,42px)}
   .tv #card .where{font-size:clamp(11px,1.85vh,25px);margin-top:.5vh}
   .tv #card .meta{font-size:clamp(10px,1.6vh,21px);margin-top:1.1vh;gap:1.6vw}
-  .tv #card .clock{font-size:clamp(11px,1.75vh,23px)}
+  .tv #card .clock,.tv #card .temp{font-size:clamp(11px,1.75vh,23px)}
   .tv #phase{left:5vw;top:5vh;font-size:clamp(8px,1.15vh,15px)}
   .tv #pinned,.tv #rt-set{right:5vw;top:5vh;font-size:clamp(8px,1.15vh,15px)}
   .tv #attrib{right:5vw;bottom:4.6vh;font-size:clamp(7px,1vh,13px);max-width:38vw}
@@ -234,6 +237,7 @@
     <div class="where"></div>
     <div class="meta">
       <span class="clock"></span>
+      <span class="temp"></span>
     </div>
   </div>
 </div>
@@ -293,6 +297,7 @@ const CFG = {
   volume:       15,     // percent, the level a feed's own sound settles at
   adHold:       6,      // seconds to hold the landing rather than reveal a pre-roll
   arriveR:      0.95,   // where the approach stops, in earth radii above the surface
+  tempUnit:     'F',    // the card's temperature: 'F' or 'C'
 };
 
 const R_EARTH = 6371000;
@@ -780,6 +785,31 @@ function ytSignIn(){
 const card = $('#card');
 let cardTimer = null, clockTimer = null;
 
+/* The temperature where the camera is, from Open-Meteo: no key, no account,
+   no billing, which is the rule for every source in this app. One request per
+   landing, and a reading is kept for twenty minutes, so a long night parked on
+   one camera costs a handful of calls. It fails silently on purpose — an empty
+   slot beside the clock is better than an error written over the picture. */
+const wxCache = new Map();
+const WX_TTL = 20*60*1000;
+async function temperature(pose){
+  const key = pose.lat.toFixed(2)+','+pose.lng.toFixed(2)+CFG.tempUnit;
+  const hit = wxCache.get(key);
+  if (hit && Date.now() - hit.at < WX_TTL) return hit.t;
+  const unit = CFG.tempUnit === 'C' ? 'celsius' : 'fahrenheit';
+  const r = await fetch('https://api.open-meteo.com/v1/forecast'
+    + `?latitude=${pose.lat.toFixed(4)}&longitude=${pose.lng.toFixed(4)}`
+    + `&current=temperature_2m&temperature_unit=${unit}`, { cache:'no-store' });
+  if (!r.ok) throw new Error('weather ' + r.status);
+  const j = await r.json();
+  // current= is the present API; current_weather= is the older one, and both
+  // have been seen in the wild depending on which edge answers.
+  const t = j?.current?.temperature_2m ?? j?.current_weather?.temperature;
+  if (typeof t !== 'number') throw new Error('no temperature in the reply');
+  wxCache.set(key, { t, at: Date.now() });
+  return t;
+}
+
 function showCard(cam){
   card.querySelector('.place').textContent = cam.name;
   card.querySelector('.where').textContent = cam.location;
@@ -795,10 +825,20 @@ function showCard(cam){
   };
   tick();
   clearInterval(clockTimer); clockTimer = setInterval(tick, 15000);
+
+  // A reading that arrives after the next camera has landed belongs to the
+  // camera that asked for it, not to the one on screen.
+  const temp = card.querySelector('.temp');
+  temp.textContent = '';
+  const mine = ++showCard.seq;
+  temperature(cam.pose)
+    .then(t => { if (showCard.seq === mine) temp.textContent = Math.round(t) + '\u00b0'; })
+    .catch(() => {});
   card.classList.add('on'); card.classList.remove('rest');
   clearTimeout(cardTimer);
   cardTimer = setTimeout(() => card.classList.add('rest'), 6500);
 }
+showCard.seq = 0;
 function hideCard(){ card.classList.remove('on','rest'); clearInterval(clockTimer); }
 
 /* ── the flight ─────────────────────────────────────────────────────────── */

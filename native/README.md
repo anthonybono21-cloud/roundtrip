@@ -16,17 +16,18 @@ The action strip is `menu.js`, which reserved that slot for this; the bridge
 only registers an item, and falls back to a floating button if it is talking
 to a build that predates the strip.
 
-Nothing here needs a paid API, a key, or an account to *build*. Putting the
-Apple apps on a device does need an Apple developer account, which is Apple's
-rule, not a choice made here.
+Nothing here needs a paid API or a map key. The Apple builds are signed
+automatically against Anthony's developer team (`867VXT3658`) with the bundle
+identifier `com.anthonybono.roundtrip`, so a build on the MacBook picks up his
+identity and profiles without anything being clicked.
 
 ## What state each one is in
 
 | | Builds | Runs | What is missing |
 |---|---|---|---|
 | **Android** | Yes, in CI, on every push | Phone and tablet | Nothing, for sideloading |
-| **iPhone / iPad** | Compiles in CI; needs Xcode for a device build | — | An Apple developer account to sign it |
-| **Mac** | Same project, Mac Catalyst | — | The same account |
+| **iPhone / iPad** | Compiles in CI; builds and installs from the MacBook | Anthony's iPhone, over the wireless pairing | Nothing |
+| **Mac** | Same project, Mac Catalyst | Yes | Nothing |
 | **Apple TV** | Not possible as a web shell | — | See below |
 
 ### The Fire TV app is a separate thing, on purpose
@@ -52,6 +53,9 @@ and has a WebView. That is the working answer for a television today, and the
 APK this directory builds is the same one the Fire TV work uses.
 
 ## Building
+
+Copy-runnable commands for every platform, including installing onto the
+paired iPhone, are in [BUILD.md](BUILD.md). The short version:
 
 Everything starts from the repo root's `index.html`, which is copied in by
 `sync-web.mjs`. Nothing in this directory ever writes back to the root.
@@ -85,10 +89,10 @@ store. A real store release would need a private key kept somewhere else.
 npm run ios:open        # opens the Xcode project
 ```
 
-Pick a simulator and it runs straight away. For a real device or a Mac build,
-set a team in *Signing & Capabilities* first. The Mac build is the iPad app
-under Mac Catalyst, which is already switched on — choose *My Mac (Mac
-Catalyst)* as the destination.
+Signing is already configured, so a device or Mac build needs no setup. The
+Mac build is the iPad app under Mac Catalyst, which is switched on; choose
+*My Mac (Mac Catalyst)* as the destination. To build without opening Xcode at
+all, use the commands in [BUILD.md](BUILD.md).
 
 ## How it fits together
 

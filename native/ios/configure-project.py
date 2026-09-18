@@ -7,6 +7,7 @@ project can be thrown away and regenerated without losing any of it:
 
   * the two Swift files that make up the map, added to the App target
   * Mac Catalyst switched on, which is the whole Mac app
+  * automatic signing against Anthony's Apple developer team
   * iPhone and iPad both, portrait and landscape
   * a version number that means something
 
@@ -28,7 +29,16 @@ PROJECT = HERE / "App" / "App.xcodeproj" / "project.pbxproj"
 
 SOURCES = ["RoundtripMapPlugin.swift", "RoundtripMapViewController.swift"]
 
+# Anthony's Apple developer team, from the MacBook that builds this. Not a
+# secret: a team id is public, it appears in every app this account ships.
+# With automatic signing, this is all Xcode needs to pick his identity and
+# provisioning profiles up by itself, so nothing has to be clicked before a
+# build.
+TEAM_ID = "867VXT3658"
+
 SETTINGS = {
+    "DEVELOPMENT_TEAM": TEAM_ID,
+    "CODE_SIGN_STYLE": "Automatic",
     # Mac Catalyst is the Mac app: the same iPad build, running natively on
     # macOS, MapKit and all. Nothing else in the project changes.
     "SUPPORTS_MACCATALYST": "YES",

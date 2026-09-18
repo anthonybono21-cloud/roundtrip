@@ -67,7 +67,10 @@
   const CSS = `
   #rt-menu{position:fixed;z-index:30;left:50%;
     bottom:calc(30px + env(safe-area-inset-bottom,0px));
-    transform:translate(-50%,16px);width:min(680px,calc(100vw - 24px));
+    transform:translate(-50%,16px);
+    /* Hugs its items rather than filling a fixed width, so the panel is as
+       wide as what is in it; the cap is where it starts wrapping instead. */
+    width:max-content;max-width:min(700px,calc(100vw - 24px));
     opacity:0;pointer-events:none;
     transition:opacity .22s ease,transform .22s ease}
   #rt-menu.on{opacity:1;pointer-events:auto;transform:translate(-50%,0)}

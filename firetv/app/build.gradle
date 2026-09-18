@@ -1,0 +1,46 @@
+plugins { id 'com.android.application' }
+
+android {
+  namespace 'com.roundtrip.tv'
+  compileSdk 34
+
+  defaultConfig {
+    applicationId 'com.roundtrip.tv'
+    // Fire OS 5 is Android 5.1, which is the oldest Fire Stick still in use.
+    minSdk 22
+    targetSdk 34
+    // CI passes the run number so each build installs over the last one.
+    versionCode (project.findProperty('versionCode') ?: '1').toString().toInteger()
+    versionName (project.findProperty('versionName') ?: '1.0.' + versionCode).toString()
+  }
+
+  // Signed with a key that is in this repository on purpose. It protects
+  // nothing: this app is sideloaded onto one Fire Stick and is never going
+  // near a store. What a fixed key buys is that every build installs over the
+  // last one instead of being refused as a different app.
+  signingConfigs {
+    sideload {
+      storeFile file('../roundtrip-sideload.jks')
+      storePassword 'roundtrip'
+      keyAlias 'roundtrip'
+      keyPassword 'roundtrip'
+    }
+  }
+
+  buildTypes {
+    release {
+      minifyEnabled false
+      signingConfig signingConfigs.sideload
+    }
+    debug { signingConfig signingConfigs.sideload }
+  }
+
+  compileOptions {
+    sourceCompatibility JavaVersion.VERSION_17
+    targetCompatibility JavaVersion.VERSION_17
+  }
+
+  // No libraries at all: this is a framework WebView and nothing else, which
+  // keeps the apk about a megabyte and the build about a minute.
+  lint { abortOnError false }
+}

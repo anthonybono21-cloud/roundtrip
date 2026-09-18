@@ -325,6 +325,14 @@ const CFG = {
     url: (z,x,y) => `https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/${z}/${y}/${x}`,
     credit: 'Imagery: Esri, Maxar, Earthstar Geographics',
     maxZoom: 19,
+    // Borders, coastlines and place names, drawn over the imagery on the way
+    // down so the wide part of the descent reads as somewhere rather than as
+    // an aerial photograph. Transparent PNGs from the same free service. The
+    // layer stops at zoom 13, which is the behaviour we want: the labels are
+    // there while the country is, and gone by the time the street is.
+    overlay: (z,x,y) => `https://server.arcgisonline.com/ArcGIS/rest/services/Reference/World_Boundaries_and_Places/MapServer/tile/${z}/${y}/${x}`,
+    overlayMaxZoom: 13,
+    overlayWait: 2500,  // ms before giving up on a label tile; never stalls a dive
   },
   tempUnit:     'F',    // the card's temperature: 'F' or 'C'
   restR:        2.7,    // resting distance from the centre; the globe fills the frame
@@ -462,6 +470,24 @@ async function imageryMosaic(lat, lng, halfM, z){
       .catch(()=>{}));                       // a missing tile leaves the backing colour
   }
   await Promise.all(jobs);
+
+  /* Names and borders go on after the imagery, so they sit on top of it. They
+     are decoration: a slow or missing label tile must never hold up a descent,
+     so each one races a timer and whatever has not arrived is simply skipped. */
+  const ov = CFG.imagery.overlay;
+  if (ov && z <= CFG.imagery.overlayMaxZoom){
+    const patient = url => Promise.race([
+      loadImage(url),
+      new Promise(r => setTimeout(() => r(null), CFG.imagery.overlayWait)) ]);
+    const marks = [];
+    for (let x=x0; x<=x1; x++) for (let y=y0; y<=y1; y++){
+      marks.push(patient(ov(z,x,y))
+        .then(im => { if (im) ctx.drawImage(im,(x-x0)*256,(y-y0)*256,256,256); })
+        .catch(()=>{}));
+    }
+    await Promise.all(marks);
+  }
+
   return { canvas: cv, bounds: {
     west: tileX2lng(x0,z), east: tileX2lng(x1+1,z),
     north: tileY2lat(y0,z), south: tileY2lat(y1+1,z) } };

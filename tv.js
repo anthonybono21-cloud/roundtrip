@@ -246,6 +246,12 @@
   function doBack() {
     var s = search();
     if (s && s.isOpen && s.isOpen()) { s.close ? s.close() : esc(); return; }
+    // The tap menu closes before anything else, the same as it does on the
+    // key path above. This is the path that matters inside the Fire TV app,
+    // where the activity turns the remote's Back into history navigation and
+    // no key event ever reaches the page.
+    var m = window.RoundtripMenu;
+    if (m && m.isOpen && m.isOpen()) { m.close(); return; }
     if (open) { hide(); return; }
     Act.orbit();
   }

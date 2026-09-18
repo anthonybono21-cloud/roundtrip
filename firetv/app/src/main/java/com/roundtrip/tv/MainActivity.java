@@ -17,6 +17,13 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
+import androidx.webkit.WebSettingsCompat;
+import androidx.webkit.WebViewFeature;
+
+import java.util.Collections;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 /**
  * Roundtrip on a Fire Stick.
  *
@@ -62,15 +69,30 @@ public class MainActivity extends Activity {
       "https://www.youtube.com/channel_switcher";
 
   /**
-   * Google refuses a sign-in from a user agent it recognises as an embedded
-   * browser, and the framework WebView announces itself as one with "; wv".
-   * The sign-in pages are given a plain desktop string instead; the app drops
-   * back to its own the moment it is done, because the site itself wants to
-   * be told it is on a television, not on a desktop.
+   * Google refuses a sign-in from a browser it recognises as an embedded one,
+   * and the framework WebView gives itself away twice over: "; wv" in the user
+   * agent, and an X-Requested-With header carrying this package name. Both
+   * have to go, and the header is the one that cannot be cleared from the
+   * platform API — see signInMitigations().
+   *
+   * The version is read off the device's own WebView rather than written down
+   * here, because a user agent claiming a Chrome from two years ago is its own
+   * kind of suspicious and a constant in this file is stale the month after it
+   * is typed. The floor below is only for a WebView too old to parse or too
+   * old to be worth quoting.
    */
-  private static final String DESKTOP_UA =
-      "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) "
-      + "Chrome/124.0.0.0 Safari/537.36";
+  private static final int UA_VERSION_FLOOR = 128;
+  private static final Pattern UA_CHROME = Pattern.compile("Chrome/(\\d+)");
+
+  private String desktopUa() {
+    int major = UA_VERSION_FLOOR;
+    try {
+      Matcher m = UA_CHROME.matcher(WebSettings.getDefaultUserAgent(this));
+      if (m.find()) major = Math.max(major, Integer.parseInt(m.group(1)));
+    } catch (Throwable ignored) { }
+    return "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) "
+        + "Chrome/" + major + ".0.0.0 Safari/537.36";
+  }
 
   private WebView web;
   private String home = HOME;
@@ -221,11 +243,47 @@ public class MainActivity extends Activity {
     @JavascriptInterface public boolean isShell() { return true; }
   }
 
+  /**
+   * The one thing that actually got the sign-in refused on the television.
+   *
+   * A WebView sends `X-Requested-With: com.roundtrip.tv` on every request it
+   * makes, which is how Google's sign-in knows it is talking to an app rather
+   * than a browser however the user agent reads, and why the desktop string
+   * alone was not enough. androidx.webkit can restrict that header to an
+   * allow-list of origins, and an empty list means nobody gets it.
+   *
+   * It is put back afterwards rather than left off: outside the sign-in the
+   * header is harmless, and a WebView that lies about itself to every site it
+   * ever loads is not a thing to leave switched on.
+   *
+   * Whether it takes at all depends on the WebView on the device, so the
+   * result is logged either way — a Fire Stick old enough not to support the
+   * feature cannot be signed in this way at all, and the log line is how that
+   * is told apart from a wrong password.
+   */
+  private void signInMitigations(boolean on) {
+    if (!WebViewFeature.isFeatureSupported(WebViewFeature.REQUESTED_WITH_HEADER_ALLOW_LIST)) {
+      android.util.Log.w("roundtrip", "X-Requested-With cannot be cleared on this WebView; "
+          + "Google will probably refuse the sign-in");
+      return;
+    }
+    try {
+      WebSettingsCompat.setRequestedWithHeaderOriginAllowList(
+          web.getSettings(),
+          on ? Collections.<String>emptySet() : Collections.singleton("*"));
+      android.util.Log.i("roundtrip", "X-Requested-With " + (on ? "cleared for sign-in"
+                                                               : "restored"));
+    } catch (Throwable t) {
+      android.util.Log.w("roundtrip", "X-Requested-With allow list refused: " + t);
+    }
+  }
+
   private void startSignIn() {
     if (signingIn) return;
     signingIn = true;
     signInStep = 1;
-    web.getSettings().setUserAgentString(DESKTOP_UA);
+    web.getSettings().setUserAgentString(desktopUa());
+    signInMitigations(true);
     // Immersive mode and a soft keyboard fight each other: the sticky flags
     // come back while a field has focus and take the bottom of the keyboard
     // with them. Roundtrip itself never takes typing, so the plain window is
@@ -242,6 +300,7 @@ public class MainActivity extends Activity {
     signInStep = 0;
     CookieManager.getInstance().flush();
     web.getSettings().setUserAgentString(null);   // back to the app's own
+    signInMitigations(false);
     web.clearHistory();
     web.loadUrl(home);
     immersive();

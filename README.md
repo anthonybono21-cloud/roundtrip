@@ -201,9 +201,9 @@ honours the viewer's own subscription, and that is the only thing here that
 removes an advert rather than working around it. In a browser, being signed in
 to YouTube in the same browser is already enough. Inside the Fire TV app the
 cookie jar belongs to the shell, so the shell does the sign-in: the **Ads**
-item in the action strip calls `RoundtripShell.signIn()`, the app swaps to a
-plain desktop user agent (Google refuses a sign-in from a user agent carrying
-the WebView's `; wv`), and runs the sign-in in two steps — Google, then
+item in the action strip calls `RoundtripShell.signIn()`, the app makes itself
+look like a browser rather than an app for the duration, and runs the sign-in
+in two steps — Google, then
 YouTube's channel picker — before coming back to the globe with the account's
 cookies kept. The second step is not optional politeness: the channel chosen
 there is where everything this television watches gets recorded, so a Brand
@@ -213,7 +213,20 @@ rather than to any one channel, still reaches the players. The password is
 typed on the television by the person whose account it is; nothing in the app
 or the runbook accepts one over adb, from the page or from an intent extra,
 and the app drops out of immersive mode for the sign-in so the on-screen
-keyboard has room. `setAcceptThirdPartyCookies` is the other half
+keyboard has room.
+
+Looking like a browser takes two things, and the obvious one is not the one
+that matters. A WebView carries `; wv` in its user agent, so the sign-in pages
+get a desktop string instead — with the Chrome version read off the device's
+own WebView rather than written into the source, where it would be stale
+within the month. But it also sends `X-Requested-With: com.roundtrip.tv` on
+every request, which is how Google's sign-in knows it is an app whatever the
+user agent claims. That header is why the first build was still refused on the
+KC50, nothing in the platform API can clear it, and `androidx.webkit` is the
+project's only dependency because it can: an empty origin allow-list for the
+duration of the sign-in, put back afterwards. A WebView too old to support the
+feature says so in the log and cannot be signed in this way at all; there the
+answer is the television's own browser. `setAcceptThirdPartyCookies` is the other half
 of that: the players are `youtube.com` frames inside a `github.io` page, so
 without it no account could ever reach them. The Ads item only appears where it
 is useful — inside the TV app, or on a device that has actually had an advert

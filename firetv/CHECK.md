@@ -131,13 +131,41 @@ Reading back whether it took, once he is done:
 # Let it run a dozen dives and watch whether that number stops growing.
 ```
 
-Two things worth knowing before this is called broken. Google refuses sign-ins
-from user agents it recognises as embedded browsers; the app swaps to a plain
-desktop string for the sign-in pages for exactly that reason, and it may still
-be refused — a "this browser or app may not be secure" page is that refusal and
-not a bug in the app. And **none of this has been tested from a project
-session**: no session here can reach a television or accounts.google.com, so
-everything above is written from the code, not from a run.
+### When Google refuses it
+
+"Couldn't sign you in. This browser or app may not be secure" is Google
+declining to talk to an embedded browser. A WebView gives itself away twice:
+`; wv` in the user agent, and an `X-Requested-With` header carrying the package
+name. The desktop user agent alone was tried on the KC50 on Sep 18 2026 and was
+**not** enough — the header is the one that matters, and clearing it needs
+androidx.webkit rather than the platform API.
+
+Whether the clearing took on this particular WebView is the first thing to read
+back, because an unsupported WebView and a wrong password look identical on
+screen:
+
+```sh
+adb logcat -c
+adb shell am start -n com.roundtrip.tv/.MainActivity
+# start the sign-in, then:
+adb logcat -d -s roundtrip
+```
+
+- `X-Requested-With cleared for sign-in` — the fix is active. A refusal after
+  this is something else.
+- `X-Requested-With cannot be cleared on this WebView` — this stick's WebView
+  is too old for the feature, and no build can sign it in this way. The answer
+  then is the device's own browser: open the live site fullscreen in Silk (or
+  in Chrome, on a television that has it) signed in to the channel, which is
+  what Anthony did on the KC50 while this was broken.
+
+The user agent needs no maintenance: the app reads the Chrome version off the
+device's own WebView and quotes that back, with a floor for a WebView too old
+to be worth quoting, so it never goes stale.
+
+**None of this has been tested from a project session**: no session here can
+reach a television or accounts.google.com, so everything above is written from
+the code and from what Anthony saw on the KC50, not from a run.
 
 ## Screenshots
 

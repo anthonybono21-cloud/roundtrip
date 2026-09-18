@@ -46,7 +46,13 @@ android {
     targetCompatibility JavaVersion.VERSION_17
   }
 
-  // No libraries at all: this is a framework WebView and nothing else, which
-  // keeps the apk about a megabyte and the build about a minute.
   lint { abortOnError false }
+}
+
+// One library, for one line. Google refuses its sign-in to a browser that
+// announces itself as an app, and the framework WebView announces itself with
+// an X-Requested-With header carrying this package name. Nothing in the
+// platform API can clear that header; androidx.webkit can.
+dependencies {
+  implementation 'androidx.webkit:webkit:1.11.0'
 }

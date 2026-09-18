@@ -244,6 +244,8 @@
   });
 
   function doBack() {
+    var about = document.getElementById('about');
+    if (about && about.open) { about.close(); return; }
     var s = search();
     if (s && s.isOpen && s.isOpen()) { s.close ? s.close() : esc(); return; }
     // The tap menu closes before anything else, the same as it does on the
@@ -279,6 +281,15 @@
     if (!e.isTrusted) return;            // our own synthetic Escape, ignore it
     var g = nameOf(e);
     if (!g) return;
+    var about = document.getElementById('about');
+    if (about && about.open) {
+      if (g === 'back') {
+        e.preventDefault(); e.stopImmediatePropagation(); about.close();
+      } else if (g === 'ok' && about.contains(document.activeElement)) {
+        e.preventDefault(); e.stopImmediatePropagation(); document.activeElement.click();
+      }
+      return;
+    }
     goFull();
 
     var s = search();

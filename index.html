@@ -145,8 +145,15 @@
   #pinlab .t .s::before{content:"";display:inline-block;width:5px;height:5px;border-radius:50%;
     margin-right:5px;vertical-align:1px;background:currentColor;box-shadow:0 0 7px currentColor}
 
-  #attrib{position:fixed;right:12px;bottom:10px;font-size:10px;color:rgba(200,215,235,.42);
-    text-align:right;line-height:1.5;pointer-events:none}
+  #about{width:min(440px,calc(100vw - 40px));max-height:75vh;box-sizing:border-box;
+    margin:auto;padding:24px;border:1px solid var(--edge);border-radius:16px;
+    background:#101722;color:var(--ink);box-shadow:0 18px 60px #0008}
+  #about::backdrop{background:rgba(0,0,0,.55)}
+  #about h2{font-size:20px;margin:0 0 16px}
+  #about button{display:block;margin:20px 0 0 auto;min-height:44px;padding:8px 18px;
+    border:1px solid var(--edge);border-radius:10px;background:#ffffff12;color:inherit;font:inherit}
+  #about button:focus-visible{outline:2px solid #ffd479;outline-offset:3px}
+  #attrib{font-size:13px;color:var(--dim);line-height:1.7;overflow-wrap:anywhere}
 
   #help{position:fixed;right:40px;bottom:44px;font-size:12px;color:var(--dim);
     background:var(--panel);border:1px solid var(--edge);border-radius:10px;padding:12px 14px;
@@ -186,7 +193,6 @@
   .tv #card{left:5vw;right:5vw;bottom:5.5vh}
   .tv #phase{left:5vw;top:5vh;font-size:clamp(8px,1.15vh,15px)}
   .tv #pinned,.tv #rt-set{right:5vw;top:5vh;font-size:clamp(8px,1.15vh,15px)}
-  .tv #attrib{right:5vw;bottom:4.6vh;font-size:clamp(7px,1vh,13px);max-width:38vw}
   .tv #err{bottom:19vh;font-size:clamp(10px,1.6vh,21px);padding:1.1vh 1.4vw;max-width:56vw}
   .tv #help{right:5vw;bottom:10vh;font-size:clamp(9px,1.45vh,19px);
     padding:1.3vh 1.4vw;max-width:36vw;border-radius:.9vh}
@@ -252,7 +258,11 @@
   <div><kbd>F</kbd>fullscreen &middot; <kbd>H</kbd>hide this</div>
 </div>
 
-<div id="attrib"></div>
+<dialog id="about" aria-labelledby="about-title">
+  <h2 id="about-title">About Roundtrip</h2>
+  <div id="attrib"></div>
+  <form method="dialog"><button type="submit" autofocus>Close</button></form>
+</dialog>
 <div id="err"></div>
 <div id="boot"><div class="b"><div class="t">Roundtrip</div><div class="bar"><i></i></div></div></div>
 
@@ -283,10 +293,8 @@ import { createTileLoader } from './tile-loader.js';
    descent; the ground is gone and a dive now ends on the globe itself.
    ───────────────────────────────────────────────────────────────────────────*/
 
-/* Bumped by hand with each push. It shows in the corner with the credits, so
-   a page that is not doing what a change says it should can be told apart from
-   a page a browser or a television is still serving from yesterday. */
-const BUILD = '674 cameras + FedEx · 2026-09-18';
+/* Kept in Roundtrip.build for diagnostics, outside the viewing experience. */
+const BUILD = 'Clean viewer · 2026-09-18';
 
 const CFG = {
   dwell:        90,     // seconds on a live feed before moving on
@@ -2019,6 +2027,7 @@ window.RoundtripPins = {
 /* ── input ──────────────────────────────────────────────────────────────── */
 
 addEventListener('keydown', e => {
+  if ($('#about').open) return;
   const k = e.key;
   // While the search box is open every key is typing, and it handles its
   // own Escape, arrows and Enter.
@@ -2170,6 +2179,10 @@ Menu?.init({
     { id:'keys', label:'Keys', icon:'keys',
       run: () => $('#help').classList.add('on'),
       state: () => ({ title:'The keyboard shortcuts' }) },
+    { id:'about', label:'About',
+      svg:'<circle cx="12" cy="12" r="8.4"/><path d="M12 11v6M12 7h.01"/>',
+      run: () => $('#about').showModal(),
+      state: () => ({ title:'About Roundtrip and source credits' }) },
   ],
 });
 addEventListener('fullscreenchange', () => Menu?.sync());
@@ -2178,7 +2191,7 @@ addEventListener('fullscreenchange', () => Menu?.sync());
    shows what can be done and changes nothing, and a second press puts it
    away again. Presses inside the strip or the search panel are theirs. */
 addEventListener('pointerdown', e => {
-  if (!Menu) return;
+  if (!Menu || $('#about').open) return;
   // While the pin map is up, the globe itself is the control: a press is a
   // drag or a pick, not a call for the strip. Back or Escape leaves the map.
   if (mapState.on) return;
@@ -2227,13 +2240,9 @@ const progress = v => { bar.style.width = (v*100)+'%'; };
 
   const attrib = () => {
     $('#attrib').innerHTML =
-      `Globe: ${satelliteEarth?.status.mode === 'geocolor' ? 'NOAA/CIRA GeoColor · JMA · EUMETSAT' : 'NASA Blue Marble (satellite images unavailable)'} &middot; ${CFG.imagery.credit}`
+      `Globe: ${satelliteEarth?.status.mode === 'geocolor' ? 'NOAA/CIRA GeoColor · JMA · EUMETSAT' : 'NASA Blue Marble'}<br>${CFG.imagery.credit}`
       + (overlayCredit ? ` &middot; ${overlayCredit}` : '')
-      + (clouds ? `<br>${clouds.credit()}` : '')
-      // Which build is actually on the screen. Small, in the corner with the
-      // other credits, and the only way to tell a stale page in a television's
-      // cache from a change that did not work.
-      + `<br>${BUILD}`;
+      + (clouds ? `<br>${clouds.credit()}` : '');
     const source = state.cam?.attribution_url;
     if(source){
       try {
@@ -2248,12 +2257,6 @@ const progress = v => { bar.style.width = (v*100)+'%'; };
         }
       } catch { /* Invalid optional publisher link must not break the viewer. */ }
     }
-    // Sit the help panel above the credits rather than on top of them. Both
-    // are anchored bottom-right, and the panel was covering the tail of the
-    // first credit line, which Esri and OpenStreetMap both require to stay
-    // readable. Measured rather than guessed at, because the block gains a
-    // line when the cloud layer attaches and wraps on a narrow window.
-    $('#help').style.bottom = ($('#attrib').offsetHeight + 22) + 'px';
   };
   window.addEventListener('rt-credit', attrib);
   attrib();

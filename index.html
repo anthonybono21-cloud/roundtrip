@@ -693,18 +693,29 @@ try { ads.seen = JSON.parse(localStorage.getItem(AD_KEY) || '{}') || {}; } catch
 /* The player says nothing until it is asked to (`enablejsapi=1` is already on
    the src; this handshake is what starts the reports). There is no event out
    here for "the player exists", so the knock is repeated across the first
-   stretch of the dive and then left alone. */
+   stretch of the dive and then left alone.
+
+   It knocks at once and often, and that matters more than it used to. When the
+   dive still flew down through terrain there were eight or nine seconds
+   between mounting the player and revealing it, and an answer arriving late
+   was of no consequence. The flight is CFG.depart plus CFG.settle now, about
+   four, so an answer that comes after the reveal is an advert on the screen —
+   the hold can only hold on something it has been told about in time. */
 function adsWatch(frame){
   adsReset();
   ads.watching = frame;
   let n = 0;
-  ads.knock = setInterval(() => {
-    if (ads.watching !== frame || ++n > 20){ clearInterval(ads.knock); ads.knock = null; return; }
+  const knock = () => {
+    if (ads.watching !== frame || ++n > 32){
+      clearInterval(ads.knock); ads.knock = null; return;
+    }
     try {
       frame.contentWindow?.postMessage(JSON.stringify(
         { event:'listening', id:'roundtrip', channel:'widget' }), 'https://www.youtube.com');
     } catch {}
-  }, 400);
+  };
+  knock();                      // not 250ms from now: the flight is short
+  ads.knock = setInterval(knock, 250);
 }
 function adsReset(){
   if (ads.knock){ clearInterval(ads.knock); ads.knock = null; }

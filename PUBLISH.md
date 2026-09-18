@@ -75,6 +75,7 @@ feed still reach five origins at runtime:
 | `s3.amazonaws.com` | terrarium terrain tiles | ground is flat |
 | `overpass-api.de` | OSM buildings | no buildings |
 | `clouds.matteason.co.uk` | today's real clouds | falls back to the baked texture (fine) |
+| `ntfy.sh` | sending the thumbs-up/down ledger out | votes still work, but stay on the device |
 | `gibs.earthdata.nasa.gov` | NASA GIBS cloud source used by `clouds/` | falls back with the above |
 
 GitHub Pages is a plain static host with no content security policy of its own,

@@ -17,10 +17,38 @@ baked into itself.
 After editing `cameras.json`, rebuild the single file with `build.py`
 (needs Python): `python build.py`.
 
+## A tap shows what you can do
+
+Nothing floats over the picture at rest. A tap, a click anywhere, the OK button
+on a remote or a press of `←` or `→` brings up a strip along the bottom:
+
+**Skip · Back · Stay · Sound · Search · Good · Drop · Globe · Full · Keys**
+
+It changes nothing by itself. Skipping to another camera is one of the things
+offered there, not what touching the screen does to you, which is the whole
+point of it. Arrows walk the strip, `Enter` presses, `Esc` or a remote's Back
+closes it, and it fades out after a few seconds alone. `Back` returns to the
+camera before this one; press it again to keep walking back.
+
+The speaker, the magnifier and the two thumbs used to sit in the top-right
+corner and are items in this strip now.
+
+`menu.js` is the whole thing: it draws itself, knows nothing about the globe,
+and is handed its actions by the page, in the shape `search.js` is written in.
+Another feature adds one without touching either file:
+
+```js
+Roundtrip.menu.addItem({ id:'map', label:'Map', icon:'map', run(){ … } }, 'full');
+```
+
+On a television `tv.js` hands its own menu over to this one, so a D-pad and a
+finger drive exactly the same strip.
+
 ## Keys
 
 | key | what it does |
 | --- | --- |
+| tap/click, `←`, `→` | show the actions |
 | `/` | open search: places, scenes and tags |
 | `N` | dive to the next camera now |
 | `Space` | hold this camera, cancel the rotation |
@@ -65,8 +93,8 @@ anything also takes the page full screen, which is what loses Silk's title bar.
 
 ## Thumbs up and thumbs down
 
-Two round buttons sit under the magnifier while a camera is on screen, and the
-up and down arrow keys do the same thing without moving a hand.
+**Good** and **Drop** in the action strip, or the up and down arrow keys
+without moving a hand.
 
 Thumbs down is immediate, because it means "I do not want to see that again":
 the camera leaves this browser's deck on the spot and the next dive starts.
@@ -75,23 +103,60 @@ keeps the camera and nudges it a little earlier in the shuffle - gently, and
 only within a cycle, so the deck still deals every camera exactly once and a
 favourite crowds nothing out. The same thumb again takes the mark off.
 
-Votes stay in the browser that cast them, in `localStorage` under
-`roundtrip.votes`, and go nowhere else. `Roundtrip.votes()` prints them as a
-list, each entry carrying the camera's key, name, location and the moment of
-the verdict:
+Votes are kept in `localStorage` under `roundtrip.votes`, so a browser holds
+its own verdicts for good. `Roundtrip.votes()` prints them as a list, each
+entry carrying the camera's key, name, location and the moment of the verdict:
 
     [{ key: "2umaXl_TvIg", vote: -1, name: "...", location: "...",
        url: "...", at: "2026-09-17T22:24:51.383Z" }]
 
-That is the list to prune `cameras.json` from: a `vote: -1` becomes an entry in
-`rejects` with a `reject_reason` and a `rejected_at`.
+That is the list `cameras.json` is pruned from: a `vote: -1` becomes an entry
+in `rejects` with a `reject_reason` and a `rejected_at`.
+
+### Where the votes go
+
+So that pruning does not wait on anyone exporting anything, the page also sends
+the ledger to a public [ntfy.sh](https://ntfy.sh) topic:
+
+    https://ntfy.sh/roundtrip-cam-votes-et45-9k4m2x
+
+No account, no key and nothing secret in the page, which is the only sort of
+endpoint a page served straight off GitHub Pages can safely talk to. It is a
+public channel and the contents are camera names and a thumb - nothing about
+the person watching. Read it back with:
+
+    curl -s 'https://ntfy.sh/roundtrip-cam-votes-et45-9k4m2x/json?poll=1&since=all'
+
+Each message is one snapshot from one browser: `{ app, kind, device, at, up,
+down, votes }`, where `device` is a short random id kept in `localStorage` so
+the desk PC's ledger and the tablet's can be told apart. Take the newest
+snapshot per `device` and merge; older ones are supersets of nothing and can be
+dropped.
+
+Two details make that reliable. Every message carries the **whole** ledger
+rather than a change, and one goes out shortly after each load as well as after
+each vote, so the topic's roughly twelve-hour retention cannot lose a verdict a
+browser still remembers. And sending is best-effort and silent - a plain body
+with no custom headers, so there is no CORS preflight to fail, and a vote that
+cannot leave now leaves on the next load. Nothing about it can affect what is
+on screen.
 
 ## Search
 
-Press `/`, or click the magnifier under the speaker. Type a place, a scene or a
+Press `/`, or **Search** in the action strip. Type a place, a scene or a
 tag and every camera that matches is listed - all of them, scrolled, never a
 top-five. `Enter` or a click flies there through the normal dive; **Play these**
 narrows the rotation to exactly that set until `Esc` hands the world back.
+
+Names people actually type are understood: **nyc**, **big apple**, **la**,
+**socal**, **sf**, **bay area**, **dc**, **oz**, **aotearoa**, **holland**,
+**mecca**, **wailing wall**, **venezia**, **firenze**, **rio**, **scandinavia**,
+**middle east**. Two-word ones survive the tokenizer, so "new york city" is one
+name and not three words. One and two letter terms match exactly rather than by
+prefix, so "la" is Los Angeles and not every lake, landmark and lava field.
+Aliases live in two places on purpose: `tag.py` writes the ones it knows into a
+camera's tags at build time, and `search.js` expands what is typed, so a camera
+added by hand answers to its nickname without being run through the tagger.
 
 The box opens on a tag list, so nothing has to be known in advance: the chips
 under Places, Scenes and Moods are searches, and so is every chip on a result

@@ -7273,6 +7273,187 @@
         "sunrise",
         "always-on"
       ]
+    },
+    {
+      "name": "Irish Kevin's Stage",
+      "location": "211 Duval Street, Old Town, Key West, Florida, United States",
+      "country": "United States",
+      "category": "stage",
+      "provider": "Seek Duval Street (YouTube)",
+      "kind": "youtube",
+      "video_id": "qXMiIsbXSIA",
+      "url": "https://www.youtube.com/embed/qXMiIsbXSIA?autoplay=1&mute=1",
+      "watch_url": "https://www.youtube.com/watch?v=qXMiIsbXSIA",
+      "requires_login": false,
+      "last_verified": "2026-09-17",
+      "notes": "A front-row seat on the little stage at Irish Kevin's, the sing-along bar halfway down Duval Street. One performer with a guitar works the room for three-and-a-half hours at a stretch, trading insults with the crowd between songs, and a new act takes over the moment the last one steps down. The venue's own calendar has run four back-to-back acts every single day without a break for as far ahead as it publishes.",
+      "audio": "live-music",
+      "audio_basis": "Dedicated stage cam whose whole purpose is the performer; the venue bills itself as live entertainment from 11am to close and the stream carries the room mix.",
+      "always_on": true,
+      "live_window": {
+        "tz": "America/New_York",
+        "days": "daily",
+        "from": "11:00",
+        "to": "02:00",
+        "sets": [
+          {
+            "from": "11:00",
+            "to": "14:30"
+          },
+          {
+            "from": "14:30",
+            "to": "18:00"
+          },
+          {
+            "from": "18:00",
+            "to": "22:00"
+          },
+          {
+            "from": "22:00",
+            "to": "02:00"
+          }
+        ],
+        "source": "irishkevins.com/events, read 2026-09-18",
+        "note": "All 35 consecutive days on the published calendar (2026-08-31 through 2026-10-04) carry exactly 4 acts, back to back with no changeover gap. First slot is always 11:00-14:30. On roughly 40% of days slots 2-4 run 30 minutes later (14:30-18:30, 18:30-22:30, 22:30-02:30), so the last set can end at 02:30 rather than 02:00 - the window above is the conservative reading."
+      },
+      "timezone": "America/New_York",
+      "pose": {
+        "lat": 24.55853,
+        "lng": -81.80532,
+        "alt_m": 4,
+        "heading": 45,
+        "pitch": -5,
+        "fov": 55,
+        "aligned": false,
+        "view": "landscape",
+        "confidence": "low",
+        "basis": "Street address 211 Duval St geocoded from the venue's own site; camera placed just inside the Duval frontage looking back along the room's depth toward the stage at the rear. Interior heading is inferred from the building's orientation off Duval, not from a floor plan."
+      },
+      "check": {
+        "verdict": "live",
+        "checked": "2026-09-17",
+        "reason": "isLiveBroadcast True, startDate present, no endDate, statusCode 200, US in regionsAllowed - checked by this thread on 2026-09-17. Still showing LIVE with viewers in a live-filtered search on 2026-09-18.",
+        "method": "youtube watch page metadata (isLiveBroadcast / startDate / endDate)",
+        "embed": "ok",
+        "embed_reason": "embed page returned the real video title on 2026-09-17, so it plays in an iframe without a login."
+      },
+      "scene_set": "stages",
+      "in_sets": [
+        "stages"
+      ],
+      "tags": [
+        "211 duval street",
+        "old town",
+        "key west",
+        "florida",
+        "united states",
+        "us",
+        "usa",
+        "america",
+        "united states of america",
+        "north america",
+        "stage",
+        "live music",
+        "music",
+        "bar",
+        "venue",
+        "live band",
+        "duval street",
+        "sing along",
+        "acoustic",
+        "honky tonk",
+        "florida keys",
+        "busy",
+        "part-time",
+        "has-sound"
+      ]
+    },
+    {
+      "name": "Elbo Room BandCam",
+      "location": "241 S Fort Lauderdale Beach Blvd (A1A at Las Olas), Fort Lauderdale, Florida, United States",
+      "country": "United States",
+      "category": "stage",
+      "provider": "Elbo Room / ElboTV (YouTube)",
+      "kind": "youtube",
+      "video_id": "YWs0HMRVCBY",
+      "url": "https://www.youtube.com/embed/YWs0HMRVCBY?autoplay=1&mute=1",
+      "watch_url": "https://www.youtube.com/watch?v=YWs0HMRVCBY",
+      "requires_login": false,
+      "last_verified": "2026-09-17",
+      "notes": "The dance floor and band corner of the Elbo Room, the 1938 beach bar on the corner where A1A meets Las Olas - the one from Where the Boys Are. The camera is the venue's own, part of their ElboTV network, and it points at the spot where the band sets up and the crowd never quite sits down. Three booked acts a day, seven days a week, running from lunchtime until midnight.",
+      "audio": "live-music",
+      "audio_basis": "Venue-operated BandCam pointed at the stage; the channel's own description calls it 'where the bands play', and the venue cross-promotes 'Tune in live as <act> takes the stage'.",
+      "always_on": true,
+      "live_window": {
+        "tz": "America/New_York",
+        "days": "daily",
+        "from": "12:00",
+        "to": "00:00",
+        "sets": [
+          {
+            "from": "12:00",
+            "to": "16:00"
+          },
+          {
+            "from": "16:30",
+            "to": "20:30"
+          },
+          {
+            "from": "21:00",
+            "to": "00:00"
+          }
+        ],
+        "source": "elboroom.com/band-schedule, read 2026-09-18",
+        "note": "Every day on the published calendar (2026-09-17 through 2026-09-30, including Sundays, Tuesdays and Wednesdays) carries exactly the same three accepted bookings: 12-4pm, 4:30-8:30pm, 9pm-12am. The two 30-minute gaps at 16:00-16:30 and 20:30-21:00 are changeovers and are an empty stage - they are excluded from the sets on purpose."
+      },
+      "timezone": "America/New_York",
+      "pose": {
+        "lat": 26.11948,
+        "lng": -80.10505,
+        "alt_m": 6,
+        "heading": 250,
+        "pitch": -12,
+        "fov": 60,
+        "aligned": false,
+        "view": "landscape",
+        "confidence": "low",
+        "basis": "Venue address at the SE corner of A1A and Las Olas Blvd geocoded; camera placed high on the ocean-facing side of the room looking inland/west across the dance floor toward the band corner. Interior heading inferred, not measured. Deliberately offset from the venue's other two cams (Bar Cam wVNt3l657X0, Patio Cam bM0GplM_vPY) so no two share a dive point."
+      },
+      "check": {
+        "verdict": "live",
+        "checked": "2026-09-17",
+        "reason": "isLiveBroadcast True, startDate present, no endDate, statusCode 200, US in regionsAllowed - checked by this thread on 2026-09-17. Still showing LIVE with viewers in a live-filtered search on 2026-09-18.",
+        "method": "youtube watch page metadata (isLiveBroadcast / startDate / endDate)",
+        "embed": "ok",
+        "embed_reason": "embed page returned the real video title on 2026-09-17, so it plays in an iframe without a login."
+      },
+      "scene_set": "stages",
+      "in_sets": [
+        "stages"
+      ],
+      "tags": [
+        "241 s fort lauderdale beach blvd (a1a at las olas)",
+        "fort lauderdale",
+        "florida",
+        "united states",
+        "us",
+        "usa",
+        "america",
+        "united states of america",
+        "north america",
+        "stage",
+        "live music",
+        "music",
+        "bar",
+        "venue",
+        "live band",
+        "beach bar",
+        "a1a",
+        "las olas",
+        "busy",
+        "part-time",
+        "has-sound"
+      ]
     }
   ],
   "rejects": [
@@ -8330,6 +8511,349 @@
       "video_id": "S605ycm0Vlk",
       "location": "Key West, Florida",
       "country": "United States"
+    },
+    {
+      "name": "Live Cameras Around the World (Boston and Maine Live)",
+      "video_id": "AiNCbGzabVo",
+      "reject_reason": "Rotating multi-cam aggregator with a chill-music bed over other people's feeds.",
+      "rejected_at": "2026-09-18",
+      "kind": "youtube"
+    },
+    {
+      "name": "RIO Boat 24/7 (SlowTV)",
+      "video_id": "VnsRQvfv_g4",
+      "reject_reason": "SlowTV re-stream channel; full quality is gated behind channel membership.",
+      "rejected_at": "2026-09-18",
+      "kind": "youtube"
+    },
+    {
+      "name": "Kensington Cam3, Philadelphia (Rescue Rescue)",
+      "video_id": "rbbYXhP2glA",
+      "reject_reason": "Channel's stated purpose is broadcasting street-level human tragedy; not a transport cam and wrong for the app.",
+      "rejected_at": "2026-09-18",
+      "kind": "youtube"
+    },
+    {
+      "name": "The Next Railroad Crossing (Rail Moments)",
+      "video_id": "daphM0VINdE",
+      "reject_reason": "Mobile trackside camera that relocates; no fixed dive point, so it cannot be pinned on the globe.",
+      "rejected_at": "2026-09-18",
+      "kind": "youtube"
+    },
+    {
+      "name": "Hafen-Livestream Hamburg / Kieler Foerde (wettercom LIVE)",
+      "video_id": "mIpgUIeFJbk",
+      "reject_reason": "Rotating multi-location weather-channel montage rather than one fixed harbour camera.",
+      "rejected_at": "2026-09-18",
+      "kind": "youtube"
+    },
+    {
+      "name": "Bosphorus / Istanbul ship traffic",
+      "video_id": "",
+      "reject_reason": "YouTube live filter returned zero results for Bosphorus and Istanbul ship-traffic queries; no embeddable live stream found.",
+      "rejected_at": "2026-09-18",
+      "kind": "youtube"
+    },
+    {
+      "name": "Nashville Lower Broadway / Honky Tonk Highway live cam",
+      "video_id": "YK-R4X9ECAI",
+      "reject_reason": "Street cam looking down Broadway, not a stage cam - you see the neon and the crowd, not a band. Belongs to the street-scene niche, not this one. The Nashville honky tonks (Tootsie's, Robert's Western World, Nudie's) appear to run their cams through SkylineWebcams/flycams rather than their own YouTube channels, so the whole Nashville lead looks weak for a YouTube-only list.",
+      "rejected_at": "2026-09-18",
+      "kind": "youtube"
+    },
+    {
+      "name": "Bagatelle Key West Duval Street Cam",
+      "video_id": "BP9AtblEpXE",
+      "reject_reason": "Exterior Duval Street view from a restaurant balcony, not a stage cam. No band in frame.",
+      "rejected_at": "2026-09-18",
+      "kind": "youtube"
+    },
+    {
+      "name": "Temple Bar Pub stage, Dublin",
+      "video_id": "3nyPER2kzqk",
+      "reject_reason": "The only YouTube route to the Temple Bar stage is EarthCam's 'EarthCam Live: Dublin' feed, which is a rotating multi-cam aggregator - excluded by rule 5. The pub's own stage view is an EarthCam embed on thetemplebarpub.com, not a standalone YouTube live stream. Already in the skip list too.",
+      "rejected_at": "2026-09-18",
+      "kind": "youtube"
+    },
+    {
+      "name": "Live Cameras Around the World (Boston and Maine Live)",
+      "video_id": "AiNCbGzabVo",
+      "reject_reason": "Rotating multi-cam aggregator with a chill-music bed over other people's feeds.",
+      "rejected_at": "2026-09-18",
+      "kind": "youtube"
+    },
+    {
+      "name": "RIO Boat 24/7 (SlowTV)",
+      "video_id": "VnsRQvfv_g4",
+      "reject_reason": "SlowTV re-stream channel; full quality is gated behind channel membership.",
+      "rejected_at": "2026-09-18",
+      "kind": "youtube"
+    },
+    {
+      "name": "Kensington Cam3, Philadelphia (Rescue Rescue)",
+      "video_id": "rbbYXhP2glA",
+      "reject_reason": "Channel's stated purpose is broadcasting street-level human tragedy; not a transport cam and wrong for the app.",
+      "rejected_at": "2026-09-18",
+      "kind": "youtube"
+    },
+    {
+      "name": "The Next Railroad Crossing (Rail Moments)",
+      "video_id": "daphM0VINdE",
+      "reject_reason": "Mobile trackside camera that relocates; no fixed dive point, so it cannot be pinned on the globe.",
+      "rejected_at": "2026-09-18",
+      "kind": "youtube"
+    },
+    {
+      "name": "Hafen-Livestream Hamburg / Kieler Foerde (wettercom LIVE)",
+      "video_id": "mIpgUIeFJbk",
+      "reject_reason": "Rotating multi-location weather-channel montage rather than one fixed harbour camera.",
+      "rejected_at": "2026-09-18",
+      "kind": "youtube"
+    },
+    {
+      "name": "Bosphorus / Istanbul ship traffic",
+      "video_id": "",
+      "reject_reason": "YouTube live filter returned zero results for Bosphorus and Istanbul ship-traffic queries; no embeddable live stream found.",
+      "rejected_at": "2026-09-18",
+      "kind": "youtube"
+    },
+    {
+      "name": "Animal Ambassador 24/7 Live Cams - Alveus Sanctuary",
+      "video_id": "-K-VxA6v7QM",
+      "reject_reason": "Rotating multi-cam aggregator across the sanctuary's ambassador animals, which the brief bans on sight.",
+      "rejected_at": "2026-09-18",
+      "kind": "youtube"
+    },
+    {
+      "name": "Wild Africa Live! 24/7 Safari Cam",
+      "video_id": "qpukdDslCjk",
+      "reject_reason": "Explicitly a switched feed from '30+ wildlife cameras across Africa' — rotating multi-cam aggregator.",
+      "rejected_at": "2026-09-18",
+      "kind": "youtube"
+    },
+    {
+      "name": "Daycare for Your Dog 24/7 - Doggy Woods Retreat Live DogTV",
+      "video_id": "aO5nGDw2vyA",
+      "reject_reason": "'DogTV Season 1' framing plus multi-location pack-walk footage — reads as edited/looped content streamed as live, not a fixed webcam.",
+      "rejected_at": "2026-09-18",
+      "kind": "youtube"
+    },
+    {
+      "name": "24/7 Dog TV for Dogs to Watch (Only Cute Puppies)",
+      "video_id": "M_RwhzjTFg8",
+      "reject_reason": "Looped pre-recorded clip compilation with anti-anxiety music, not a live camera.",
+      "rejected_at": "2026-09-18",
+      "kind": "youtube"
+    },
+    {
+      "name": "Dog TV - All-Day Anti-Anxiety Videos for Dogs",
+      "video_id": "NUutX-ZeEro",
+      "reject_reason": "Looped pre-recorded footage streamed as live.",
+      "rejected_at": "2026-09-18",
+      "kind": "youtube"
+    },
+    {
+      "name": "4K Animal Kingdom - Tranquil Wildlife Exploration with Calming Music",
+      "video_id": "ItoNVjSmkx0",
+      "reject_reason": "Stock wildlife footage over music, not a webcam.",
+      "rejected_at": "2026-09-18",
+      "kind": "youtube"
+    },
+    {
+      "name": "DogMode: North Inside",
+      "video_id": "1suAgaip2GY",
+      "reject_reason": "No viewers, no description, unidentifiable location — cannot be placed on a map and almost certainly an empty room.",
+      "rejected_at": "2026-09-18",
+      "kind": "youtube"
+    },
+    {
+      "name": "Live Deer, Bird & Wildlife Cam (Woodlands Critter Quest)",
+      "video_id": "oI8R4_UG3Fs",
+      "reject_reason": "A backyard feeder/critter cam in North Carolina. The list already carries three feeders; duplicates the niche.",
+      "rejected_at": "2026-09-18",
+      "kind": "youtube"
+    },
+    {
+      "name": "LIVE South Africa Bird Feeder & Wildlife Cam",
+      "video_id": "MrLVxFR1IbI",
+      "reject_reason": "Another bird feeder cam — niche already covered three times over in the list.",
+      "rejected_at": "2026-09-18",
+      "kind": "youtube"
+    },
+    {
+      "name": "African safari waterholes (Africam and Namibia Wildlife Resorts cluster)",
+      "video_id": "gdrNUUf-cQw, DhCfRI7XssU, jG0uYl5S44E, yuIm1V7Ne7I, NapztoCaKFY, qwvk5hbEJnY, mk02pEy3FdA, Cq2qCph6Lx8, QJe1tGI1EZc, f9uqHbXChno, ItdXaWUVF48, JMMoRwYo5kE",
+      "reject_reason": "All safari-lodge waterholes. The list already has eight waterholes including Senyati and the Namibian ones, so this whole cluster duplicates an over-served niche. Deliberately not verified, to save budget. Re-open only if the list is later thinned of waterholes; the Zimbabwe (Hwange, Victoria Falls) and Botswana (Jack's Camp, Camelthorn) ones are the most geographically distinct.",
+      "rejected_at": "2026-09-18",
+      "kind": "youtube"
+    },
+    {
+      "name": "UTC-11 (American Samoa, Niue)",
+      "video_id": "",
+      "reject_reason": "Confirmed empty for this pass. English searches restricted to youtube.com for Pago Pago, American Samoa and Niue live webcams returned only sport broadcasts, an ocean-exploration ROV feed and travel vlogs - no fixed public camera of any kind. Treat this offset as genuinely uncovered on YouTube rather than under-searched.",
+      "rejected_at": "2026-09-18",
+      "kind": "youtube"
+    },
+    {
+      "name": "UTC-9 (western Alaska: Nome, Adak, Aleutians)",
+      "video_id": "",
+      "reject_reason": "No YouTube live stream found. The Nome camera (visitnomealaska.com/nome-cam), the Dutch Harbor aviation cameras and the Juneau harbour PTZ all exist, but as HLS/PTZ feeds on their own sites or on aggregators (opencctv.org, PTZtv), none of them as an embeddable YouTube broadcast. Note for the next scout: Anchorage and Juneau are also UTC-9, so the offset does not require a Bering Sea camera - an Anchorage city or harbour cam would close it, and that search was not exhausted before credits ran out.",
+      "rejected_at": "2026-09-18",
+      "kind": "youtube"
+    },
+    {
+      "name": "UTC-2 (Fernando de Noronha, South Georgia)",
+      "video_id": "",
+      "reject_reason": "Confirmed empty. Portuguese-language search ('camera ao vivo 24 horas', 'transmissao') restricted to youtube.com returned only travel vlogs, flight-simulator streams and a samba recording for Fernando de Noronha; South Georgia has no permanent public camera at all. This offset has essentially no candidate population.",
+      "rejected_at": "2026-09-18",
+      "kind": "youtube"
+    },
+    {
+      "name": "UTC+11 (Solomon Islands, Vanuatu, New Caledonia, Norfolk Island)",
+      "video_id": "",
+      "reject_reason": "Empty on YouTube. Searches in English and French for Noumea, Vanuatu and the Solomons returned cruise vlogs, walking tours and a FIFA qualifier, no fixed cameras. The Russian +11 alternative was also checked in Russian (Yuzhno-Sakhalinsk, Sakhalin oblast, Magadan): city cameras do exist but only as RTSP/HLS feeds on camdv.ru, world-cam.ru and youwebcams.org, never as YouTube broadcasts. Worth one more Russian-language pass on 'Магадан веб камера youtube' by a future scout, but the aggregator-only pattern looks firm.",
+      "rejected_at": "2026-09-18",
+      "kind": "youtube"
+    },
+    {
+      "name": "UTC+5:30 Sri Lanka (Colombo, Galle Face)",
+      "video_id": "",
+      "reject_reason": "No fixed live camera found. Every Galle Face and Galle Fort result was a walking vlog or a one-off IRL stream, not a continuous webcam. India is the only realistic way to fill +5:30, via the temple-darshan leads above.",
+      "rejected_at": "2026-09-18",
+      "kind": "youtube"
+    },
+    {
+      "name": "Virtual Railfan / Railcam station cameras (Galesburg, Ashland, Strasburg, La Grange, Folkston, York, Crewe)",
+      "video_id": "On1MRt0NqFs",
+      "reject_reason": "Viewer-controlled or operator-driven PTZ, explicitly banned by the brief, and in any case trackside trainspotting rather than a human crowd. The whole Virtual Railfan and Railcam UK family was skipped on sight for this reason - do not re-check them for 'busy human places'.",
+      "rejected_at": "2026-09-18",
+      "kind": "youtube"
+    },
+    {
+      "name": "SkylineWebcams and I Love You Venice rolling multi-cam streams",
+      "video_id": "wMT2aNcP4Wg",
+      "reject_reason": "Rotating multi-cam aggregators with music beds ('600 TOP LIVE CAMS from Italy', '1200 TOP LIVE WEBCAMS around the World' EFum1rGUdkk, 'Rolling Cam Venice' a1mcaV3Sf9U, 'Live Cam around the World' i10aOLMK76k, WebCamera.pl Rn_ga4yXkME, 'WATCH ISTANBUL LIVE 24/7 (Touristic & Traffic Cameras)' 5UOLtygL3q8 and 0xFW3MBtpVE). Banned by the brief and a known time sink.",
+      "rejected_at": "2026-09-18",
+      "kind": "youtube"
+    },
+    {
+      "name": "Bangkok / Benalmadena IRL walking-tour streams",
+      "video_id": "OkQ0utdxwBY",
+      "reject_reason": "Handheld walking-tour livestreams with a presenter, not fixed cameras - the view moves with a person and the stream only exists while they are out. Same for fppvSUhqqLk (Benalmadena) and the various Istanbul 'walking tour' streams xzX2_dvr6xY, AEM-0RqOAlM, 1K7XfRJdUcE. Not webcams.",
+      "rejected_at": "2026-09-18",
+      "kind": "youtube"
+    },
+    {
+      "name": "Generic Indian darshan re-streamer channels",
+      "video_id": "WPZ0xL0-sKs",
+      "reject_reason": "Kashi Vishwanath (WPZ0xL0-sKs), Ram Mandir Ayodhya (2PNF3tNx7vQ, eS7QO0bsoxg, EoEeDspvWV4), Somnath (J4z7CIrvsuw), Kedarnath (nY2qt1oVUA8, ExRyw6y4Y_0) and Puri Jagannath (1DScORQ1YL0) all come from third-party devotional channels ('Bhajan Prem', 'BHAKTI LIVE', 'Swarg Marg', 'Jay Jagannath Bhakta') rather than the temple trusts, which makes them likely rebroadcasts of a TV or official feed. Prefer the official-channel leads (Shantikunj, ISKCON Bangalore, Vadtal, Kalupur) if India is pursued.",
+      "rejected_at": "2026-09-18",
+      "kind": "youtube"
+    },
+    {
+      "name": "Hollywood Beach Broadwalk, Florida",
+      "video_id": "cmkAbDUEoyA",
+      "reject_reason": "Already in the do-not-duplicate list. Same for Assisi Piazza del Comune (CkNeltsc5ps) and Ponte delle Guglie Venice (mt7uE-n0YPI), both of which surfaced again in this pass.",
+      "rejected_at": "2026-09-18",
+      "kind": "youtube"
+    },
+    {
+      "name": "24/7 ASMR Relaxation Rituals from Barbershops & Spas Worldwide (Nomad Barber)",
+      "video_id": "kort7kFqGZA",
+      "reject_reason": "Not a webcam. This is edited, pre-recorded barbershop footage from many different shops looped as a 24/7 'live' ASMR stream — the aggregator/looped-footage case the brief says to bail on immediately.",
+      "rejected_at": "2026-09-18",
+      "kind": "youtube"
+    },
+    {
+      "name": "24/7 ASMR barbershop videos (Yes Plz ASMR)",
+      "video_id": "wA0OrxIA_rc",
+      "reject_reason": "Looped pre-recorded ASMR haircut/shave clips streamed as live, produced with a third-party restreaming tool (Upstream) per its own description. No real camera, no real place.",
+      "rejected_at": "2026-09-18",
+      "kind": "youtube"
+    },
+    {
+      "name": "Japanese Barber ASMR 24/7 (Tokyo Barber Sounds)",
+      "video_id": "yEn0ZhgxHIA",
+      "reject_reason": "Same pattern — a 24/7 loop of recorded Japanese barbershop ASMR footage, not a live feed from a shop. Turkish/'berber canlı yayın' searching surfaced only this class of channel.",
+      "rejected_at": "2026-09-18",
+      "kind": "youtube"
+    },
+    {
+      "name": "GOMV.COM Woods Hole Ferry Dock & Harbor Webcam (Pie in the Sky Bakery)",
+      "video_id": "TE6N2eDrsR0",
+      "reject_reason": "The bakery only sponsors and hosts the camera; the framing is the Woods Hole ferry dock and harbour, not the bakery counter or oven. Wrong niche — it is a harbour cam.",
+      "rejected_at": "2026-09-18",
+      "kind": "youtube"
+    },
+    {
+      "name": "Japan Cafe Vibe / Lofi Coffee 24/7",
+      "video_id": "bRnTGwCbr3E",
+      "reject_reason": "Lofi music channel with a static/animated cafe backdrop. Not a camera.",
+      "rejected_at": "2026-09-18",
+      "kind": "youtube"
+    },
+    {
+      "name": "Warm Relaxing Jazz Music with Cozy Coffee Shop",
+      "video_id": "fTb6yJ7AlT8",
+      "reject_reason": "Lofi/jazz music stream with a still cafe image. Not a camera.",
+      "rejected_at": "2026-09-18",
+      "kind": "youtube"
+    },
+    {
+      "name": "Calm Cafe Jazz Radio",
+      "video_id": "LTFEmIIOvNQ",
+      "reject_reason": "Music radio stream, illustrated backdrop. Not a camera.",
+      "rejected_at": "2026-09-18",
+      "kind": "youtube"
+    },
+    {
+      "name": "1990s Lofi City",
+      "video_id": "TfWotiyXGfI",
+      "reject_reason": "Lofi music stream with animated art. Not a camera.",
+      "rejected_at": "2026-09-18",
+      "kind": "youtube"
+    },
+    {
+      "name": "Living Coffee: Smooth Jazz Radio",
+      "video_id": "SORD03t7nlo",
+      "reject_reason": "Music radio stream. Not a camera.",
+      "rejected_at": "2026-09-18",
+      "kind": "youtube"
+    },
+    {
+      "name": "Tsukidate Hanakobo (つきだて花工房), Date City, Fukushima",
+      "video_id": "3nY9pmXrpSQ",
+      "reject_reason": "The Japanese word 工房 ('workshop') is in the name but this is a countryside inn streaming a satoyama landscape view. No work, no people, no counter.",
+      "rejected_at": "2026-09-18",
+      "kind": "youtube"
+    },
+    {
+      "name": "Giken Kobo Sapporo road-condition cams (株式会社技研工房)",
+      "video_id": "AWVVYHfxZac",
+      "reject_reason": "Matched on 工房 in the company name only. These are traffic/road-condition cams in Sapporo, plus a bird feeder. Wrong niche, and the channel warns the feeds are intermittently powered down.",
+      "rejected_at": "2026-09-18",
+      "kind": "youtube"
+    },
+    {
+      "name": "Nashville Lower Broadway / Honky Tonk Highway live cam",
+      "video_id": "YK-R4X9ECAI",
+      "reject_reason": "Street cam looking down Broadway, not a stage cam - you see the neon and the crowd, not a band. Belongs to the street-scene niche, not this one. The Nashville honky tonks (Tootsie's, Robert's Western World, Nudie's) appear to run their cams through SkylineWebcams/flycams rather than their own YouTube channels, so the whole Nashville lead looks weak for a YouTube-only list.",
+      "rejected_at": "2026-09-18",
+      "kind": "youtube"
+    },
+    {
+      "name": "Bagatelle Key West Duval Street Cam",
+      "video_id": "BP9AtblEpXE",
+      "reject_reason": "Exterior Duval Street view from a restaurant balcony, not a stage cam. No band in frame.",
+      "rejected_at": "2026-09-18",
+      "kind": "youtube"
+    },
+    {
+      "name": "Temple Bar Pub stage, Dublin",
+      "video_id": "3nyPER2kzqk",
+      "reject_reason": "The only YouTube route to the Temple Bar stage is EarthCam's 'EarthCam Live: Dublin' feed, which is a rotating multi-cam aggregator - excluded by rule 5. The pub's own stage view is an EarthCam embed on thetemplebarpub.com, not a standalone YouTube live stream. Already in the skip list too.",
+      "rejected_at": "2026-09-18",
+      "kind": "youtube"
     },
     {
       "name": "Live Cameras Around the World (Boston and Maine Live)",

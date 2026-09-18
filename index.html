@@ -499,7 +499,7 @@ async function osmBuildings(lat, lng, radius=420){
 const renderer = new THREE.WebGLRenderer({ antialias:true, powerPreference:'high-performance' });
 renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
 renderer.toneMapping = THREE.ACESFilmicToneMapping;
-renderer.toneMappingExposure = 1.18;
+renderer.toneMappingExposure = 1.05;
 renderer.outputColorSpace = THREE.SRGBColorSpace;
 renderer.autoClear = false;
 $('#stage').appendChild(renderer.domElement);
@@ -576,114 +576,33 @@ async function buildSpace(progress){
           vec4 w=modelMatrix*vec4(position,1.); vW=w.xyz;
           gl_Position=projectionMatrix*viewMatrix*w; }`,
       fragmentShader:`
-        uniform sampler2D dayMap,nightMap,topoMap; uniform vec3 sunDir;
-        uniform float hasTopo; uniform float time; uniform float alt;
-        uniform sampler2D cloudA,cloudB;
-        uniform float cloudModeA,cloudModeB,cloudBlend,cloudDrift,hasClouds;
-        uniform float cloudDensity,cloudShadow;
-        uniform vec2 cloudSoft,cloudFade;
+        uniform sampler2D dayMap,nightMap,topoMap; uniform vec3 sunDir; uniform float hasTopo;
         varying vec2 vUv; varying vec3 vN; varying vec3 vW;
-        float luma(vec3 c){ return dot(c, vec3(0.2126,0.7152,0.0722)); }
-        float cloudAt(sampler2D m, vec2 uv, float mode){
-          vec4 t=texture2D(m,uv);
-          return mix(t.a, dot(t.rgb, vec3(0.2126,0.7152,0.0722)), mode);
-        }
-        /* The deck's shadow, thrown along the ground away from the sun. The
-           offset is the real thing — cloud height over the sine of the sun's
-           elevation — which is under a map pixel at noon and stretches out
-           toward the terminator, where it is capped so it stops before it
-           becomes a smear. */
-        float cloudShade(vec3 nw, vec3 S, float d){
-          if (hasClouds < 0.5) return 0.0;
-          vec3 tg = nw*d - S;                        // -S along the surface
-          float tl = length(tg);
-          if (tl < 1e-4) return 0.0;
-          tg /= tl;
-          vec3 east  = normalize(cross(vec3(0.0,1.0,0.0), nw));
-          vec3 north = cross(nw, east);
-          float cl = max(sqrt(max(1.0-nw.y*nw.y, 0.0)), 0.08);
-          float ds = 0.0015/max(d, 0.25);            // 9.6km of deck height
-          vec2 uv = vec2(vUv.x - cloudDrift, vUv.y)
-                  + vec2(dot(tg,east)*ds/(6.2832*cl), dot(tg,north)*ds/3.1416);
-          float c = mix(cloudAt(cloudA,uv,cloudModeA), cloudAt(cloudB,uv,cloudModeB), cloudBlend);
-          // Leaves exactly when the deck itself does, or a grey smudge would
-          // survive onto the sharp imagery after the clouds have gone.
-          return smoothstep(cloudSoft.x, cloudSoft.y, c) * cloudDensity
-               * smoothstep(cloudFade.x, cloudFade.y, alt);
-        }
-        float hash21(vec2 p){ return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453); }
         void main(){
           vec3 n=normalize(vN);
           vec3 sn=normalize((viewMatrix*vec4(sunDir,0.)).xyz);
           float d=dot(n,sn);
-
+          float day=smoothstep(-0.14,0.20,d);
           vec3 dayC=texture2D(dayMap,vUv).rgb;
           vec3 nitC=texture2D(nightMap,vUv).rgb;
-
-          // Blue Marble's oceans are all but black. Pick water out of the map's
-          // own colour, blue-dominant and dark, and lift it into something that
-          // actually reads as sea from orbit.
-          float water=smoothstep(0.0,0.10,dayC.b-dayC.r*1.55)
-                     *smoothstep(0.34,0.14,luma(dayC));
-          // Lift deep water hard and shallow shelves barely at all. The gain
-          // is on a colour that is already blue-dominant, so it multiplies the
-          // hue as well as the level: left at shelf brightness it turns every
-          // coast electric. Roll it off fast, then pull the result part way
-          // toward its own luminance, which is what deep water actually looks
-          // like from orbit — dark and desaturated, not saturated blue.
-          float wl=smoothstep(0.015,0.130,luma(dayC));
-          vec3 lift=dayC*mix(2.95,0.96,wl)+vec3(0.006,0.024,0.050);
-          lift=mix(lift, vec3(luma(lift)), 0.30)+vec3(0.005,0.011,0.017);
-          dayC=mix(dayC*1.18, lift, water);
-
-          // Relief shading, land only.
+          // Fake relief so mountains read at mid altitude.
           if(hasTopo>0.5){
-            float t =texture2D(topoMap,vUv).r;
+            float t=texture2D(topoMap,vUv).r;
             float tx=texture2D(topoMap,vUv+vec2(0.0016,0.)).r;
             float ty=texture2D(topoMap,vUv+vec2(0.,0.0016)).r;
-            float sh=clamp(1.0+((tx-t)+(ty-t))*9.0,0.72,1.30);
-            dayC*=mix(1.0,sh,1.0-water);
+            float sh=clamp(1.0+((tx-t)+(ty-t))*9.0,0.72,1.28);
+            dayC*=mix(1.0,sh,day);
           }
-
-          float day=smoothstep(-0.14,0.20,d);
-
-          // Under cloud the ground is in shade, which is what makes the deck
-          // sit above the earth rather than on it.
-          dayC *= 1.0 - cloudShade(normalize(vW), normalize(sunDir), d)*cloudShadow*day;
-
-          // Warm the grazing light so the terminator glows instead of fading.
+          // Warm the grazing light so the terminator glows instead of just fading.
           float golden=exp(-pow((d-0.04)/0.15,2.0));
           dayC*=mix(vec3(1.0),vec3(1.30,1.04,0.80),golden*0.85);
-
-          // Sun glint off the water: what makes an ocean look wet.
+          vec3 col=mix(nitC*1.65,dayC,day);
+          // City lights are only worth showing where it is properly dark.
+          col+=nitC*1.1*smoothstep(0.06,-0.16,d);
+          // Atmospheric limb on the lit side.
           vec3 vd=normalize(cameraPosition-vW);
-          vec3 vdv=normalize((viewMatrix*vec4(vd,0.)).xyz);
-          float spec=pow(max(dot(reflect(-sn,n),vdv),0.0),34.0);
-          dayC+=vec3(1.0,0.96,0.86)*spec*water*0.6*day;
-
-          // City lights are the warm part of the night map; its blue cast is
-          // just the map's own ocean, which must not be added as light.
-          float lights=clamp((nitC.r-nitC.b*0.55)*2.4,0.0,1.0);
-
-          // Cities do not all switch on together. Ignition lags dusk and is
-          // staggered per place, so a band of light creeps west across the
-          // night side instead of the whole hemisphere fading up at once.
-          vec2 cell=floor(vUv*vec2(720.0,360.0));
-          float jitter=(hash21(cell)-0.5)*0.085;
-          float ignite=smoothstep(0.02+jitter,-0.21+jitter,d);
-          // A shimmer confined to the ignition band: lights popping on, not a
-          // whole continent flickering.
-          float band=1.0-abs(ignite*2.0-1.0);
-          float flick=1.0+0.30*band*sin(time*2.3+hash21(cell+3.0)*43.0);
-
-          vec3 col=dayC*day
-                 + vec3(1.0,0.82,0.52)*lights*ignite*flick*1.6
-                 + vec3(0.012,0.018,0.035)*(1.0-day);
-
-          // Atmospheric limb, strongest around the terminator.
           float rim=pow(1.0-abs(dot(normalize(vW),vd)),3.0);
-          col+=vec3(0.24,0.46,0.86)*rim*smoothstep(-0.35,0.45,d)*0.58;
-
+          col+=vec3(0.24,0.46,0.86)*rim*smoothstep(-0.3,0.45,d)*0.85;
           gl_FragColor=vec4(col,1.0);
         }`,
     }));
@@ -707,7 +626,10 @@ async function buildSpace(progress){
       u.cloudDensity = c.density;
       u.cloudSoft.value.set(c.softLow.value, c.softHigh.value);
       u.cloudFade.value.set(c.fadeLowAlt.value, c.fadeHighAlt.value);
-      u.hasClouds.value = 1;
+      // The restored earth shader does not sample the deck, so the ground
+      // shadow stays off; the clouds themselves are their own shell and
+      // draw exactly as before.
+      u.hasClouds.value = 0;
     }
   } catch (e){ console.warn('clouds unavailable', e); }
 
@@ -728,7 +650,7 @@ async function buildSpace(progress){
           // Once the camera is inside the shell this is only a grey veil over
           // the surface, so it fades out below roughly 120km.
           float outside=smoothstep(0.004,0.019,camAlt);
-          gl_FragColor=vec4(vec3(0.32,0.58,1.0)*i*(0.20+lit*0.85),i*0.72)*outside;
+          gl_FragColor=vec4(vec3(0.32,0.58,1.0)*i*(0.30+lit*0.95),i*0.9)*outside;
         }`,
       transparent:true, blending:THREE.AdditiveBlending,
       side:THREE.BackSide, depthWrite:false,
@@ -1287,6 +1209,7 @@ const state = {
   rejects: new Set(),
   // globe camera as lat/lng/altitude in earth radii
   orbit: { lat: 18, lng: 8, r: 3.1 },
+  orbitT: 0,                  // last idle frame, so the drift is per second
   sway: 0,                    // phase of the idle drift
   from: null, handoff: null,
   departDur: 0,
@@ -1675,56 +1598,13 @@ function beginDive(cam){
 }
 
 function backToOrbit(){
-  // The retreat runs the departure backwards, so whatever sits in state.from
-  // is where it comes to rest. Pointing it at the next destination is what
-  // turns the pull-out into a rotation toward the next place instead of a
-  // trip home to the same view.
-  const nxt = nextFramedOrbit();
-  state.from = { lat: nxt.lat, lng: nxt.lng, r: nxt.r };
+  // Come to rest on the turn itself. The retreat runs the departure backwards,
+  // so state.from is where it ends up; leaving it on the idle pose means the
+  // pull-out hands straight back to the spin rather than flying home to a
+  // fixed view of the same part of the world.
+  state.from = { lat: state.orbit.lat, lng: state.orbit.lng, r: 3.1 };
+  state.orbitT = clock();
   setPhase('retreat');
-}
-
-/* Where the globe rests between dives, and it has to do two things at once.
-   Framing the sun alone put the camera over the same part of the world every
-   single time, so every retreat ended on the same shot. Framing the next
-   destination alone swung it round onto the night side half the time, and a
-   dark globe is not what anyone wants to sit and watch. So it turns toward the
-   next place and stops at the terminator: the wait reads as the planet turning
-   toward where it is about to go, and the lit face stays in frame. */
-const RESTLIT = 58;   // how far from the subsolar point the rest pose may go
-function nextFramedOrbit(){
-  const cam = peekNext();
-  if (!cam || !cam.pose) return sunFramedOrbit();
-  const b = CFG.breathe, p = cam.pose, s = sunPosition();
-  let lat = clamp(p.lat*0.86 + 5 + drift(state.sway*0.63, 1.3)*5*b, -62, 66);
-  let lng = p.lng - 17 + drift(state.sway, 4.7)*9*b;
-  const here = latLngToVec3(lat, lng, 1), sun = latLngToVec3(s.lat, s.lng, 1);
-  const off = Math.acos(clamp(here.dot(sun), -1, 1))/DEG;
-  if (off > RESTLIT){
-    if (off > 179) return sunFramedOrbit();       // nothing left to slide along
-    // Slide back along the great circle toward the sun until the lit face is
-    // in frame. Slerp rather than a straight lerp, because the angle is the
-    // whole point of the exercise.
-    const sO = Math.sin(off*DEG);
-    const v = here.multiplyScalar(Math.sin(RESTLIT*DEG)/sO)
-                  .addScaledVector(sun, Math.sin((off - RESTLIT)*DEG)/sO).normalize();
-    lat = Math.asin(clamp(v.y, -1, 1))/DEG;
-    lng = ((Math.atan2(v.z, -v.x)/DEG - 180) + 540) % 360 - 180;
-  }
-  return { lat, lng, r: 3.1 + drift(state.sway*0.41, 8.9)*0.18*b };
-}
-
-/* The fallback, used only when there is no next camera to frame: a fixed
-   offset from the subsolar point, so the lit limb and the terminator are in
-   frame whatever the hour, with a slow sway so the planet reads as turning. */
-function sunFramedOrbit(){
-  const s = sunPosition();
-  const b = CFG.breathe;
-  return {
-    lat: clamp(s.lat*0.55 + 12 + drift(state.sway*0.63, 1.3)*10*b, -40, 48),
-    lng: s.lng - 44 + drift(state.sway, 4.7)*26*b,
-    r:   3.1 + drift(state.sway*0.41, 8.9)*0.18*b,
-  };
 }
 
 /* The globe camera. In orbit it drifts and looks at the centre of the earth;
@@ -1735,26 +1615,21 @@ const _look = new THREE.Vector3(), _fwd = new THREE.Vector3(),
 function updateSpaceCam(){
   if (state.phase === 'orbit'){
     if (mapState.on) return updateMapCam();      // steered by hand, not by the sun
-    state.sway += 0.00055;                       // a full sway takes ~3 minutes
-    // Ease toward the sun-framed pose rather than snapping, so the shot recovers
-    // smoothly after a dive instead of cutting back.
-    const tgt = nextFramedOrbit();
-    state.orbit.lat = lerp(state.orbit.lat, tgt.lat, 0.010);
-    state.orbit.lng = lerp(state.orbit.lng, shortestAngle(state.orbit.lng, tgt.lng), 0.010);
-    state.orbit.r   = lerp(state.orbit.r,   tgt.r,   0.010);
+    // The original idle camera, and the one Anthony asked for back: a steady
+    // eastward drift at a fixed height, no framing, no sway, no roll, no
+    // breathing on the lens. It never resets to a home view because it never
+    // has one - it simply keeps turning, and the next dive sets off from
+    // wherever the turn has got to. Per second rather than per frame, so a
+    // television and a desk display turn at the same rate.
+    const now = clock();
+    state.orbit.lng += 2.1 * clamp(now - state.orbitT, 0, 0.1);
+    state.orbitT = now;
+    if (state.orbit.lng > 180) state.orbit.lng -= 360;
     const { lat, lng, r } = state.orbit;
     spaceCam.position.copy(latLngToVec3(lat, lng, r));
-    // Under a degree of roll about the view axis, so the shot is never quite
-    // level and never quite the same twice.
-    const roll = drift(state.sway*0.71, 5.1) * 0.9*DEG * CFG.breathe;
-    _fwd.copy(spaceCam.position).negate().normalize();
-    _right.set(0,1,0).cross(_fwd);
-    if (_right.lengthSq() < 1e-6) _right.set(1,0,0);   // looking along the poles
-    _right.normalize();
-    _up.copy(_fwd).cross(_right).applyAxisAngle(_fwd, roll);
-    spaceCam.up.copy(_up);
+    spaceCam.up.set(0,1,0);
     spaceCam.lookAt(0,0,0);
-    spaceCam.fov = 38 + drift(state.sway*0.53, 2.2)*0.8*CFG.breathe;
+    spaceCam.fov = 38;
     setSpaceClip(r-1);
     return;
   }
@@ -2665,9 +2540,6 @@ const progress = v => { bar.style.width = (v*100)+'%'; };
   };
   attrib();
 
-  // Open already framed on the terminator, with no ease-in on the first frame.
-  Object.assign(state.orbit, sunFramedOrbit());
-
   await buildSpace(progress);
   attrib();                          // the earth build may have attached clouds
   if (clouds) clouds.ready.then(attrib).catch(()=>{});
@@ -2703,7 +2575,6 @@ const progress = v => { bar.style.width = (v*100)+'%'; };
     // Preview another moment: ET45.setTime('2026-09-17T06:20:00Z'), or null to
     // go back to the real clock.
     setTime: iso => { timeWarp = iso ? (new Date(iso) - Date.now()) : 0;
-                      Object.assign(state.orbit, sunFramedOrbit());
                       if (state.cam) stageGround(state.cam); return now().toISOString(); },
     now,
     parts: () => ({ space, ground, spaceCam, groundCam, patch, closePatch, farFloor, skyDome, bldGroup }),

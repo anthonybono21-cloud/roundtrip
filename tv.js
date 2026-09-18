@@ -357,7 +357,7 @@
      callback fires once per frame that the page was going to draw anyway — so
      it samples the real cadence at no cost. `?fps=1` puts a line a second on
      the console, which is what comes out of `adb logcat -s chromium`. */
-  var frames = [], last = 0;
+  var frames = [], last = 0, sampling = false, sampleUntil = 0;
   function sample(t) {
     // A gap of a second is not a slow frame, it is the page having been left
     // alone: a backgrounded tab, a paused app, the first frames after a load.
@@ -367,9 +367,14 @@
       if (frames.length > 600) frames.shift();
     }
     last = t;
-    requestAnimationFrame(sample);
+    if(t<sampleUntil)requestAnimationFrame(sample);
+    else {sampling=false;last=0;}
   }
   function stats(n) {
+    // Diagnostics wake the page only when requested. This measures the page
+    // callback cadence, not the cross-origin video's decoded frame rate.
+    sampleUntil=performance.now()+10000;
+    if(!sampling){sampling=true;requestAnimationFrame(sample);}
     var a = frames.slice(-(n || 120)).sort(function (x, y) { return x - y; });
     if (a.length < 8) return null;
     var med = a[a.length >> 1];
@@ -387,7 +392,6 @@
     style();
     armBack();
     retitleHelp();
-    requestAnimationFrame(sample);
     // One line at boot, so a log off the device says which layout it took and
     // on what. Without it there is no way to tell a television that failed to
     // be recognised from one that was.

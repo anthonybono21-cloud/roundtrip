@@ -56,18 +56,25 @@
   #grade{position:fixed;inset:0;pointer-events:none;
     background:radial-gradient(ellipse at 50% 46%,transparent 48%,rgba(0,0,0,.45) 100%)}
 
+  /* Where you are, and the local time. Nothing else: the light and the
+     category used to sit beside the clock and read as stray words on the
+     picture. Tags belong in the search panel, not over the view.
+     It is legible over a bright noon feed as well as over black space, so
+     the whole card stays near full strength once the first few seconds have
+     passed, the second line is close to white rather than blue-grey, and
+     every line carries a tight shadow under the wide one: a soft glow alone
+     disappears against white surf. */
   #card{position:fixed;left:40px;bottom:40px;max-width:min(46ch,44vw);
     opacity:0;transform:translateY(10px);transition:opacity .9s ease,transform .9s ease;
-    text-shadow:0 2px 20px rgba(0,0,0,.9);pointer-events:none}
+    text-shadow:0 1px 3px rgba(0,0,0,.95),0 2px 22px rgba(0,0,0,.9);pointer-events:none}
   #card.on{opacity:1;transform:none}
-  #card.rest{opacity:.34}
+  #card.rest{opacity:.86}
   #card .place{font-size:30px;font-weight:600;letter-spacing:-.02em;line-height:1.12}
-  #card .where{color:var(--dim);margin-top:4px;font-size:15px}
-  #card .meta{margin-top:10px;font-size:13px;color:var(--dim);
+  #card .where{color:#d3dfef;margin-top:5px;font-size:16px}
+  #card .meta{margin-top:9px;font-size:15px;color:#d3dfef;
     display:flex;gap:14px;align-items:baseline;flex-wrap:wrap}
-  #card .clock{font-variant-numeric:tabular-nums;color:var(--ink);font-size:15px;font-weight:500}
-  #card .sun::before{content:"";display:inline-block;width:6px;height:6px;border-radius:50%;
-    margin-right:6px;vertical-align:1px;background:currentColor;box-shadow:0 0 8px currentColor}
+  #card .clock{font-variant-numeric:tabular-nums;color:var(--ink);font-size:17px;font-weight:600;
+    letter-spacing:.01em}
 
   #phase{position:fixed;left:40px;top:34px;font-size:11px;letter-spacing:.16em;
     text-transform:uppercase;color:var(--dim);opacity:.75}
@@ -75,58 +82,12 @@
     text-transform:uppercase;color:#ffd479;opacity:0;transition:opacity .4s}
   #pinned.on{opacity:1}
 
-  /* Sound. Always there, glassy and see-through, and it brightens under the
-     cursor so it never competes with the picture. */
-  /* Round HUD buttons. Any new one should carry .hud-btn and supply only its
-     own corner, so it inherits everything below.
-     They sit on a dark translucent disc rather than a pale one, because pale
-     over a lit globe is exactly where a button disappears. They rest
-     see-through and go solid on hover or focus. They used to rest at 34% and
-     only lift on hover, which on a mouse read as no button at all and on a
-     touch screen, where nothing ever hovers, meant they were never visible;
-     a coarse pointer or no hover additionally gets a bigger target and the
-     safe-area inset. */
-  .hud-btn{position:fixed;width:46px;height:46px;border-radius:50%;
-    display:grid;place-items:center;cursor:pointer;z-index:9;
-    background:rgba(9,15,25,.42);border:1px solid rgba(255,255,255,.26);
-    backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
-    opacity:.72;transition:opacity .25s ease,background .25s ease,transform .12s ease;
-    touch-action:manipulation;-webkit-tap-highlight-color:transparent}
-  .hud-btn:hover,.hud-btn:focus-visible{opacity:1;background:rgba(18,28,44,.62);outline:none}
-  .hud-btn:active{transform:scale(.93)}
-  .hud-btn svg{width:19px;height:19px;fill:none;stroke:var(--ink);stroke-width:1.7;
-    stroke-linecap:round;stroke-linejoin:round;
-    filter:drop-shadow(0 1px 3px rgba(0,0,0,.6))}
-  @media (hover:none),(pointer:coarse){
-    .hud-btn{width:50px;height:50px;opacity:.94;
-      background:rgba(9,15,25,.52);border-color:rgba(255,255,255,.32);
-      box-shadow:0 2px 10px rgba(0,0,0,.35)}
-    .hud-btn:hover,.hud-btn:focus-visible{background:rgba(9,15,25,.66)}
-    .hud-btn svg{width:24px;height:24px;stroke-width:1.9}
-  }
-  #sound{right:calc(34px + env(safe-area-inset-right,0px));
-    top:calc(58px + env(safe-area-inset-top,0px))}
-  #sound svg{display:none}                 /* one of the two, chosen by .off */
-  #sound .on-i{display:block}
-  #sound.off .on-i{display:none}
-  #sound.off .off-i{display:block}
-
-  /* Thumbs. They only mean anything with a camera on screen, so they are
-     absent in orbit rather than faded: display, not opacity, so the touch
-     rules above still decide how bright they rest. */
-  .vote-btn{display:none;right:calc(34px + env(safe-area-inset-right,0px))}
-  .vote-btn.on{display:grid}
-  /* The right-hand column, top down: speaker, magnifier (search.js owns
-     that one at 108/116), then the two thumbs. */
-  #voteup{top:calc(158px + env(safe-area-inset-top,0px))}
-  #votedown{top:calc(208px + env(safe-area-inset-top,0px))}
-  .vote-btn.cast{opacity:1;background:rgba(255,212,121,.2);border-color:rgba(255,212,121,.55)}
-  .vote-btn.cast svg{stroke:#ffd479}
-  @media (hover:none),(pointer:coarse){
-    #voteup{top:calc(174px + env(safe-area-inset-top,0px))}
-    #votedown{top:calc(232px + env(safe-area-inset-top,0px))}
-    .vote-btn.cast{background:rgba(255,212,121,.3)}
-  }
+  /* The speaker, the magnifier and the two thumbs used to float in the
+     top-right corner. They live in the action strip now (menu.js), which is
+     what a tap, a click or the OK button on a remote brings up, so the
+     picture is uncovered until something is asked for. The strip carries the
+     same rules those buttons were given: a target a finger can hit, a dark
+     translucent panel rather than a pale one, and the safe-area inset. */
 
   #attrib{position:fixed;right:12px;bottom:10px;font-size:10px;color:rgba(200,215,235,.42);
     text-align:right;line-height:1.5;pointer-events:none}
@@ -188,15 +149,13 @@
   .tv #help kbd{font-size:clamp(8px,1.25vh,16px);min-width:0;margin-right:.5vw;
     padding:.15vh .55vw}
 
-  .tv .hud-btn,.tv #rt-mag{width:clamp(30px,4.4vh,58px);height:clamp(30px,4.4vh,58px);
-    right:5vw;opacity:.9;box-shadow:none}
-  .tv .hud-btn svg,.tv #rt-mag svg{width:clamp(13px,1.9vh,25px);
-    height:clamp(13px,1.9vh,25px);stroke-width:1.7}
-  .tv #sound,.tv #voteup,.tv #votedown{right:5vw}
-  .tv #sound{top:5vh}
-  .tv #rt-mag{top:10.6vh}
-  .tv #voteup{top:16.2vh}
-  .tv #votedown{top:21.8vh}
+  /* The corner buttons are gone; what a television needs sized for a room
+     across is the action strip, which the D-pad drives. */
+  .tv #rt-menu{bottom:6vh;width:min(76vw,1180px)}
+  .tv #rt-menu .bar{gap:.5vw;padding:1vh 1vw;border-radius:1.6vh}
+  .tv #rt-menu .mi{min-width:6.6vw;padding:1.2vh .8vw 1vh;gap:.7vh;
+    font-size:clamp(9px,1.35vh,18px);border-radius:1.2vh}
+  .tv #rt-menu .mi svg{width:clamp(16px,2.7vh,36px);height:clamp(16px,2.7vh,36px)}
 
   .tv #rt-search{width:min(46vw,760px)}
   .tv #rt-search.on{transform:translate(-50%,7vh)}
@@ -220,8 +179,6 @@
   <div class="where"></div>
   <div class="meta">
     <span class="clock"></span>
-    <span class="sun"></span>
-    <span class="cat"></span>
   </div>
 </div>
 
@@ -238,6 +195,7 @@
 </div>
 
 <div id="help">
+  <div><kbd>Tap</kbd>show the actions &middot; nothing moves on its own</div>
   <div><kbd>N</kbd>dive to the next camera</div>
   <div><kbd>/</kbd>search places, scenes and tags</div>
   <div><kbd>Space</kbd>hold this one</div>
@@ -249,34 +207,6 @@
   <div><kbd>F</kbd>fullscreen &middot; <kbd>H</kbd>hide this</div>
 </div>
 
-<div id="sound" class="hud-btn off" role="button" tabindex="0" aria-pressed="false" aria-label="Sound">
-  <svg class="on-i" viewBox="0 0 24 24" aria-hidden="true">
-    <path d="M4 9.2v5.6h3.4L12.8 19V5L7.4 9.2H4z"/>
-    <path d="M16.3 9a4.2 4.2 0 0 1 0 6"/>
-    <path d="M19 6.4a8 8 0 0 1 0 11.2"/>
-  </svg>
-  <svg class="off-i" viewBox="0 0 24 24" aria-hidden="true">
-    <path d="M4 9.2v5.6h3.4L12.8 19V5L7.4 9.2H4z"/>
-    <path d="M16.6 9.8l4.8 4.4"/><path d="M21.4 9.8l-4.8 4.4"/>
-  </svg>
-</div>
-
-<div id="voteup" class="hud-btn vote-btn" role="button" tabindex="0" aria-pressed="false"
-     aria-label="Good camera" title="Good camera (up arrow)">
-  <svg viewBox="0 0 24 24" aria-hidden="true">
-    <path d="M7 10.5v9H4.6a.6.6 0 0 1-.6-.6v-7.8a.6.6 0 0 1 .6-.6H7z"/>
-    <path d="M7 10.5l4.4-6.2a.9.9 0 0 1 1.6.5v4.3h4.7a2 2 0 0 1 2 2.4l-1.2 5.8a2.4 2.4 0 0 1-2.3 1.9H7"/>
-  </svg>
-</div>
-
-<div id="votedown" class="hud-btn vote-btn" role="button" tabindex="0" aria-pressed="false"
-     aria-label="Bad camera, drop it" title="Bad camera, drop it (down arrow)">
-  <svg viewBox="0 0 24 24" aria-hidden="true">
-    <path d="M7 13.5v-9H4.6a.6.6 0 0 0-.6.6v7.8c0 .33.27.6.6.6H7z"/>
-    <path d="M7 13.5l4.4 6.2a.9.9 0 0 0 1.6-.5v-4.3h4.7a2 2 0 0 0 2-2.4l-1.2-5.8A2.4 2.4 0 0 0 16.2 4.8H7"/>
-  </svg>
-</div>
-
 <div id="attrib"></div>
 <div id="err"></div>
 <div id="boot"><div class="b"><div class="t">Roundtrip</div><div class="bar"><i></i></div></div></div>
@@ -285,7 +215,11 @@
 <script src="./clouds/et45-clouds-inline.js"></script>
 <!-- Search. Self-contained, publishes window.RoundtripSearch. -->
 <script src="./search.js"></script>
-<!-- Fire TV remote. Self-contained, publishes window.RoundtripRemote. -->
+<!-- The action strip a tap brings up. Self-contained, publishes window.RoundtripMenu. -->
+<script src="./menu.js"></script>
+<!-- Fire TV remote. Self-contained, publishes window.RoundtripRemote. It hands
+     its own menu over to RoundtripMenu above, so a television gets the same
+     strip as everything else, driven by the D-pad. -->
 <script src="./tv.js"></script>
 <script type="module">
 import * as THREE from './vendor/three.module.js';
@@ -1272,23 +1206,14 @@ const armAudio = () => {
 addEventListener('pointerdown', armAudio, { passive:true });
 addEventListener('keydown', armAudio);
 
-const soundEl = $('#sound');
-function paintSound(){
-  soundEl.classList.toggle('off', !audio.on);
-  soundEl.setAttribute('aria-pressed', String(audio.on));
-  soundEl.setAttribute('aria-label', audio.on ? 'Sound on' : 'Silent');
-  soundEl.title = audio.on ? 'Sound on' : 'Silent';
-}
+/* The speaker is an item in the action strip now, so painting it is asking
+   the strip to look at the state again. */
+function paintSound(){ Menu?.sync(); }
 function toggleSound(){
   audio.on = !audio.on;
   try { localStorage.setItem(SOUND_KEY, audio.on ? 'on' : 'off'); } catch {}
   paintSound();
 }
-soundEl.addEventListener('click', toggleSound);
-soundEl.addEventListener('keydown', e => {
-  if (e.key === 'Enter' || e.key === ' '){ e.preventDefault(); e.stopPropagation(); toggleSound(); }
-});
-paintSound();
 
 /* ── place card ─────────────────────────────────────────────────────────── */
 
@@ -1298,15 +1223,15 @@ let cardTimer = null, clockTimer = null;
 function showCard(cam){
   card.querySelector('.place').textContent = cam.name;
   card.querySelector('.where').textContent = cam.location;
-  card.querySelector('.cat').textContent = cam.category || '';
+  // The place, where it is, and what time it is there. The light label and
+  // the category were dropped on Anthony's word: they read as loose tags
+  // over the picture. lightLabel is still what the rotation uses to prefer
+  // a well-lit camera; it is simply not written on screen.
   const tick = () => {
     try {
       card.querySelector('.clock').textContent = new Intl.DateTimeFormat([], {
         hour:'2-digit', minute:'2-digit', timeZone: cam.timezone }).format(now());
     } catch { card.querySelector('.clock').textContent = ''; }
-    const [label, colour] = lightLabel(sunElevation(cam.pose.lat, cam.pose.lng));
-    const s = card.querySelector('.sun');
-    s.textContent = label; s.style.color = colour;
   };
   tick();
   clearInterval(clockTimer); clockTimer = setInterval(tick, 15000);
@@ -1470,25 +1395,11 @@ function castVote(dir){
   paintVote();
 }
 
-const voteUpEl = $('#voteup'), voteDownEl = $('#votedown');
-function paintVote(){
-  const show = !!state.cam && !state.align
-            && (state.phase === 'live' || state.phase === 'reveal');
-  const v = voteOf(state.cam);
-  voteUpEl.classList.toggle('on', show);
-  voteDownEl.classList.toggle('on', show);
-  voteUpEl.classList.toggle('cast', v > 0);
-  voteDownEl.classList.toggle('cast', v < 0);
-  voteUpEl.setAttribute('aria-pressed', String(v > 0));
-  voteDownEl.setAttribute('aria-pressed', String(v < 0));
-}
-voteUpEl.addEventListener('click', () => castVote(1));
-voteDownEl.addEventListener('click', () => castVote(-1));
-for (const el of [voteUpEl, voteDownEl]){
-  el.addEventListener('keydown', e => {
-    if (e.key === 'Enter' || e.key === ' '){ e.preventDefault(); e.stopPropagation(); el.click(); }
-  });
-}
+/* The thumbs are items in the strip, and they are only offered with a
+   camera actually on screen. */
+const voteReady = () => !!state.cam && !state.align
+                     && (state.phase === 'live' || state.phase === 'reveal');
+function paintVote(){ Menu?.sync(); }
 
 function lightWeight(cam){
   const el = sunElevation(cam.pose.lat, cam.pose.lng);
@@ -1596,6 +1507,39 @@ function requestDive(cam){
   else { queued = cam; if (state.phase !== 'retreat') backToOrbit(); }
 }
 
+/* Where this session has been, so "Back" in the action strip returns to the
+   camera before this one rather than to a random draw. Going back pops both
+   the camera on screen and the one being returned to, because beginDive puts
+   the destination back on the end: press it twice and you walk two steps
+   back, which is what everyone expects of a back button. */
+const hist = [];
+const HIST_MAX = 60;
+function pushHistory(cam){
+  if (hist[hist.length-1] === cam) return;
+  hist.push(cam);
+  if (hist.length > HIST_MAX) hist.shift();
+}
+const canGoBack = () => hist.length >= 2;
+function divePrev(){
+  if (!canGoBack() || state.align) return;
+  hist.pop();
+  requestDive(hist.pop());
+}
+
+/* The explicit skip. Unlike the N key it works mid-flight too, by queueing,
+   because an action asked for on screen should never simply do nothing. */
+function skipNext(){
+  if (state.align) return;
+  requestDive(pickNext());
+}
+
+/* Hold this one: the rotation stops moving on and the feed stays up. */
+function togglePinned(force){
+  state.pinned = force === undefined ? !state.pinned : !!force;
+  $('#pinned').classList.toggle('on', state.pinned);
+  Menu?.sync();
+}
+
 /* Narrow the rotation to a set of cameras, or drop back to all of them. */
 function playSet(list, label){
   if (!list || list.length < 2) return;
@@ -1618,6 +1562,7 @@ function clearSet(quiet){
 function beginDive(cam){
   if (!cam) return;
   if (cam === prefetched) prefetched = null;
+  pushHistory(cam);
   state.cam = cam;
   state.pinned = false; $('#pinned').classList.remove('on');
   pins?.children.forEach(p => {
@@ -1984,7 +1929,12 @@ addEventListener('keydown', e => {
   // While the search box is open every key is typing, and it handles its
   // own Escape, arrows and Enter.
   if (Search?.isOpen()) return;
+  // The action strip gets first refusal on arrows, Enter and Back while it
+  // is up, so a remote can drive it without the app's shortcuts firing
+  // underneath.
+  if (Menu?.isOpen() && Menu.key(e)){ e.preventDefault(); return; }
   if (k === '/' && Search && !state.align){
+    Menu?.close();
     Search.open('');          // always opens on the tag list
     e.preventDefault();
     return;
@@ -2010,8 +1960,14 @@ addEventListener('keydown', e => {
     e.preventDefault();
     return;
   }
+  /* Nothing is on screen to press, so the first push of a D-pad brings the
+     strip up. Left and right, because up and down are the thumbs and a
+     keyboard should keep them. */
+  if (Menu && !Menu.isOpen() && (k==='Enter' || k==='ArrowLeft' || k==='ArrowRight')){
+    Menu.open(); e.preventDefault(); return;
+  }
   if (k==='n' || k==='N'){ if (state.phase==='live'||state.phase==='orbit') beginDive(pickNext()); }
-  else if (k===' '){ state.pinned = !state.pinned; $('#pinned').classList.toggle('on', state.pinned); e.preventDefault(); }
+  else if (k===' '){ togglePinned(); e.preventDefault(); }
   else if (k==='M' || (k==='m' && e.shiftKey)){
     // Silence this camera for good: a music bed or a radio loop, not ambience.
     if (state.cam){
@@ -2035,6 +1991,92 @@ addEventListener('keydown', e => {
   else if (k==='f' || k==='F'){ document.fullscreenElement ? document.exitFullscreen() : document.body.requestFullscreen(); }
   else if (k==='h' || k==='H'){ $('#help').classList.toggle('on'); }
 });
+
+/* ── the action strip ───────────────────────────────────────────────────
+
+   A tap, a click or the OK button puts the actions on screen. It never
+   changes the scene by itself: skipping is one of the things offered here,
+   not what touching the picture does to you. menu.js draws it and handles
+   moving around it; everything below is what each item means.
+
+   A feature built elsewhere adds itself with
+   Roundtrip.menu.addItem({...}, 'full'), which is the slot the pin-map mode
+   drops into. */
+
+const Menu = window.RoundtripMenu || null;
+
+Menu?.init({
+  idle: 6200,                       // fades out on its own after a quiet moment
+  onOpen(){ $('#help').classList.remove('on'); },
+  items: [
+    { id:'skip', label:'Skip', icon:'skip',
+      run: () => skipNext(),
+      state: () => ({ disabled: state.align || !state.cams.length,
+                      title:'Skip to the next camera' }) },
+
+    { id:'prev', label:'Back', icon:'prev',
+      run: () => divePrev(),
+      state: () => ({ disabled: !canGoBack() || state.align,
+                      title:'Back to the camera before this one' }) },
+
+    { id:'stay', label:'Stay', icon:'stay', toggle:true, close:false,
+      run: () => togglePinned(),
+      state: () => ({ pressed: state.pinned, disabled: !state.cam,
+                      title: state.pinned ? 'Staying here. Press to let it move on'
+                                          : 'Stay on this one' }) },
+
+    { id:'sound', label:'Sound', icon:'sound', toggle:true, close:false,
+      run: () => toggleSound(),
+      state: () => ({ pressed: audio.on,
+                      icon: audio.on ? 'sound' : 'mute',
+                      label: audio.on ? 'Sound' : 'Silent',
+                      title: audio.on ? 'Sound is on. Press for silence'
+                                      : 'Silent. Press for the camera\u2019s own sound' }) },
+
+    { id:'search', label:'Search', icon:'search',
+      run: () => Search?.open(''),
+      state: () => ({ hidden: !Search, title:'Search places, scenes and tags' }) },
+
+    { id:'up', label:'Good', icon:'up', toggle:true, close:false,
+      run: () => castVote(1),
+      state: () => ({ disabled: !voteReady(), pressed: voteOf(state.cam) > 0,
+                      title:'Good camera, show it more often' }) },
+
+    { id:'down', label:'Drop', icon:'down', toggle:true,
+      run: () => castVote(-1),
+      state: () => ({ disabled: !voteReady(), pressed: voteOf(state.cam) < 0,
+                      title:'Drop this camera and move on' }) },
+
+    { id:'globe', label:'Globe', icon:'globe',
+      run: () => backToOrbit(),
+      state: () => ({ disabled: state.align || !state.cam || state.phase === 'orbit',
+                      title:'Pull back out to the globe' }) },
+
+    { id:'full', label:'Full', icon:'full', close:false,
+      run: () => { document.fullscreenElement ? document.exitFullscreen()
+                                              : document.body.requestFullscreen(); },
+      state: () => ({ pressed: !!document.fullscreenElement,
+                      icon: document.fullscreenElement ? 'exit' : 'full',
+                      label: document.fullscreenElement ? 'Exit' : 'Full',
+                      title: document.fullscreenElement ? 'Leave fullscreen' : 'Fullscreen' }) },
+
+    { id:'keys', label:'Keys', icon:'keys',
+      run: () => $('#help').classList.add('on'),
+      state: () => ({ title:'The keyboard shortcuts' }) },
+  ],
+});
+addEventListener('fullscreenchange', () => Menu?.sync());
+
+/* A press anywhere on the picture. This is the whole point of the thing: it
+   shows what can be done and changes nothing, and a second press puts it
+   away again. Presses inside the strip or the search panel are theirs. */
+addEventListener('pointerdown', e => {
+  if (!Menu || state.align) return;
+  if (Search?.isOpen()) return;
+  const t = e.target;
+  if (t && t.closest && t.closest('#rt-menu,#rt-search,#rt-mag')) return;
+  Menu.isOpen() ? Menu.close() : Menu.open();
+}, { passive:true });
 
 let helpTimer = setTimeout(()=>$('#help').classList.remove('on'), 9000);
 $('#help').classList.add('on');
@@ -2106,6 +2148,8 @@ const progress = v => { bar.style.width = (v*100)+'%'; };
   Search?.init({
     cams: state.cams,
     isLiveNow,
+    // The magnifier folds into the action strip, which carries a Search item.
+    mag: false,
     onPick: cam => requestDive(cam),
     onPlaySet: (list, label) => playSet(list, label),
   });
@@ -2114,6 +2158,9 @@ const progress = v => { bar.style.width = (v*100)+'%'; };
   progress(1);
   setPhase('orbit');
   setTimeout(()=>$('#boot').classList.add('gone'), 260);
+  // Show the strip once on the way in, so the gesture teaches itself; it
+  // fades out on its own like any other time.
+  setTimeout(()=>Menu?.open(), 900);
 
   // The first dive used to be the only cold one: nothing prefetches until a
   // feed has played, so it alone paid full network time and stretched its
@@ -2141,6 +2188,9 @@ const progress = v => { bar.style.width = (v*100)+'%'; };
     // Roundtrip.audio shows the button state, whether the browser has allowed
     // sound yet, and where the volume ramp currently sits.
     audio, toggleSound, camHasSound,
+    // Roundtrip.menu.addItem({...}, 'full') puts another action in the strip.
+    menu: Menu, skipNext, divePrev, togglePinned,
+    history: () => hist.map(c => c.name),
     // Roundtrip.votes() is every thumb cast in this browser, as a list the
     // camera file can be pruned from.
     votes: () => Object.entries(votes).map(([key, v]) => ({ key, ...v })),
@@ -2152,7 +2202,7 @@ const progress = v => { bar.style.width = (v*100)+'%'; };
     // What the Fire TV remote drives (tv.js). backToOrbit is Escape,
     // hold is the Space bar, note puts a line on screen.
     backToOrbit, note,
-    hold: on => { state.pinned = (on === undefined) ? !state.pinned : !!on;
+    hold: on => { togglePinned(on === undefined ? undefined : !!on);
                   $('#pinned').classList.toggle('on', state.pinned);
                   return state.pinned; },
     dive: q => { const c = state.cams.find(c => c.name.toLowerCase().includes(String(q).toLowerCase()));

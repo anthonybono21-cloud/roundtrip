@@ -36,6 +36,12 @@ tag = '<script src="./search.js"></script>'
 assert tag in html, 'search script tag not found'
 html = html.replace(tag, '<script>\n' + search_js + '\n</script>', 1)
 
+# The action strip, inlined for the same reason.
+menu_js = (D/'menu.js').read_text(encoding='utf-8')
+tag = '<script src="./menu.js"></script>'
+assert tag in html, 'menu script tag not found'
+html = html.replace(tag, '<script>\n' + menu_js + '\n</script>', 1)
+
 # The Fire TV remote, inlined for the same reason.
 tv_js = (D/'tv.js').read_text(encoding='utf-8')
 tag = '<script src="./tv.js"></script>'

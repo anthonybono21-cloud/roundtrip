@@ -87,20 +87,21 @@ adb shell input keyevent --longpress KEYCODE_BACK   # this is how you leave
 
 ## Signing in to YouTube, so Premium removes the adverts
 
-This is the one thing on the television that needs an account, and it is a
-one-time job. The feeds are embedded YouTube players; an embedded player
-honours the viewer's own Premium subscription, and the subscription only
-reaches it if this WebView is carrying the account's cookies. Without Premium
-on the account there is nothing to gain here — the sign-in changes nothing on
-its own.
+**The password is not typed from here, and there is no command in this file
+that types one.** Anthony signs in on the television itself, with the Fire
+Stick's on-screen keyboard, because it is his account. A session on the 3090
+gets the app to the sign-in screen and reads back whether it took; everything
+between those two points happens on the television.
 
-The password is the one thing no session can supply. `adb shell input text`
-types into whatever field has focus, so the sign-in can be driven from here
-end to end as long as the account's password is at hand on the 3090; otherwise
-the same screens take the remote and the on-screen keyboard.
+The point of it is the adverts: the feeds are embedded YouTube players, an
+embedded player honours the viewer's own Premium subscription, and the
+subscription only reaches it if this WebView carries the account's cookies.
+The sign-in is two steps, and the app walks itself through both: Google first,
+then YouTube's channel picker, because the channel this television watches as
+is where its watch history goes. Picking a Brand Account channel there keeps
+the webcams out of the personal one.
 
-The surest way in is the DevTools handle, because it does not depend on where
-the highlight happens to be sitting:
+Getting it to the sign-in screen:
 
 ```sh
 adb shell am start -n com.roundtrip.tv/.MainActivity
@@ -111,45 +112,23 @@ adb forward tcp:9222 localabstract:webview_devtools_remote_$PID
 #   Roundtrip.ytSignIn()
 ```
 
-The remote gets there too: Select opens the action strip, right walks it, and
-**Ads** sits between Full and Keys. Read the highlighted label rather than
-counting presses — the strip's contents change with what is on screen.
+The remote gets there too, without a machine in the loop: Select opens the
+action strip, right walks it, and **Ads** sits between Full and Keys. Read the
+highlighted label rather than counting presses — the strip's contents change
+with what is on screen.
+
+Then hand the remote over. The app drops out of immersive mode for the
+sign-in so the on-screen keyboard has room, and comes back to the globe by
+itself once a channel has been picked. Holding Back leaves the sign-in without
+finishing it; it does not quit the app while a sign-in is up.
+
+Reading back whether it took, once he is done:
 
 ```sh
-adb shell input keyevent KEYCODE_DPAD_CENTER   # strip opens on the first item
-sleep 1
-for i in $(seq 1 10); do adb shell input keyevent KEYCODE_DPAD_RIGHT; sleep 0.3; done
-adb shell input keyevent KEYCODE_DPAD_CENTER
-sleep 6
-adb shell dumpsys activity com.roundtrip.tv | grep -i url   # should be accounts.google.com
-```
-
-Then the Google form, field by field. `input text` has no way to type a space,
-and `%s` is the substitute if one is ever needed:
-
-```sh
-adb shell input text 'the.address@gmail.com'
-adb shell input keyevent KEYCODE_ENTER
-sleep 5
-adb shell input text 'the-password'
-adb shell input keyevent KEYCODE_ENTER
-sleep 8
-```
-
-The app watches for the landing on `youtube.com` that a completed sign-in ends
-on, waits a couple of seconds and takes itself back to the globe by itself.
-Holding Back leaves the sign-in without finishing it; it does not quit the app
-while a sign-in is up.
-
-Proving it took:
-
-```sh
-PID=$(adb shell pidof com.roundtrip.tv | tr -d '\r')
-adb forward tcp:9222 localabstract:webview_devtools_remote_$PID
-# In a DevTools console against the page:
-#   Roundtrip.ads                -> { on, seen, ... }; `seen` is this device's tally
+# Still against 127.0.0.1:9222:
+#   Roundtrip.ads               -> { on, seen, ... }; `seen` is this device's tally
 #   Object.keys(Roundtrip.ads.seen).length
-# Let it run through a dozen dives and watch whether that number stops growing.
+# Let it run a dozen dives and watch whether that number stops growing.
 ```
 
 Two things worth knowing before this is called broken. Google refuses sign-ins

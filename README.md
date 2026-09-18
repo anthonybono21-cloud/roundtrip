@@ -203,8 +203,17 @@ to YouTube in the same browser is already enough. Inside the Fire TV app the
 cookie jar belongs to the shell, so the shell does the sign-in: the **Ads**
 item in the action strip calls `RoundtripShell.signIn()`, the app swaps to a
 plain desktop user agent (Google refuses a sign-in from a user agent carrying
-the WebView's `; wv`), runs the Google sign-in, and comes back to the globe
-with the account's cookies kept. `setAcceptThirdPartyCookies` is the other half
+the WebView's `; wv`), and runs the sign-in in two steps — Google, then
+YouTube's channel picker — before coming back to the globe with the account's
+cookies kept. The second step is not optional politeness: the channel chosen
+there is where everything this television watches gets recorded, so a Brand
+Account channel keeps 130-odd webcams out of the account holder's own watch
+history and recommendations while Premium, which belongs to the Google Account
+rather than to any one channel, still reaches the players. The password is
+typed on the television by the person whose account it is; nothing in the app
+or the runbook accepts one over adb, from the page or from an intent extra,
+and the app drops out of immersive mode for the sign-in so the on-screen
+keyboard has room. `setAcceptThirdPartyCookies` is the other half
 of that: the players are `youtube.com` frames inside a `github.io` page, so
 without it no account could ever reach them. The Ads item only appears where it
 is useful — inside the TV app, or on a device that has actually had an advert

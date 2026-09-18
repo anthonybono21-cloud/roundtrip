@@ -41,10 +41,25 @@ public class MainActivity extends Activity {
    * viewer's own Premium subscription, and a subscription only reaches it if
    * this WebView is carrying the account's cookies. Nothing else here needs
    * an account, and nothing is stored by the app itself.
+   *
+   * The password is typed on the television, by the person whose account it
+   * is, and it deliberately has no other route in: nothing here accepts one
+   * over adb, from the page, or from an intent extra.
    */
   private static final String SIGN_IN =
       "https://accounts.google.com/ServiceLogin?service=youtube"
       + "&continue=https%3A%2F%2Fwww.youtube.com%2F";
+
+  /**
+   * Step two, and the reason the sign-in does not simply end when Google lets
+   * it through. A channel picked here is where everything this television
+   * watches gets recorded, so choosing a Brand Account channel keeps 130-odd
+   * webcams out of the account holder's own watch history and recommendations
+   * while the Premium subscription, which belongs to the Google Account rather
+   * than to any one channel, still reaches the players.
+   */
+  private static final String CHANNEL_SWITCHER =
+      "https://www.youtube.com/channel_switcher";
 
   /**
    * Google refuses a sign-in from a user agent it recognises as an embedded
@@ -62,6 +77,8 @@ public class MainActivity extends Activity {
   private final Handler ui = new Handler(Looper.getMainLooper());
   private boolean failed = false;
   private boolean signingIn = false;
+  /** 1 while Google has the screen, 2 once the channel is being chosen. */
+  private int signInStep = 0;
 
   @SuppressLint("SetJavaScriptEnabled")
   @Override
@@ -120,15 +137,28 @@ public class MainActivity extends Activity {
     web.setWebViewClient(new WebViewClient() {
       @Override public void onPageFinished(WebView v, String url) {
         failed = false;
-        // Landing on YouTube proper is what finishing the sign-in looks like:
-        // that is where the continue= parameter sends an account that got
-        // through. Nobody is going to press anything on a kitchen television,
-        // so the app takes itself back to the globe.
-        if (signingIn && url != null && url.startsWith("https://www.youtube.com/")
-            && !url.contains("/signin") && !url.contains("accounts.google")) {
+        if (!signingIn || url == null) return;
+        boolean onYouTube = url.startsWith("https://www.youtube.com/")
+            && !url.contains("/signin") && !url.contains("accounts.google");
+        if (!onYouTube) return;
+
+        // Landing on YouTube proper is what getting through Google looks
+        // like: that is where the continue= parameter sends an account that
+        // was accepted. Rather than stopping there, go straight on to the
+        // channel picker, because which channel this television watches as is
+        // the whole point of signing it in separately.
+        if (signInStep == 1 && !url.contains("channel_switcher")) {
+          signInStep = 2;
+          web.loadUrl(CHANNEL_SWITCHER);
+          return;
+        }
+        // Picking a channel takes YouTube back to its own front page, and
+        // that is the app's cue to go home. Nobody wants to hunt for a way
+        // out on a kitchen television.
+        if (signInStep == 2 && !url.contains("channel_switcher")) {
           ui.postDelayed(new Runnable() {
             @Override public void run() { if (signingIn) endSignIn(); }
-          }, 2500);
+          }, 2000);
         }
       }
 
@@ -194,7 +224,13 @@ public class MainActivity extends Activity {
   private void startSignIn() {
     if (signingIn) return;
     signingIn = true;
+    signInStep = 1;
     web.getSettings().setUserAgentString(DESKTOP_UA);
+    // Immersive mode and a soft keyboard fight each other: the sticky flags
+    // come back while a field has focus and take the bottom of the keyboard
+    // with them. Roundtrip itself never takes typing, so the plain window is
+    // only ever up during the sign-in.
+    showSystemUi();
     web.clearHistory();               // so Back walks the sign-in, not the app
     web.loadUrl(SIGN_IN);
   }
@@ -203,6 +239,7 @@ public class MainActivity extends Activity {
   private void endSignIn() {
     if (!signingIn) return;
     signingIn = false;
+    signInStep = 0;
     CookieManager.getInstance().flush();
     web.getSettings().setUserAgentString(null);   // back to the app's own
     web.clearHistory();
@@ -210,7 +247,14 @@ public class MainActivity extends Activity {
     immersive();
   }
 
+  /** The ordinary window, so the on-screen keyboard has somewhere to sit. */
+  private void showSystemUi() {
+    if (Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT) return;
+    getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_VISIBLE);
+  }
+
   private void immersive() {
+    if (signingIn) return;          // the keyboard owns the screen until it is done
     if (Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT) return;
     getWindow().getDecorView().setSystemUiVisibility(
         View.SYSTEM_UI_FLAG_LAYOUT_STABLE

@@ -1,5 +1,13 @@
 apply plugin: 'com.android.application'
 
+// CI passes the run number in, so a newer build is never refused as a
+// downgrade. Worked out up here rather than inline in defaultConfig: Groovy
+// reads `versionCode (x).toString()` as a call to versionCode(x) followed by
+// toString() on what it returned, which is nothing, and the build dies on
+// "Value is null".
+def rtVersionCode = ((project.findProperty('versionCode') ?: '1') as String).toInteger()
+def rtVersionName = (project.findProperty('versionName') ?: "1.0.${rtVersionCode}").toString()
+
 android {
     namespace "com.anthonybono.roundtrip"
     compileSdk rootProject.ext.compileSdkVersion
@@ -7,10 +15,8 @@ android {
         applicationId "com.anthonybono.roundtrip"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        // CI passes the run number, so a newer build is never refused as a
-        // downgrade.
-        versionCode (project.findProperty('versionCode') ?: '1').toString().toInteger()
-        versionName (project.findProperty('versionName') ?: '1.0.' + versionCode).toString()
+        versionCode rtVersionCode
+        versionName rtVersionName
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         aaptOptions {
              // Files and dirs to omit from the packaged assets dir, modified to accommodate modern web apps.

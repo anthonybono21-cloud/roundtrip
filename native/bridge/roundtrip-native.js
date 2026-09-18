@@ -111,6 +111,9 @@
     open = true;
     // Hold the rotation: the dive timer runs on regardless of what is drawn on
     // top of it, and coming back to a feed you never chose is disorienting.
+    // Set directly rather than through Roundtrip.hold(), which also lights the
+    // "pinned" badge — that would sit under the map unseen and then flash on
+    // the way out.
     try { wasPinned = !!app.state.pinned; app.state.pinned = true; } catch (e) {}
     Map.show({ pins: pins(), focus: focus() }).catch(function (err) {
       open = false;

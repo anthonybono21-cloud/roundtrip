@@ -234,7 +234,10 @@
     open = true;
     sync();
     root.classList.add('on');
-    if (sel < 0 || !usable(sel)) select(nextUsable(-1, 1));
+    // Always opens on the first thing you can do, however it was left last
+    // time. On a remote that matters: where the ring sits has to be
+    // predictable from across a room, not a memory of the last press.
+    select(nextUsable(-1, 1));
     try { hooks.onOpen && hooks.onOpen(); } catch (e) { console.warn(e); }
     if (!(opts && opts.sticky)) nudge(); else clearTimeout(idleTimer);
   }

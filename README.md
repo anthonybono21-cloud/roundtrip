@@ -17,10 +17,38 @@ baked into itself.
 After editing `cameras.json`, rebuild the single file with `build.py`
 (needs Python): `python build.py`.
 
+## A tap shows what you can do
+
+Nothing floats over the picture at rest. A tap, a click anywhere, the OK button
+on a remote or a press of `←` or `→` brings up a strip along the bottom:
+
+**Skip · Back · Stay · Sound · Search · Good · Drop · Globe · Full · Keys**
+
+It changes nothing by itself. Skipping to another camera is one of the things
+offered there, not what touching the screen does to you, which is the whole
+point of it. Arrows walk the strip, `Enter` presses, `Esc` or a remote's Back
+closes it, and it fades out after a few seconds alone. `Back` returns to the
+camera before this one; press it again to keep walking back.
+
+The speaker, the magnifier and the two thumbs used to sit in the top-right
+corner and are items in this strip now.
+
+`menu.js` is the whole thing: it draws itself, knows nothing about the globe,
+and is handed its actions by the page, in the shape `search.js` is written in.
+Another feature adds one without touching either file:
+
+```js
+Roundtrip.menu.addItem({ id:'map', label:'Map', icon:'map', run(){ … } }, 'full');
+```
+
+On a television `tv.js` hands its own menu over to this one, so a D-pad and a
+finger drive exactly the same strip.
+
 ## Keys
 
 | key | what it does |
 | --- | --- |
+| tap/click, `←`, `→` | show the actions |
 | `/` | open search: places, scenes and tags |
 | `N` | dive to the next camera now |
 | `Space` | hold this camera, cancel the rotation |
@@ -38,8 +66,8 @@ when they are actually broadcasting, rather than rejected.
 
 ## Thumbs up and thumbs down
 
-Two round buttons sit under the magnifier while a camera is on screen, and the
-up and down arrow keys do the same thing without moving a hand.
+**Good** and **Drop** in the action strip, or the up and down arrow keys
+without moving a hand.
 
 Thumbs down is immediate, because it means "I do not want to see that again":
 the camera leaves this browser's deck on the spot and the next dive starts.
@@ -61,10 +89,20 @@ That is the list to prune `cameras.json` from: a `vote: -1` becomes an entry in
 
 ## Search
 
-Press `/`, or click the magnifier under the speaker. Type a place, a scene or a
+Press `/`, or **Search** in the action strip. Type a place, a scene or a
 tag and every camera that matches is listed - all of them, scrolled, never a
 top-five. `Enter` or a click flies there through the normal dive; **Play these**
 narrows the rotation to exactly that set until `Esc` hands the world back.
+
+Names people actually type are understood: **nyc**, **big apple**, **la**,
+**socal**, **sf**, **bay area**, **dc**, **oz**, **aotearoa**, **holland**,
+**mecca**, **wailing wall**, **venezia**, **firenze**, **rio**, **scandinavia**,
+**middle east**. Two-word ones survive the tokenizer, so "new york city" is one
+name and not three words. One and two letter terms match exactly rather than by
+prefix, so "la" is Los Angeles and not every lake, landmark and lava field.
+Aliases live in two places on purpose: `tag.py` writes the ones it knows into a
+camera's tags at build time, and `search.js` expands what is typed, so a camera
+added by hand answers to its nickname without being run through the tagger.
 
 The box opens on a tag list, so nothing has to be known in advance: the chips
 under Places, Scenes and Moods are searches, and so is every chip on a result

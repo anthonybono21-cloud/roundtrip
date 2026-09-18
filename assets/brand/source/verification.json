@@ -1,0 +1,740 @@
+{
+  "selected_sources": {
+    "color": "source/handle-flight-color-original.png",
+    "white": "source/handle-flight-white-original.png"
+  },
+  "source_byte_preservation": "The selected originals are read-only inputs and are never copied, modified, or overwritten by this builder.",
+  "crop_method": "Alpha >= 16 identifies artwork bounds; crops preserve original RGBA pixels and add 12px padding.",
+  "palette_sampled_from_color": [
+    {
+      "rgb": [
+        18,
+        65,
+        151
+      ],
+      "pixels": 11325
+    },
+    {
+      "rgb": [
+        17,
+        65,
+        150
+      ],
+      "pixels": 10812
+    },
+    {
+      "rgb": [
+        17,
+        64,
+        150
+      ],
+      "pixels": 8256
+    },
+    {
+      "rgb": [
+        18,
+        65,
+        150
+      ],
+      "pixels": 8152
+    },
+    {
+      "rgb": [
+        18,
+        66,
+        151
+      ],
+      "pixels": 7256
+    },
+    {
+      "rgb": [
+        17,
+        65,
+        151
+      ],
+      "pixels": 6013
+    },
+    {
+      "rgb": [
+        18,
+        64,
+        151
+      ],
+      "pixels": 5460
+    },
+    {
+      "rgb": [
+        18,
+        64,
+        150
+      ],
+      "pixels": 4958
+    },
+    {
+      "rgb": [
+        17,
+        63,
+        149
+      ],
+      "pixels": 4148
+    },
+    {
+      "rgb": [
+        18,
+        63,
+        150
+      ],
+      "pixels": 4091
+    },
+    {
+      "rgb": [
+        17,
+        64,
+        149
+      ],
+      "pixels": 4012
+    },
+    {
+      "rgb": [
+        17,
+        63,
+        150
+      ],
+      "pixels": 4009
+    }
+  ],
+  "typography": "Custom raster lettering preserved from the selected source; typeface unknown.",
+  "svg_tracing": {
+    "tool": "vtracer 0.6.15 with Pillow 12.1.1",
+    "status": {
+      "handle-flight-color": "path",
+      "handle-flight-color-mark": "path",
+      "handle-flight-color-wordmark": "path",
+      "handle-flight-white": "path",
+      "handle-flight-white-mark": "path",
+      "handle-flight-white-wordmark": "path"
+    },
+    "runtime": "Python 3.13 recommended on Windows; vtracer's Python 3.14 wheel currently crashes during conversion.",
+    "limit": "SVGs are traced derivatives; the selected PNG originals remain the pixel-faithful artwork."
+  },
+  "checks": {
+    "ios_opaque": true,
+    "android_foreground_safe_circle_diameter_px": 264,
+    "android_foreground_within_safe_circle": true,
+    "tvos_backdrops_opaque": true,
+    "firetv_backdrops_opaque": true,
+    "splash_backdrops_opaque": true,
+    "white_visible_pixels_are_rgb_255": true,
+    "sources_read_from_bundled_relative_paths": true
+  },
+  "assets": {
+    "firetv/firetv-background-1920x1080.png": {
+      "size": [
+        1920,
+        1080
+      ],
+      "mode": "RGBA",
+      "alpha_extrema": [
+        255,
+        255
+      ],
+      "meaningful_alpha_bbox": [
+        0,
+        0,
+        1920,
+        1080
+      ],
+      "meaningful_visible_pixels": 2073600,
+      "opaque_pixels": 2073600
+    },
+    "firetv/firetv-banner-1280x720.png": {
+      "size": [
+        1280,
+        720
+      ],
+      "mode": "RGBA",
+      "alpha_extrema": [
+        255,
+        255
+      ],
+      "meaningful_alpha_bbox": [
+        0,
+        0,
+        1280,
+        720
+      ],
+      "meaningful_visible_pixels": 921600,
+      "opaque_pixels": 921600
+    },
+    "handle-flight-color-horizontal.png": {
+      "size": [
+        3157,
+        621
+      ],
+      "mode": "RGBA",
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "meaningful_alpha_bbox": [
+        12,
+        12,
+        3117,
+        609
+      ],
+      "meaningful_visible_pixels": 702616,
+      "opaque_pixels": 27081
+    },
+    "handle-flight-color-mark.png": {
+      "size": [
+        469,
+        621
+      ],
+      "mode": "RGBA",
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "meaningful_alpha_bbox": [
+        12,
+        12,
+        457,
+        609
+      ],
+      "meaningful_visible_pixels": 124568,
+      "opaque_pixels": 1960
+    },
+    "handle-flight-color-wordmark.png": {
+      "size": [
+        771,
+        180
+      ],
+      "mode": "RGBA",
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "meaningful_alpha_bbox": [
+        12,
+        12,
+        759,
+        168
+      ],
+      "meaningful_visible_pixels": 48365,
+      "opaque_pixels": 2182
+    },
+    "handle-flight-color.png": {
+      "size": [
+        771,
+        816
+      ],
+      "mode": "RGBA",
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "meaningful_alpha_bbox": [
+        12,
+        12,
+        759,
+        804
+      ],
+      "meaningful_visible_pixels": 172933,
+      "opaque_pixels": 4142
+    },
+    "handle-flight-white-horizontal.png": {
+      "size": [
+        3127,
+        624
+      ],
+      "mode": "RGBA",
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "meaningful_alpha_bbox": [
+        12,
+        12,
+        3087,
+        612
+      ],
+      "meaningful_visible_pixels": 748415,
+      "opaque_pixels": 24476
+    },
+    "handle-flight-white-mark.png": {
+      "size": [
+        470,
+        624
+      ],
+      "mode": "RGBA",
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "meaningful_alpha_bbox": [
+        12,
+        12,
+        458,
+        612
+      ],
+      "meaningful_visible_pixels": 127836,
+      "opaque_pixels": 1776
+    },
+    "handle-flight-white-wordmark.png": {
+      "size": [
+        771,
+        183
+      ],
+      "mode": "RGBA",
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "meaningful_alpha_bbox": [
+        12,
+        12,
+        759,
+        171
+      ],
+      "meaningful_visible_pixels": 53124,
+      "opaque_pixels": 1591
+    },
+    "handle-flight-white.png": {
+      "size": [
+        771,
+        819
+      ],
+      "mode": "RGBA",
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "meaningful_alpha_bbox": [
+        12,
+        12,
+        759,
+        807
+      ],
+      "meaningful_visible_pixels": 180960,
+      "opaque_pixels": 3367
+    },
+    "icons/android-background-432.png": {
+      "size": [
+        432,
+        432
+      ],
+      "mode": "RGBA",
+      "alpha_extrema": [
+        255,
+        255
+      ],
+      "meaningful_alpha_bbox": [
+        0,
+        0,
+        432,
+        432
+      ],
+      "meaningful_visible_pixels": 186624,
+      "opaque_pixels": 186624
+    },
+    "icons/android-foreground-432.png": {
+      "size": [
+        432,
+        432
+      ],
+      "mode": "RGBA",
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "meaningful_alpha_bbox": [
+        146,
+        119,
+        288,
+        311
+      ],
+      "meaningful_visible_pixels": 13248,
+      "opaque_pixels": 901
+    },
+    "icons/apple-touch-icon-180.png": {
+      "size": [
+        180,
+        180
+      ],
+      "mode": "RGBA",
+      "alpha_extrema": [
+        255,
+        255
+      ],
+      "meaningful_alpha_bbox": [
+        0,
+        0,
+        180,
+        180
+      ],
+      "meaningful_visible_pixels": 32400,
+      "opaque_pixels": 32400
+    },
+    "icons/favicon-16.png": {
+      "size": [
+        16,
+        16
+      ],
+      "mode": "RGBA",
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "meaningful_alpha_bbox": [
+        3,
+        2,
+        12,
+        14
+      ],
+      "meaningful_visible_pixels": 76,
+      "opaque_pixels": 12
+    },
+    "icons/favicon-32.png": {
+      "size": [
+        32,
+        32
+      ],
+      "mode": "RGBA",
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "meaningful_alpha_bbox": [
+        6,
+        3,
+        25,
+        29
+      ],
+      "meaningful_visible_pixels": 292,
+      "opaque_pixels": 55
+    },
+    "icons/favicon-48.png": {
+      "size": [
+        48,
+        48
+      ],
+      "mode": "RGBA",
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "meaningful_alpha_bbox": [
+        10,
+        5,
+        38,
+        43
+      ],
+      "meaningful_visible_pixels": 570,
+      "opaque_pixels": 110
+    },
+    "icons/icon-192.png": {
+      "size": [
+        192,
+        192
+      ],
+      "mode": "RGBA",
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "meaningful_alpha_bbox": [
+        38,
+        19,
+        153,
+        173
+      ],
+      "meaningful_visible_pixels": 8448,
+      "opaque_pixels": 696
+    },
+    "icons/icon-512.png": {
+      "size": [
+        512,
+        512
+      ],
+      "mode": "RGBA",
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "meaningful_alpha_bbox": [
+        104,
+        52,
+        408,
+        460
+      ],
+      "meaningful_visible_pixels": 58180,
+      "opaque_pixels": 1678
+    },
+    "icons/ios-1024.png": {
+      "size": [
+        1024,
+        1024
+      ],
+      "mode": "RGBA",
+      "alpha_extrema": [
+        255,
+        255
+      ],
+      "meaningful_alpha_bbox": [
+        0,
+        0,
+        1024,
+        1024
+      ],
+      "meaningful_visible_pixels": 1048576,
+      "opaque_pixels": 1048576
+    },
+    "source/preview.png": {
+      "size": [
+        1280,
+        768
+      ],
+      "mode": "RGBA",
+      "alpha_extrema": [
+        255,
+        255
+      ],
+      "meaningful_alpha_bbox": [
+        0,
+        0,
+        1280,
+        768
+      ],
+      "meaningful_visible_pixels": 983040,
+      "opaque_pixels": 983040
+    },
+    "splash/splash-dark-1170x2532.png": {
+      "size": [
+        1170,
+        2532
+      ],
+      "mode": "RGBA",
+      "alpha_extrema": [
+        255,
+        255
+      ],
+      "meaningful_alpha_bbox": [
+        0,
+        0,
+        1170,
+        2532
+      ],
+      "meaningful_visible_pixels": 2962440,
+      "opaque_pixels": 2962440
+    },
+    "splash/splash-dark-1920x1080.png": {
+      "size": [
+        1920,
+        1080
+      ],
+      "mode": "RGBA",
+      "alpha_extrema": [
+        255,
+        255
+      ],
+      "meaningful_alpha_bbox": [
+        0,
+        0,
+        1920,
+        1080
+      ],
+      "meaningful_visible_pixels": 2073600,
+      "opaque_pixels": 2073600
+    },
+    "splash/splash-dark-2732x2732.png": {
+      "size": [
+        2732,
+        2732
+      ],
+      "mode": "RGBA",
+      "alpha_extrema": [
+        255,
+        255
+      ],
+      "meaningful_alpha_bbox": [
+        0,
+        0,
+        2732,
+        2732
+      ],
+      "meaningful_visible_pixels": 7463824,
+      "opaque_pixels": 7463824
+    },
+    "tvos/tvos-1280x768-back.png": {
+      "size": [
+        1280,
+        768
+      ],
+      "mode": "RGBA",
+      "alpha_extrema": [
+        255,
+        255
+      ],
+      "meaningful_alpha_bbox": [
+        0,
+        0,
+        1280,
+        768
+      ],
+      "meaningful_visible_pixels": 983040,
+      "opaque_pixels": 983040
+    },
+    "tvos/tvos-1280x768-front.png": {
+      "size": [
+        1280,
+        768
+      ],
+      "mode": "RGBA",
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "meaningful_alpha_bbox": [
+        350,
+        516,
+        930,
+        639
+      ],
+      "meaningful_visible_pixels": 32313,
+      "opaque_pixels": 1704
+    },
+    "tvos/tvos-1280x768-middle.png": {
+      "size": [
+        1280,
+        768
+      ],
+      "mode": "RGBA",
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "meaningful_alpha_bbox": [
+        498,
+        71,
+        788,
+        461
+      ],
+      "meaningful_visible_pixels": 54094,
+      "opaque_pixels": 1529
+    },
+    "tvos/tvos-400x240-back.png": {
+      "size": [
+        400,
+        240
+      ],
+      "mode": "RGBA",
+      "alpha_extrema": [
+        255,
+        255
+      ],
+      "meaningful_alpha_bbox": [
+        0,
+        0,
+        400,
+        240
+      ],
+      "meaningful_visible_pixels": 96000,
+      "opaque_pixels": 96000
+    },
+    "tvos/tvos-400x240-front.png": {
+      "size": [
+        400,
+        240
+      ],
+      "mode": "RGBA",
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "meaningful_alpha_bbox": [
+        109,
+        160,
+        291,
+        200
+      ],
+      "meaningful_visible_pixels": 3463,
+      "opaque_pixels": 666
+    },
+    "tvos/tvos-400x240-middle.png": {
+      "size": [
+        400,
+        240
+      ],
+      "mode": "RGBA",
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "meaningful_alpha_bbox": [
+        155,
+        22,
+        246,
+        145
+      ],
+      "meaningful_visible_pixels": 5530,
+      "opaque_pixels": 571
+    },
+    "tvos/tvos-800x480-back.png": {
+      "size": [
+        800,
+        480
+      ],
+      "mode": "RGBA",
+      "alpha_extrema": [
+        255,
+        255
+      ],
+      "meaningful_alpha_bbox": [
+        0,
+        0,
+        800,
+        480
+      ],
+      "meaningful_visible_pixels": 384000,
+      "opaque_pixels": 384000
+    },
+    "tvos/tvos-800x480-front.png": {
+      "size": [
+        800,
+        480
+      ],
+      "mode": "RGBA",
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "meaningful_alpha_bbox": [
+        219,
+        322,
+        580,
+        400
+      ],
+      "meaningful_visible_pixels": 12826,
+      "opaque_pixels": 1285
+    },
+    "tvos/tvos-800x480-middle.png": {
+      "size": [
+        800,
+        480
+      ],
+      "mode": "RGBA",
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "meaningful_alpha_bbox": [
+        310,
+        44,
+        492,
+        289
+      ],
+      "meaningful_visible_pixels": 21472,
+      "opaque_pixels": 1062
+    }
+  }
+}

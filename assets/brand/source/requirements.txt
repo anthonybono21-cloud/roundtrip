@@ -1,0 +1,2 @@
+Pillow>=11
+vtracer==0.6.15

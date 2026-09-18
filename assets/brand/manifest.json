@@ -1,0 +1,410 @@
+{
+  "brand": "Roundtrip",
+  "selected_concept": "Handle Flight",
+  "integration_status": "assets ready; app and native wiring remains with consumers",
+  "masters": {
+    "color": "handle-flight-color.png",
+    "white_overlay": "handle-flight-white.png",
+    "color_mark": "handle-flight-color-mark.png",
+    "white_mark": "handle-flight-white-mark.png"
+  },
+  "checks": {
+    "required_dimensions": "passed",
+    "white_rgb": "#FFFFFF",
+    "opaque_platform_backgrounds": "passed",
+    "android_safe_circle_diameter_px": 264,
+    "android_pixels_outside_safe_circle": 0,
+    "ico_sizes": [
+      16,
+      32,
+      48
+    ],
+    "svg_contains_paths_not_embedded_bitmaps": true
+  },
+  "files": [
+    {
+      "path": ".gitignore",
+      "bytes": 19,
+      "sha256": "862263fa1f46c20f0d1e4dac5ffcc75abd55c08211b2c3864c5f8764b9d87793",
+      "hash_basis": "LF-normalized text"
+    },
+    {
+      "path": "firetv/firetv-background-1920x1080.png",
+      "bytes": 92505,
+      "sha256": "898a4c2c6cb08864be2aaadc74cff2b0e2ed079d3168e7f1747a693301387460",
+      "hash_basis": "exact file bytes",
+      "width": 1920,
+      "height": 1080,
+      "mode": "RGBA"
+    },
+    {
+      "path": "firetv/firetv-banner-1280x720.png",
+      "bytes": 49363,
+      "sha256": "5d4f45deb70d0eab00430774b798d12ae7e883bc74929591ec15edb797d221bd",
+      "hash_basis": "exact file bytes",
+      "width": 1280,
+      "height": 720,
+      "mode": "RGBA"
+    },
+    {
+      "path": "handle-flight-color-horizontal.png",
+      "bytes": 606324,
+      "sha256": "c57a14aafd8b3d98db12713e10c19cbe756a33906b7d6f1447d99d230658058e",
+      "hash_basis": "exact file bytes",
+      "width": 3157,
+      "height": 621,
+      "mode": "RGBA"
+    },
+    {
+      "path": "handle-flight-color-mark.png",
+      "bytes": 139233,
+      "sha256": "ae6204d10bb4f7be2a19ec6be9288e349cbd2715c2b189d30182ef41d4ca833e",
+      "hash_basis": "exact file bytes",
+      "width": 469,
+      "height": 621,
+      "mode": "RGBA"
+    },
+    {
+      "path": "handle-flight-color-mark.svg",
+      "bytes": 12873,
+      "sha256": "d262bf1d6c5da7e8deba3776c858004e000bd441f7d61d8ca431350149375da0",
+      "hash_basis": "LF-normalized text"
+    },
+    {
+      "path": "handle-flight-color-wordmark.png",
+      "bytes": 78236,
+      "sha256": "96c46a32188ea92a54dc12f44ffbc54ae005885f5cfad55c0119135dce7e814a",
+      "hash_basis": "exact file bytes",
+      "width": 771,
+      "height": 180,
+      "mode": "RGBA"
+    },
+    {
+      "path": "handle-flight-color-wordmark.svg",
+      "bytes": 8359,
+      "sha256": "b37ab3c17745b5ff04650649d4fe3d53815466987b6569c02158577c06a10f9e",
+      "hash_basis": "LF-normalized text"
+    },
+    {
+      "path": "handle-flight-color.png",
+      "bytes": 224018,
+      "sha256": "df13ab17156cc6691c6d584fd53ce172bd8370398bbd43e47ca96c1de54134b9",
+      "hash_basis": "exact file bytes",
+      "width": 771,
+      "height": 816,
+      "mode": "RGBA"
+    },
+    {
+      "path": "handle-flight-color.svg",
+      "bytes": 21066,
+      "sha256": "8f949fff4c9ca45b78ed2b4163f8c1b9813a5f2f09dff5cb80f1d2bbfa9b0195",
+      "hash_basis": "LF-normalized text"
+    },
+    {
+      "path": "handle-flight-white-horizontal.png",
+      "bytes": 228573,
+      "sha256": "3731720b1fcca597bb39a7045a5ec7654152ae48e7ea1706d7f2225ee01c9f7c",
+      "hash_basis": "exact file bytes",
+      "width": 3127,
+      "height": 624,
+      "mode": "RGBA"
+    },
+    {
+      "path": "handle-flight-white-mark.png",
+      "bytes": 36226,
+      "sha256": "1513b3400111452367cc3e1eb4be8017b45489844d15a1130957eeeed2cb0978",
+      "hash_basis": "exact file bytes",
+      "width": 470,
+      "height": 624,
+      "mode": "RGBA"
+    },
+    {
+      "path": "handle-flight-white-mark.svg",
+      "bytes": 14063,
+      "sha256": "ed6bf5b69cf8692e155e5b226212622c7bdc9a3f2db673b43d2af7e8313b6148",
+      "hash_basis": "LF-normalized text"
+    },
+    {
+      "path": "handle-flight-white-wordmark.png",
+      "bytes": 32802,
+      "sha256": "899186d4ebcf29f4cd398a35ac2f89f83d16b454586bb95f963c59eb3cd25483",
+      "hash_basis": "exact file bytes",
+      "width": 771,
+      "height": 183,
+      "mode": "RGBA"
+    },
+    {
+      "path": "handle-flight-white-wordmark.svg",
+      "bytes": 15604,
+      "sha256": "50c74ac63a8fe147799020add70b8cc05dd13bd35b179b8266e23080cdaad93c",
+      "hash_basis": "LF-normalized text"
+    },
+    {
+      "path": "handle-flight-white.png",
+      "bytes": 73254,
+      "sha256": "4fbaa0b5697151fddd1c9dfcfd538efd2d71e92ed875537d27fd68ec936e75cd",
+      "hash_basis": "exact file bytes",
+      "width": 771,
+      "height": 819,
+      "mode": "RGBA"
+    },
+    {
+      "path": "handle-flight-white.svg",
+      "bytes": 29513,
+      "sha256": "538b39c23766848ba5bd71a283637fae0d814e9ea4e65377cfaa17d447eed813",
+      "hash_basis": "LF-normalized text"
+    },
+    {
+      "path": "icons/android-background-432.png",
+      "bytes": 1713,
+      "sha256": "bb13aff0c6b77e0c966558a724a6ac3acdb1170cd1a6bc9152cce8f06112ae70",
+      "hash_basis": "exact file bytes",
+      "width": 432,
+      "height": 432,
+      "mode": "RGBA"
+    },
+    {
+      "path": "icons/android-foreground-432.png",
+      "bytes": 9769,
+      "sha256": "37117184bf011cbe13780e1d76da65cbe0124ff7884a91491fe0687dae6ac05a",
+      "hash_basis": "exact file bytes",
+      "width": 432,
+      "height": 432,
+      "mode": "RGBA"
+    },
+    {
+      "path": "icons/apple-touch-icon-180.png",
+      "bytes": 10405,
+      "sha256": "27f7a406ffba7969cbb9ba1a11241343fde634e096f737e8793b437b70bccc1e",
+      "hash_basis": "exact file bytes",
+      "width": 180,
+      "height": 180,
+      "mode": "RGBA"
+    },
+    {
+      "path": "icons/favicon-16.png",
+      "bytes": 416,
+      "sha256": "041d796bd4bd2efe628df128dbd5026ae605b07d4c682d8aa8435e39bba5d2e0",
+      "hash_basis": "exact file bytes",
+      "width": 16,
+      "height": 16,
+      "mode": "RGBA"
+    },
+    {
+      "path": "icons/favicon-32.png",
+      "bytes": 1193,
+      "sha256": "3f3e12e407085601f9b9d68919d5d11ef67e1ef11167db0ccc13dc7ffdc2b426",
+      "hash_basis": "exact file bytes",
+      "width": 32,
+      "height": 32,
+      "mode": "RGBA"
+    },
+    {
+      "path": "icons/favicon-48.png",
+      "bytes": 2027,
+      "sha256": "f308b90420e0e1dca543f2692aba6f5c47e124b112a52b4ea5569b3fff318d34",
+      "hash_basis": "exact file bytes",
+      "width": 48,
+      "height": 48,
+      "mode": "RGBA"
+    },
+    {
+      "path": "icons/favicon.ico",
+      "bytes": 3964,
+      "sha256": "cc15e00f96eceeecf7f7c4b802c8f6bea5e27bb36d4e18a67a29a2e08f4d48cf",
+      "hash_basis": "exact file bytes"
+    },
+    {
+      "path": "icons/icon-192.png",
+      "bytes": 15941,
+      "sha256": "c5d24e038f76f0ed9dcf1742ede38456eaf8f0406ccd01ddcf4ddd53325d512a",
+      "hash_basis": "exact file bytes",
+      "width": 192,
+      "height": 192,
+      "mode": "RGBA"
+    },
+    {
+      "path": "icons/icon-512.png",
+      "bytes": 81186,
+      "sha256": "525ae8c4ce914b6f23966b4de443bbbab279a299fd019d3e03aef86c586da529",
+      "hash_basis": "exact file bytes",
+      "width": 512,
+      "height": 512,
+      "mode": "RGBA"
+    },
+    {
+      "path": "icons/ios-1024.png",
+      "bytes": 151103,
+      "sha256": "fa83d211f5f9c4ba98318a5117837cbc481c271ee84e467b62c1b46217e90cd6",
+      "hash_basis": "exact file bytes",
+      "width": 1024,
+      "height": 1024,
+      "mode": "RGB"
+    },
+    {
+      "path": "README.md",
+      "bytes": 5167,
+      "sha256": "cb5f020a84901196f2c214f374addaee5046626dc6e812ff614d53b86643e1da",
+      "hash_basis": "LF-normalized text"
+    },
+    {
+      "path": "source/generate.py",
+      "bytes": 13954,
+      "sha256": "09ea2afc6a8779bcc5d1161d015f963c0049abbeb3b4e712ee52ff9d506135e5",
+      "hash_basis": "LF-normalized text"
+    },
+    {
+      "path": "source/handle-flight-color-original.png",
+      "bytes": 253650,
+      "sha256": "bf711d7b8ba4e2500a1af6ae3b70beaa41689fc2000c8197d38c18e78d8eb29d",
+      "hash_basis": "exact file bytes",
+      "width": 1254,
+      "height": 1254,
+      "mode": "RGBA"
+    },
+    {
+      "path": "source/handle-flight-white-original.png",
+      "bytes": 79960,
+      "sha256": "f964a829065c56fabc7a7b43f917a9ef502efbe128eb8f728ebb420ea3232928",
+      "hash_basis": "exact file bytes",
+      "width": 1072,
+      "height": 1118,
+      "mode": "RGBA"
+    },
+    {
+      "path": "source/preview.png",
+      "bytes": 65665,
+      "sha256": "f7cf60116a79ac2258e67f6deecfa19e982eb248bac4612d7d3e129d6541e6f1",
+      "hash_basis": "exact file bytes",
+      "width": 1280,
+      "height": 768,
+      "mode": "RGB"
+    },
+    {
+      "path": "source/requirements.txt",
+      "bytes": 27,
+      "sha256": "18706fc3b757e32ee21feeaece782531e400271c6361e711601649b895708be5",
+      "hash_basis": "LF-normalized text"
+    },
+    {
+      "path": "source/verification.json",
+      "bytes": 14106,
+      "sha256": "bc4d3b2a1eb6a6130405dd9489c2a44dbc4578d09af7a793a6ce35f7c1a6150d",
+      "hash_basis": "LF-normalized text"
+    },
+    {
+      "path": "source/verify.py",
+      "bytes": 5470,
+      "sha256": "813d9dd45d5d472e73b54250820f553da5d4256448d8a033061f007bd922a369",
+      "hash_basis": "LF-normalized text"
+    },
+    {
+      "path": "splash/splash-dark-1170x2532.png",
+      "bytes": 91834,
+      "sha256": "13c7e81fa9ffd7281b79b5f5b7b05c450b61daf6ed70c16ac3b5d88d7ee52a16",
+      "hash_basis": "exact file bytes",
+      "width": 1170,
+      "height": 2532,
+      "mode": "RGB"
+    },
+    {
+      "path": "splash/splash-dark-1920x1080.png",
+      "bytes": 63311,
+      "sha256": "394f8d4d312c802513a6b9c4a77e12c29049b9bd5ee124dfa2bf31b7b132b2d6",
+      "hash_basis": "exact file bytes",
+      "width": 1920,
+      "height": 1080,
+      "mode": "RGB"
+    },
+    {
+      "path": "splash/splash-dark-2732x2732.png",
+      "bytes": 230818,
+      "sha256": "d5fd9eef9863a1e104a29cb8f712154ea5bc3a11fbf02585f073e22d6de60a92",
+      "hash_basis": "exact file bytes",
+      "width": 2732,
+      "height": 2732,
+      "mode": "RGB"
+    },
+    {
+      "path": "tvos/tvos-1280x768-back.png",
+      "bytes": 5732,
+      "sha256": "a733100d9778e57f93c3c2b3c11cd5921f0f9b682236af26a88043cd762bc48b",
+      "hash_basis": "exact file bytes",
+      "width": 1280,
+      "height": 768,
+      "mode": "RGBA"
+    },
+    {
+      "path": "tvos/tvos-1280x768-front.png",
+      "bytes": 31585,
+      "sha256": "fca9474277bf4454ddf918129672e36216e16645e5bd5db11595979fea64e58e",
+      "hash_basis": "exact file bytes",
+      "width": 1280,
+      "height": 768,
+      "mode": "RGBA"
+    },
+    {
+      "path": "tvos/tvos-1280x768-middle.png",
+      "bytes": 27878,
+      "sha256": "642fd87b560184a5712e7888fda205724106f92d31dcd01dc56ae571bfb59f42",
+      "hash_basis": "exact file bytes",
+      "width": 1280,
+      "height": 768,
+      "mode": "RGBA"
+    },
+    {
+      "path": "tvos/tvos-400x240-back.png",
+      "bytes": 957,
+      "sha256": "b830b39c0a9d4e275b6ca66126e7922ec1bb6b84156d2a6690a310336a8b94e0",
+      "hash_basis": "exact file bytes",
+      "width": 400,
+      "height": 240,
+      "mode": "RGBA"
+    },
+    {
+      "path": "tvos/tvos-400x240-front.png",
+      "bytes": 6331,
+      "sha256": "aba487f1e2bf94246479c7cfd1ed31dfa8d38cf9ab4ceeb98ceea6ef68134a64",
+      "hash_basis": "exact file bytes",
+      "width": 400,
+      "height": 240,
+      "mode": "RGBA"
+    },
+    {
+      "path": "tvos/tvos-400x240-middle.png",
+      "bytes": 5596,
+      "sha256": "a9aa37b3350313a8e250288232c6cfb588e41cad3ec59c85edc2ed3eb04ff84b",
+      "hash_basis": "exact file bytes",
+      "width": 400,
+      "height": 240,
+      "mode": "RGBA"
+    },
+    {
+      "path": "tvos/tvos-800x480-back.png",
+      "bytes": 2673,
+      "sha256": "8e283fd3d7aed0579413b86b22b75e9a63b27dc79a5e710967b7af71f3e54470",
+      "hash_basis": "exact file bytes",
+      "width": 800,
+      "height": 480,
+      "mode": "RGBA"
+    },
+    {
+      "path": "tvos/tvos-800x480-front.png",
+      "bytes": 15488,
+      "sha256": "ceb75124ac6ad78e2ffc27043e7cdd55cd4187d2f4eced3f149da39826055768",
+      "hash_basis": "exact file bytes",
+      "width": 800,
+      "height": 480,
+      "mode": "RGBA"
+    },
+    {
+      "path": "tvos/tvos-800x480-middle.png",
+      "bytes": 13955,
+      "sha256": "db62fa1669dc4d7c57419cae1cc495ffc4a71096d78d8361aaf5a0911701b335",
+      "hash_basis": "exact file bytes",
+      "width": 800,
+      "height": 480,
+      "mode": "RGBA"
+    }
+  ]
+}

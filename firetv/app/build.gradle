@@ -1,5 +1,11 @@
 plugins { id 'com.android.application' }
 
+// Worked out before the android block on purpose. Written inline as
+// `versionCode (expr).toString().toInteger()`, Groovy reads it as a call to
+// versionCode(expr) and then chains onto its return value, which is null.
+def vCode = ((project.findProperty('versionCode') ?: '1') as String) as Integer
+def vName = (project.findProperty('versionName') ?: "1.0.$vCode") as String
+
 android {
   namespace 'com.roundtrip.tv'
   compileSdk 34
@@ -10,8 +16,8 @@ android {
     minSdk 22
     targetSdk 34
     // CI passes the run number so each build installs over the last one.
-    versionCode (project.findProperty('versionCode') ?: '1').toString().toInteger()
-    versionName (project.findProperty('versionName') ?: '1.0.' + versionCode).toString()
+    versionCode vCode
+    versionName vName
   }
 
   // Signed with a key that is in this repository on purpose. It protects

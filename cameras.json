@@ -85,7 +85,8 @@
         "turquoise",
         "sunset-facing",
         "sunset"
-      ]
+      ],
+      "ads": "unknown"
     },
     {
       "name": "Maribago Port, Mactan",
@@ -152,7 +153,8 @@
         "night lights",
         "sunrise-facing",
         "sunrise"
-      ]
+      ],
+      "ads": "unknown"
     },
     {
       "name": "Mayon Volcano",
@@ -213,7 +215,8 @@
         "lava",
         "quiet",
         "music bed"
-      ]
+      ],
+      "ads": "yes"
     },
     {
       "name": "Agdao Public Market",
@@ -275,7 +278,8 @@
         "stalls",
         "mindanao",
         "busy"
-      ]
+      ],
+      "ads": "unknown"
     },
     {
       "name": "Bankerohan street food",
@@ -339,7 +343,8 @@
         "night lights",
         "sunrise-facing",
         "sunrise"
-      ]
+      ],
+      "ads": "unknown"
     },
     {
       "name": "Rialto Bridge, Venice",
@@ -403,7 +408,8 @@
         "tourists",
         "busy",
         "night lights"
-      ]
+      ],
+      "ads": "unknown"
     },
     {
       "name": "Grand Canal, Venice",
@@ -463,7 +469,8 @@
         "historic",
         "palazzi",
         "night lights"
-      ]
+      ],
+      "ads": "unknown"
     },
     {
       "name": "St Mark's Basin, Venice",
@@ -527,7 +534,8 @@
         "historic",
         "gondolas",
         "night lights"
-      ]
+      ],
+      "ads": "unknown"
     },
     {
       "name": "Piazza del Campo, Siena",
@@ -592,7 +600,8 @@
         "night lights",
         "sunset-facing",
         "sunset"
-      ]
+      ],
+      "ads": "unknown"
     },
     {
       "name": "Piazza del Comune, Assisi",
@@ -656,7 +665,8 @@
         "night lights",
         "sunset-facing",
         "sunset"
-      ]
+      ],
+      "ads": "unknown"
     },
     {
       "name": "Manarola, Cinque Terre",
@@ -720,7 +730,8 @@
         "quiet",
         "sunset-facing",
         "sunset"
-      ]
+      ],
+      "ads": "unknown"
     },
     {
       "name": "Maria Pia Beach, Sardinia",
@@ -783,7 +794,8 @@
         "pine",
         "sunset-facing",
         "sunset"
-      ]
+      ],
+      "ads": "yes"
     },
     {
       "name": "Sottomarina beach, Chioggia",
@@ -847,7 +859,8 @@
         "lido",
         "sunrise-facing",
         "sunrise"
-      ]
+      ],
+      "ads": "unknown"
     },
     {
       "name": "Mount Etna",
@@ -909,7 +922,8 @@
         "snow",
         "quiet",
         "music bed"
-      ]
+      ],
+      "ads": "yes"
     },
     {
       "name": "Dolomites panorama",
@@ -974,7 +988,8 @@
         "quiet",
         "sunrise-facing",
         "sunrise"
-      ]
+      ],
+      "ads": "yes"
     },
     {
       "name": "Florence",
@@ -1041,7 +1056,8 @@
         "night lights",
         "sunset-facing",
         "sunset"
-      ]
+      ],
+      "ads": "unknown"
     },
     {
       "name": "Seoul Station Plaza",
@@ -1106,7 +1122,8 @@
         "night lights",
         "sunrise-facing",
         "sunrise"
-      ]
+      ],
+      "ads": "yes"
     },
     {
       "name": "Han River at Banpo Bridge",
@@ -1165,7 +1182,8 @@
         "bridge",
         "fountain",
         "night lights"
-      ]
+      ],
+      "ads": "unknown"
     },
     {
       "name": "Han River skyline, Yeouido",
@@ -1225,7 +1243,8 @@
         "night lights",
         "sunrise-facing",
         "sunrise"
-      ]
+      ],
+      "ads": "unknown"
     },
     {
       "name": "Dongdaemun Design Plaza",
@@ -1289,7 +1308,8 @@
         "busy",
         "sunset-facing",
         "sunset"
-      ]
+      ],
+      "ads": "unknown"
     },
     {
       "name": "Gwangan Bridge and Gwangalli Beach",
@@ -1353,7 +1373,8 @@
         "seaside",
         "sunrise-facing",
         "sunrise"
-      ]
+      ],
+      "ads": "unknown"
     },
     {
       "name": "Haeundae Beach",
@@ -1415,7 +1436,8 @@
         "high rises",
         "crowd",
         "resort"
-      ]
+      ],
+      "ads": "unknown"
     },
     {
       "name": "Gangmun Beach, Gangneung",
@@ -1479,7 +1501,8 @@
         "surf",
         "seaside",
         "sunrise-facing"
-      ]
+      ],
+      "ads": "yes"
     },
     {
       "name": "Kelp Forest Cam",
@@ -1551,7 +1574,8 @@
         "sea otters",
         "quiet",
         "part-time"
-      ]
+      ],
+      "ads": "no"
     },
     {
       "name": "Open Sea Cam",
@@ -1624,7 +1648,8 @@
         "open ocean",
         "blue",
         "part-time"
-      ]
+      ],
+      "ads": "no"
     },
     {
       "name": "Jelly Cam",
@@ -1696,7 +1721,8 @@
         "calm",
         "hypnotic",
         "part-time"
-      ]
+      ],
+      "ads": "no"
     },
     {
       "name": "Tropical Reef Camera",
@@ -1761,7 +1787,8 @@
         "coral",
         "tropical fish",
         "colourful"
-      ]
+      ],
+      "ads": "no"
     },
     {
       "name": "Shark Lagoon",
@@ -1823,7 +1850,8 @@
         "ocean",
         "sharks",
         "rays"
-      ]
+      ],
+      "ads": "no"
     },
     {
       "name": "Blue Cavern",
@@ -1887,7 +1915,8 @@
         "ocean",
         "catalina",
         "blue"
-      ]
+      ],
+      "ads": "no"
     },
     {
       "name": "Homosassa Springs Underwater Manatees",
@@ -1947,7 +1976,8 @@
         "springs",
         "clear water",
         "florida springs"
-      ]
+      ],
+      "ads": "no"
     },
     {
       "name": "Utopia Village Underwater Coral",
@@ -2014,7 +2044,8 @@
         "diving",
         "quiet",
         "part-time"
-      ]
+      ],
+      "ads": "no"
     },
     {
       "name": "USC Wrigley Catalina Marine Reserve",
@@ -2086,7 +2117,8 @@
         "diving",
         "quiet",
         "part-time"
-      ]
+      ],
+      "ads": "no"
     },
     {
       "name": "Penguins, Underwater View",
@@ -2150,7 +2182,8 @@
         "birds",
         "cute",
         "swimming"
-      ]
+      ],
+      "ads": "no"
     },
     {
       "name": "Underwater Salmon Cam",
@@ -2219,7 +2252,8 @@
         "sunrise",
         "part-time",
         "has-sound"
-      ]
+      ],
+      "ads": "no"
     },
     {
       "name": "Silver Springs Underwater Manatee Camera",
@@ -2279,7 +2313,8 @@
         "springs",
         "clear water",
         "florida springs"
-      ]
+      ],
+      "ads": "no"
     },
     {
       "name": "Brooks Falls Brown Bears",
@@ -2349,7 +2384,8 @@
         "fat bear week",
         "part-time",
         "has-sound"
-      ]
+      ],
+      "ads": "no"
     },
     {
       "name": "Anan Wildlife Observatory, Lower Falls",
@@ -2420,7 +2456,8 @@
         "sunrise",
         "part-time",
         "has-sound"
-      ]
+      ],
+      "ads": "no"
     },
     {
       "name": "African Watering Hole at Mpala",
@@ -2480,7 +2517,8 @@
         "giraffe",
         "quiet",
         "has-sound"
-      ]
+      ],
+      "ads": "no"
     },
     {
       "name": "Tembe Elephant Park Waterhole",
@@ -2539,7 +2577,8 @@
         "big five",
         "quiet",
         "has-sound"
-      ]
+      ],
+      "ads": "no"
     },
     {
       "name": "Tau Waterhole",
@@ -2598,7 +2637,8 @@
         "elephants",
         "quiet",
         "has-sound"
-      ]
+      ],
+      "ads": "no"
     },
     {
       "name": "Nkorho Bush Lodge",
@@ -2660,7 +2700,8 @@
         "bush",
         "quiet",
         "has-sound"
-      ]
+      ],
+      "ads": "no"
     },
     {
       "name": "Panama Fruit Feeder at Canopy Lodge",
@@ -2729,7 +2770,8 @@
         "sunrise",
         "part-time",
         "has-sound"
-      ]
+      ],
+      "ads": "no"
     },
     {
       "name": "Panama Hummingbird Feeder at Canopy Tower",
@@ -2798,7 +2840,8 @@
         "sunset",
         "part-time",
         "has-sound"
-      ]
+      ],
+      "ads": "no"
     },
     {
       "name": "Burrowing Owls at the Former Umatilla Chemical Depot",
@@ -2859,7 +2902,8 @@
         "birding",
         "quiet",
         "has-sound"
-      ]
+      ],
+      "ads": "no"
     },
     {
       "name": "International Wolf Center, North Camera",
@@ -2918,7 +2962,8 @@
         "snow",
         "boundary waters",
         "has-sound"
-      ]
+      ],
+      "ads": "no"
     },
     {
       "name": "Plains Bison Watering Hole",
@@ -2982,7 +3027,8 @@
         "badlands",
         "quiet",
         "has-sound"
-      ]
+      ],
+      "ads": "no"
     },
     {
       "name": "Texas Backyard Wildlife",
@@ -3043,7 +3089,8 @@
         "hill country",
         "quiet",
         "has-sound"
-      ]
+      ],
+      "ads": "no"
     },
     {
       "name": "Banzai Pipeline, North Shore Oahu",
@@ -3105,7 +3152,8 @@
         "north shore",
         "always-on",
         "has-sound"
-      ]
+      ],
+      "ads": "no"
     },
     {
       "name": "Ala Moana and Magic Island, Honolulu",
@@ -3165,7 +3213,8 @@
         "surf",
         "quiet",
         "always-on"
-      ]
+      ],
+      "ads": "unknown"
     },
     {
       "name": "Waikiki Beach from the Marriott",
@@ -3227,7 +3276,8 @@
         "resort",
         "crowd",
         "always-on"
-      ]
+      ],
+      "ads": "yes"
     },
     {
       "name": "Halemaumau Crater, Kilauea",
@@ -3286,7 +3336,8 @@
         "quiet",
         "always-on",
         "has-sound"
-      ]
+      ],
+      "ads": "no"
     },
     {
       "name": "Lake Hood seaplane base",
@@ -3341,7 +3392,8 @@
         "lake",
         "busy",
         "always-on"
-      ]
+      ],
+      "ads": "yes"
     },
     {
       "name": "Mendenhall Glacier, Juneau",
@@ -3396,7 +3448,8 @@
         "sunset",
         "always-on",
         "has-sound"
-      ]
+      ],
+      "ads": "no"
     },
     {
       "name": "Vancouver Harbour and Canada Place",
@@ -3449,7 +3502,8 @@
         "mountains",
         "night lights",
         "always-on"
-      ]
+      ],
+      "ads": "unknown"
     },
     {
       "name": "Golden Gate Bridge across the bay",
@@ -3511,7 +3565,8 @@
         "sunset-facing",
         "sunset",
         "always-on"
-      ]
+      ],
+      "ads": "yes"
     },
     {
       "name": "LAX south runways",
@@ -3571,7 +3626,8 @@
         "sunset-facing",
         "sunset",
         "always-on"
-      ]
+      ],
+      "ads": "yes"
     },
     {
       "name": "Spray Valley and Mount Rundle, Banff",
@@ -3626,7 +3682,8 @@
         "canmore",
         "quiet",
         "always-on"
-      ]
+      ],
+      "ads": "no"
     },
     {
       "name": "Popocatepetl",
@@ -3682,7 +3739,8 @@
         "sunset",
         "always-on",
         "music bed"
-      ]
+      ],
+      "ads": "yes"
     },
     {
       "name": "Duluth Ship Canal and Aerial Lift Bridge",
@@ -3741,7 +3799,8 @@
         "sunrise-facing",
         "sunrise",
         "always-on"
-      ]
+      ],
+      "ads": "unknown"
     },
     {
       "name": "Mackinac Bridge from Mackinaw City",
@@ -3796,7 +3855,8 @@
         "mighty mac",
         "busy",
         "always-on"
-      ]
+      ],
+      "ads": "unknown"
     },
     {
       "name": "Hollywood Beach Broadwalk",
@@ -3852,7 +3912,8 @@
         "atlantic",
         "south florida",
         "always-on"
-      ]
+      ],
+      "ads": "no"
     },
     {
       "name": "Horseshoe Falls, Niagara",
@@ -3905,7 +3966,8 @@
         "sunrise-facing",
         "sunrise",
         "always-on"
-      ]
+      ],
+      "ads": "yes"
     },
     {
       "name": "The National Mall from the Washington Monument",
@@ -3964,7 +4026,8 @@
         "sunrise-facing",
         "sunrise",
         "always-on"
-      ]
+      ],
+      "ads": "yes"
     },
     {
       "name": "Lower Manhattan skyline and One World Trade Center",
@@ -4022,7 +4085,8 @@
         "sunrise-facing",
         "sunrise",
         "always-on"
-      ]
+      ],
+      "ads": "yes"
     },
     {
       "name": "Statue of Liberty",
@@ -4080,7 +4144,8 @@
         "sunset-facing",
         "sunset",
         "always-on"
-      ]
+      ],
+      "ads": "yes"
     },
     {
       "name": "Times Square North, Manhattan",
@@ -4138,7 +4203,8 @@
         "night lights",
         "busy",
         "always-on"
-      ]
+      ],
+      "ads": "yes"
     },
     {
       "name": "Santiago and the Cordillera",
@@ -4193,7 +4259,8 @@
         "sunrise-facing",
         "sunrise",
         "always-on"
-      ]
+      ],
+      "ads": "unknown"
     },
     {
       "name": "Valle Nevado in the Andes",
@@ -4248,7 +4315,8 @@
         "piste",
         "quiet",
         "always-on"
-      ]
+      ],
+      "ads": "unknown"
     },
     {
       "name": "Handelskade waterfront, Willemstad",
@@ -4302,7 +4370,8 @@
         "sunrise-facing",
         "sunrise",
         "always-on"
-      ]
+      ],
+      "ads": "yes"
     },
     {
       "name": "Maho Beach landings, Sint Maarten",
@@ -4360,7 +4429,8 @@
         "sunrise",
         "always-on",
         "music bed"
-      ]
+      ],
+      "ads": "yes"
     },
     {
       "name": "Necochea Beach",
@@ -4413,7 +4483,8 @@
         "resort",
         "seaside",
         "always-on"
-      ]
+      ],
+      "ads": "unknown"
     },
     {
       "name": "Avenida 9 de Julio",
@@ -4467,7 +4538,8 @@
         "crowd",
         "busy",
         "always-on"
-      ]
+      ],
+      "ads": "no"
     },
     {
       "name": "Ilulissat Icefjord",
@@ -4522,7 +4594,8 @@
         "sunset",
         "always-on",
         "music bed"
-      ]
+      ],
+      "ads": "yes"
     },
     {
       "name": "Copacabana Beach from Posto 6",
@@ -4578,7 +4651,8 @@
         "tropical",
         "famous",
         "always-on"
-      ]
+      ],
+      "ads": "unknown"
     },
     {
       "name": "Reykjavik and Mount Esja",
@@ -4633,7 +4707,8 @@
         "busy",
         "night lights",
         "always-on"
-      ]
+      ],
+      "ads": "yes"
     },
     {
       "name": "Northern lights over the Golden Circle",
@@ -4685,7 +4760,8 @@
         "thingvellir",
         "quiet",
         "always-on"
-      ]
+      ],
+      "ads": "no"
     },
     {
       "name": "Madeira runway approach",
@@ -4741,7 +4817,8 @@
         "sunset-facing",
         "sunset",
         "always-on"
-      ]
+      ],
+      "ads": "yes"
     },
     {
       "name": "Dublin Port mouth",
@@ -4794,7 +4871,8 @@
         "sunrise-facing",
         "sunrise",
         "always-on"
-      ]
+      ],
+      "ads": "no"
     },
     {
       "name": "Poolbeg Lighthouse and the mouth of the Liffey",
@@ -4850,7 +4928,8 @@
         "sunrise-facing",
         "sunrise",
         "always-on"
-      ]
+      ],
+      "ads": "no"
     },
     {
       "name": "Arthur's Seat and Salisbury Crags",
@@ -4909,7 +4988,8 @@
         "sunrise-facing",
         "sunrise",
         "always-on"
-      ]
+      ],
+      "ads": "unknown"
     },
     {
       "name": "Abbey Road crossing",
@@ -4964,7 +5044,8 @@
         "music history",
         "busy",
         "always-on"
-      ]
+      ],
+      "ads": "yes"
     },
     {
       "name": "The Thames and the City from Bankside",
@@ -5019,7 +5100,8 @@
         "bridges",
         "night lights",
         "always-on"
-      ]
+      ],
+      "ads": "yes"
     },
     {
       "name": "Mierlo-Hout level crossing",
@@ -5073,7 +5155,8 @@
         "sunset-facing",
         "sunset",
         "always-on"
-      ]
+      ],
+      "ads": "unknown"
     },
     {
       "name": "Cologne Cathedral",
@@ -5132,7 +5215,8 @@
         "sunset",
         "always-on",
         "music bed"
-      ]
+      ],
+      "ads": "no"
     },
     {
       "name": "Geirangerfjord from Hotel Union",
@@ -5188,7 +5272,8 @@
         "sunset-facing",
         "sunset",
         "always-on"
-      ]
+      ],
+      "ads": "unknown"
     },
     {
       "name": "Grimentz in the Val d'Anniviers",
@@ -5245,7 +5330,8 @@
         "sunrise-facing",
         "sunrise",
         "always-on"
-      ]
+      ],
+      "ads": "unknown"
     },
     {
       "name": "Eiger, Monch and Jungfrau over Lake Thun",
@@ -5301,7 +5387,8 @@
         "famous",
         "quiet",
         "always-on"
-      ]
+      ],
+      "ads": "yes"
     },
     {
       "name": "St Peter's Square",
@@ -5358,7 +5445,8 @@
         "sunset",
         "always-on",
         "music bed"
-      ]
+      ],
+      "ads": "no"
     },
     {
       "name": "St Peter's dome across Rome",
@@ -5415,7 +5503,8 @@
         "sunset-facing",
         "sunset",
         "always-on"
-      ]
+      ],
+      "ads": "unknown"
     },
     {
       "name": "Zell am See and the Zeller See",
@@ -5471,7 +5560,8 @@
         "sunset-facing",
         "sunset",
         "always-on"
-      ]
+      ],
+      "ads": "unknown"
     },
     {
       "name": "Namib Desert waterhole",
@@ -5523,7 +5613,8 @@
         "sunrise-facing",
         "sunrise",
         "always-on"
-      ]
+      ],
+      "ads": "unknown"
     },
     {
       "name": "Okaukuejo waterhole, Etosha",
@@ -5578,7 +5669,8 @@
         "sunset-facing",
         "sunset",
         "always-on"
-      ]
+      ],
+      "ads": "no"
     },
     {
       "name": "Sea Point and Lion's Head",
@@ -5632,7 +5724,8 @@
         "mountain",
         "quiet",
         "always-on"
-      ]
+      ],
+      "ads": "unknown"
     },
     {
       "name": "Table Mountain from Bloubergstrand",
@@ -5685,7 +5778,8 @@
         "icon",
         "kitesurfing",
         "always-on"
-      ]
+      ],
+      "ads": "unknown"
     },
     {
       "name": "Tromso harbour and the Arctic sound",
@@ -5742,7 +5836,8 @@
         "polar night",
         "night lights",
         "always-on"
-      ]
+      ],
+      "ads": "unknown"
     },
     {
       "name": "Aurora over Kilpisjarvi",
@@ -5798,7 +5893,8 @@
         "quiet",
         "always-on",
         "music bed"
-      ]
+      ],
+      "ads": "unknown"
     },
     {
       "name": "Senyati waterhole",
@@ -5851,7 +5947,8 @@
         "quiet",
         "always-on",
         "has-sound"
-      ]
+      ],
+      "ads": "no"
     },
     {
       "name": "The Kotel, close view",
@@ -5909,7 +6006,8 @@
         "sunrise",
         "always-on",
         "music bed"
-      ]
+      ],
+      "ads": "no"
     },
     {
       "name": "Western Wall plaza, Jerusalem",
@@ -5966,7 +6064,8 @@
         "sunrise-facing",
         "sunrise",
         "always-on"
-      ]
+      ],
+      "ads": "yes"
     },
     {
       "name": "ol Donyo waterhole",
@@ -6019,7 +6118,8 @@
         "quiet",
         "always-on",
         "has-sound"
-      ]
+      ],
+      "ads": "no"
     },
     {
       "name": "The Kaaba, Masjid al-Haram",
@@ -6080,7 +6180,8 @@
         "sunset",
         "always-on",
         "music bed"
-      ]
+      ],
+      "ads": "no"
     },
     {
       "name": "Yiti cliffs near Muscat",
@@ -6136,7 +6237,8 @@
         "sunrise-facing",
         "sunrise",
         "always-on"
-      ]
+      ],
+      "ads": "unknown"
     },
     {
       "name": "Ala-Too Square, Bishkek",
@@ -6187,7 +6289,8 @@
         "busy",
         "night lights",
         "always-on"
-      ]
+      ],
+      "ads": "unknown"
     },
     {
       "name": "Zailiysky Alatau above Almaty",
@@ -6238,7 +6341,8 @@
         "snow peaks",
         "quiet",
         "always-on"
-      ]
+      ],
+      "ads": "no"
     },
     {
       "name": "Kathmandu river bend",
@@ -6291,7 +6395,8 @@
         "busy",
         "night lights",
         "always-on"
-      ]
+      ],
+      "ads": "yes"
     },
     {
       "name": "Crystal Bay Beach, Koh Samui",
@@ -6350,7 +6455,8 @@
         "sunrise-facing",
         "sunrise",
         "always-on"
-      ]
+      ],
+      "ads": "unknown"
     },
     {
       "name": "Bangkok skyline",
@@ -6400,7 +6506,8 @@
         "krungthep",
         "busy",
         "always-on"
-      ]
+      ],
+      "ads": "unknown"
     },
     {
       "name": "Semeru",
@@ -6454,7 +6561,8 @@
         "quiet",
         "always-on",
         "music bed"
-      ]
+      ],
+      "ads": "yes"
     },
     {
       "name": "Bukit Jimbaran panorama, Bali",
@@ -6508,7 +6616,8 @@
         "resort",
         "quiet",
         "always-on"
-      ]
+      ],
+      "ads": "unknown"
     },
     {
       "name": "Mount Fuji from Lake Kawaguchi",
@@ -6564,7 +6673,8 @@
         "icon",
         "quiet",
         "always-on"
-      ]
+      ],
+      "ads": "yes"
     },
     {
       "name": "Shibuya Scramble Crossing",
@@ -6620,7 +6730,8 @@
         "famous",
         "busy",
         "always-on"
-      ]
+      ],
+      "ads": "yes"
     },
     {
       "name": "Tokyo Tower from Shiodome",
@@ -6677,7 +6788,8 @@
         "sunset-facing",
         "sunset",
         "always-on"
-      ]
+      ],
+      "ads": "yes"
     },
     {
       "name": "Odaiba and the Rainbow Bridge, Tokyo",
@@ -6733,7 +6845,8 @@
         "night lights",
         "skyline",
         "always-on"
-      ]
+      ],
+      "ads": "unknown"
     },
     {
       "name": "Haneda plane spotting, Tokyo",
@@ -6786,7 +6899,8 @@
         "bay",
         "busy",
         "always-on"
-      ]
+      ],
+      "ads": "yes"
     },
     {
       "name": "Werribee lion plains",
@@ -6839,7 +6953,8 @@
         "sunrise-facing",
         "sunrise",
         "always-on"
-      ]
+      ],
+      "ads": "no"
     },
     {
       "name": "Melbourne skyline from Southbank",
@@ -6892,7 +7007,8 @@
         "night lights",
         "high rises",
         "always-on"
-      ]
+      ],
+      "ads": "unknown"
     },
     {
       "name": "Sydney Harbour, the Bridge and the Opera House",
@@ -6948,7 +7064,8 @@
         "famous",
         "night lights",
         "always-on"
-      ]
+      ],
+      "ads": "unknown"
     },
     {
       "name": "Brisbane skyline from Bowen Hills",
@@ -7003,7 +7120,8 @@
         "sunset-facing",
         "sunset",
         "always-on"
-      ]
+      ],
+      "ads": "unknown"
     },
     {
       "name": "Auckland skyline and Waitemata Harbour",
@@ -7056,7 +7174,8 @@
         "yachts",
         "night lights",
         "always-on"
-      ]
+      ],
+      "ads": "unknown"
     },
     {
       "name": "Lyall Bay, Wellington",
@@ -7112,7 +7231,8 @@
         "planes",
         "quiet",
         "always-on"
-      ]
+      ],
+      "ads": "unknown"
     },
     {
       "name": "Hog's Breath Saloon stage",
@@ -7193,7 +7313,8 @@
         "busy",
         "part-time",
         "has-sound"
-      ]
+      ],
+      "ads": "unknown"
     },
     {
       "name": "Soo Locks",
@@ -7265,7 +7386,8 @@
         "sunset",
         "always-on",
         "has-sound"
-      ]
+      ],
+      "ads": "yes"
     },
     {
       "name": "Deshler Diamond",
@@ -7332,7 +7454,8 @@
         "sunset",
         "always-on",
         "has-sound"
-      ]
+      ],
+      "ads": "yes"
     },
     {
       "name": "Welland Canal at Port Colborne",
@@ -7399,7 +7522,8 @@
         "sunrise",
         "always-on",
         "has-sound"
-      ]
+      ],
+      "ads": "yes"
     },
     {
       "name": "Kiel-Holtenau Lock",
@@ -7466,7 +7590,8 @@
         "sunrise-facing",
         "sunrise",
         "always-on"
-      ]
+      ],
+      "ads": "yes"
     },
     {
       "name": "Irish Kevin's Stage",
@@ -7560,7 +7685,8 @@
         "busy",
         "part-time",
         "has-sound"
-      ]
+      ],
+      "ads": "unknown"
     },
     {
       "name": "Elbo Room BandCam",
@@ -7647,7 +7773,8 @@
         "busy",
         "part-time",
         "has-sound"
-      ]
+      ],
+      "ads": "unknown"
     }
   ],
   "rejects": [
@@ -8821,5 +8948,11 @@
     "Every camera carries a `tags` array: place (city, region, country, continent, aliases people type), scene (beach, skyline, waterhole, zoo), and qualities (busy, quiet, night lights, sunset-facing, always-on, has-sound).",
     "Generated by tag.py, which rewrites the array from the camera's own fields plus a hand-written table of what no field knows. Edit tag.py, not this file.",
     "has-sound marks cameras confirmed to carry real ambience or live music. audio: \"unknown\" means nobody has listened yet, so it gets no tag."
+  ],
+  "ads_notes": [
+    "ads is one of: no (an institution, a public body or a non-profit, which do not run advertising on a live feed), yes (a channel whose business is the streams or the broadcast, which does), unknown (not established either way).",
+    "The viewer uses this only to order the rotation: an ad-free feed is dealt a little earlier and a monetised one a little later, and nothing is ever dropped for it. What the device has actually seen outranks this field as soon as it has seen anything.",
+    "These were assigned from what each channel is, not by watching: no session in this project can reach youtube.com, so no pre-roll has been observed from here. The viewer counts every advert it does meet (roundtrip.adseen on the device) and re-weights that camera itself, which is how a wrong guess corrects.",
+    "The only thing that removes advertising rather than ordering around it is a signed-in YouTube Premium account: an embedded player honours the viewer's own subscription. The Ads item in the action strip is that sign-in."
   ]
 }

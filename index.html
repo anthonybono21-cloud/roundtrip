@@ -287,6 +287,7 @@ const CFG = {
   breathe:      1.0,    // idle camera drift and roll, 0 turns it off
   maxDepart:    8,      // seconds to wait for tiles before diving anyway
   volume:       15,     // percent, the level a feed's own sound settles at
+  adHold:       6,      // seconds to hold the landing rather than reveal a pre-roll
   buildings:    true,   // pull OSM footprints for the final approach
   wideM:        11000,  // detailed ground, wide enough to carry the horizon
   nearM:        900,    // sharp ground for the last stretch
@@ -1086,6 +1087,7 @@ function mountLive(cam){
     liveEl.appendChild(f);
     liveEl.classList.add('zoom');        // crop the player chrome out of frame
     liveFrame = f;
+    adsWatch(f);                         // listen for an advert over the camera
   } else if (cam.url){
     const v = document.createElement('video');
     v.src = cam.url; v.autoplay = v.muted = v.playsInline = true;
@@ -1096,6 +1098,7 @@ function mountLive(cam){
 }
 function unmountLive(){
   liveEl.classList.remove('on','zoom'); liveEl.innerHTML=''; liveFrame=null;
+  adsReset();
   audio.vol = audio.target = 0;     // a fresh player starts muted
 }
 
@@ -1144,7 +1147,7 @@ function applyVolume(){
    out. This runs on its own timer because the render loop idles while a feed
    is playing, which is the whole time the sound matters. */
 setInterval(() => {
-  const want = (audio.on && audio.armed && state.liveOn && camHasSound(state.cam))
+  const want = (audio.on && audio.armed && state.liveOn && !ads.on && camHasSound(state.cam))
              ? audio.target : 0;
   if (Math.abs(want - audio.vol) < 0.004){
     if (audio.vol !== want){ audio.vol = want; applyVolume(); }
@@ -1170,6 +1173,113 @@ function toggleSound(){
   audio.on = !audio.on;
   try { localStorage.setItem(SOUND_KEY, audio.on ? 'on' : 'off'); } catch {}
   paintSound();
+}
+
+/* ── adverts over the camera ───────────────────────────────────────────────
+   YouTube runs its own advertising inside the embedded player, and Roundtrip
+   mounts a fresh player for every dive, so a monetised channel can meet a
+   landing with a pre-roll. Three honest things are done about that, in the
+   order they actually help.
+
+   1. A signed-in Premium account removes them at the source. An embedded
+      player honours the viewer's own subscription, so the Ads item in the
+      strip is a one-time sign-in: in a browser it opens YouTube in another
+      tab, and inside the Fire TV app it hands over to the shell, which holds
+      its cookies and comes back to this page signed in.
+
+   2. Nothing is revealed over an advert that can simply be waited out. The
+      player is asked to report on itself and an advert gives itself away by
+      having a short, finite length where a live stream has none. While one is
+      running the landing holds on the matched ground render for up to
+      CFG.adHold and the sound stays down, so what is on screen is the place
+      rather than a car commercial.
+
+   3. Whatever still gets through is remembered. Every advert seen is counted
+      against that camera on this device and the rotation deals those cameras
+      later — the same shape as the thumbs, so the deck teaches itself which
+      feeds are worth the landing. The list's own `ads` field is a first guess
+      at the same thing, so a device that has watched nothing yet already
+      leans toward the institutional feeds.
+
+   What is deliberately not done is blocking the advert's own requests. That
+   breaks YouTube's terms for embedded players, and a player that is fought
+   with is a player that stops playing — the feed is the whole product. */
+const AD_KEY = 'roundtrip.adseen';
+const ads = { on:false, since:0, seen:{}, watching:null, knock:null };
+try { ads.seen = JSON.parse(localStorage.getItem(AD_KEY) || '{}') || {}; } catch {}
+
+/* The player says nothing until it is asked to (`enablejsapi=1` is already on
+   the src; this handshake is what starts the reports). There is no event out
+   here for "the player exists", so the knock is repeated across the first
+   stretch of the dive and then left alone. */
+function adsWatch(frame){
+  adsReset();
+  ads.watching = frame;
+  let n = 0;
+  ads.knock = setInterval(() => {
+    if (ads.watching !== frame || ++n > 20){ clearInterval(ads.knock); ads.knock = null; return; }
+    try {
+      frame.contentWindow?.postMessage(JSON.stringify(
+        { event:'listening', id:'roundtrip', channel:'widget' }), 'https://www.youtube.com');
+    } catch {}
+  }, 400);
+}
+function adsReset(){
+  if (ads.knock){ clearInterval(ads.knock); ads.knock = null; }
+  ads.on = false; ads.since = 0; ads.watching = null;
+}
+
+/* A live stream has no length: the player reports 0, or a DVR window running
+   to hours. An advert is a finished video a few seconds long, and that is the
+   only tell the embed gives away without loading the IFrame API. The band is
+   kept narrow so a stream that has only just gone live is never mistaken for
+   one, and the cost of being wrong either way is a second of held render. */
+const AD_MAX_LEN = 240;
+
+addEventListener('message', e => {
+  if (e.origin !== 'https://www.youtube.com' || !ads.watching) return;
+  if (e.source !== ads.watching.contentWindow) return;
+  let d; try { d = JSON.parse(e.data); } catch { return; }
+  if (!d || d.event !== 'infoDelivery' || !d.info) return;
+  const len = Number(d.info.duration);
+  if (!Number.isFinite(len)) return;
+  const advert = len > 0.5 && len <= AD_MAX_LEN;
+  if (advert === ads.on) return;
+  ads.on = advert;
+  if (advert){ ads.since = clock(); countAd(state.cam); }
+});
+
+function countAd(cam){
+  if (!cam) return;
+  const k = camKey(cam);
+  ads.seen[k] = (ads.seen[k] || 0) + 1;
+  try { localStorage.setItem(AD_KEY, JSON.stringify(ads.seen)); } catch {}
+}
+
+/* Rotation weight. The list's own guess is worth something on a device that
+   has seen nothing yet; what this device has actually watched outranks it the
+   moment there is any. Never zero — a camera is dealt later, not dropped,
+   because dropping cameras is what the thumbs are for. */
+function adWeight(cam){
+  const seen = ads.seen[camKey(cam)] || 0;
+  if (seen) return Math.max(0.35, 1/(1 + 0.6*seen));
+  return cam.ads === 'no' ? 1.15 : cam.ads === 'yes' ? 0.7 : 1;
+}
+
+/* The one thing that removes adverts rather than hiding them. Inside the Fire
+   TV app the shell owns the cookie jar, so it does the sign-in and comes back;
+   in a browser, being signed in to YouTube in the same browser is already
+   enough, so this only has to open the page. */
+const shellTV = () => (window.RoundtripShell && typeof window.RoundtripShell.signIn === 'function')
+                    ? window.RoundtripShell : null;
+function ytSignIn(){
+  const shell = shellTV();
+  if (shell){
+    try { shell.signIn(); return; } catch {}
+  }
+  note('Sign in to YouTube in the tab that just opened. A Premium account removes '
+     + 'the adverts from these feeds; without one there is nothing to sign in for.');
+  try { window.open('https://www.youtube.com/account', '_blank', 'noopener'); } catch {}
 }
 
 /* ── place card ─────────────────────────────────────────────────────────── */
@@ -1435,7 +1545,7 @@ function shuffledBag(){
   const onAir = kept.filter(isLiveNow);
   const pool = onAir.length ? onAir : kept;
   return pool
-    .map(c => ({ c, k: Math.pow(Math.random(), 1/(lightWeight(c)*voteWeight(c))) }))
+    .map(c => ({ c, k: Math.pow(Math.random(), 1/(lightWeight(c)*voteWeight(c)*adWeight(c))) }))
     .sort((a,b) => b.k - a.k)
     .map(o => o.c);
 }
@@ -1785,6 +1895,11 @@ function tick(){
       if (phaseT(CFG.descend) >= 1) setPhase('settle');
       break;
     case 'settle':
+      // Hold on the matched ground render while a pre-roll plays itself out,
+      // so the landing never reveals an advert that was about to end anyway.
+      // Capped, because a long unskippable one is not worth stalling the whole
+      // rotation for: past the cap the feed comes up regardless.
+      if (ads.on && clock() - state.t0 < CFG.settle + CFG.adHold) break;
       if (phaseT(CFG.settle) >= 1){
         setPhase('reveal');
         liveEl.classList.add('on');
@@ -2461,6 +2576,17 @@ Menu?.init({
                       label: document.fullscreenElement ? 'Exit' : 'Full',
                       title: document.fullscreenElement ? 'Leave fullscreen' : 'Fullscreen' }) },
 
+    /* Only offered where it is worth offering: inside the Fire TV app, where
+       the shell is the only way to sign in at all, and on any device that has
+       actually had an advert land on it. A screen that never sees one never
+       grows a button about them. */
+    { id:'ads', label:'Ads', icon:'ads',
+      run: () => ytSignIn(),
+      state: () => ({ hidden: !shellTV() && !Object.keys(ads.seen).length,
+                      title: shellTV()
+                        ? 'Sign in to YouTube on this television so Premium removes the ads'
+                        : 'Sign in to YouTube in this browser so Premium removes the ads' }) },
+
     { id:'keys', label:'Keys', icon:'keys',
       run: () => $('#help').classList.add('on'),
       state: () => ({ title:'The keyboard shortcuts' }) },
@@ -2588,6 +2714,10 @@ const progress = v => { bar.style.width = (v*100)+'%'; };
     // Roundtrip.audio shows the button state, whether the browser has allowed
     // sound yet, and where the volume ramp currently sits.
     audio, toggleSound, camHasSound,
+    // Roundtrip.ads shows whether an advert is on screen right now and the
+    // tally this device has built up; Roundtrip.adWeight(cam) is what that
+    // tally does to the rotation. Roundtrip.ytSignIn() is the Ads button.
+    ads, adWeight, ytSignIn,
     // Roundtrip.menu.addItem({...}, 'full') puts another action in the strip.
     menu: Menu, skipNext, divePrev, togglePinned,
     history: () => hist.map(c => c.name),

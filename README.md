@@ -190,6 +190,47 @@ with no custom headers, so there is no CORS preflight to fail, and a vote that
 cannot leave now leaves on the next load. Nothing about it can affect what is
 on screen.
 
+## Adverts over the camera
+
+The feeds are embedded YouTube players and YouTube runs its own advertising
+inside them, so a monetised channel can meet a landing with a pre-roll. Three
+things are done about it, in the order they actually help.
+
+**A signed-in Premium account removes them at the source.** An embedded player
+honours the viewer's own subscription, and that is the only thing here that
+removes an advert rather than working around it. In a browser, being signed in
+to YouTube in the same browser is already enough. Inside the Fire TV app the
+cookie jar belongs to the shell, so the shell does the sign-in: the **Ads**
+item in the action strip calls `RoundtripShell.signIn()`, the app swaps to a
+plain desktop user agent (Google refuses a sign-in from a user agent carrying
+the WebView's `; wv`), runs the Google sign-in, and comes back to the globe
+with the account's cookies kept. `setAcceptThirdPartyCookies` is the other half
+of that: the players are `youtube.com` frames inside a `github.io` page, so
+without it no account could ever reach them. The Ads item only appears where it
+is useful — inside the TV app, or on a device that has actually had an advert
+land on it.
+
+**Nothing is revealed over an advert that can be waited out.** `enablejsapi=1`
+is on every embed and a `listening` handshake starts the player reporting on
+itself. An advert gives itself away by having a short, finite length where a
+live stream has none, so while one is running the landing holds on the matched
+ground render for up to `CFG.adHold` (6 s) and the sound stays down. Past that
+cap the feed comes up regardless: a long unskippable advert is not worth
+stalling the rotation for.
+
+**Whatever still gets through is remembered.** Each advert seen is counted
+against that camera in `roundtrip.adseen` on the device, and `adWeight()` deals
+those cameras later in the cycle — the same shape as the thumbs, and never a
+drop, because dropping cameras is what the thumbs are for. Each camera also
+carries an `ads` field (`no`, `yes`, `unknown`) guessed from what the channel
+is, so a device that has watched nothing yet already leans toward the
+institutional feeds. What a device has seen outranks that guess as soon as it
+has seen anything.
+
+What is deliberately **not** done is blocking the adverts' own requests. It
+breaks YouTube's terms for embedded players, and a player that is fought with
+is a player that stops playing — the feed is the whole product.
+
 ## Search
 
 Press `/`, or **Search** in the action strip. Type a place, a scene or a

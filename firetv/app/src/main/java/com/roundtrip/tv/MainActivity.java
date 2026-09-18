@@ -10,6 +10,8 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.webkit.CookieManager;
+import android.webkit.JavascriptInterface;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
@@ -33,10 +35,33 @@ public class MainActivity extends Activity {
   private static final String HOME =
       "https://anthonybono21-cloud.github.io/roundtrip/?tv=1";
 
+  /**
+   * Where the one-time YouTube sign-in goes. The point of it is the adverts:
+   * the feeds are embedded YouTube players, an embedded player honours the
+   * viewer's own Premium subscription, and a subscription only reaches it if
+   * this WebView is carrying the account's cookies. Nothing else here needs
+   * an account, and nothing is stored by the app itself.
+   */
+  private static final String SIGN_IN =
+      "https://accounts.google.com/ServiceLogin?service=youtube"
+      + "&continue=https%3A%2F%2Fwww.youtube.com%2F";
+
+  /**
+   * Google refuses a sign-in from a user agent it recognises as an embedded
+   * browser, and the framework WebView announces itself as one with "; wv".
+   * The sign-in pages are given a plain desktop string instead; the app drops
+   * back to its own the moment it is done, because the site itself wants to
+   * be told it is on a television, not on a desktop.
+   */
+  private static final String DESKTOP_UA =
+      "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) "
+      + "Chrome/124.0.0.0 Safari/537.36";
+
   private WebView web;
   private String home = HOME;
   private final Handler ui = new Handler(Looper.getMainLooper());
   private boolean failed = false;
+  private boolean signingIn = false;
 
   @SuppressLint("SetJavaScriptEnabled")
   @Override
@@ -73,11 +98,39 @@ public class MainActivity extends Activity {
     s.setMediaPlaybackRequiresUserGesture(false);
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) s.setSafeBrowsingEnabled(false);
 
+    // The feeds are youtube.com iframes inside a github.io page, so to the
+    // WebView every cookie they carry is a third-party one. Off — which is the
+    // default — a signed-in account can never reach the embedded player, and
+    // a Premium subscription would have no way of removing the adverts. This
+    // is the whole reason the sign-in below is worth having.
+    CookieManager cookies = CookieManager.getInstance();
+    cookies.setAcceptCookie(true);
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+      cookies.setAcceptThirdPartyCookies(web, true);
+    }
+
+    // The page asks for the sign-in through this, because the cookie jar
+    // belongs to the app rather than to the page. It is injected into every
+    // frame, the YouTube iframes included, so it checks who is asking.
+    web.addJavascriptInterface(new Shell(), "RoundtripShell");
+
     // A chrome client is what makes a video able to go full screen, and the
     // absence of one is a long-standing way to get a black player.
     web.setWebChromeClient(new WebChromeClient());
     web.setWebViewClient(new WebViewClient() {
-      @Override public void onPageFinished(WebView v, String url) { failed = false; }
+      @Override public void onPageFinished(WebView v, String url) {
+        failed = false;
+        // Landing on YouTube proper is what finishing the sign-in looks like:
+        // that is where the continue= parameter sends an account that got
+        // through. Nobody is going to press anything on a kitchen television,
+        // so the app takes itself back to the globe.
+        if (signingIn && url != null && url.startsWith("https://www.youtube.com/")
+            && !url.contains("/signin") && !url.contains("accounts.google")) {
+          ui.postDelayed(new Runnable() {
+            @Override public void run() { if (signingIn) endSignIn(); }
+          }, 2500);
+        }
+      }
 
       @Override public void onReceivedError(WebView v, int code, String msg, String url) {
         retry();
@@ -107,7 +160,7 @@ public class MainActivity extends Activity {
    * standing in front of.
    */
   private void retry() {
-    if (failed) return;
+    if (failed || signingIn) return;
     failed = true;
     ui.postDelayed(new Runnable() {
       @Override public void run() {
@@ -115,6 +168,46 @@ public class MainActivity extends Activity {
         web.loadUrl(home);
       }
     }, 6000);
+  }
+
+  /**
+   * The bridge the page's Ads button reaches. It arrives on the WebView's own
+   * thread, so everything real happens back on the UI one.
+   */
+  private class Shell {
+    @JavascriptInterface public void signIn() {
+      ui.post(new Runnable() {
+        @Override public void run() {
+          String at = web.getUrl();
+          // Only our own page may ask. The interface is injected into the
+          // YouTube frames too, and they have no business navigating the app.
+          if (at == null || !at.startsWith("https://anthonybono21-cloud.github.io/")) return;
+          startSignIn();
+        }
+      });
+    }
+
+    /** So the page can tell it is inside this shell rather than in Silk. */
+    @JavascriptInterface public boolean isShell() { return true; }
+  }
+
+  private void startSignIn() {
+    if (signingIn) return;
+    signingIn = true;
+    web.getSettings().setUserAgentString(DESKTOP_UA);
+    web.clearHistory();               // so Back walks the sign-in, not the app
+    web.loadUrl(SIGN_IN);
+  }
+
+  /** Back to Roundtrip, carrying whatever account the sign-in left behind. */
+  private void endSignIn() {
+    if (!signingIn) return;
+    signingIn = false;
+    CookieManager.getInstance().flush();
+    web.getSettings().setUserAgentString(null);   // back to the app's own
+    web.clearHistory();
+    web.loadUrl(home);
+    immersive();
   }
 
   private void immersive() {
@@ -147,13 +240,19 @@ public class MainActivity extends Activity {
   }
 
   @Override public boolean onKeyLongPress(int code, KeyEvent e) {
-    if (code == KeyEvent.KEYCODE_BACK) { finish(); return true; }
+    // Holding Back leaves the app, except during a sign-in, where it is the
+    // way out of the sign-in rather than out of Roundtrip.
+    if (code == KeyEvent.KEYCODE_BACK) {
+      if (signingIn) endSignIn(); else finish();
+      return true;
+    }
     return super.onKeyLongPress(code, e);
   }
 
   @Override public boolean onKeyUp(int code, KeyEvent e) {
     if (code == KeyEvent.KEYCODE_BACK) {
       if (e.isCanceled()) return true;          // the long press already fired
+      if (signingIn && !web.canGoBack()) { endSignIn(); return true; }
       if (web.canGoBack()) web.goBack(); else finish();
       return true;
     }
@@ -173,7 +272,13 @@ public class MainActivity extends Activity {
     web.saveState(out);
   }
 
-  @Override protected void onPause()   { super.onPause();   web.onPause(); }
+  @Override protected void onPause() {
+    super.onPause();
+    web.onPause();
+    // A sideloaded app on a television is killed rather than closed, so the
+    // account survives only if the jar is written out here.
+    CookieManager.getInstance().flush();
+  }
   @Override protected void onResume()  { super.onResume();  web.onResume(); immersive(); }
   @Override protected void onDestroy() { web.destroy(); super.onDestroy(); }
 }

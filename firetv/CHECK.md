@@ -85,6 +85,81 @@ Two things worth confirming by eye, because they are what a remote gets wrong:
 adb shell input keyevent --longpress KEYCODE_BACK   # this is how you leave
 ```
 
+## Signing in to YouTube, so Premium removes the adverts
+
+This is the one thing on the television that needs an account, and it is a
+one-time job. The feeds are embedded YouTube players; an embedded player
+honours the viewer's own Premium subscription, and the subscription only
+reaches it if this WebView is carrying the account's cookies. Without Premium
+on the account there is nothing to gain here — the sign-in changes nothing on
+its own.
+
+The password is the one thing no session can supply. `adb shell input text`
+types into whatever field has focus, so the sign-in can be driven from here
+end to end as long as the account's password is at hand on the 3090; otherwise
+the same screens take the remote and the on-screen keyboard.
+
+The surest way in is the DevTools handle, because it does not depend on where
+the highlight happens to be sitting:
+
+```sh
+adb shell am start -n com.roundtrip.tv/.MainActivity
+sleep 10
+PID=$(adb shell pidof com.roundtrip.tv | tr -d '\r')
+adb forward tcp:9222 localabstract:webview_devtools_remote_$PID
+# Then, in any CDP client against 127.0.0.1:9222, evaluate:
+#   Roundtrip.ytSignIn()
+```
+
+The remote gets there too: Select opens the action strip, right walks it, and
+**Ads** sits between Full and Keys. Read the highlighted label rather than
+counting presses — the strip's contents change with what is on screen.
+
+```sh
+adb shell input keyevent KEYCODE_DPAD_CENTER   # strip opens on the first item
+sleep 1
+for i in $(seq 1 10); do adb shell input keyevent KEYCODE_DPAD_RIGHT; sleep 0.3; done
+adb shell input keyevent KEYCODE_DPAD_CENTER
+sleep 6
+adb shell dumpsys activity com.roundtrip.tv | grep -i url   # should be accounts.google.com
+```
+
+Then the Google form, field by field. `input text` has no way to type a space,
+and `%s` is the substitute if one is ever needed:
+
+```sh
+adb shell input text 'the.address@gmail.com'
+adb shell input keyevent KEYCODE_ENTER
+sleep 5
+adb shell input text 'the-password'
+adb shell input keyevent KEYCODE_ENTER
+sleep 8
+```
+
+The app watches for the landing on `youtube.com` that a completed sign-in ends
+on, waits a couple of seconds and takes itself back to the globe by itself.
+Holding Back leaves the sign-in without finishing it; it does not quit the app
+while a sign-in is up.
+
+Proving it took:
+
+```sh
+PID=$(adb shell pidof com.roundtrip.tv | tr -d '\r')
+adb forward tcp:9222 localabstract:webview_devtools_remote_$PID
+# In a DevTools console against the page:
+#   Roundtrip.ads                -> { on, seen, ... }; `seen` is this device's tally
+#   Object.keys(Roundtrip.ads.seen).length
+# Let it run through a dozen dives and watch whether that number stops growing.
+```
+
+Two things worth knowing before this is called broken. Google refuses sign-ins
+from user agents it recognises as embedded browsers; the app swaps to a plain
+desktop string for the sign-in pages for exactly that reason, and it may still
+be refused — a "this browser or app may not be secure" page is that refusal and
+not a bug in the app. And **none of this has been tested from a project
+session**: no session here can reach a television or accounts.google.com, so
+everything above is written from the code, not from a run.
+
 ## Screenshots
 
 ```sh

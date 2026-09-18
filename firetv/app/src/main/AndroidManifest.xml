@@ -18,11 +18,15 @@
       android:allowBackup="false"
       android:usesCleartextTraffic="false">
 
+    <!-- windowSoftInputMode: the one-time YouTube sign-in is the only screen
+         in the app with a text field in it, and without adjustResize the soft
+         keyboard covers the box it is filling in. -->
     <activity
         android:name=".MainActivity"
         android:exported="true"
         android:launchMode="singleTask"
         android:screenOrientation="landscape"
+        android:windowSoftInputMode="adjustResize"
         android:configChanges="keyboard|keyboardHidden|orientation|screenSize|screenLayout|smallestScreenSize|uiMode|navigation">
       <intent-filter>
         <action android:name="android.intent.action.MAIN" />

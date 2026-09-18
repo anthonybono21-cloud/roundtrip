@@ -4,6 +4,34 @@
 <meta charset="utf-8">
 <title>Roundtrip</title>
 <meta name="viewport" content="width=device-width,initial-scale=1">
+<!-- Fire TV and other 10-foot screens. Decided before the first paint, so the
+     overlay is never briefly laid out at desk size. ?tv=1 / ?tv=0 forces it
+     either way and is remembered, which is how this gets tested on a desk. -->
+<script>
+(function(){
+  var d = document.documentElement, ua = navigator.userAgent || '', q = null;
+  try { q = new URLSearchParams(location.search).get('tv'); } catch(e){}
+  try {
+    if (q === '1' || q === '0') localStorage.setItem('roundtrip.tv', q);
+    else q = localStorage.getItem('roundtrip.tv');
+  } catch(e){}
+  // Every Fire TV model id starts AFT: AFTB, AFTS, AFTMM, AFTKA, AFTKRT...
+  var fire = /\bAFT[A-Z0-9]{1,8}\b|Fire\s?TV/i.test(ua);
+  var tvUA = fire || /Android\s?TV|Google\s?TV|SMART-?TV|SmartTV|Tizen|Web0S|WebOS|NetCast|BRAVIA|HbbTV|CrKey|Chromecast|VIDAA|Roku|AppleTV/i.test(ua);
+  // A large screen with no touch points that cannot hover is, in practice, a
+  // set-top browser being driven by a remote.
+  var big = false;
+  try {
+    big = !tvUA && (navigator.maxTouchPoints|0) === 0
+       && matchMedia('(hover:none)').matches
+       && Math.max(screen.width, screen.height) >= 1280;
+  } catch(e){}
+  var tv = q === '1' ? true : q === '0' ? false : (tvUA || big);
+  if (tv)   d.className += ' tv';
+  if (fire) d.className += ' firetv';
+  window.RoundtripTV = { on: tv, fire: fire, forced: q === '1' || q === '0' };
+})();
+</script>
 <style>
   :root{
     --ink:#e8eef7; --dim:#8fa3bd; --panel:rgba(8,13,22,.72); --edge:rgba(255,255,255,.10);
@@ -136,6 +164,47 @@
   #err{position:fixed;left:50%;bottom:80px;transform:translateX(-50%);display:none;
     background:rgba(60,12,12,.85);border:1px solid rgba(255,120,120,.3);border-radius:8px;
     padding:9px 14px;font-size:12px;color:#ffd9d9;max-width:70ch;z-index:11}
+
+  /* ── 10-foot screens ─────────────────────────────────────────────────────
+     A TV browser reports a small CSS viewport on a very large screen, so the
+     desk layout arrives at roughly double size across the room: that is the
+     place-and-clock card eating the picture on a Fire Stick. Everything here
+     is sized off the viewport instead of in fixed pixels, and held inside a
+     5% title-safe margin because a TV may still overscan the edges.
+     These rules also cancel the coarse-pointer block above, which a TV
+     browser matches (it cannot hover) and which was meant for a thumb. */
+  .tv #card{left:5vw;bottom:5.5vh;max-width:44vw}
+  .tv #card .place{font-size:clamp(18px,3vh,42px)}
+  .tv #card .where{font-size:clamp(11px,1.85vh,25px);margin-top:.5vh}
+  .tv #card .meta{font-size:clamp(10px,1.6vh,21px);margin-top:1.1vh;gap:1.6vw}
+  .tv #card .clock{font-size:clamp(11px,1.75vh,23px)}
+  .tv #phase{left:5vw;top:5vh;font-size:clamp(8px,1.15vh,15px)}
+  .tv #pinned,.tv #rt-set{right:5vw;top:5vh;font-size:clamp(8px,1.15vh,15px)}
+  .tv #attrib{right:5vw;bottom:4.6vh;font-size:clamp(7px,1vh,13px);max-width:38vw}
+  .tv #err{bottom:12vh;font-size:clamp(10px,1.6vh,21px);padding:1.1vh 1.4vw;max-width:56vw}
+  .tv #help{right:5vw;bottom:10vh;font-size:clamp(9px,1.45vh,19px);
+    padding:1.3vh 1.4vw;max-width:36vw;border-radius:.9vh}
+  .tv #help div{margin-top:.5vh}
+  .tv #help kbd{font-size:clamp(8px,1.25vh,16px);min-width:0;margin-right:.5vw;
+    padding:.15vh .55vw}
+
+  .tv .hud-btn,.tv #rt-mag{width:clamp(30px,4.4vh,58px);height:clamp(30px,4.4vh,58px);
+    right:5vw;opacity:.9;box-shadow:none}
+  .tv .hud-btn svg,.tv #rt-mag svg{width:clamp(13px,1.9vh,25px);
+    height:clamp(13px,1.9vh,25px);stroke-width:1.7}
+  .tv #sound,.tv #voteup,.tv #votedown{right:5vw}
+  .tv #sound{top:5vh}
+  .tv #rt-mag{top:10.6vh}
+  .tv #voteup{top:16.2vh}
+  .tv #votedown{top:21.8vh}
+
+  .tv #rt-search{width:min(46vw,760px)}
+  .tv #rt-search.on{transform:translate(-50%,7vh)}
+  .tv #rt-search input{font-size:clamp(12px,2vh,26px)}
+  .tv #rt-search .row .n{font-size:clamp(11px,1.75vh,23px)}
+  .tv #rt-search .row .w{font-size:clamp(9px,1.45vh,19px)}
+  .tv #rt-search .chip,.tv #rt-search .play{font-size:clamp(9px,1.35vh,17px)}
+  .tv #rt-search .list{max-height:56vh}
 </style>
 </head>
 <body>
@@ -216,6 +285,8 @@
 <script src="./clouds/et45-clouds-inline.js"></script>
 <!-- Search. Self-contained, publishes window.RoundtripSearch. -->
 <script src="./search.js"></script>
+<!-- Fire TV remote. Self-contained, publishes window.RoundtripRemote. -->
+<script src="./tv.js"></script>
 <script type="module">
 import * as THREE from './vendor/three.module.js';
 
@@ -2033,6 +2104,12 @@ const progress = v => { bar.style.width = (v*100)+'%'; };
     // Roundtrip.find('beach') is what the search box runs.
     find: q => (Search ? Search.search(q).map(r => r.cam.name) : []),
     search: Search, playSet, clearSet, requestDive,
+    // What the Fire TV remote drives (tv.js). backToOrbit is Escape,
+    // hold is the Space bar, note puts a line on screen.
+    backToOrbit, note,
+    hold: on => { state.pinned = (on === undefined) ? !state.pinned : !!on;
+                  $('#pinned').classList.toggle('on', state.pinned);
+                  return state.pinned; },
     dive: q => { const c = state.cams.find(c => c.name.toLowerCase().includes(String(q).toLowerCase()));
                  if (c) beginDive(c); else console.warn('no camera matching', q); return c?.name; } };
 

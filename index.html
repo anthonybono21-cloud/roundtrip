@@ -300,6 +300,11 @@ import * as THREE from './vendor/three.module.js';
    descent; the ground is gone and a dive now ends on the globe itself.
    ───────────────────────────────────────────────────────────────────────────*/
 
+/* Bumped by hand with each push. It shows in the corner with the credits, so
+   a page that is not doing what a change says it should can be told apart from
+   a page a browser or a television is still serving from yesterday. */
+const BUILD = 'build 2026-09-18 13:45';
+
 const CFG = {
   dwell:        90,     // seconds on a live feed before moving on
   orbitDwell:   2.6,    // seconds parked on the globe before the next dive
@@ -327,12 +332,24 @@ const CFG = {
     maxZoom: 19,
     // Borders, coastlines and place names, drawn over the imagery on the way
     // down so the wide part of the descent reads as somewhere rather than as
-    // an aerial photograph. Transparent PNGs from the same free service. The
-    // layer stops at zoom 13, which is the behaviour we want: the labels are
-    // there while the country is, and gone by the time the street is.
-    overlay: (z,x,y) => `https://server.arcgisonline.com/ArcGIS/rest/services/Reference/World_Boundaries_and_Places/MapServer/tile/${z}/${y}/${x}`,
+    // an aerial photograph. Transparent PNGs. The layer stops at zoom 13,
+    // which is the behaviour we want: the names are there while the country
+    // is, and gone by the time the street is.
+    //
+    // More than one source, because none of them can be checked from a build
+    // session and a label layer that silently draws nothing is indistinguishable
+    // from one that was never wired in. The first that answers a probe tile
+    // wins, once, and the rest are never asked again. Note the two coordinate
+    // orders: Esri caches are row/column, everything else is x then y.
+    overlays: [
+      { url: (z,x,y) => `https://server.arcgisonline.com/ArcGIS/rest/services/Reference/World_Boundaries_and_Places/MapServer/tile/${z}/${y}/${x}`,
+        credit: 'Boundaries: Esri' },
+      { url: (z,x,y) => `https://services.arcgisonline.com/ArcGIS/rest/services/Reference/World_Boundaries_and_Places/MapServer/tile/${z}/${y}/${x}`,
+        credit: 'Boundaries: Esri' },
+      { url: (z,x,y) => `https://basemaps.cartocdn.com/rastertiles/voyager_only_labels/${z}/${x}/${y}.png`,
+        credit: 'Labels: CARTO, OpenStreetMap contributors' },
+    ],
     overlayMaxZoom: 13,
-    overlayWait: 2500,  // ms before giving up on a label tile; never stalls a dive
   },
   tempUnit:     'F',    // the card's temperature: 'F' or 'C'
   restR:        2.7,    // resting distance from the centre; the globe fills the frame
@@ -449,6 +466,27 @@ function fitZoom(lat, lng, halfM, budget, maxZ){
   return 6;
 }
 
+/* Which label layer this session will use, decided once by asking each source
+   for a single tile that is certain to have something on it. Resolves to null
+   if none of them answer, in which case the descent simply has no names. */
+let overlayPick = null;
+let overlayCredit = '';
+function overlaySource(){
+  if (overlayPick) return overlayPick;
+  const list = CFG.imagery.overlays || [];
+  overlayPick = (async () => {
+    for (const src of list){
+      try { await loadImage(src.url(2,1,1));
+            overlayCredit = src.credit;
+            window.dispatchEvent(new Event('rt-credit'));
+            return src; }                                      // a quarter of the world: always drawn on
+      catch { /* try the next one */ }
+    }
+    return null;
+  })();
+  return overlayPick;
+}
+
 /* Mosaic the imagery tiles covering a patch into one canvas texture.
    Returns {canvas, bounds} so the mesh UVs can be mapped onto it exactly. */
 async function imageryMosaic(lat, lng, halfM, z){
@@ -471,24 +509,32 @@ async function imageryMosaic(lat, lng, halfM, z){
   }
   await Promise.all(jobs);
 
-  /* Names and borders go on after the imagery, so they sit on top of it. They
-     are decoration: a slow or missing label tile must never hold up a descent,
-     so each one races a timer and whatever has not arrived is simply skipped. */
-  const ov = CFG.imagery.overlay;
-  if (ov && z <= CFG.imagery.overlayMaxZoom){
-    const patient = url => Promise.race([
-      loadImage(url),
-      new Promise(r => setTimeout(() => r(null), CFG.imagery.overlayWait)) ]);
-    const marks = [];
-    for (let x=x0; x<=x1; x++) for (let y=y0; y<=y1; y++){
-      marks.push(patient(ov(z,x,y))
-        .then(im => { if (im) ctx.drawImage(im,(x-x0)*256,(y-y0)*256,256,256); })
-        .catch(()=>{}));
-    }
-    await Promise.all(marks);
+  /* Names and borders go on after the imagery, so they sit over it. They are
+     decoration and the descent does not wait for them: this returns as soon as
+     the imagery is down, and each label tile paints into the same canvas as it
+     lands, calling back so the texture can be re-uploaded. An earlier version
+     raced each tile against a 2.5s timer, which looked safe and was not: all
+     the timers start together, a browser opens six connections to a host, and
+     on a real network the eightieth tile in the queue had lost the race before
+     it was ever sent. Nothing drew. Do not put a deadline on work that is
+     queued behind other work. */
+  const marks = { done: null, onPaint: null };
+  if (z <= CFG.imagery.overlayMaxZoom){
+    marks.done = (async () => {
+      const src = await overlaySource();
+      if (!src) return;
+      const jobs2 = [];
+      for (let x=x0; x<=x1; x++) for (let y=y0; y<=y1; y++){
+        jobs2.push(loadImage(src.url(z,x,y))
+          .then(im => { ctx.drawImage(im,(x-x0)*256,(y-y0)*256,256,256);
+                        if (marks.onPaint) marks.onPaint(); })
+          .catch(()=>{}));            // no tile there is normal: open sea, or past the cache
+      }
+      await Promise.all(jobs2);
+    })();
   }
 
-  return { canvas: cv, bounds: {
+  return { canvas: cv, marks, bounds: {
     west: tileX2lng(x0,z), east: tileX2lng(x1+1,z),
     north: tileY2lat(y0,z), south: tileY2lat(y1+1,z) } };
 }
@@ -858,6 +904,9 @@ function stageOneDetail(mesh, i, pose){
     renderer.initTexture(t);
     mesh.material.uniforms.map.value?.dispose();
     mesh.material.uniforms.map.value = t;
+    // Labels are still arriving into the same canvas; each one that lands has
+    // to be pushed to the GPU again, or the patch keeps the bare imagery.
+    if (mosaic.marks) mosaic.marks.onPaint = () => { t.needsUpdate = true; };
     // Only a level appearing from nothing needs the ease; one that was already
     // up is a swap of imagery at the same opacity.
     if (!mesh.visible){ mesh.userData.shown = clock(); mesh.visible = true; }
@@ -2381,7 +2430,12 @@ const progress = v => { bar.style.width = (v*100)+'%'; };
   const attrib = () => {
     $('#attrib').innerHTML =
       `Globe: NASA Blue Marble &amp; Black Marble &middot; ${CFG.imagery.credit}`
-      + (clouds ? `<br>${clouds.credit()}` : '');
+      + (overlayCredit ? ` &middot; ${overlayCredit}` : '')
+      + (clouds ? `<br>${clouds.credit()}` : '')
+      // Which build is actually on the screen. Small, in the corner with the
+      // other credits, and the only way to tell a stale page in a television's
+      // cache from a change that did not work.
+      + `<br>${BUILD}`;
     // Sit the help panel above the credits rather than on top of them. Both
     // are anchored bottom-right, and the panel was covering the tail of the
     // first credit line, which Esri and OpenStreetMap both require to stay
@@ -2389,6 +2443,7 @@ const progress = v => { bar.style.width = (v*100)+'%'; };
     // line when the cloud layer attaches and wraps on a narrow window.
     $('#help').style.bottom = ($('#attrib').offsetHeight + 22) + 'px';
   };
+  window.addEventListener('rt-credit', attrib);
   attrib();
 
   await buildSpace(progress);
@@ -2422,7 +2477,7 @@ const progress = v => { bar.style.width = (v*100)+'%'; };
                       return now().toISOString(); },
     now,
     parts: () => ({ space, spaceCam, earth, atmo, stars, pins, detail }),
-    name: 'Roundtrip',
+    name: 'Roundtrip', build: BUILD,
     // Roundtrip.order() shows the rest of this cycle; Roundtrip.CFG.lightBias
     // changes how much the light skews it.
     order: () => [peekNext(), ...bag].filter(Boolean).map(c => c.name),

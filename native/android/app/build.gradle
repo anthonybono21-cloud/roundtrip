@@ -18,17 +18,20 @@ def rtVersionName = (project.findProperty('versionName') ?: "1.0.${rtVersionCode
 // copied, so there is one key and one place it is written down, and the two
 // apps cannot drift apart. Neither app is going near a store: the key is in
 // the repository on purpose and protects nothing.
+//
+// The map is not called `sideload`: inside signingConfigs { } that name is the
+// signing config being declared, and a local of the same name shadows it.
 def sideloadKey = rootProject.file('../../firetv/roundtrip-sideload.jks')
 def sideloadFrom = rootProject.file('../../firetv/app/build.gradle')
-def sideload = [:]
+def sideloadCreds = [:]
 if (sideloadFrom.exists()) {
     sideloadFrom.eachLine { line ->
         def m = (line =~ /^\s*(storePassword|keyAlias|keyPassword)\s+'([^']*)'/)
-        if (m.find()) sideload[m.group(1)] = m.group(2)
+        if (m.find()) sideloadCreds[m.group(1)] = m.group(2)
     }
 }
 def canSign = sideloadKey.exists() &&
-    ['storePassword', 'keyAlias', 'keyPassword'].every { sideload.containsKey(it) }
+    ['storePassword', 'keyAlias', 'keyPassword'].every { sideloadCreds.containsKey(it) }
 if (!canSign) {
     logger.lifecycle('Roundtrip: no sideload key found, falling back to debug signing')
 }
@@ -56,9 +59,9 @@ android {
         signingConfigs {
             sideload {
                 storeFile sideloadKey
-                storePassword sideload['storePassword']
-                keyAlias sideload['keyAlias']
-                keyPassword sideload['keyPassword']
+                storePassword sideloadCreds['storePassword']
+                keyAlias sideloadCreds['keyAlias']
+                keyPassword sideloadCreds['keyPassword']
             }
         }
     }

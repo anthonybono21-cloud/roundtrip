@@ -328,6 +328,7 @@ const CFG = {
   },
   tempUnit:     'F',    // the card's temperature: 'F' or 'C'
   restR:        2.7,    // resting distance from the centre; the globe fills the frame
+  nightLift:    0.26,   // how much moonlight the dark side keeps: 0 is a black planet
 };
 
 /* The largest step a per-frame accumulator will take in one go. It is here to
@@ -532,6 +533,7 @@ async function buildSpace(progress){
     new THREE.ShaderMaterial({
       uniforms:{ dayMap:{value:day}, nightMap:{value:night}, topoMap:{value:topo},
                  sunDir:{value:sunDir}, hasTopo:{value: topo?1:0}, time:uTime,
+                 nightLift:{value:CFG.nightLift},
                  alt:camAlt,
                  // Filled in by the cloud layer if it attaches. The samplers
                  // start on a transparent pixel so the shader is valid without
@@ -549,6 +551,7 @@ async function buildSpace(progress){
           gl_Position=projectionMatrix*viewMatrix*w; }`,
       fragmentShader:`
         uniform sampler2D dayMap,nightMap,topoMap; uniform vec3 sunDir;
+        uniform float nightLift;
         uniform float hasTopo; uniform float time; uniform float alt;
         uniform sampler2D cloudA,cloudB;
         uniform float cloudModeA,cloudModeB,cloudBlend,cloudDrift,hasClouds;
@@ -648,8 +651,16 @@ async function buildSpace(progress){
           float band=1.0-abs(ignite*2.0-1.0);
           float flick=1.0+0.30*band*sin(time*2.3+hash21(cell+3.0)*43.0);
 
+          // The night side used to be a flat near-black wash, so everything
+          // that was not a city simply vanished: no ocean, no coastline, and
+          // no cloud to catch the eye. Light it with the surface's own colour
+          // instead, cooled toward moonlight and turned right down. The sea
+          // reads as sea after dark and the deck above it has something to
+          // sit on, which is the difference between a dark planet and a hole.
+          vec3 moon=dayC*vec3(0.62,0.78,1.0)*nightLift;
           vec3 col=dayC*day
                  + vec3(1.0,0.82,0.52)*lights*ignite*flick*1.6
+                 + moon*(1.0-day)
                  + vec3(0.012,0.018,0.035)*(1.0-day);
 
           // Atmospheric limb, strongest around the terminator.

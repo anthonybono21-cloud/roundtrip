@@ -260,9 +260,12 @@
     // Sunrise and sunset along the terminator.
     '  float golden = exp(-pow((d - 0.02) / 0.17, 2.0));',
     '  lit = mix(lit, vec3(1.26, 0.86, 0.62), golden * 0.80);',
-    // Night: not black, or the deck punches holes in the city lights; just
-    // dark enough to read as unlit cloud with a little moonlight on top.
-    '  vec3 dark = vec3(0.020, 0.028, 0.050) + vec3(0.030, 0.034, 0.046) * 0.5;',
+    // Night: cloud tops are the brightest thing on a moonlit planet, and on a
+    // television across a room they are most of what makes the dark side read
+    // as weather rather than as an empty hole. Keep them clearly visible, blue
+    // rather than white so they still say night, and well under the sunlit
+    // side so the terminator is not lost.
+    '  vec3 dark = vec3(0.420, 0.500, 0.640);',
     '  vec3 col = mix(dark, lit, day);',
 
     // Overcast genuinely hides the lights underneath it, so keep most of the

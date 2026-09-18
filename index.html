@@ -77,33 +77,38 @@
      passed, the second line is close to white rather than blue-grey, and
      every line carries a tight shadow under the wide one: a soft glow alone
      disappears against white surf. */
-  #card{position:fixed;left:40px;bottom:40px;max-width:min(58ch,52vw);
+  #card{position:fixed;left:40px;bottom:40px;
     display:flex;align-items:center;gap:18px;
     opacity:0;transform:translateY(10px);transition:opacity .9s ease,transform .9s ease;
-    text-shadow:0 1px 3px rgba(0,0,0,.95),0 2px 22px rgba(0,0,0,.9);pointer-events:none}
+    text-shadow:0 2px 20px rgba(0,0,0,.9);pointer-events:none}
   #card.on{opacity:1;transform:none}
-  #card.rest{opacity:.86}
+  #card.rest{opacity:.34}
   /* The supplied white lockup, as supplied: real alpha, pure white, never
-     retyped in a font. The place, the local time and anything else stay
-     separate app text beside it, never baked into the artwork. A drop shadow
-     rather than a glow, for the same reason the text carries one: a soft glow
-     alone disappears against white surf. */
+     retyped in a font. Everything beside it is app text and is never baked
+     into the artwork. */
   #card .lockup{flex:none;width:auto;height:86px;
-    filter:drop-shadow(0 1px 3px rgba(0,0,0,.95)) drop-shadow(0 2px 18px rgba(0,0,0,.8))}
-  #card .lines{min-width:0}
+    filter:drop-shadow(0 2px 20px rgba(0,0,0,.9))}
+  /* The text keeps the original card's own width, so a long place name wraps
+     exactly where it always did; the lockup widens the card, not the column. */
+  #card .lines{min-width:0;max-width:min(46ch,44vw)}
   #card .place{font-size:30px;font-weight:600;letter-spacing:-.02em;line-height:1.12}
-  #card .where{color:#d3dfef;margin-top:5px;font-size:16px}
-  #card .meta{margin-top:9px;font-size:15px;color:#d3dfef;
+  #card .where{color:var(--dim);margin-top:4px;font-size:15px}
+  #card .meta{margin-top:10px;font-size:13px;color:var(--dim);
     display:flex;gap:14px;align-items:baseline;flex-wrap:wrap}
-  #card .clock,#card .temp{font-variant-numeric:tabular-nums;color:var(--ink);font-size:17px;
-    font-weight:600;letter-spacing:.01em}
+  #card .clock{font-variant-numeric:tabular-nums;color:var(--ink);font-size:15px;font-weight:500}
+  /* The temperature carries the line, on Anthony's word: bigger than the
+     place name, and the first thing read from across the room. */
+  #card .temp{font-variant-numeric:tabular-nums;color:var(--ink);font-size:40px;font-weight:600;
+    letter-spacing:-.02em;line-height:1}
   /* Empty until the reading arrives, and empty for good if it never does:
      the row simply has one item in it, and nothing says so on the picture. */
   #card .temp:empty{display:none}
 
   @media (max-width:620px){
-    #card{gap:12px;max-width:calc(100vw - 80px)}
+    #card{gap:12px}
     #card .lockup{height:52px}
+    #card .lines{max-width:calc(100vw - 80px - 64px)}
+    #card .temp{font-size:30px}
   }
 
   #phase{position:fixed;left:40px;top:34px;font-size:11px;letter-spacing:.16em;
@@ -184,12 +189,14 @@
      5% title-safe margin because a TV may still overscan the edges.
      These rules also cancel the coarse-pointer block above, which a TV
      browser matches (it cannot hover) and which was meant for a thumb. */
-  .tv #card{left:5vw;bottom:5.5vh;max-width:44vw}
+  .tv #card{left:5vw;bottom:5.5vh}
+  .tv #card .lines{max-width:44vw}
   .tv #card .lockup{height:clamp(40px,9.5vh,132px)}
   .tv #card .place{font-size:clamp(18px,3vh,42px)}
   .tv #card .where{font-size:clamp(11px,1.85vh,25px);margin-top:.5vh}
   .tv #card .meta{font-size:clamp(10px,1.6vh,21px);margin-top:1.1vh;gap:1.6vw}
-  .tv #card .clock,.tv #card .temp{font-size:clamp(11px,1.75vh,23px)}
+  .tv #card .clock{font-size:clamp(11px,1.75vh,23px)}
+  .tv #card .temp{font-size:clamp(24px,4.4vh,58px)}
   .tv #phase{left:5vw;top:5vh;font-size:clamp(8px,1.15vh,15px)}
   .tv #pinned,.tv #rt-set{right:5vw;top:5vh;font-size:clamp(8px,1.15vh,15px)}
   .tv #attrib{right:5vw;bottom:4.6vh;font-size:clamp(7px,1vh,13px);max-width:38vw}
@@ -236,8 +243,8 @@
     <div class="place"></div>
     <div class="where"></div>
     <div class="meta">
-      <span class="clock"></span>
       <span class="temp"></span>
+      <span class="clock"></span>
     </div>
   </div>
 </div>

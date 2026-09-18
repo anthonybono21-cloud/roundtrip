@@ -20,10 +20,19 @@ rule, not a choice made here.
 
 | | Builds | Runs | What is missing |
 |---|---|---|---|
-| **Android** | Yes, in CI, on every push | Phone, tablet, and anything on Fire OS | Signed release build needs a keystore |
+| **Android** | Yes, in CI, on every push | Phone and tablet | Installing a new build over an old one (see below) |
 | **iPhone / iPad** | Compiles in CI; needs Xcode for a device build | — | An Apple developer account to sign it |
 | **Mac** | Same project, Mac Catalyst | — | The same account |
 | **Apple TV** | Not possible as a web shell | — | See below |
+
+### The Fire TV app is a separate thing, on purpose
+
+`firetv/` in this repository is its own Android app for the Fire Stick, and it
+stays that way. It is a one-megabyte WebView pointed at the live address, with
+no libraries at all, so the television always shows today's build and the
+remote drives it. This one bundles the app and carries a map engine, which is
+right for a phone you hold and wrong for a screen you point a D-pad at. Two
+small apps beat one that is bad at both.
 
 ### Apple TV
 
@@ -55,8 +64,15 @@ npm run sync            # copy the web app in, then sync both shells
 npm run android:apk     # -> android/app/build/outputs/apk/debug/app-debug.apk
 ```
 
-Or let CI do it: every push to `main` that touches the app builds an APK and
-attaches it to the run, under **Actions → Apps → roundtrip-android-apk**.
+Or let CI do it: every push to `main` that touches the app builds an APK,
+attaches it to the run, and drops it beside the site as
+<https://anthonybono21-cloud.github.io/roundtrip/phone.apk> — open that on the
+phone you want it on.
+
+One rough edge: the build is not signed with a fixed key, so Android will
+refuse to install a new one *over* an old one; remove the app first. Fixing it
+means pointing the build at the sideload key `firetv/` already keeps, which is
+a few lines in `android/app/build.gradle`.
 
 **iPhone, iPad and Mac** (needs a Mac with Xcode)
 

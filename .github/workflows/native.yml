@@ -32,6 +32,8 @@ jobs:
   android:
     name: Android APK
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
       - uses: actions/checkout@v4
 
@@ -46,9 +48,17 @@ jobs:
           distribution: temurin
           java-version: '21'
 
-      # No setup-android step: the Ubuntu runner already ships the SDK with its
-      # licences accepted, and the action insists on installing the long-dead
-      # "tools" package, which fails.
+      # setup-android@v3 is not used: it asks the sdkmanager for the obsolete
+      # `tools` package, which no longer exists in Google's repository, and
+      # dies on it. The runner image already carries the SDK, so take that and
+      # add the two pieces this build needs. (Same conclusion the Fire TV
+      # build reached; see .github/workflows/firetv.yml.)
+      - name: Android SDK
+        run: |
+          set -eu
+          SDKMGR=$(ls "$ANDROID_HOME"/cmdline-tools/*/bin/sdkmanager | tail -1)
+          yes | "$SDKMGR" --licenses > /dev/null 2>&1 || true
+          "$SDKMGR" "platforms;android-35" "build-tools;35.0.0"
 
       - name: Install
         working-directory: native
@@ -62,22 +72,38 @@ jobs:
         working-directory: native
         run: npx cap sync android
 
-      - name: Build the debug APK
+      - name: Build the APK
         working-directory: native/android
-        run: ./gradlew --no-daemon assembleDebug
-
-      - name: Name the APK after the commit
-        run: |
-          mkdir -p out
-          cp native/android/app/build/outputs/apk/debug/app-debug.apk \
-             "out/Roundtrip-${GITHUB_SHA::7}.apk"
-          ls -la out
+        run: >
+          ./gradlew --no-daemon --stacktrace
+          -PversionCode=${{ github.run_number }}
+          -PversionName=1.${{ github.run_number }}
+          assembleDebug
 
       - uses: actions/upload-artifact@v4
         with:
           name: roundtrip-android-apk
-          path: out/*.apk
+          path: native/android/app/build/outputs/apk/debug/app-debug.apk
           if-no-files-found: error
+
+      # An artifact needs a GitHub account and a zip to get at. A file beside
+      # the site is a link you open on the phone you want it on. The Fire TV
+      # app does the same with rt.apk.
+      - name: Publish it beside the site
+        if: github.ref == 'refs/heads/main'
+        run: |
+          set -eu
+          cp native/android/app/build/outputs/apk/debug/app-debug.apk phone.apk
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add phone.apk
+          if git diff --cached --quiet; then
+            echo "apk unchanged"
+          else
+            git commit -m "Android app build ${{ github.run_number }}"
+            git pull --rebase origin main
+            git push origin HEAD:main
+          fi
 
   apple:
     name: iPhone, iPad and Mac

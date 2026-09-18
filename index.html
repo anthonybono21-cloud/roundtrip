@@ -100,12 +100,12 @@
   #card .where{color:#eaf1fb;margin-top:6px;font-size:20px;font-weight:500}
   #card .meta{margin-top:12px;font-size:17px;color:#eaf1fb;
     display:flex;gap:16px;align-items:baseline;flex-wrap:wrap}
-  #card .clock{font-variant-numeric:tabular-nums;color:#fff;font-size:22px;font-weight:600;
-    letter-spacing:.01em}
-  /* The temperature carries the line, on Anthony's word: bigger than the
-     place name, and the first thing read from across the room. */
-  #card .temp{font-variant-numeric:tabular-nums;color:#fff;font-size:46px;font-weight:600;
-    letter-spacing:-.02em;line-height:1}
+  /* The temperature and the time are twins, on Anthony's word: one size, one
+     weight, one line, the temperature first, and both bigger than the place
+     name — the pair you read from across the room. They share a rule so that
+     nothing can change one without changing the other. */
+  #card .temp,#card .clock{font-variant-numeric:tabular-nums;color:#fff;font-size:46px;
+    font-weight:600;letter-spacing:-.02em;line-height:1}
   /* Empty until the reading arrives, and empty for good if it never does:
      the row simply has one item in it, and nothing says so on the picture. */
   #card .temp:empty{display:none}
@@ -115,7 +115,8 @@
     #card .lockup{height:52px}
     #card .lines{max-width:calc(100vw - 80px - 64px)}
     #card .place{font-size:28px}
-    #card .temp{font-size:34px}
+    /* Small enough that the pair still shares one line in a phone-width column. */
+    #card .temp,#card .clock{font-size:28px}
   }
 
   #phase{position:fixed;left:40px;top:34px;font-size:11px;letter-spacing:.16em;
@@ -204,8 +205,7 @@
   .tv #card .place{font-size:clamp(22px,3.7vh,52px)}
   .tv #card .where{font-size:clamp(14px,2.6vh,36px);margin-top:.7vh}
   .tv #card .meta{font-size:clamp(13px,2.3vh,32px);margin-top:1.3vh;gap:1.8vw}
-  .tv #card .clock{font-size:clamp(15px,2.6vh,36px)}
-  .tv #card .temp{font-size:clamp(28px,5.8vh,78px)}
+  .tv #card .temp,.tv #card .clock{font-size:clamp(28px,5.8vh,78px)}
   .tv #phase{left:5vw;top:5vh;font-size:clamp(8px,1.15vh,15px)}
   .tv #pinned,.tv #rt-set{right:5vw;top:5vh;font-size:clamp(8px,1.15vh,15px)}
   .tv #attrib{right:5vw;bottom:4.6vh;font-size:clamp(7px,1vh,13px);max-width:38vw}

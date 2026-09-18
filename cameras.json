@@ -13420,6 +13420,67 @@
         "street"
       ],
       "ads": "unknown"
+    },
+    {
+      "name": "Memphis airport, FedEx World Hub",
+      "location": "Memphis, Tennessee",
+      "country": "United States",
+      "category": "airport",
+      "provider": "WREG-TV News Channel 3",
+      "kind": "hls",
+      "url": "https://wreglivecams.com/hls/airport.m3u8",
+      "watch_url": "https://wreg.com/weather-cameras/airport-cam/",
+      "requires_login": false,
+      "last_verified": "2026-09-18",
+      "notes": "Restored from the original desk-companion catalog. Public WREG airport view including the FedEx World Hub; not the corporate headquarters. Direct 1080p live HLS. Camera position is approximate, inherited from the earlier visual research.",
+      "scene_set": "world",
+      "in_sets": [
+        "world"
+      ],
+      "pose": {
+        "lat": 35.0686,
+        "lng": -89.9732,
+        "alt_m": 25,
+        "heading": 198,
+        "pitch": -6,
+        "fov": 62,
+        "aligned": false,
+        "view": "landscape",
+        "confidence": "low",
+        "basis": "Approximate camera position from original aviation research, subject Memphis airport. Mounting point is not published; position uncertainty about 1 km."
+      },
+      "timezone": "America/Chicago",
+      "audio": "unknown",
+      "audio_basis": "No sound classification established; source audio only if present.",
+      "tags": [
+        "fedex",
+        "fed ex",
+        "federal express",
+        "fedex world hub",
+        "superhub",
+        "memphis",
+        "mem",
+        "kmem",
+        "tennessee",
+        "tn",
+        "usa",
+        "united states",
+        "north america",
+        "airport",
+        "aviation",
+        "cargo",
+        "planes",
+        "plane spotting",
+        "logistics",
+        "wreg"
+      ],
+      "check": {
+        "verdict": "live",
+        "checked": "2026-09-18",
+        "method": "HLS playlist responds HTTP 200 with CORS; browser playback verification recorded in research/fedex-camera-restoration.json"
+      },
+      "night_hint": "unknown",
+      "replay_risk": "low"
     }
   ],
   "rejects": [

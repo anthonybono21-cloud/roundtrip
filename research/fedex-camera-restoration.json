@@ -1,0 +1,24 @@
+{
+  "checked_at": "2026-09-18T15:25:00Z",
+  "camera": "Memphis airport, FedEx World Hub",
+  "source": "https://wreg.com/weather-cameras/airport-cam/",
+  "stream": "https://wreglivecams.com/hls/airport.m3u8",
+  "recovered_from": "Earlier desk-companion tour catalog, record kmem-wreg-airport",
+  "verification": {
+    "playlist_http": 200,
+    "cors": "*",
+    "actual_browser_playback": true,
+    "video_dimensions": [1920, 1080],
+    "sample_current_time_seconds": 34.586626,
+    "ready_state": 4,
+    "paused": false,
+    "scene_observed": "Airport control tower, cargo buildings, purple aircraft tails, taxiways and foreground trees.",
+    "search": "fedex returns this camera in RoundtripSearch",
+    "cleanup": "The normal rotation left Memphis and removed the retired video element."
+  },
+  "limitations": [
+    "This is the airport and FedEx World Hub area, not the corporate headquarters.",
+    "Camera mount coordinates remain approximate and unaligned.",
+    "Desktop browser verified; ET401 hardware was not available to this session."
+  ]
+}

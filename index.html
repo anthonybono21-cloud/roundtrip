@@ -271,6 +271,8 @@ import * as THREE from './vendor/three.module.js';
 import { createSatelliteEarth } from './satellite-earth.js';
 import { createSpaceScene } from './space-scene.js';
 import { createJourney, createRetreat } from './journey.js';
+import { mountDirectVideo } from './live-video.js';
+import { createTileLoader } from './tile-loader.js';
 
 /* ─────────────────────────────────────────────────────────────────────────────
    Roundtrip — orbit-to-camera viewer for the ET45 desk app, entirely on free data.
@@ -284,7 +286,7 @@ import { createJourney, createRetreat } from './journey.js';
 /* Bumped by hand with each push. It shows in the corner with the credits, so
    a page that is not doing what a change says it should can be told apart from
    a page a browser or a television is still serving from yesterday. */
-const BUILD = 'Place first compact · 2026-09-18';
+const BUILD = 'Compact overlay + Memphis · 2026-09-18';
 
 const CFG = {
   dwell:        90,     // seconds on a live feed before moving on
@@ -427,31 +429,8 @@ function lightLabel(el){
 /* ── tile fetching ──────────────────────────────────────────────────────── */
 
 // Bound network/decode pressure; repeated requests share a promise and cache.
-const tileCache = new Map(), tileQueue = [];
-let tileActive = 0;
-function loadImage(url){
-  if (tileCache.has(url)) return tileCache.get(url);
-  const promise = new Promise((resolve,reject) => {
-    tileQueue.push(() => {
-      const im = new Image(); im.crossOrigin = 'anonymous';
-      const finish = (error) => {
-        clearTimeout(timer); im.onload = im.onerror = null;
-        tileActive--; pumpTiles();
-        if(error){tileCache.delete(url);reject(error);}else resolve(im);
-      };
-      const timer = setTimeout(() => { im.src=''; finish(new Error('tile timeout')); },15000);
-      im.onload=()=>finish();im.onerror=()=>finish(new Error('tile unavailable'));
-      im.src=url;
-    });
-    pumpTiles();
-  });
-  tileCache.set(url,promise);
-  while(tileCache.size>96) tileCache.delete(tileCache.keys().next().value);
-  return promise;
-}
-function pumpTiles(){
-  while(tileActive<8 && tileQueue.length){tileActive++;tileQueue.shift()();}
-}
+const tileLoader = createTileLoader();
+const loadImage = (url, consumer=null) => tileLoader.load(url, consumer);
 
 /* The sharpest zoom whose mosaic still fits a tile budget. Degrees of
    longitude shrink toward the poles, so this has to be computed, not assumed. */
@@ -488,7 +467,7 @@ function overlaySource(){
 
 /* Mosaic the imagery tiles covering a patch into one canvas texture.
    Returns {canvas, bounds} so the mesh UVs can be mapped onto it exactly. */
-async function imageryMosaic(lat, lng, halfM, z){
+async function imageryMosaic(lat, lng, halfM, z, consumer){
   z = Math.min(z, CFG.imagery.maxZoom);
   const dLat = halfM / 111320;
   const dLng = halfM / (111320 * Math.cos(lat*DEG));
@@ -504,11 +483,12 @@ async function imageryMosaic(lat, lng, halfM, z){
   let loaded=0;
   const wrapX=x=>((x%(2**z))+(2**z))%(2**z);
   for (let x=x0; x<=x1; x++) for (let y=y0; y<=y1; y++){
-    jobs.push(loadImage(CFG.imagery.url(z,wrapX(x),y))
-      .then(im => {ctx.drawImage(im,(x-x0)*256,(y-y0)*256,256,256);loaded++;})
+    jobs.push(loadImage(CFG.imagery.url(z,wrapX(x),y), consumer)
+      .then(im => {if(consumer.cancelled)return;ctx.drawImage(im,(x-x0)*256,(y-y0)*256,256,256);loaded++;})
       .catch(()=>{}));                       // a missing tile leaves the backing colour
   }
   await Promise.all(jobs);
+  if (consumer.cancelled) throw new Error('Destination changed');
   if (loaded/jobs.length < .9) throw new Error('Incomplete satellite detail');
 
   /* Names and borders go on after the imagery, so they sit over it. They are
@@ -524,11 +504,12 @@ async function imageryMosaic(lat, lng, halfM, z){
   if (z <= CFG.imagery.overlayMaxZoom){
     marks.done = (async () => {
       const src = await overlaySource();
-      if (!src) return;
+      if (!src || consumer.cancelled) return;
       const jobs2 = [];
       for (let x=x0; x<=x1; x++) for (let y=y0; y<=y1; y++){
-        jobs2.push(loadImage(src.url(z,wrapX(x),y))
-          .then(im => { ctx.drawImage(im,(x-x0)*256,(y-y0)*256,256,256);
+        jobs2.push(loadImage(src.url(z,wrapX(x),y), consumer)
+          .then(im => { if(consumer.cancelled)return;
+                        ctx.drawImage(im,(x-x0)*256,(y-y0)*256,256,256);
                         if (marks.onPaint) marks.onPaint(); })
           .catch(()=>{}));            // no tile there is normal: open sea, or past the cache
       }
@@ -653,27 +634,34 @@ function detailTexture(canvas){
   t.wrapS=t.wrapT=THREE.ClampToEdgeWrapping;
   renderer.initTexture(t);return t;
 }
-function prepareDetail(pose){
+function prepareDetail(pose, priority=0){
   const key=`${pose.lat},${pose.lng}`;
-  if(preparedDetail?.key===key) return preparedDetail.promise;
+  if(preparedDetail?.key===key){
+    preparedDetail.consumer.priority=Math.max(priority,preparedDetail.consumer.priority);
+    tileLoader.prune();return preparedDetail.promise;
+  }
+  if(preparedDetail)preparedDetail.consumer.cancelled=true;
+  tileLoader.prune();
   preparedDetail?.promise.then(rows=>rows.forEach(row=>row?.preparedTexture?.dispose()));
+  const consumer={cancelled:false,priority};
   const promise=Promise.all(DETAIL_LEVELS.map(async lv=>{
     const halfM=lv.spanDeg/2*111320;
     const z=fitZoom(pose.lat,pose.lng,halfM,lv.budget,lv.maxZ);
     try {
-      const mosaic=await imageryMosaic(pose.lat,pose.lng,halfM,z);
+      const mosaic=await imageryMosaic(pose.lat,pose.lng,halfM,z,consumer);
       // Preloaded labels finish before this texture reaches the screen.
       await mosaic.marks?.done;
       await new Promise(resolve=>setTimeout(resolve,20));
+      if(consumer.cancelled)return null;
       mosaic.preparedTexture=detailTexture(mosaic.canvas);
       return mosaic;
     } catch {return null;}
   }));
-  preparedDetail={key,promise};return promise;
+  preparedDetail={key,promise,consumer};return promise;
 }
 async function stageDetail(pose){
   const generation=++detailGeneration;
-  const mosaics=await prepareDetail(pose);
+  const mosaics=await prepareDetail(pose,1);
   if(generation!==detailGeneration) return;
   for(const [i,mesh] of detail.entries()){
     const mosaic=mosaics[i];
@@ -741,6 +729,7 @@ function arrivalPose(pose){
 
 const liveEl = $('#live');
 let liveFrame = null;
+let directVideo = null;
 
 function mountLive(cam){
   unmountLive();
@@ -757,13 +746,19 @@ function mountLive(cam){
     adsWatch(f);                         // listen for an advert over the camera
   } else if (cam.url){
     const v = document.createElement('video');
-    v.src = cam.url; v.autoplay = v.muted = v.playsInline = true;
     v.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;object-fit:cover';
     liveEl.appendChild(v);
     liveFrame = v;
+    directVideo = mountDirectVideo(v,cam,{suspended:state.suspended,onError:error=>{
+      if(liveFrame!==v)return;
+      console.warn('Roundtrip direct camera:',cam.name,error.message);
+      note('This camera is unavailable. Moving to the next view.');
+      skipNext();
+    }});
   }
 }
 function unmountLive(){
+  directVideo?.destroy();directVideo=null;
   liveEl.classList.remove('on','zoom'); liveEl.innerHTML=''; liveFrame=null;
   adsReset();
   audio.vol = audio.target = 0;     // a fresh player starts muted
@@ -1095,6 +1090,7 @@ let externalCover=false,suspendedAt=0;
 function setCovered(covered){
   externalCover=!!covered;
   const suspend=externalCover||document.hidden;
+  directVideo?.setSuspended(suspend);
   if(suspend===state.suspended)return;
   state.suspended=suspend;
   if(suspend){
@@ -1102,7 +1098,7 @@ function setCovered(covered){
   }else{
     const elapsed=clock()-suspendedAt;
     state.t0+=elapsed;state.lastT=state.orbitT=clock();
-    ytCmd('playVideo');liveFrame?.play?.()?.catch?.(()=>{});
+    ytCmd('playVideo');
   }
 }
 document.addEventListener('visibilitychange',()=>setCovered(externalCover));
@@ -1536,6 +1532,13 @@ function tick(){
       break;
     }
     case 'settle':
+      // Reveal only after the direct player has produced a frame. A broken
+      // stream moves on after the bounded wait instead of fading to black.
+      if(directVideo && !directVideo.isReady()){
+        if(clock()-state.t0<12)break;
+        note('This camera is taking too long. Moving to the next view.');
+        skipNext();break;
+      }
       // Hold the geographical view briefly while a responding player buffers.
       // Some embeds never answer; retain a bounded fallback for those devices.
       if(ads.playerState!==null && ads.playerState!==1 && !ads.error
@@ -2265,6 +2268,7 @@ const progress = v => { bar.style.width = (v*100)+'%'; };
   // Handle for the console: Roundtrip.dive('Rialto') jumps straight to a
   // camera, Roundtrip.CFG tunes timings live while you watch.
   window.Roundtrip = { state, CFG, beginDive, pickNext, sunElevation, sunPosition,
+    tileStats: tileLoader.stats,
     // Preview another moment: ET45.setTime('2026-09-17T06:20:00Z'), or null to
     // go back to the real clock.
     setTime: iso => { timeWarp = iso ? (new Date(iso) - Date.now()) : 0;

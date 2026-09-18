@@ -13,11 +13,25 @@ export async function createSatelliteEarth({ THREE, renderer, scene, altitude, s
   }
   const status = { mode:'fallback', generatedAt:null, satellites:[], errors:[] };
   const loader = new THREE.TextureLoader();
-  const load = url => new Promise((resolve,reject) => loader.load(url, t => {
-    t.colorSpace=THREE.SRGBColorSpace;
-    t.anisotropy=Math.min(8,renderer.capabilities.getMaxAnisotropy());
-    renderer.initTexture(t); resolve(t);
-  },undefined,reject));
+  // Loading an image must not upload it. A request started behind the video
+  // may finish after the next flight has made the globe visible again.
+  const load = url => new Promise((resolve,reject) => {
+    let settled=false, texture;
+    const fail = error => {
+      if(settled)return;
+      settled=true;clearTimeout(deadline);texture?.dispose();reject(error);
+    };
+    const deadline=setTimeout(()=>fail(new Error('Satellite image timeout')),15000);
+    try{
+      texture=loader.load(url,t=>{
+        if(settled)return; // The timed-out texture has already been disposed.
+        settled=true;clearTimeout(deadline);
+        t.colorSpace=THREE.SRGBColorSpace;
+        t.anisotropy=Math.min(8,renderer.capabilities.getMaxAnisotropy());
+        resolve(t);
+      },undefined,fail);
+    }catch(error){fail(error);}
+  });
   const material = new THREE.ShaderMaterial({
     uniforms, toneMapped:false,
     vertexShader:`varying vec3 world; varying vec2 baseUv;
@@ -75,25 +89,71 @@ export async function createSatelliteEarth({ THREE, renderer, scene, altitude, s
   const mesh = new THREE.Mesh(new THREE.SphereGeometry(1,160,96),material);
   mesh.name='geocolor-earth'; scene.add(mesh);
   uniforms.fallback.value=await load(new URL('./assets/earth-day.jpg',import.meta.url).href).catch(()=>placeholder);
+  // The fallback is the first visible surface and must also work when callers
+  // start with canInstall=false. Subsequent satellite work uses the phase gate.
+  if(uniforms.fallback.value!==placeholder)renderer.initTexture(uniforms.fallback.value);
   let lastCheck=0, refreshing=false, pending=null;
+  let installing=null, completedGeneration=null;
+  const installedRows=new Map();
+  const textureName=i=>i==='conus'?'conus':'disk'+i;
   function installPending(){
-    if(!pending || !canInstall())return;
-    const {updates,manifest}=pending;
-    for(const {i,row,texture} of updates){
-      const name=i==='conus'?'conus':'disk'+i;
-      const old=uniforms[name].value;uniforms[name].value=texture;
+    if(installing)return installing;
+    if(!pending || !canInstall())return Promise.resolve();
+    installing=advancePending().finally(()=>{installing=null;});
+    return installing;
+  }
+  async function advancePending(){
+    const batch=pending;
+    while(batch.next<batch.requests.length){
+      // Pause both new image work and uploads until the next covered phase.
+      // The app calls installPending while live; no polling timer is required.
+      if(!canInstall())return;
+      const request=batch.requests[batch.next],{i,row}=request,name=textureName(i);
+      const previous=installedRows.get(i);
+      if(!request.texture && row.sha256 && previous?.sha256===row.sha256 && previous?.id===row.id){
+        batch.updates.push({i,row,texture:uniforms[name].value});
+        batch.next++;continue;
+      }
+      try {
+        if(!request.texture){
+          const url=new URL(row.image,batch.imageRoot);
+          url.searchParams.set('v',row.sha256?.slice(0,12)||batch.manifest.generatedAt);
+          request.texture=await load(url.href);
+        }
+        // Recheck after decode: the user may have pressed Next meanwhile.
+        if(!canInstall())return;
+        renderer.initTexture(request.texture);
+        batch.updates.push({i,row,texture:request.texture});
+      }catch{
+        request.texture?.dispose();batch.failed=true;
+        status.errors.push(i==='conus'?'Regional image unavailable':'Image unavailable: '+row.id);
+      }
+      batch.next++;
+      // One upload per task, allowing input/phase changes between large maps.
+      if(batch.next<batch.requests.length)await new Promise(resolve=>setTimeout(resolve,0));
+    }
+    if(!canInstall())return;
+    for(const {i,row,texture} of batch.updates){
+      const name=textureName(i),old=uniforms[name].value;
+      uniforms[name].value=texture;installedRows.set(i,row);
       if(i==='conus'){
         uniforms.hasConus.value=1;uniforms.conusExtent.value.fromArray(row.extent);
       }else uniforms['spec'+i].value.set(row.longitude*Math.PI/180,row.half,row.sweep==='y'?1:0,1);
-      if(old!==placeholder)old.dispose();
+      if(old!==placeholder && old!==texture)old.dispose();
     }
-    if(updates.some(x=>x.i!=='conus')){
-      status.mode='geocolor';status.generatedAt=manifest.generatedAt;status.satellites=manifest.satellites;
+    if(batch.updates.length){
+      status.generatedAt=batch.manifest.generatedAt;
+      // A failed replacement retains the previous capture metadata as well as
+      // its pixels. A new manifest date must not falsely freshen an old image.
+      status.satellites=[...installedRows].filter(([i])=>i!=='conus').map(([,row])=>row);
+      if(status.satellites.length)status.mode='geocolor';
     }
+    if(!batch.failed)completedGeneration=batch.manifest.generatedAt;
+    status.errors=status.errors.slice(-8);
     pending=null;window.dispatchEvent(new Event('rt-credit'));
   }
   async function refresh(force=false) {
-    installPending();
+    await installPending();
     if(refreshing || pending || (!force && Date.now()-lastCheck<20*60*1000)) return;
     refreshing=true;lastCheck=Date.now();
     try {
@@ -108,23 +168,11 @@ export async function createSatelliteEarth({ THREE, renderer, scene, altitude, s
         }catch{}finally{clearTimeout(deadline);}
       }
       if(!manifest)throw new Error('Satellite imagery unavailable; keeping last good Earth');
-      if(status.generatedAt===manifest.generatedAt) return;
-      // Decode/upload serially while video covers the globe. Keep old maps on
-      // failure. The caller only refreshes in boot or under the live video.
-      const updates=[];
-      for(const [i,row] of manifest.satellites.slice(0,5).entries()) {
-        try {
-          const url=new URL(row.image,imageRoot);url.searchParams.set('v',row.sha256?.slice(0,12)||manifest.generatedAt);
-          const texture=await load(url.href);
-          updates.push({i,row,texture});
-        } catch {status.errors.push('Image unavailable: '+row.id);}
-      }
-      if(manifest.conus)try {
-        const row=manifest.conus,url=new URL(row.image,imageRoot);url.searchParams.set('v',row.sha256?.slice(0,12)||manifest.generatedAt);
-        const texture=await load(url.href);
-        updates.push({i:'conus',row,texture});
-      } catch {status.errors.push('Regional image unavailable');}
-      pending={updates,manifest};installPending();
+      if(completedGeneration===manifest.generatedAt) return;
+      const requests=manifest.satellites.slice(0,5).map((row,i)=>({i,row}));
+      if(manifest.conus)requests.push({i:'conus',row:manifest.conus});
+      pending={updates:[],requests,next:0,failed:false,manifest,imageRoot};
+      await installPending();
     } catch(error){status.errors.push(error.message);}
     finally {refreshing=false;status.errors=status.errors.slice(-8);}
     window.dispatchEvent(new Event('rt-credit'));

@@ -76,6 +76,8 @@ def classic_module(rel, imported):
             'function bundledImageURL(image, root){\n'
             "  return image.startsWith('data:') ? {href:image,searchParams:{set(){}}} : new URL(image,root);\n"
             '}\n' + source)
+    if rel == 'live-video.js':
+        source = source.replace("'./vendor/hls.light.min.js'", json.dumps(data_uri('vendor/hls.light.min.js', 'text/javascript')))
     assert 'import.meta' not in source, f'unresolved module asset in {rel}'
     assert not re.search(r'^\s*(import|export)\s', source, re.M), f'unresolved module syntax in {rel}'
     return 'const {' + ','.join(names) + '} = (()=>{\n' + source + '\nreturn {' + ','.join(names) + '};\n})();\n'

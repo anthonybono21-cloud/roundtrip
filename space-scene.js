@@ -7,6 +7,15 @@ const DEG = Math.PI / 180;
 const J2000 = Date.UTC(2000, 0, 1, 12);
 const EARTH_KM = 6371;
 const clamp = (x, a, b) => Math.min(b, Math.max(a, x));
+// Display scale approved for the travel scene. Orbital positions and solar
+// direction remain astronomical; apparent sizes intentionally are not to scale.
+export const CELESTIAL_STYLE = Object.freeze({
+  moonScale: 4,
+  moonEarthshine: 0.028,
+  sunScale: 2.25,
+  sunPhysicalDiameterDegrees: 0.53,
+  sunDiskRadiusUV: 0.2
+});
 
 export function siderealAngle(date) {
   const days = (+date - J2000) / 86400000;
@@ -68,51 +77,58 @@ export async function createSpaceScene({ THREE, scene, camera }) {
   const fromTextureMeridian = new THREE.Vector3(1, 0, 0);
   const resources = [];
   const keep = object => (resources.push(object), object);
-  const stats = { stars: 0, drawCalls: 2, ephemerisUpdates: 0, moonTexture: 'loading', starCatalog: 'loading', lastUpdate: null };
+  const stats = { stars: 0, drawCalls: 2, ephemerisUpdates: 0, moonTexture: 'loading', starCatalog: 'loading', lastUpdate: null,
+    moonDisplayScale: CELESTIAL_STYLE.moonScale,
+    sunDiameterDegrees: CELESTIAL_STYLE.sunPhysicalDiameterDegrees * CELESTIAL_STYLE.sunScale };
   const starOpacity = { value: 0.88 };
   const dpr = { value: Math.min(globalThis.devicePixelRatio || 1, 2) };
 
-  // A true ~0.53 degree solar disk; the larger surrounding area is only glare.
+  // A modestly enlarged ~1.19 degree disk, with a warm local glow in the same
+  // draw call. Neither the disk nor glow changes the underlying Earth imagery.
   const sunMaterial = keep(new THREE.ShaderMaterial({
     transparent: true, depthWrite: false, depthTest: true, toneMapped: false,
-    uniforms: { strength: { value: 1 } },
+    uniforms: { strength: { value: 1 }, diskRadius: { value: CELESTIAL_STYLE.sunDiskRadiusUV } },
     vertexShader: `varying vec2 vUv; void main(){vUv=uv;gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.0);${skyDepth}}`,
-    fragmentShader: `varying vec2 vUv; uniform float strength;
+    fragmentShader: `varying vec2 vUv; uniform float strength; uniform float diskRadius;
       void main(){
         float r=length(vUv-0.5)*2.0;
-        float disk=1.0-smoothstep(0.117,0.125,r);
-        float glow=exp(-r*7.0)*0.20*(1.0-smoothstep(0.65,1.0,r));
+        float disk=1.0-smoothstep(diskRadius*0.97,diskRadius,r);
+        float outside=max(r-diskRadius,0.0);
+        float glow=exp(-outside*8.0)*0.24*(1.0-smoothstep(0.65,1.0,r));
         float alpha=clamp(disk+glow,0.0,1.0)*strength;
         if(alpha<0.002)discard;
-        gl_FragColor=vec4(mix(vec3(1.0,0.73,0.36),vec3(1.0,0.985,0.94),disk),alpha);
+        float limb=clamp(r/diskRadius,0.0,1.0);
+        vec3 diskColor=mix(vec3(1.0,0.985,0.92),vec3(1.0,0.88,0.62),limb*limb*0.65);
+        gl_FragColor=vec4(mix(vec3(1.0,0.70,0.32),diskColor,disk),alpha);
       }`
   }));
   const sun = new THREE.Mesh(keep(new THREE.PlaneGeometry(1, 1)), sunMaterial);
-  sun.name = 'sun-angular-diameter-0.53deg';
+  sun.name = 'sun-display-diameter-1.19deg';
   const sunDistance = 80;
-  sun.scale.setScalar(2 * sunDistance * Math.tan(0.265 * DEG) / 0.125);
+  sun.scale.setScalar(2 * sunDistance * Math.tan(stats.sunDiameterDegrees * 0.5 * DEG) / CELESTIAL_STYLE.sunDiskRadiusUV);
   sun.renderOrder = -20;
   sun.frustumCulled = false;
   group.add(sun);
 
   const moonMaterial = keep(new THREE.ShaderMaterial({
     transparent: true, depthWrite: false, depthTest: true, toneMapped: false,
-    uniforms: { sunDirection: { value: sunDirection }, map: { value: null }, hasMap: { value: false }, opacity: { value: 1 } },
+    uniforms: { sunDirection: { value: sunDirection }, map: { value: null }, hasMap: { value: false }, opacity: { value: 1 }, earthshine: { value: CELESTIAL_STYLE.moonEarthshine } },
     vertexShader: `varying vec2 vUv; varying vec3 vNormal;
       void main(){vUv=uv;vNormal=normalize(mat3(modelMatrix)*normal);
       gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.0);${skyDepth}}`,
     fragmentShader: `varying vec2 vUv; varying vec3 vNormal;
-      uniform vec3 sunDirection; uniform sampler2D map; uniform bool hasMap; uniform float opacity;
+      uniform vec3 sunDirection; uniform sampler2D map; uniform bool hasMap; uniform float opacity; uniform float earthshine;
       void main(){
         vec3 surface=hasMap?texture2D(map,vUv).rgb:vec3(0.48);
         float lit=max(dot(normalize(vNormal),sunDirection),0.0);
-        // Small earthshine keeps the unlit silhouette legible, with no fake rim.
-        gl_FragColor=vec4(surface*(0.012+0.988*sqrt(lit)),opacity);
+        // Gentle earthshine reveals the unlit surface without flattening phase.
+        gl_FragColor=vec4(surface*(earthshine+(1.0-earthshine)*sqrt(lit)),opacity);
         #include <colorspace_fragment>
       }`
   }));
   const moon = new THREE.Mesh(keep(new THREE.SphereGeometry(1737.4 / EARTH_KM, 32, 20)), moonMaterial);
-  moon.name = 'moon-physical-radius-distance-phase';
+  moon.name = 'moon-display-scale-4x';
+  moon.scale.setScalar(CELESTIAL_STYLE.moonScale);
   moon.renderOrder = -10;
   moon.frustumCulled = false;
   group.add(moon);

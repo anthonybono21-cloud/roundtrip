@@ -43,11 +43,25 @@ disabled because their apparent depth is controlled in the vertex shader.
   [2019 1024x512 JPEG](https://svs.gsfc.nasa.gov/vis/a000000/a004700/a004720/lroc_color_poles_1k.jpg)
   saved unchanged as `assets/moon-lro.jpg`. No external texture request at runtime.
 - Sun: uses the same supplied solar direction that lights the Earth. The disk
-  subtends approximately 0.53 degrees. A small shader glare surrounds it. It does
+  is displayed at **2.25 times its natural angular size**, approximately **1.19
+  degrees** across. A restrained warm shader glow surrounds it. It does
   not illuminate or recolor the satellite photograph.
 
-Moon radius is 1,737.4 km relative to an Earth radius of 6,371 km. Its distance is
-the calculated ~364,000–406,000 km. Neither celestial disk is enlarged for drama.
+The Moon's base geometry uses a 1,737.4 km radius relative to an Earth radius of
+6,371 km, then deliberately scales it **4 times larger** for visibility. Its
+center stays at the calculated ~364,000–406,000 km distance and actual approximate
+direction. This produces an approximately **2 degree** apparent disk, exposing
+more of the existing NASA surface texture. These enlarged apparent sizes are
+artistic presentation choices; **this is not a scale model or eclipse simulator**.
+The darker lunar surface retains a gentle earthshine term while its phase remains
+driven by the supplied Sun direction. The image itself is unmodified.
+
+`CELESTIAL_STYLE` documents the display choices in one place. The enhancement adds
+no draw calls, textures, timers, animation loops, stars, light sources, or full-screen
+post-processing. The original star catalog and brightness are unchanged. With
+motion disabled, the same static celestial composition remains complete; motion
+and reduced-motion camera behavior continue to belong to the parent app.
+
 Stars use display-adjusted intensity so they remain visible beside the globe;
 that is an artistic exposure choice, not a camera exposure simulation. No planets,
 nebulae, decorative galaxies, lens flares, or invented star motion are added.

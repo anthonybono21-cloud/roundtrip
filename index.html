@@ -781,13 +781,12 @@ function buildDetail(){
    built to the mosaic's own bounds needs no UV remapping: three.js lays out
    phi/theta exactly the way latLngToVec3 does. */
 function stageDetail(pose){
-  const jobs = detail.map((mesh, i) => stageOneDetail(mesh, i, pose).catch(()=>{}));
-  // Leave orbit as soon as the levels that carry the top of the descent are
-  // up. L2 and L3 do not reach full opacity until 20km and 6.7km, a long way
-  // into the dive, and a level that lands after its altitude eases in over
-  // 0.7s rather than popping, so waiting for their tiles before departing
-  // only lengthens the shot of the globe.
-  return Promise.all(jobs.slice(0, 2));
+  // Every level, before the dive starts. Leaving with only the top two staged
+  // saved a second or so in orbit and spent it where it actually shows: the
+  // last stretch of the descent arriving soft while L2 and L3 were still on
+  // their way. The departure now covers the wait smoothly instead of
+  // stuttering through it, so there is nothing left to gain by going early.
+  return Promise.all(detail.map((mesh, i) => stageOneDetail(mesh, i, pose).catch(()=>{})));
 }
 function stageOneDetail(mesh, i, pose){
   return (async () => {
@@ -1649,21 +1648,34 @@ function backToOrbit(){
   setPhase('retreat');
 }
 
-/* Where the globe rests between dives. Framing the sun put the camera over
-   the same part of the world every single time, so every retreat ended on the
-   same shot of North America and the next dive set off from there. Frame the
-   next destination instead: the wait then reads as the planet turning toward
-   where it is about to go. Kept off to one side and above, so the dive still
-   has somewhere to travel rather than dropping down its own axis. */
+/* Where the globe rests between dives, and it has to do two things at once.
+   Framing the sun alone put the camera over the same part of the world every
+   single time, so every retreat ended on the same shot. Framing the next
+   destination alone swung it round onto the night side half the time, and a
+   dark globe is not what anyone wants to sit and watch. So it turns toward the
+   next place and stops at the terminator: the wait reads as the planet turning
+   toward where it is about to go, and the lit face stays in frame. */
+const RESTLIT = 58;   // how far from the subsolar point the rest pose may go
 function nextFramedOrbit(){
   const cam = peekNext();
   if (!cam || !cam.pose) return sunFramedOrbit();
-  const b = CFG.breathe, p = cam.pose;
-  return {
-    lat: clamp(p.lat*0.86 + 5 + drift(state.sway*0.63, 1.3)*5*b, -62, 66),
-    lng: p.lng - 17 + drift(state.sway, 4.7)*9*b,
-    r:   3.1 + drift(state.sway*0.41, 8.9)*0.18*b,
-  };
+  const b = CFG.breathe, p = cam.pose, s = sunPosition();
+  let lat = clamp(p.lat*0.86 + 5 + drift(state.sway*0.63, 1.3)*5*b, -62, 66);
+  let lng = p.lng - 17 + drift(state.sway, 4.7)*9*b;
+  const here = latLngToVec3(lat, lng, 1), sun = latLngToVec3(s.lat, s.lng, 1);
+  const off = Math.acos(clamp(here.dot(sun), -1, 1))/DEG;
+  if (off > RESTLIT){
+    if (off > 179) return sunFramedOrbit();       // nothing left to slide along
+    // Slide back along the great circle toward the sun until the lit face is
+    // in frame. Slerp rather than a straight lerp, because the angle is the
+    // whole point of the exercise.
+    const sO = Math.sin(off*DEG);
+    const v = here.multiplyScalar(Math.sin(RESTLIT*DEG)/sO)
+                  .addScaledVector(sun, Math.sin((off - RESTLIT)*DEG)/sO).normalize();
+    lat = Math.asin(clamp(v.y, -1, 1))/DEG;
+    lng = ((Math.atan2(v.z, -v.x)/DEG - 180) + 540) % 360 - 180;
+  }
+  return { lat, lng, r: 3.1 + drift(state.sway*0.41, 8.9)*0.18*b };
 }
 
 /* The fallback, used only when there is no next camera to frame: a fixed

@@ -42,7 +42,15 @@
   var tv = q === '1' ? true : q === '0' ? false : (tvUA || big);
   if (tv)   d.className += ' tv';
   if (fire) d.className += ' firetv';
-  window.RoundtripTV = { on: tv, fire: fire, forced: q === '1' || q === '0' };
+  // A Fire Stick's graphics chip is a small fraction of a phone's, and the full
+  // globe ran at 3 to 4 frames a second on one. Lite draws less for the same
+  // picture; nothing else is touched by it. ?lite=1 / ?lite=0 forces it for a
+  // test on a desk, and is not remembered.
+  var lite = fire, lq = null;
+  try { lq = new URLSearchParams(location.search).get('lite'); } catch(e){}
+  if (lq === '1') lite = true; else if (lq === '0') lite = false;
+  if (lite) d.className += ' lite';
+  window.RoundtripTV = { on: tv, fire: fire, lite: lite, forced: q === '1' || q === '0' };
 })();
 </script>
 <style>
@@ -55,6 +63,10 @@
     -webkit-font-smoothing:antialiased}
   #stage{position:fixed;inset:0}
   canvas{display:block;width:100%;height:100%}
+  /* Lite: a blur behind a panel is redone every frame the globe or the feed
+     moves under it, which a Fire Stick cannot spare. The panels are opaque
+     enough to read without it. */
+  html.lite *{backdrop-filter:none!important;-webkit-backdrop-filter:none!important}
 
   /* Live feed sits above the 3D canvas and is crossfaded in on arrival. */
   /* No backing colour: an unpainted player would otherwise crossfade to a
@@ -534,8 +546,13 @@ async function imageryMosaic(lat, lng, halfM, z, consumer){
 
 /* ── renderer ───────────────────────────────────────────────────────────── */
 
+// Set by the detection block at the top of the page: a Fire Stick, or ?lite=1.
+// At ten feet a globe drawn at half size and scaled up looks the same, and it
+// is a quarter of the pixels for a chip that was spending 300ms on each frame.
+const LITE = !!window.RoundtripTV?.lite;
+const PIXEL_CAP = LITE ? 1 : 2;
 const renderer = new THREE.WebGLRenderer({ antialias:true, powerPreference:'high-performance' });
-renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+renderer.setPixelRatio(Math.min(devicePixelRatio, PIXEL_CAP));
 renderer.toneMapping = THREE.ACESFilmicToneMapping;
 renderer.toneMappingExposure = 1.18;
 renderer.outputColorSpace = THREE.SRGBColorSpace;
@@ -573,7 +590,10 @@ const DETAIL_LEVELS = [
   { spanDeg:1.10, budget: 72, maxZ:12, altIn:0.0520, altFull:0.01300 }, // 122km   74    98
   { spanDeg:0.24, budget:100, maxZ:14, altIn:0.0135, altFull:0.00320 }, //  27km   13    24
   { spanDeg:0.09, budget: 72, maxZ:15, altIn:0.0034, altFull:0.00105 }, //  10km    7     8
-];
+// Lite draws at half the pixel size, so the same arithmetic asks for a quarter
+// of the tiles: one zoom level down, a quarter of the downloads, decodes and
+// texture uploads for the chip that was stalling on them mid-flight.
+].map(lv => LITE ? { ...lv, budget: Math.round(lv.budget/4) } : lv);
 const detail = [];
 let clouds = null;                 // the live cloud layer, if it attaches
 const sunDir = new THREE.Vector3(1,0,0);
@@ -587,10 +607,10 @@ const uTime  = { value: 0 };       // seconds, for the city-light flicker
 
 let satelliteEarth, celestial;
 async function buildSpace(progress){
-  satelliteEarth = await createSatelliteEarth({ THREE, renderer, scene:space, altitude:camAlt, sunDir, canInstall:()=>state.phase==='boot' || (state.phase==='live' && state.liveOn) });
+  satelliteEarth = await createSatelliteEarth({ THREE, renderer, scene:space, altitude:camAlt, sunDir, lite:LITE, canInstall:()=>state.phase==='boot' || (state.phase==='live' && state.liveOn) });
   earth = satelliteEarth.mesh;
   progress(.65);
-  celestial = await createSpaceScene({ THREE, scene:space, camera:spaceCam });
+  celestial = await createSpaceScene({ THREE, scene:space, camera:spaceCam, pixelCap:PIXEL_CAP });
   stars = celestial.group;
   progress(.8);
 }

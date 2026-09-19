@@ -70,7 +70,7 @@ export function moonPosition(date) {
 // depth precision is necessary. Opaque globe geometry naturally occludes it.
 const skyDepth = 'gl_Position.z = gl_Position.w;';
 
-export async function createSpaceScene({ THREE, scene, camera }) {
+export async function createSpaceScene({ THREE, scene, camera, pixelCap = 2 }) {
   const group = new THREE.Group();
   group.name = 'roundtrip-celestial-sky';
   scene.add(group);
@@ -85,7 +85,7 @@ export async function createSpaceScene({ THREE, scene, camera }) {
     moonDisplayScale: CELESTIAL_STYLE.moonScale,
     sunDiameterDegrees: CELESTIAL_STYLE.sunPhysicalDiameterDegrees * CELESTIAL_STYLE.sunScale };
   const starOpacity = { value: 0.88 };
-  const dpr = { value: Math.min(globalThis.devicePixelRatio || 1, 2) };
+  const dpr = { value: Math.min(globalThis.devicePixelRatio || 1, pixelCap) };
 
   // A modestly enlarged ~1.19 degree disk, with a warm local glow in the same
   // draw call. Neither the disk nor glow changes the underlying Earth imagery.
@@ -233,7 +233,7 @@ export async function createSpaceScene({ THREE, scene, camera }) {
     // Sun effectively at infinity. Keep its direction fixed while the observer moves.
     sun.position.copy(camera.position).addScaledVector(sunDirection, sunDistance);
     sun.quaternion.copy(camera.quaternion);
-    dpr.value = Math.min(globalThis.devicePixelRatio || 1, 2);
+    dpr.value = Math.min(globalThis.devicePixelRatio || 1, pixelCap);
     if (Math.abs(timestamp - lastAstrometry) < 60000) return;
     lastAstrometry = timestamp;
     const lunar = moonPosition(date);

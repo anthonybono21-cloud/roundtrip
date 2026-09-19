@@ -1,6 +1,6 @@
 // Real GeoColor pixels reprojected to the geographic globe. Satellite images
 // already contain their day/night lighting and clouds: never light them twice.
-export async function createSatelliteEarth({ THREE, renderer, scene, altitude, sunDir, canInstall = () => true }) {
+export async function createSatelliteEarth({ THREE, renderer, scene, altitude, sunDir, lite = false, canInstall = () => true }) {
   const root = new URL('./assets/satellite/', import.meta.url);
   const placeholder = new THREE.DataTexture(new Uint8Array([0,0,0,255]),1,1);
   placeholder.needsUpdate = true;
@@ -32,11 +32,9 @@ export async function createSatelliteEarth({ THREE, renderer, scene, altitude, s
       },undefined,fail);
     }catch(error){fail(error);}
   });
-  const material = new THREE.ShaderMaterial({
-    uniforms, toneMapped:false,
-    vertexShader:`varying vec3 world; varying vec2 baseUv;
-      void main(){world=position; baseUv=uv;gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.);}`,
-    fragmentShader:`
+  // Everything before main(): the uniforms and the projection. Shared by the
+  // full shader and, in lite, by the bake and the per-frame shader that reads it.
+  const shaderHead=`
       varying vec3 world; varying vec2 baseUv;
       uniform float altitude,hasConus; uniform vec3 sunDir;
       uniform sampler2D fallback,conus,disk0,disk1,disk2,disk3,disk4;
@@ -65,7 +63,12 @@ export async function createSatelliteEarth({ THREE, renderer, scene, altitude, s
         float inside=step(0.,uv.x)*step(uv.x,1.)*step(0.,uv.y)*step(uv.y,1.);
         return vec4(texture2D(image,clamp(uv,0.,1.)).rgb,p.z*inside);
       }
-      void main(){
+`;
+  const material = new THREE.ShaderMaterial({
+    uniforms, toneMapped:false,
+    vertexShader:`varying vec3 world; varying vec2 baseUv;
+      void main(){world=position; baseUv=uv;gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.);}`,
+    fragmentShader:shaderHead+`      void main(){
         vec3 n=normalize(world);
         vec4 a=sampleDisk(disk0,spec0,n),b=sampleDisk(disk1,spec1,n),
           c=sampleDisk(disk2,spec2,n),d=sampleDisk(disk3,spec3,n),e=sampleDisk(disk4,spec4,n);
@@ -86,7 +89,86 @@ export async function createSatelliteEarth({ THREE, renderer, scene, altitude, s
         #include <colorspace_fragment>
       }`
   });
-  const mesh = new THREE.Mesh(new THREE.SphereGeometry(1,160,96),material);
+  // Lite. The shader above reprojects five disks for every pixel of every
+  // frame, and on a Fire Stick that held the globe to 3 or 4 frames a second.
+  // The disks only change when a batch installs, so here the reprojection is
+  // done once per batch, into a map laid out like the sphere's own uv, and each
+  // frame reads the map. The fallback's lighting and the regional image stay
+  // per frame, because one follows the sun and the other fades with altitude.
+  let bake=()=>{}, liteMaterial=null;
+  if(lite){
+    const width=Math.min(4096,renderer.capabilities.maxTextureSize);
+    const target=new THREE.WebGLRenderTarget(width,width/2,{colorSpace:THREE.SRGBColorSpace,
+      depthBuffer:false,generateMipmaps:true,minFilter:THREE.LinearMipmapLinearFilter});
+    target.texture.anisotropy=Math.min(8,renderer.capabilities.getMaxAnisotropy());
+    const bakeCamera=new THREE.OrthographicCamera(-1,1,1,-1,0,1);
+    const quad=new THREE.Mesh(new THREE.PlaneGeometry(2,2),new THREE.ShaderMaterial({
+      uniforms, toneMapped:false, depthTest:false, depthWrite:false,
+      vertexShader:`varying vec3 world; varying vec2 baseUv;
+        void main(){world=vec3(0.);baseUv=uv;gl_Position=vec4(position.xy,0.,1.);}`,
+      fragmentShader:shaderHead+`      void main(){
+        // The point this texel covers, in SphereGeometry's own uv layout, so
+        // the map lies on the mesh with no remapping.
+        float phi=baseUv.x*2.*PI,theta=(1.-baseUv.y)*PI;
+        vec3 n=vec3(-cos(phi)*sin(theta),cos(theta),sin(phi)*sin(theta));
+        vec4 a=sampleDisk(disk0,spec0,n),b=sampleDisk(disk1,spec1,n),
+          c=sampleDisk(disk2,spec2,n),d=sampleDisk(disk3,spec3,n),e=sampleDisk(disk4,spec4,n);
+        float sum=a.a+b.a+c.a+d.a+e.a;
+        vec3 actual=(a.rgb*a.a+b.rgb*b.a+c.rgb*c.a+d.rgb*d.a+e.rgb*e.a)/max(sum,.000001);
+        gl_FragColor=vec4(actual,smoothstep(0.,.00012,sum));
+        #include <colorspace_fragment>
+      }`}));
+    quad.frustumCulled=false;
+    const bakeScene=new THREE.Scene().add(quad);
+    // Start with no coverage, so the fallback shows until the first batch
+    // lands. The empty render also builds the mip chain, without which the
+    // map would be incomplete and sample as black.
+    const previous=renderer.getRenderTarget(),clearColor=renderer.getClearColor(new THREE.Color()),
+      clearAlpha=renderer.getClearAlpha();
+    renderer.setRenderTarget(target);renderer.setClearColor(0x000000,0);renderer.clear();
+    renderer.render(new THREE.Scene(),bakeCamera);
+    renderer.setRenderTarget(previous);renderer.setClearColor(clearColor,clearAlpha);
+    // In strips, one a frame. The whole map at once is around a second of GPU
+    // time on a Fire Stick, which would freeze the feed that is on screen.
+    const STRIPS=16;let job=0;
+    bake=()=>{
+      const mine=++job;let strip=0;
+      const step=()=>{
+        if(mine!==job)return;            // a newer batch has started over
+        const rows=target.height/STRIPS,previous=renderer.getRenderTarget();
+        target.scissor.set(0,strip*rows,target.width,rows);target.scissorTest=true;
+        target.texture.generateMipmaps=strip===STRIPS-1;   // once, after the last
+        renderer.setRenderTarget(target);renderer.render(bakeScene,bakeCamera);
+        renderer.setRenderTarget(previous);
+        if(++strip<STRIPS)requestAnimationFrame(step);
+      };
+      requestAnimationFrame(step);
+    };
+    liteMaterial=new THREE.ShaderMaterial({
+      uniforms:{...uniforms,baked:{value:target.texture}}, toneMapped:false,
+      vertexShader:material.vertexShader,
+      fragmentShader:shaderHead+`      uniform sampler2D baked;
+      void main(){
+        vec3 n=normalize(world);
+        vec3 base=texture2D(fallback,baseUv).rgb;
+        base*=mix(.09,1.,smoothstep(-.12,.14,dot(n,sunDir)));
+        vec4 satellite=texture2D(baked,baseUv);
+        vec3 color=mix(base,satellite.rgb,satellite.a);
+        // The regional image as the full shader blends it. It is faded out
+        // from orbit, so there its one projection is skipped.
+        if(hasConus>.5&&altitude<.95){
+          vec3 p=project(n,vec4(-75.2*PI/180.,.151872,0.,1.));
+          vec2 uv=(p.xy-conusExtent.xw)/(conusExtent.zy-conusExtent.xw);
+          float edge=min(min(uv.x,1.-uv.x),min(uv.y,1.-uv.y));
+          float regional=smoothstep(0.,.025,edge)*step(.00001,p.z)
+            *(1.-smoothstep(.30,.95,altitude));
+          color=mix(color,texture2D(conus,clamp(uv,0.,1.)).rgb,regional);
+        }
+        gl_FragColor=vec4(color,1.);
+        #include <colorspace_fragment>
+      }`});
+  }
+  const mesh = new THREE.Mesh(new THREE.SphereGeometry(1,160,96),liteMaterial||material);
   mesh.name='geocolor-earth'; scene.add(mesh);
   uniforms.fallback.value=await load(new URL('./assets/earth-day.jpg',import.meta.url).href).catch(()=>placeholder);
   // The fallback is the first visible surface and must also work when callers
@@ -142,6 +224,7 @@ export async function createSatelliteEarth({ THREE, renderer, scene, altitude, s
       if(old!==placeholder && old!==texture)old.dispose();
     }
     if(batch.updates.length){
+      bake();                            // lite only; a no-op otherwise
       status.generatedAt=batch.manifest.generatedAt;
       // A failed replacement retains the previous capture metadata as well as
       // its pixels. A new manifest date must not falsely freshen an old image.

@@ -1,0 +1,1582 @@
+{
+  "lane": "earthcam-2026-09-19",
+  "updated_at": "2026-09-19T15:07:28+00:00",
+  "source": "EarthCam official YouTube channel (@EarthCam, UC6qrG3W8SMK0jior2olka3g) /streams tab, plus one stream Anthony named",
+  "candidates": [
+    {
+      "name": "Western Wall, Temple Archaeological Park",
+      "location": "Old City, Jerusalem",
+      "country": "Israel",
+      "category": "landmark",
+      "provider": "Mount of Olives Prayer Bridge (YouTube)",
+      "kind": "youtube",
+      "video_id": "zp6LNSoq000",
+      "url": "https://www.youtube.com/embed/zp6LNSoq000?autoplay=1&mute=1",
+      "watch_url": "https://www.youtube.com/watch?v=zp6LNSoq000",
+      "lat": 31.7758,
+      "lng": 35.2346,
+      "timezone": "Asia/Jerusalem",
+      "coordinate_confidence": "The channel says the camera is at the southwest corner of the Temple Mount in the Temple Archaeological Park; the frame looks north along the Wall over the Mughrabi bridge roof to Wilson's Arch. Point is Robinson's Arch (OSM).",
+      "tags": [
+        "western wall",
+        "wailing wall",
+        "kotel",
+        "temple archaeological park",
+        "temple mount",
+        "prayer",
+        "judaism",
+        "historic",
+        "crowd",
+        "people",
+        "outdoor"
+      ],
+      "quality_score": 5,
+      "quality_reason": "High view north along the Western Wall from its southern end. A dense crowd of worshippers fills the men's section in front of Wilson's Arch, with the women's section and the Mughrabi bridge roof in the foreground. People walk, sit and regroup between frames, and a woman crosses the open plaza at lower left.",
+      "quality_evidence": {
+        "method": "Visual inspection of two decoded live frames 5 s apart (paired_frames)",
+        "visual_inspected": true,
+        "checked_at": "2026-09-19T15:05:44+00:00",
+        "motion_observed": true,
+        "evidence_paths": [
+          "frames/earthcam-2026-09-19/wwall-archpark-a.jpg",
+          "frames/earthcam-2026-09-19/wwall-archpark-b.jpg"
+        ]
+      },
+      "validation": {
+        "checked_at": "2026-09-19T15:05:44+00:00",
+        "is_live": true,
+        "playable": true,
+        "method": "yt-dlp metadata live_status=is_live, playable_in_embed=true; ffmpeg decoded the live stream",
+        "resolution": [
+          1920,
+          1080
+        ],
+        "motion_observed": true,
+        "live_since": "2026-03-17T11:11:48+00:00",
+        "limitations": "short daytime sample; activity varies"
+      },
+      "source_provenance": {
+        "channel_url": "https://www.youtube.com/channel/UCnsR6NZFdu_kOljI3SWiGJw",
+        "channel": "Mt. of Olives Prayer Bridge",
+        "stream_title": "Western Wall, Temple Archaeological Park",
+        "found_via": "Named by Anthony (channel: Mt. of Olives Prayer Bridge)"
+      },
+      "notes": "A second camera from the channel behind 'The Kotel, close view', looking up the Wall from the archaeological park at its southern end. Carries a clock and a small 'kotel2' label."
+    },
+    {
+      "name": "9/11 Memorial reflecting pool from above",
+      "location": "Lower Manhattan, New York City, New York, United States",
+      "country": "United States",
+      "category": "landmark",
+      "provider": "EarthCam",
+      "kind": "youtube",
+      "video_id": "ZYQlLQHz2Mg",
+      "url": "https://www.youtube.com/embed/ZYQlLQHz2Mg?autoplay=1&mute=1",
+      "watch_url": "https://www.youtube.com/watch?v=ZYQlLQHz2Mg",
+      "lat": 40.7114,
+      "lng": -74.0133,
+      "timezone": "America/New_York",
+      "coordinate_confidence": "OSM point for the National September 11 Memorial; the camera looks straight down on one of the two pools from a tower at the World Trade Center site, exact building not published.",
+      "tags": [
+        "9/11 memorial",
+        "september 11",
+        "world trade center",
+        "ground zero",
+        "reflecting pool",
+        "memorial",
+        "waterfall",
+        "fountain",
+        "new york city",
+        "nyc",
+        "manhattan",
+        "people",
+        "outdoor"
+      ],
+      "quality_score": 4,
+      "quality_reason": "Top-down view of a 9/11 Memorial reflecting pool: water pours down all four walls into the dark pool and the central void, ringed by trees and walkways. Visitors walk along the parapet and plaza paths, and their positions change between frames.",
+      "quality_evidence": {
+        "method": "Visual inspection of two decoded live frames 5 s apart (paired_frames)",
+        "visual_inspected": true,
+        "checked_at": "2026-09-19T15:05:59+00:00",
+        "motion_observed": true,
+        "evidence_paths": [
+          "frames/earthcam-2026-09-19/nine-eleven-a.jpg",
+          "frames/earthcam-2026-09-19/nine-eleven-b.jpg"
+        ]
+      },
+      "validation": {
+        "checked_at": "2026-09-19T15:05:59+00:00",
+        "is_live": true,
+        "playable": true,
+        "method": "yt-dlp metadata live_status=is_live, playable_in_embed=true; ffmpeg decoded the live stream",
+        "resolution": [
+          1920,
+          1080
+        ],
+        "motion_observed": true,
+        "live_since": "2026-08-31T15:04:16+00:00",
+        "limitations": "short daytime sample; activity varies"
+      },
+      "source_provenance": {
+        "channel_url": "https://www.youtube.com/channel/UC6qrG3W8SMK0jior2olka3g",
+        "channel": "EarthCam",
+        "stream_title": "9/11 Memorial & Museum",
+        "found_via": "EarthCam channel /streams listing, 2026-09-19"
+      },
+      "notes": "EarthCam's long-running Ground Zero camera, looking down on a memorial pool."
+    },
+    {
+      "name": "Coney Island, Luna Park and the beach from above",
+      "location": "Coney Island, Brooklyn, New York City, New York, United States",
+      "country": "United States",
+      "category": "boardwalk",
+      "provider": "EarthCam",
+      "kind": "youtube",
+      "video_id": "H67j7H-7QD0",
+      "url": "https://www.youtube.com/embed/H67j7H-7QD0?autoplay=1&mute=1",
+      "watch_url": "https://www.youtube.com/watch?v=H67j7H-7QD0",
+      "lat": 40.5738,
+      "lng": -73.9803,
+      "timezone": "America/New_York",
+      "coordinate_confidence": "OSM point for Luna Park, the subject; the camera looks south over the park from a tall building north of Surf Avenue, exact building not published.",
+      "tags": [
+        "coney island",
+        "luna park",
+        "cyclone",
+        "wonder wheel",
+        "parachute jump",
+        "amusement park",
+        "roller coaster",
+        "rides",
+        "boardwalk",
+        "beach",
+        "atlantic",
+        "subway",
+        "brooklyn",
+        "new york city",
+        "nyc",
+        "traffic",
+        "outdoor",
+        "vacation"
+      ],
+      "quality_score": 4,
+      "quality_reason": "High panorama over Luna Park: the Cyclone at left, the Wonder Wheel, the Parachute Jump, the beach and the Atlantic, with the elevated subway in front. Cars move along Surf Avenue and the side streets between frames; people are too small to follow.",
+      "quality_evidence": {
+        "method": "Visual inspection of two decoded live frames 5 s apart (paired_frames)",
+        "visual_inspected": true,
+        "checked_at": "2026-09-19T15:07:03+00:00",
+        "motion_observed": true,
+        "evidence_paths": [
+          "frames/earthcam-2026-09-19/coney-island-a.jpg",
+          "frames/earthcam-2026-09-19/coney-island-b.jpg"
+        ]
+      },
+      "validation": {
+        "checked_at": "2026-09-19T15:07:03+00:00",
+        "is_live": true,
+        "playable": true,
+        "method": "yt-dlp metadata live_status=is_live, playable_in_embed=true; ffmpeg decoded the live stream",
+        "resolution": [
+          1280,
+          720
+        ],
+        "motion_observed": true,
+        "live_since": "2026-02-28T13:43:31+00:00",
+        "limitations": "short daytime sample; activity varies"
+      },
+      "source_provenance": {
+        "channel_url": "https://www.youtube.com/channel/UC6qrG3W8SMK0jior2olka3g",
+        "channel": "EarthCam",
+        "stream_title": "EarthCam Live:  Coney Island (New York City)",
+        "found_via": "EarthCam channel /streams listing, 2026-09-19"
+      },
+      "notes": "EarthCam's Coney Island camera. Busiest in summer."
+    },
+    {
+      "name": "River's Edge Park and the Omaha skyline, Council Bluffs",
+      "location": "Council Bluffs, Iowa, United States",
+      "country": "United States",
+      "category": "park",
+      "provider": "EarthCam",
+      "kind": "youtube",
+      "video_id": "qsrevo5Vdkw",
+      "url": "https://www.youtube.com/embed/qsrevo5Vdkw?autoplay=1&mute=1",
+      "watch_url": "https://www.youtube.com/watch?v=qsrevo5Vdkw",
+      "lat": 41.2632,
+      "lng": -95.917,
+      "timezone": "America/Chicago",
+      "coordinate_confidence": "OSM point for the River's Edge Pavilion; the 'Looking Up' statue in frame stands in front of it, and the view looks west across the park and the Missouri River to Omaha.",
+      "tags": [
+        "council bluffs",
+        "omaha",
+        "nebraska",
+        "iowa",
+        "river's edge park",
+        "tom hanafan river's edge park",
+        "missouri river",
+        "bob kerrey pedestrian bridge",
+        "looking up",
+        "sculpture",
+        "skyline",
+        "park",
+        "people",
+        "crowd",
+        "outdoor"
+      ],
+      "quality_score": 4,
+      "quality_reason": "View west over Tom Hanafan River's Edge Park to the Omaha skyline, with the 33-foot 'Looking Up' statue at left and the Bob Kerrey Pedestrian Bridge ramp at right. A crowd gathers in the foreground and a group plays on the far field; people move between frames.",
+      "quality_evidence": {
+        "method": "Visual inspection of two decoded live frames 5 s apart (paired_frames)",
+        "visual_inspected": true,
+        "checked_at": "2026-09-19T15:06:35+00:00",
+        "motion_observed": true,
+        "evidence_paths": [
+          "frames/earthcam-2026-09-19/council-bluffs-a.jpg",
+          "frames/earthcam-2026-09-19/council-bluffs-b.jpg"
+        ]
+      },
+      "validation": {
+        "checked_at": "2026-09-19T15:06:35+00:00",
+        "is_live": true,
+        "playable": true,
+        "method": "yt-dlp metadata live_status=is_live, playable_in_embed=true; ffmpeg decoded the live stream",
+        "resolution": [
+          1920,
+          1080
+        ],
+        "motion_observed": true,
+        "live_since": "2026-06-04T19:11:01+00:00",
+        "limitations": "short daytime sample; activity varies"
+      },
+      "source_provenance": {
+        "channel_url": "https://www.youtube.com/channel/UC6qrG3W8SMK0jior2olka3g",
+        "channel": "EarthCam",
+        "stream_title": "EarthCam Live:  Council Bluffs, Iowa",
+        "found_via": "EarthCam channel /streams listing, 2026-09-19"
+      },
+      "notes": "EarthCam at River's Edge. The park hosts festivals and events."
+    },
+    {
+      "name": "Tamariu cove and beach, Costa Brava",
+      "location": "Tamariu, Palafrugell, Catalonia, Spain",
+      "country": "Spain",
+      "category": "beach",
+      "provider": "EarthCam",
+      "kind": "youtube",
+      "video_id": "fTh5ssC1z-c",
+      "url": "https://www.youtube.com/embed/fTh5ssC1z-c?autoplay=1&mute=1",
+      "watch_url": "https://www.youtube.com/watch?v=fTh5ssC1z-c",
+      "lat": 41.9184,
+      "lng": 3.2081,
+      "timezone": "Europe/Madrid",
+      "coordinate_confidence": "OSM point for Club Nautic Tamariu, where EarthCam says the camera is; it looks across the beach and the cove.",
+      "tags": [
+        "tamariu",
+        "palafrugell",
+        "costa brava",
+        "catalonia",
+        "girona",
+        "mediterranean",
+        "beach",
+        "cove",
+        "boats",
+        "sailboats",
+        "swimmers",
+        "sunbathers",
+        "outdoor",
+        "vacation"
+      ],
+      "quality_score": 4,
+      "quality_reason": "Wide view over Tamariu's beach and cove, with dozens of boats at anchor and wooded headlands on both sides. Many sunbathers on the sand and swimmers in the water; people walk the beach and boats shift between frames. A light haze patch sits on the right of the lens.",
+      "quality_evidence": {
+        "method": "Visual inspection of two decoded live frames 5 s apart (paired_frames)",
+        "visual_inspected": true,
+        "checked_at": "2026-09-19T15:07:02+00:00",
+        "motion_observed": true,
+        "evidence_paths": [
+          "frames/earthcam-2026-09-19/tamariu-a.jpg",
+          "frames/earthcam-2026-09-19/tamariu-b.jpg"
+        ]
+      },
+      "validation": {
+        "checked_at": "2026-09-19T15:07:02+00:00",
+        "is_live": true,
+        "playable": true,
+        "method": "yt-dlp metadata live_status=is_live, playable_in_embed=true; ffmpeg decoded the live stream",
+        "resolution": [
+          1920,
+          1080
+        ],
+        "motion_observed": true,
+        "live_since": "2026-08-27T11:00:07+00:00",
+        "limitations": "short daytime sample; activity varies"
+      },
+      "source_provenance": {
+        "channel_url": "https://www.youtube.com/channel/UC6qrG3W8SMK0jior2olka3g",
+        "channel": "EarthCam",
+        "stream_title": "EarthCam Live:  Tamariu, Spain",
+        "found_via": "EarthCam channel /streams listing, 2026-09-19"
+      },
+      "notes": "EarthCam camera at the Club Nautic Tamariu on the Costa Brava. Busiest in summer."
+    },
+    {
+      "name": "Anglin's Pier and the beach path, Lauderdale-By-The-Sea",
+      "location": "Lauderdale-By-The-Sea, Florida, United States",
+      "country": "United States",
+      "category": "beach",
+      "provider": "EarthCam",
+      "kind": "youtube",
+      "video_id": "tAdTOOsrZBQ",
+      "url": "https://www.youtube.com/embed/tAdTOOsrZBQ?autoplay=1&mute=1",
+      "watch_url": "https://www.youtube.com/watch?v=tAdTOOsrZBQ",
+      "lat": 26.1898,
+      "lng": -80.0937,
+      "timezone": "America/New_York",
+      "coordinate_confidence": "Anglin's Pier where it meets the beach, about 200 m east of the OSM point for Anglin's Square; the camera looks east over the dunes from just north of the pier.",
+      "tags": [
+        "anglins pier",
+        "anglin's pier",
+        "fishing pier",
+        "lauderdale-by-the-sea",
+        "fort lauderdale",
+        "broward",
+        "florida",
+        "beach",
+        "ocean",
+        "atlantic",
+        "dunes",
+        "seagulls",
+        "swimmers",
+        "outdoor",
+        "vacation"
+      ],
+      "quality_score": 3,
+      "quality_reason": "A dune path leads to the beach, with Anglin's Pier and its pavilion on the right and the Atlantic beyond. Gulls fly across the sky, beachgoers sit and walk at the waterline, and small waves break between frames. Dune plants fill the lower half.",
+      "quality_evidence": {
+        "method": "Visual inspection of two decoded live frames 5 s apart (paired_frames)",
+        "visual_inspected": true,
+        "checked_at": "2026-09-19T15:06:07+00:00",
+        "motion_observed": true,
+        "evidence_paths": [
+          "frames/earthcam-2026-09-19/anglins-pier-a.jpg",
+          "frames/earthcam-2026-09-19/anglins-pier-b.jpg"
+        ]
+      },
+      "validation": {
+        "checked_at": "2026-09-19T15:06:07+00:00",
+        "is_live": true,
+        "playable": true,
+        "method": "yt-dlp metadata live_status=is_live, playable_in_embed=true; ffmpeg decoded the live stream",
+        "resolution": [
+          1920,
+          1080
+        ],
+        "motion_observed": true,
+        "live_since": "2026-08-27T11:05:27+00:00",
+        "limitations": "short daytime sample; activity varies"
+      },
+      "source_provenance": {
+        "channel_url": "https://www.youtube.com/channel/UC6qrG3W8SMK0jior2olka3g",
+        "channel": "EarthCam",
+        "stream_title": "EarthCam Live:  Anglins Pier (Lauderdale-By-The-Sea, FL)",
+        "found_via": "EarthCam channel /streams listing, 2026-09-19"
+      },
+      "notes": "EarthCam and the Town of Lauderdale-By-The-Sea."
+    },
+    {
+      "name": "Chicago from the Willis Tower Skydeck",
+      "location": "Chicago, Illinois, United States",
+      "country": "United States",
+      "category": "skyline",
+      "provider": "EarthCam",
+      "kind": "youtube",
+      "video_id": "O0UGT7AT3aw",
+      "url": "https://www.youtube.com/embed/O0UGT7AT3aw?autoplay=1&mute=1",
+      "watch_url": "https://www.youtube.com/watch?v=O0UGT7AT3aw",
+      "lat": 41.8787,
+      "lng": -87.636,
+      "timezone": "America/Chicago",
+      "coordinate_confidence": "OSM point for Willis Tower; EarthCam says the camera is on the 103rd-floor Skydeck.",
+      "tags": [
+        "willis tower",
+        "sears tower",
+        "skydeck",
+        "chicago",
+        "the loop",
+        "lake michigan",
+        "illinois",
+        "skyline",
+        "clouds",
+        "high view",
+        "outdoor"
+      ],
+      "quality_score": 3,
+      "quality_reason": "High view over the Loop toward Lake Michigan. Low cloud wrapped the tower today: the camera panned between presets, cloud drifted past, and in the last of five frames 30 s apart it broke to show the Loop and the lakefront. Rain drops sat on the window.",
+      "quality_evidence": {
+        "method": "Visual inspection of two decoded live frames 5 s apart (paired_frames), plus a second look at 5 frames 30 s apart",
+        "visual_inspected": true,
+        "checked_at": "2026-09-19T15:12:50+00:00",
+        "motion_observed": true,
+        "evidence_paths": [
+          "frames/earthcam-2026-09-19/chicago-skydeck-a.jpg",
+          "frames/earthcam-2026-09-19/chicago-skydeck-b.jpg",
+          "frames/earthcam-2026-09-19/resample/chicago-skydeck-1.jpg",
+          "frames/earthcam-2026-09-19/resample/chicago-skydeck-2.jpg",
+          "frames/earthcam-2026-09-19/resample/chicago-skydeck-3.jpg",
+          "frames/earthcam-2026-09-19/resample/chicago-skydeck-4.jpg",
+          "frames/earthcam-2026-09-19/resample/chicago-skydeck-5.jpg"
+        ]
+      },
+      "validation": {
+        "checked_at": "2026-09-19T15:07:24+00:00",
+        "is_live": true,
+        "playable": true,
+        "method": "yt-dlp metadata live_status=is_live, playable_in_embed=true; ffmpeg decoded the live stream",
+        "resolution": [
+          1920,
+          1080
+        ],
+        "motion_observed": true,
+        "live_since": "2026-02-28T13:49:06+00:00",
+        "limitations": "short daytime sample; activity varies"
+      },
+      "source_provenance": {
+        "channel_url": "https://www.youtube.com/channel/UC6qrG3W8SMK0jior2olka3g",
+        "channel": "EarthCam",
+        "stream_title": "EarthCam Live:  Chicago Skydeck Cam (Chicago, IL)",
+        "found_via": "EarthCam channel /streams listing, 2026-09-19"
+      },
+      "notes": "Skydeck camera on the 103rd floor. On cloudy days the city can disappear under the cloud."
+    },
+    {
+      "name": "Crescent Harbor and Sitka Sound",
+      "location": "Sitka, Alaska, United States",
+      "country": "United States",
+      "category": "harbor",
+      "provider": "EarthCam",
+      "kind": "youtube",
+      "video_id": "sF5hFDGN20Y",
+      "url": "https://www.youtube.com/embed/sF5hFDGN20Y?autoplay=1&mute=1",
+      "watch_url": "https://www.youtube.com/watch?v=sF5hFDGN20Y",
+      "lat": 57.0496,
+      "lng": -135.3322,
+      "timezone": "America/Sitka",
+      "coordinate_confidence": "OSM point for Harrigan Centennial Hall, the building in the foreground; Crescent Harbor is at left and the view looks out over Sitka Sound.",
+      "tags": [
+        "sitka",
+        "alaska",
+        "crescent harbor",
+        "sitka sound",
+        "harrigan centennial hall",
+        "harbor",
+        "boats",
+        "fishing",
+        "mountains",
+        "islands",
+        "rain",
+        "outdoor"
+      ],
+      "quality_score": 3,
+      "quality_reason": "Harrigan Centennial Hall in front of Sitka Sound, with Crescent Harbor's boats at left and forested islands and peaks in low cloud. Wind ruffles the water, rain falls, and a person walks past the hall in one of five frames 30 s apart.",
+      "quality_evidence": {
+        "method": "Visual inspection of two decoded live frames 5 s apart (paired_frames), plus a second look at 5 frames 30 s apart",
+        "visual_inspected": true,
+        "checked_at": "2026-09-19T15:12:52+00:00",
+        "motion_observed": true,
+        "evidence_paths": [
+          "frames/earthcam-2026-09-19/sitka-a.jpg",
+          "frames/earthcam-2026-09-19/sitka-b.jpg",
+          "frames/earthcam-2026-09-19/resample/sitka-1.jpg",
+          "frames/earthcam-2026-09-19/resample/sitka-2.jpg",
+          "frames/earthcam-2026-09-19/resample/sitka-3.jpg",
+          "frames/earthcam-2026-09-19/resample/sitka-4.jpg",
+          "frames/earthcam-2026-09-19/resample/sitka-5.jpg"
+        ]
+      },
+      "validation": {
+        "checked_at": "2026-09-19T15:07:08+00:00",
+        "is_live": true,
+        "playable": true,
+        "method": "yt-dlp metadata live_status=is_live, playable_in_embed=true; ffmpeg decoded the live stream",
+        "resolution": [
+          1920,
+          1080
+        ],
+        "motion_observed": true,
+        "live_since": "2026-02-28T13:41:36+00:00",
+        "limitations": "short daytime sample; activity varies"
+      },
+      "source_provenance": {
+        "channel_url": "https://www.youtube.com/channel/UC6qrG3W8SMK0jior2olka3g",
+        "channel": "EarthCam",
+        "stream_title": "EarthCam Live:  Sitka, Alaska",
+        "found_via": "EarthCam channel /streams listing, 2026-09-19"
+      },
+      "notes": "EarthCam view over Crescent Harbor. Often grey and wet; the islands can vanish in cloud."
+    },
+    {
+      "name": "Downtown Cleveland and Lake Erie from Terminal Tower",
+      "location": "Cleveland, Ohio, United States",
+      "country": "United States",
+      "category": "skyline",
+      "provider": "EarthCam",
+      "kind": "youtube",
+      "video_id": "iHqqkh_Lths",
+      "url": "https://www.youtube.com/embed/iHqqkh_Lths?autoplay=1&mute=1",
+      "watch_url": "https://www.youtube.com/watch?v=iHqqkh_Lths",
+      "lat": 41.4983,
+      "lng": -81.6938,
+      "timezone": "America/New_York",
+      "coordinate_confidence": "OSM point for Terminal Tower, which hosts the camera per EarthCam.",
+      "tags": [
+        "terminal tower",
+        "cleveland",
+        "ohio",
+        "lake erie",
+        "cuyahoga river",
+        "the flats",
+        "downtown",
+        "stadium",
+        "skyline",
+        "high view",
+        "outdoor"
+      ],
+      "quality_score": 3,
+      "quality_reason": "High view north over downtown Cleveland to Lake Erie, with the Sherwin-Williams tower in the middle, the Cuyahoga River bending through the Flats at left and the lakefront stadium at right. Hazy today; the camera shifts slightly between presets and traffic is too small to follow.",
+      "quality_evidence": {
+        "method": "Visual inspection of two decoded live frames 5 s apart (paired_frames), plus a second look at 5 frames 30 s apart",
+        "visual_inspected": true,
+        "checked_at": "2026-09-19T15:12:50+00:00",
+        "motion_observed": true,
+        "evidence_paths": [
+          "frames/earthcam-2026-09-19/terminal-tower-a.jpg",
+          "frames/earthcam-2026-09-19/terminal-tower-b.jpg",
+          "frames/earthcam-2026-09-19/resample/terminal-tower-1.jpg",
+          "frames/earthcam-2026-09-19/resample/terminal-tower-2.jpg",
+          "frames/earthcam-2026-09-19/resample/terminal-tower-3.jpg",
+          "frames/earthcam-2026-09-19/resample/terminal-tower-4.jpg",
+          "frames/earthcam-2026-09-19/resample/terminal-tower-5.jpg"
+        ]
+      },
+      "validation": {
+        "checked_at": "2026-09-19T15:06:58+00:00",
+        "is_live": true,
+        "playable": true,
+        "method": "yt-dlp metadata live_status=is_live, playable_in_embed=true; ffmpeg decoded the live stream",
+        "resolution": [
+          1280,
+          720
+        ],
+        "motion_observed": true,
+        "live_since": "2026-02-28T13:48:12+00:00",
+        "limitations": "short daytime sample; activity varies"
+      },
+      "source_provenance": {
+        "channel_url": "https://www.youtube.com/channel/UC6qrG3W8SMK0jior2olka3g",
+        "channel": "EarthCam",
+        "stream_title": "EarthCam Live:  Terminal Tower Cam (Cleveland, OH)",
+        "found_via": "EarthCam channel /streams listing, 2026-09-19"
+      },
+      "notes": "EarthCam and K&D Management, from the 52-story Terminal Tower on Public Square."
+    },
+    {
+      "name": "Giraffe yard, Greenville Zoo",
+      "location": "Greenville, South Carolina, United States",
+      "country": "United States",
+      "category": "zoo",
+      "provider": "EarthCam",
+      "kind": "youtube",
+      "video_id": "sLRtUoPNH2k",
+      "url": "https://www.youtube.com/embed/sLRtUoPNH2k?autoplay=1&mute=1",
+      "watch_url": "https://www.youtube.com/watch?v=sLRtUoPNH2k",
+      "lat": 34.8469,
+      "lng": -82.3878,
+      "timezone": "America/New_York",
+      "coordinate_confidence": "OSM point for the Greenville Zoo; the camera looks down on the outdoor giraffe yard, exact position in the zoo not published.",
+      "tags": [
+        "greenville zoo",
+        "giraffe",
+        "giraffes",
+        "masai giraffe",
+        "zoo",
+        "animals",
+        "wildlife",
+        "greenville",
+        "south carolina",
+        "outdoor"
+      ],
+      "quality_score": 3,
+      "quality_reason": "Overhead view of the dirt giraffe yard with a thatched feeder and shade trees. The first two frames had no giraffe in view; on a second look Autumn, the zoo's Masai giraffe, stood at the feeder pole and moved around it across five frames 30 s apart, and visitors walked the path at left.",
+      "quality_evidence": {
+        "method": "Visual inspection of two decoded live frames 5 s apart (paired_frames), plus a second look at 5 frames 30 s apart",
+        "visual_inspected": true,
+        "checked_at": "2026-09-19T15:10:14+00:00",
+        "motion_observed": true,
+        "evidence_paths": [
+          "frames/earthcam-2026-09-19/giraffe-paddock-a.jpg",
+          "frames/earthcam-2026-09-19/giraffe-paddock-b.jpg",
+          "frames/earthcam-2026-09-19/resample/giraffe-paddock-1.jpg",
+          "frames/earthcam-2026-09-19/resample/giraffe-paddock-2.jpg",
+          "frames/earthcam-2026-09-19/resample/giraffe-paddock-3.jpg",
+          "frames/earthcam-2026-09-19/resample/giraffe-paddock-4.jpg",
+          "frames/earthcam-2026-09-19/resample/giraffe-paddock-5.jpg"
+        ]
+      },
+      "validation": {
+        "checked_at": "2026-09-19T15:06:29+00:00",
+        "is_live": true,
+        "playable": true,
+        "method": "yt-dlp metadata live_status=is_live, playable_in_embed=true; ffmpeg decoded the live stream",
+        "resolution": [
+          1920,
+          1080
+        ],
+        "motion_observed": true,
+        "live_since": "2026-07-02T21:08:16+00:00",
+        "limitations": "short daytime sample; activity varies"
+      },
+      "source_provenance": {
+        "channel_url": "https://www.youtube.com/channel/UC6qrG3W8SMK0jior2olka3g",
+        "channel": "EarthCam",
+        "stream_title": "EarthCam Live:  Giraffe Paddock  Cam - Greenville, SC",
+        "found_via": "EarthCam channel /streams listing, 2026-09-19"
+      },
+      "notes": "EarthCam and the Greenville Zoo. The giraffe is not always in the yard."
+    },
+    {
+      "name": "Lower Manhattan across the Hudson from Lincoln Harbor",
+      "location": "Weehawken, New Jersey, United States",
+      "country": "United States",
+      "category": "skyline",
+      "provider": "EarthCam",
+      "kind": "youtube",
+      "video_id": "sixP_dAJ8D4",
+      "url": "https://www.youtube.com/embed/sixP_dAJ8D4?autoplay=1&mute=1",
+      "watch_url": "https://www.youtube.com/watch?v=sixP_dAJ8D4",
+      "lat": 40.7588,
+      "lng": -74.0236,
+      "timezone": "America/New_York",
+      "coordinate_confidence": "OSM point for the Sheraton Lincoln Harbor Hotel, which hosts the camera per EarthCam; the view looks down the Hudson to Lower Manhattan.",
+      "tags": [
+        "lincoln harbor",
+        "hudson river",
+        "lower manhattan",
+        "one world trade center",
+        "new york city",
+        "nyc",
+        "manhattan",
+        "skyline",
+        "river",
+        "boats",
+        "ferries",
+        "outdoor"
+      ],
+      "quality_score": 3,
+      "quality_reason": "Lower Manhattan and One World Trade Center across the Hudson, with cruise boats tied up at the Lincoln Harbor piers in front. A speedboat crosses at left leaving a wake, and a bird flies across between frames.",
+      "quality_evidence": {
+        "method": "Visual inspection of two decoded live frames 5 s apart (paired_frames)",
+        "visual_inspected": true,
+        "checked_at": "2026-09-19T15:05:52+00:00",
+        "motion_observed": true,
+        "evidence_paths": [
+          "frames/earthcam-2026-09-19/lincoln-harbor-a.jpg",
+          "frames/earthcam-2026-09-19/lincoln-harbor-b.jpg"
+        ]
+      },
+      "validation": {
+        "checked_at": "2026-09-19T15:05:52+00:00",
+        "is_live": true,
+        "playable": true,
+        "method": "yt-dlp metadata live_status=is_live, playable_in_embed=true; ffmpeg decoded the live stream",
+        "resolution": [
+          1920,
+          1080
+        ],
+        "motion_observed": true,
+        "live_since": "2026-09-10T17:21:41+00:00",
+        "limitations": "short daytime sample; activity varies"
+      },
+      "source_provenance": {
+        "channel_url": "https://www.youtube.com/channel/UC6qrG3W8SMK0jior2olka3g",
+        "channel": "EarthCam",
+        "stream_title": "EarthCam Live:  Lincoln Harbor (New York City)",
+        "found_via": "EarthCam channel /streams listing, 2026-09-19"
+      },
+      "notes": "EarthCam camera on the Sheraton Lincoln Harbor Hotel in Weehawken. The catalog has two other Lower Manhattan skyline cams; this one looks down the Hudson from the New Jersey side."
+    },
+    {
+      "name": "Main Street and Veterans Memorial Park, Roswell",
+      "location": "Roswell, New Mexico, United States",
+      "country": "United States",
+      "category": "street",
+      "provider": "EarthCam",
+      "kind": "youtube",
+      "video_id": "kLoFxVhRWtQ",
+      "url": "https://www.youtube.com/embed/kLoFxVhRWtQ?autoplay=1&mute=1",
+      "watch_url": "https://www.youtube.com/watch?v=kLoFxVhRWtQ",
+      "lat": 33.3968,
+      "lng": -104.5225,
+      "timezone": "America/Denver",
+      "coordinate_confidence": "Main Street at 4th Street in front of the Chaves County Courthouse lawn (Veterans Memorial Park), which the camera faces; the camera is on a Pioneer Bank building per EarthCam, exact building not confirmed.",
+      "tags": [
+        "roswell",
+        "main street",
+        "veterans memorial park",
+        "chaves county courthouse",
+        "ufo",
+        "new mexico",
+        "street",
+        "traffic",
+        "cars",
+        "market",
+        "outdoor"
+      ],
+      "quality_score": 3,
+      "quality_reason": "A wide Main Street intersection with the tree-lined park in front of the Chaves County Courthouse, where vendor tents are up. Cars drive through the intersection and park along the street between frames.",
+      "quality_evidence": {
+        "method": "Visual inspection of two decoded live frames 5 s apart (paired_frames)",
+        "visual_inspected": true,
+        "checked_at": "2026-09-19T15:06:48+00:00",
+        "motion_observed": true,
+        "evidence_paths": [
+          "frames/earthcam-2026-09-19/roswell-a.jpg",
+          "frames/earthcam-2026-09-19/roswell-b.jpg"
+        ]
+      },
+      "validation": {
+        "checked_at": "2026-09-19T15:06:48+00:00",
+        "is_live": true,
+        "playable": true,
+        "method": "yt-dlp metadata live_status=is_live, playable_in_embed=true; ffmpeg decoded the live stream",
+        "resolution": [
+          1920,
+          1080
+        ],
+        "motion_observed": true,
+        "live_since": "2026-02-28T14:06:41+00:00",
+        "limitations": "short daytime sample; activity varies"
+      },
+      "source_provenance": {
+        "channel_url": "https://www.youtube.com/channel/UC6qrG3W8SMK0jior2olka3g",
+        "channel": "EarthCam",
+        "stream_title": "EarthCam Live:  Roswell, New Mexico",
+        "found_via": "EarthCam channel /streams listing, 2026-09-19"
+      },
+      "notes": "EarthCam and Pioneer Bank."
+    },
+    {
+      "name": "Main Street at West Street, Madison, Indiana",
+      "location": "Madison, Indiana, United States",
+      "country": "United States",
+      "category": "street",
+      "provider": "EarthCam",
+      "kind": "youtube",
+      "video_id": "Ez6xC43MMTQ",
+      "url": "https://www.youtube.com/embed/Ez6xC43MMTQ?autoplay=1&mute=1",
+      "watch_url": "https://www.youtube.com/watch?v=Ez6xC43MMTQ",
+      "lat": 38.7364,
+      "lng": -85.3803,
+      "timezone": "America/New_York",
+      "coordinate_confidence": "OSM point for 102 West Main Street (Madison Coffee & Tea, the corner building in frame); the camera looks at it from across Main Street.",
+      "tags": [
+        "madison",
+        "main street",
+        "historic district",
+        "small town",
+        "downtown",
+        "ohio river",
+        "indiana",
+        "street",
+        "traffic",
+        "cars",
+        "flags",
+        "outdoor"
+      ],
+      "quality_score": 3,
+      "quality_reason": "Historic Main Street corner with Madison Coffee & Tea and brick storefronts, American flags on the right. A pickup drives through the intersection and the flags move in the wind between frames; parked cars line the street.",
+      "quality_evidence": {
+        "method": "Visual inspection of two decoded live frames 5 s apart (paired_frames)",
+        "visual_inspected": true,
+        "checked_at": "2026-09-19T15:06:12+00:00",
+        "motion_observed": true,
+        "evidence_paths": [
+          "frames/earthcam-2026-09-19/madison-in-a.jpg",
+          "frames/earthcam-2026-09-19/madison-in-b.jpg"
+        ]
+      },
+      "validation": {
+        "checked_at": "2026-09-19T15:06:12+00:00",
+        "is_live": true,
+        "playable": true,
+        "method": "yt-dlp metadata live_status=is_live, playable_in_embed=true; ffmpeg decoded the live stream",
+        "resolution": [
+          1280,
+          720
+        ],
+        "motion_observed": true,
+        "live_since": "2026-08-17T12:11:16+00:00",
+        "limitations": "short daytime sample; activity varies"
+      },
+      "source_provenance": {
+        "channel_url": "https://www.youtube.com/channel/UC6qrG3W8SMK0jior2olka3g",
+        "channel": "EarthCam",
+        "stream_title": "EarthCam Live:  Madison, Indiana",
+        "found_via": "EarthCam channel /streams listing, 2026-09-19"
+      },
+      "notes": "EarthCam view of downtown Madison, a river town on the Ohio."
+    },
+    {
+      "name": "Midtown and Central Park from SUMMIT One Vanderbilt",
+      "location": "Midtown Manhattan, New York City, New York, United States",
+      "country": "United States",
+      "category": "skyline",
+      "provider": "EarthCam",
+      "kind": "youtube",
+      "video_id": "2_PDaUJbfuI",
+      "url": "https://www.youtube.com/embed/2_PDaUJbfuI?autoplay=1&mute=1",
+      "watch_url": "https://www.youtube.com/watch?v=2_PDaUJbfuI",
+      "lat": 40.753,
+      "lng": -73.9785,
+      "timezone": "America/New_York",
+      "coordinate_confidence": "OSM point for One Vanderbilt, which hosts the camera per EarthCam.",
+      "tags": [
+        "summit one vanderbilt",
+        "one vanderbilt",
+        "midtown",
+        "manhattan",
+        "central park",
+        "new york city",
+        "nyc",
+        "skyline",
+        "skyscrapers",
+        "high view",
+        "outdoor"
+      ],
+      "quality_score": 3,
+      "quality_reason": "Wide-angle view north from One Vanderbilt over Midtown towers to Central Park, the 57th Street supertalls and the Hudson. Clouds drift and the camera shifts slightly between presets over five frames 30 s apart; street life is too far below to see.",
+      "quality_evidence": {
+        "method": "Visual inspection of two decoded live frames 5 s apart (paired_frames), plus a second look at 5 frames 30 s apart",
+        "visual_inspected": true,
+        "checked_at": "2026-09-19T15:15:24+00:00",
+        "motion_observed": true,
+        "evidence_paths": [
+          "frames/earthcam-2026-09-19/summit-vanderbilt-a.jpg",
+          "frames/earthcam-2026-09-19/summit-vanderbilt-b.jpg",
+          "frames/earthcam-2026-09-19/resample/summit-vanderbilt-1.jpg",
+          "frames/earthcam-2026-09-19/resample/summit-vanderbilt-2.jpg",
+          "frames/earthcam-2026-09-19/resample/summit-vanderbilt-3.jpg",
+          "frames/earthcam-2026-09-19/resample/summit-vanderbilt-4.jpg",
+          "frames/earthcam-2026-09-19/resample/summit-vanderbilt-5.jpg"
+        ]
+      },
+      "validation": {
+        "checked_at": "2026-09-19T15:07:21+00:00",
+        "is_live": true,
+        "playable": true,
+        "method": "yt-dlp metadata live_status=is_live, playable_in_embed=true; ffmpeg decoded the live stream",
+        "resolution": [
+          1920,
+          1080
+        ],
+        "motion_observed": true,
+        "live_since": "2026-02-28T12:41:56+00:00",
+        "limitations": "short daytime sample; activity varies"
+      },
+      "source_provenance": {
+        "channel_url": "https://www.youtube.com/channel/UC6qrG3W8SMK0jior2olka3g",
+        "channel": "EarthCam",
+        "stream_title": "EarthCam Live:  SUMMIT One Vanderbilt (New York City, NY)",
+        "found_via": "EarthCam channel /streams listing, 2026-09-19"
+      },
+      "notes": "EarthCam and SUMMIT One Vanderbilt."
+    },
+    {
+      "name": "Midway Airport airfield",
+      "location": "Chicago, Illinois, United States",
+      "country": "United States",
+      "category": "airport",
+      "provider": "EarthCam",
+      "kind": "youtube",
+      "video_id": "EiUyBIcG4fQ",
+      "url": "https://www.youtube.com/embed/EiUyBIcG4fQ?autoplay=1&mute=1",
+      "watch_url": "https://www.youtube.com/watch?v=EiUyBIcG4fQ",
+      "lat": 41.7855,
+      "lng": -87.7517,
+      "timezone": "America/Chicago",
+      "coordinate_confidence": "OSM point for Chicago Midway International Airport; the camera looks across a perimeter road and fence onto the airfield with the control tower at far left, exact building not published.",
+      "tags": [
+        "midway",
+        "chicago midway",
+        "mdw",
+        "airport",
+        "runway",
+        "planes",
+        "aviation",
+        "takeoffs",
+        "landings",
+        "chicago",
+        "illinois",
+        "traffic",
+        "outdoor"
+      ],
+      "quality_score": 3,
+      "quality_reason": "Looks over a perimeter road and fence onto Midway's airfield, with the control tower at far left. A jet climbs away in the second frame and an SUV drives along the road. Rain drops on the lens blurred parts of the picture today.",
+      "quality_evidence": {
+        "method": "Visual inspection of two decoded live frames 5 s apart (paired_frames)",
+        "visual_inspected": true,
+        "checked_at": "2026-09-19T15:06:03+00:00",
+        "motion_observed": true,
+        "evidence_paths": [
+          "frames/earthcam-2026-09-19/midway-a.jpg",
+          "frames/earthcam-2026-09-19/midway-b.jpg"
+        ]
+      },
+      "validation": {
+        "checked_at": "2026-09-19T15:06:03+00:00",
+        "is_live": true,
+        "playable": true,
+        "method": "yt-dlp metadata live_status=is_live, playable_in_embed=true; ffmpeg decoded the live stream",
+        "resolution": [
+          1280,
+          720
+        ],
+        "motion_observed": true,
+        "live_since": "2026-08-31T14:26:37+00:00",
+        "limitations": "short daytime sample; activity varies"
+      },
+      "source_provenance": {
+        "channel_url": "https://www.youtube.com/channel/UC6qrG3W8SMK0jior2olka3g",
+        "channel": "EarthCam",
+        "stream_title": "EarthCam Live:  Midway Airport (Chicago, IL)",
+        "found_via": "EarthCam channel /streams listing, 2026-09-19"
+      },
+      "notes": "EarthCam and Pro Auto. A different camera from the StreamTime Midway view already in the catalog. Rain can spot the lens."
+    },
+    {
+      "name": "Scottsville town square, Kentucky",
+      "location": "Scottsville, Kentucky, United States",
+      "country": "United States",
+      "category": "square",
+      "provider": "EarthCam",
+      "kind": "youtube",
+      "video_id": "MsiHVaomJ04",
+      "url": "https://www.youtube.com/embed/MsiHVaomJ04?autoplay=1&mute=1",
+      "watch_url": "https://www.youtube.com/watch?v=MsiHVaomJ04",
+      "lat": 36.7534,
+      "lng": -86.1905,
+      "timezone": "America/Chicago",
+      "coordinate_confidence": "OSM town point, which sits at the town square; EarthCam says the camera is on the Carpenter-Dent Building on the square.",
+      "tags": [
+        "scottsville",
+        "allen county",
+        "kentucky",
+        "town square",
+        "courthouse square",
+        "main street",
+        "small town",
+        "roundabout",
+        "traffic",
+        "cars",
+        "outdoor"
+      ],
+      "quality_score": 3,
+      "quality_reason": "Looks down on the roundabout at Scottsville's town square, with trees, brick storefronts and a white cupola building at the end of the street. Cars circle the square and stop at the signs between frames.",
+      "quality_evidence": {
+        "method": "Visual inspection of two decoded live frames 5 s apart (paired_frames)",
+        "visual_inspected": true,
+        "checked_at": "2026-09-19T15:07:26+00:00",
+        "motion_observed": true,
+        "evidence_paths": [
+          "frames/earthcam-2026-09-19/scottsville-a.jpg",
+          "frames/earthcam-2026-09-19/scottsville-b.jpg"
+        ]
+      },
+      "validation": {
+        "checked_at": "2026-09-19T15:07:26+00:00",
+        "is_live": true,
+        "playable": true,
+        "method": "yt-dlp metadata live_status=is_live, playable_in_embed=true; ffmpeg decoded the live stream",
+        "resolution": [
+          1280,
+          720
+        ],
+        "motion_observed": true,
+        "live_since": "2026-02-28T12:40:47+00:00",
+        "limitations": "short daytime sample; activity varies"
+      },
+      "source_provenance": {
+        "channel_url": "https://www.youtube.com/channel/UC6qrG3W8SMK0jior2olka3g",
+        "channel": "EarthCam",
+        "stream_title": "EarthCam Live:  Scottsville Main Street (Scottsville, Kentucky)",
+        "found_via": "EarthCam channel /streams listing, 2026-09-19"
+      },
+      "notes": "EarthCam camera on the Carpenter-Dent Building, built in 1881."
+    },
+    {
+      "name": "Scrub Island marina, British Virgin Islands",
+      "location": "Scrub Island, British Virgin Islands",
+      "country": "British Virgin Islands",
+      "category": "harbor",
+      "provider": "EarthCam",
+      "kind": "youtube",
+      "video_id": "t55kv94nEzc",
+      "url": "https://www.youtube.com/embed/t55kv94nEzc?autoplay=1&mute=1",
+      "watch_url": "https://www.youtube.com/watch?v=t55kv94nEzc",
+      "lat": 18.4685,
+      "lng": -64.5099,
+      "timezone": "America/Tortola",
+      "coordinate_confidence": "OSM point for Scrub Island; the camera is at the Scrub Island Resort above its marina, exact position not published.",
+      "tags": [
+        "scrub island",
+        "bvi",
+        "british virgin islands",
+        "caribbean",
+        "marina",
+        "resort",
+        "boats",
+        "turquoise water",
+        "islands",
+        "tortola",
+        "outdoor",
+        "vacation"
+      ],
+      "quality_score": 3,
+      "quality_reason": "Looks down on the Scrub Island Resort marina and turquoise water, with green hills and islands across the channel. The marina was nearly empty; a small boat crossed in front of the docks in one of five frames 30 s apart and a bird flew across.",
+      "quality_evidence": {
+        "method": "Visual inspection of two decoded live frames 5 s apart (paired_frames), plus a second look at 5 frames 30 s apart",
+        "visual_inspected": true,
+        "checked_at": "2026-09-19T15:15:23+00:00",
+        "motion_observed": true,
+        "evidence_paths": [
+          "frames/earthcam-2026-09-19/scrub-island-a.jpg",
+          "frames/earthcam-2026-09-19/scrub-island-b.jpg",
+          "frames/earthcam-2026-09-19/resample/scrub-island-1.jpg",
+          "frames/earthcam-2026-09-19/resample/scrub-island-2.jpg",
+          "frames/earthcam-2026-09-19/resample/scrub-island-3.jpg",
+          "frames/earthcam-2026-09-19/resample/scrub-island-4.jpg",
+          "frames/earthcam-2026-09-19/resample/scrub-island-5.jpg"
+        ]
+      },
+      "validation": {
+        "checked_at": "2026-09-19T15:07:28+00:00",
+        "is_live": true,
+        "playable": true,
+        "method": "yt-dlp metadata live_status=is_live, playable_in_embed=true; ffmpeg decoded the live stream",
+        "resolution": [
+          1280,
+          720
+        ],
+        "motion_observed": true,
+        "live_since": "2026-02-28T12:44:21+00:00",
+        "limitations": "short daytime sample; activity varies"
+      },
+      "source_provenance": {
+        "channel_url": "https://www.youtube.com/channel/UC6qrG3W8SMK0jior2olka3g",
+        "channel": "EarthCam",
+        "stream_title": "EarthCam Live:  Scrub Island (British Virgin Islands)",
+        "found_via": "EarthCam channel /streams listing, 2026-09-19"
+      },
+      "notes": "EarthCam and Scrub Island Resort. Quieter off-season."
+    },
+    {
+      "name": "Son Muntaner golf course near Palma",
+      "location": "Palma, Mallorca, Balearic Islands, Spain",
+      "country": "Spain",
+      "category": "golf course",
+      "provider": "EarthCam",
+      "kind": "youtube",
+      "video_id": "jtdyLykT_XY",
+      "url": "https://www.youtube.com/embed/jtdyLykT_XY?autoplay=1&mute=1",
+      "watch_url": "https://www.youtube.com/watch?v=jtdyLykT_XY",
+      "lat": 39.5828,
+      "lng": 2.6074,
+      "timezone": "Europe/Madrid",
+      "coordinate_confidence": "OSM point for Golf de Son Muntaner, named by EarthCam; the camera looks over the course from a tile roof, exact building not published.",
+      "tags": [
+        "mallorca",
+        "majorca",
+        "palma",
+        "son muntaner",
+        "golf",
+        "golf course",
+        "balearic islands",
+        "mediterranean",
+        "palm trees",
+        "olive trees",
+        "golf carts",
+        "outdoor",
+        "vacation"
+      ],
+      "quality_score": 3,
+      "quality_reason": "Looks over a terracotta roof onto fairways, bunkers and olive trees at Son Muntaner, with palms and a wooded ridge behind. A golf cart moves on the path at right between frames; the rest is still.",
+      "quality_evidence": {
+        "method": "Visual inspection of two decoded live frames 5 s apart (paired_frames)",
+        "visual_inspected": true,
+        "checked_at": "2026-09-19T15:07:06+00:00",
+        "motion_observed": true,
+        "evidence_paths": [
+          "frames/earthcam-2026-09-19/mallorca-a.jpg",
+          "frames/earthcam-2026-09-19/mallorca-b.jpg"
+        ]
+      },
+      "validation": {
+        "checked_at": "2026-09-19T15:07:06+00:00",
+        "is_live": true,
+        "playable": true,
+        "method": "yt-dlp metadata live_status=is_live, playable_in_embed=true; ffmpeg decoded the live stream",
+        "resolution": [
+          1920,
+          1080
+        ],
+        "motion_observed": true,
+        "live_since": "2026-08-12T12:19:46+00:00",
+        "limitations": "short daytime sample; activity varies"
+      },
+      "source_provenance": {
+        "channel_url": "https://www.youtube.com/channel/UC6qrG3W8SMK0jior2olka3g",
+        "channel": "EarthCam",
+        "stream_title": "EarthCam Live:  Mallorca, Spain",
+        "found_via": "EarthCam channel /streams listing, 2026-09-19"
+      },
+      "notes": "EarthCam view of Golf Son Muntaner in the hills above Palma."
+    },
+    {
+      "name": "Tower of Voices, Flight 93 National Memorial",
+      "location": "Shanksville, Pennsylvania, United States",
+      "country": "United States",
+      "category": "landmark",
+      "provider": "EarthCam",
+      "kind": "youtube",
+      "video_id": "OSI8qWMoK5E",
+      "url": "https://www.youtube.com/embed/OSI8qWMoK5E?autoplay=1&mute=1",
+      "watch_url": "https://www.youtube.com/watch?v=OSI8qWMoK5E",
+      "lat": 40.0771,
+      "lng": -78.8851,
+      "timezone": "America/New_York",
+      "coordinate_confidence": "OSM point for the Tower of Voices, the subject in frame.",
+      "tags": [
+        "flight 93",
+        "flight 93 national memorial",
+        "tower of voices",
+        "memorial",
+        "9/11",
+        "september 11",
+        "national park",
+        "wind chimes",
+        "meadow",
+        "visitors",
+        "outdoor"
+      ],
+      "quality_score": 3,
+      "quality_reason": "The 93-foot Tower of Voices stands in open meadow under a grey sky, with a path curving up to it. A few visitors walk the paths at right and stand at the tower base, and their positions change between frames.",
+      "quality_evidence": {
+        "method": "Visual inspection of two decoded live frames 5 s apart (paired_frames)",
+        "visual_inspected": true,
+        "checked_at": "2026-09-19T15:06:56+00:00",
+        "motion_observed": true,
+        "evidence_paths": [
+          "frames/earthcam-2026-09-19/flight93-a.jpg",
+          "frames/earthcam-2026-09-19/flight93-b.jpg"
+        ]
+      },
+      "validation": {
+        "checked_at": "2026-09-19T15:06:56+00:00",
+        "is_live": true,
+        "playable": true,
+        "method": "yt-dlp metadata live_status=is_live, playable_in_embed=true; ffmpeg decoded the live stream",
+        "resolution": [
+          1920,
+          1080
+        ],
+        "motion_observed": true,
+        "live_since": "2026-09-11T12:08:34+00:00",
+        "limitations": "short daytime sample; activity varies"
+      },
+      "source_provenance": {
+        "channel_url": "https://www.youtube.com/channel/UC6qrG3W8SMK0jior2olka3g",
+        "channel": "EarthCam",
+        "stream_title": "EarthCam Live:  Flight 93 Memorial - Tower of Voices (Shanksville, PA)",
+        "found_via": "EarthCam channel /streams listing, 2026-09-19"
+      },
+      "notes": "EarthCam view of the Tower of Voices at the Flight 93 National Memorial. The stream last restarted on September 11."
+    },
+    {
+      "name": "Union Station and the Kansas City skyline from Liberty Memorial",
+      "location": "Kansas City, Missouri, United States",
+      "country": "United States",
+      "category": "skyline",
+      "provider": "EarthCam",
+      "kind": "youtube",
+      "video_id": "9fzUjSTK5F8",
+      "url": "https://www.youtube.com/embed/9fzUjSTK5F8?autoplay=1&mute=1",
+      "watch_url": "https://www.youtube.com/watch?v=9fzUjSTK5F8",
+      "lat": 39.0807,
+      "lng": -94.5861,
+      "timezone": "America/Chicago",
+      "coordinate_confidence": "OSM point for the National WWI Museum and Memorial, whose grounds the camera overlooks per EarthCam; it looks north across the lawn to Union Station and downtown.",
+      "tags": [
+        "kansas city",
+        "kc",
+        "missouri",
+        "union station",
+        "liberty memorial",
+        "national wwi museum",
+        "downtown",
+        "skyline",
+        "fountain",
+        "landmark",
+        "outdoor"
+      ],
+      "quality_score": 3,
+      "quality_reason": "Looks north over the Liberty Memorial lawn to Union Station, its fountain and the downtown towers. Event tents are up in front of the station; the fountain plays and a few cars move between frames.",
+      "quality_evidence": {
+        "method": "Visual inspection of two decoded live frames 5 s apart (paired_frames)",
+        "visual_inspected": true,
+        "checked_at": "2026-09-19T15:07:15+00:00",
+        "motion_observed": true,
+        "evidence_paths": [
+          "frames/earthcam-2026-09-19/kansas-city-a.jpg",
+          "frames/earthcam-2026-09-19/kansas-city-b.jpg"
+        ]
+      },
+      "validation": {
+        "checked_at": "2026-09-19T15:07:15+00:00",
+        "is_live": true,
+        "playable": true,
+        "method": "yt-dlp metadata live_status=is_live, playable_in_embed=true; ffmpeg decoded the live stream",
+        "resolution": [
+          1280,
+          720
+        ],
+        "motion_observed": true,
+        "live_since": "2026-02-28T12:42:22+00:00",
+        "limitations": "short daytime sample; activity varies"
+      },
+      "source_provenance": {
+        "channel_url": "https://www.youtube.com/channel/UC6qrG3W8SMK0jior2olka3g",
+        "channel": "EarthCam",
+        "stream_title": "EarthCam Live:  Kansas City Cam (Kansas City, MO)",
+        "found_via": "EarthCam channel /streams listing, 2026-09-19"
+      },
+      "notes": "EarthCam and the National WWI Museum and Memorial."
+    },
+    {
+      "name": "World's Largest Buffalo, Jamestown",
+      "location": "Jamestown, North Dakota, United States",
+      "country": "United States",
+      "category": "landmark",
+      "provider": "EarthCam",
+      "kind": "youtube",
+      "video_id": "VWDi2Po3ZsQ",
+      "url": "https://www.youtube.com/embed/VWDi2Po3ZsQ?autoplay=1&mute=1",
+      "watch_url": "https://www.youtube.com/watch?v=VWDi2Po3ZsQ",
+      "lat": 46.8893,
+      "lng": -98.6986,
+      "timezone": "America/Chicago",
+      "coordinate_confidence": "OSM point for the World's Largest Buffalo monument, the subject in frame.",
+      "tags": [
+        "world's largest buffalo",
+        "dakota thunder",
+        "buffalo",
+        "bison",
+        "monument",
+        "roadside attraction",
+        "jamestown",
+        "north dakota",
+        "prairie",
+        "visitors",
+        "outdoor"
+      ],
+      "quality_score": 3,
+      "quality_reason": "The 26-foot concrete bison 'Dakota Thunder' in side view on its hilltop, with Jamestown behind. A visitor walks the path past the statue while another sits on a bench. Rain drops spotted the lens today.",
+      "quality_evidence": {
+        "method": "Visual inspection of two decoded live frames 5 s apart (paired_frames)",
+        "visual_inspected": true,
+        "checked_at": "2026-09-19T15:06:23+00:00",
+        "motion_observed": true,
+        "evidence_paths": [
+          "frames/earthcam-2026-09-19/buffalo-jamestown-a.jpg",
+          "frames/earthcam-2026-09-19/buffalo-jamestown-b.jpg"
+        ]
+      },
+      "validation": {
+        "checked_at": "2026-09-19T15:06:23+00:00",
+        "is_live": true,
+        "playable": true,
+        "method": "yt-dlp metadata live_status=is_live, playable_in_embed=true; ffmpeg decoded the live stream",
+        "resolution": [
+          1280,
+          720
+        ],
+        "motion_observed": true,
+        "live_since": "2026-07-10T15:35:02+00:00",
+        "limitations": "short daytime sample; activity varies"
+      },
+      "source_provenance": {
+        "channel_url": "https://www.youtube.com/channel/UC6qrG3W8SMK0jior2olka3g",
+        "channel": "EarthCam",
+        "stream_title": "EarthCam Live:  World's Largest Buffalo Monument (Jamestown, North Dakota)",
+        "found_via": "EarthCam channel /streams listing, 2026-09-19"
+      },
+      "notes": "EarthCam and the Jamestown Area Chamber of Commerce. Rain can spot the lens."
+    }
+  ],
+  "reserve": [
+    {
+      "name": "Giraffe barn, Greenville Zoo",
+      "location": "Greenville, South Carolina, United States",
+      "country": "United States",
+      "category": "zoo",
+      "provider": "EarthCam",
+      "kind": "youtube",
+      "video_id": "AIwsO8sB0LM",
+      "url": "https://www.youtube.com/embed/AIwsO8sB0LM?autoplay=1&mute=1",
+      "watch_url": "https://www.youtube.com/watch?v=AIwsO8sB0LM",
+      "lat": 34.8469,
+      "lng": -82.3878,
+      "timezone": "America/New_York",
+      "coordinate_confidence": "OSM point for the Greenville Zoo; indoor barn, exact position in the zoo not published.",
+      "tags": [
+        "greenville zoo",
+        "giraffe",
+        "barn",
+        "zoo",
+        "animals",
+        "greenville",
+        "south carolina",
+        "indoor"
+      ],
+      "quality_score": 2,
+      "quality_reason": "Indoor barn stall with numbered doors and a hay rack. No giraffe was in view in the paired frames or in five more frames 30 s apart; a keeper hosed the floor in the last one.",
+      "quality_evidence": {
+        "method": "Visual inspection of two decoded live frames 5 s apart (paired_frames), plus a second look at 5 frames 30 s apart",
+        "visual_inspected": true,
+        "checked_at": "2026-09-19T15:10:14+00:00",
+        "motion_observed": false,
+        "evidence_paths": [
+          "frames/earthcam-2026-09-19/giraffe-barn-a.jpg",
+          "frames/earthcam-2026-09-19/giraffe-barn-b.jpg",
+          "frames/earthcam-2026-09-19/resample/giraffe-barn-1.jpg",
+          "frames/earthcam-2026-09-19/resample/giraffe-barn-2.jpg",
+          "frames/earthcam-2026-09-19/resample/giraffe-barn-3.jpg",
+          "frames/earthcam-2026-09-19/resample/giraffe-barn-4.jpg",
+          "frames/earthcam-2026-09-19/resample/giraffe-barn-5.jpg"
+        ]
+      },
+      "validation": {
+        "checked_at": "2026-09-19T15:06:18+00:00",
+        "is_live": true,
+        "playable": true,
+        "method": "yt-dlp metadata live_status=is_live, playable_in_embed=true; ffmpeg decoded the live stream",
+        "resolution": [
+          1280,
+          720
+        ],
+        "motion_observed": false,
+        "live_since": "2026-07-10T15:43:27+00:00",
+        "limitations": "short daytime sample; activity varies"
+      },
+      "source_provenance": {
+        "channel_url": "https://www.youtube.com/channel/UC6qrG3W8SMK0jior2olka3g",
+        "channel": "EarthCam",
+        "stream_title": "EarthCam Live: Giraffe Cam Barn - Greenville, SC",
+        "found_via": "EarthCam channel /streams listing, 2026-09-19"
+      },
+      "notes": "Birth-watch camera for Autumn the giraffe; she was out in the yard during the check.",
+      "reserve_reason": "Score 2 on two looks today; recheck at a busier hour."
+    },
+    {
+      "name": "Snowman Cam wildlife yard, Gaylord",
+      "location": "Gaylord, Michigan, United States",
+      "country": "United States",
+      "category": "feeder",
+      "provider": "EarthCam",
+      "kind": "youtube",
+      "video_id": "IU_-Pl9O5jQ",
+      "url": "https://www.youtube.com/embed/IU_-Pl9O5jQ?autoplay=1&mute=1",
+      "watch_url": "https://www.youtube.com/watch?v=IU_-Pl9O5jQ",
+      "lat": 45.0275,
+      "lng": -84.6748,
+      "timezone": "America/Detroit",
+      "coordinate_confidence": "Gaylord town point (OSM); snowmancam.com says the camera is west of Gaylord, exact place not published.",
+      "tags": [
+        "snowman cam",
+        "gaylord",
+        "michigan",
+        "northern michigan",
+        "feeder",
+        "wildlife",
+        "deer",
+        "woods",
+        "detroit lions",
+        "outdoor"
+      ],
+      "quality_score": 2,
+      "quality_reason": "A snowman in a Detroit Lions shirt sits behind a feeding bench in the woods, with a duck statue and a thermometer. No animals or visitors came in the paired frames or in five more frames 30 s apart; only leaves moved.",
+      "quality_evidence": {
+        "method": "Visual inspection of two decoded live frames 5 s apart (paired_frames), plus a second look at 5 frames 30 s apart",
+        "visual_inspected": true,
+        "checked_at": "2026-09-19T15:10:14+00:00",
+        "motion_observed": false,
+        "evidence_paths": [
+          "frames/earthcam-2026-09-19/snowman-gaylord-a.jpg",
+          "frames/earthcam-2026-09-19/snowman-gaylord-b.jpg",
+          "frames/earthcam-2026-09-19/resample/snowman-gaylord-1.jpg",
+          "frames/earthcam-2026-09-19/resample/snowman-gaylord-2.jpg",
+          "frames/earthcam-2026-09-19/resample/snowman-gaylord-3.jpg",
+          "frames/earthcam-2026-09-19/resample/snowman-gaylord-4.jpg",
+          "frames/earthcam-2026-09-19/resample/snowman-gaylord-5.jpg"
+        ]
+      },
+      "validation": {
+        "checked_at": "2026-09-19T15:07:11+00:00",
+        "is_live": true,
+        "playable": true,
+        "method": "yt-dlp metadata live_status=is_live, playable_in_embed=true; ffmpeg decoded the live stream",
+        "resolution": [
+          1280,
+          720
+        ],
+        "motion_observed": false,
+        "live_since": "2026-07-02T21:07:21+00:00",
+        "limitations": "short daytime sample; activity varies"
+      },
+      "source_provenance": {
+        "channel_url": "https://www.youtube.com/channel/UC6qrG3W8SMK0jior2olka3g",
+        "channel": "EarthCam",
+        "stream_title": "EarthCam Live: Snowman Cam - Animals and Wildlife (Gaylord, Michigan)",
+        "found_via": "EarthCam channel /streams listing, 2026-09-19"
+      },
+      "notes": "Deer, turkeys and other wildlife visit the bench at times, per the operator.",
+      "reserve_reason": "Score 2 on two looks today; recheck at a busier hour."
+    },
+    {
+      "name": "Beach from the Shalimar resort, Sanibel",
+      "location": "Sanibel, Florida, United States",
+      "country": "United States",
+      "category": "beach",
+      "provider": "EarthCam",
+      "kind": "youtube",
+      "video_id": "4LTSTw4jnZc",
+      "url": "https://www.youtube.com/embed/4LTSTw4jnZc?autoplay=1&mute=1",
+      "watch_url": "https://www.youtube.com/watch?v=4LTSTw4jnZc",
+      "lat": 26.423,
+      "lng": -82.0884,
+      "timezone": "America/New_York",
+      "coordinate_confidence": "OSM point for Shalimar Cottages & Motel, 2823 West Gulf Drive, named by EarthCam as the host.",
+      "tags": [
+        "sanibel",
+        "sanibel island",
+        "florida",
+        "gulf of mexico",
+        "beach",
+        "palm trees",
+        "dunes",
+        "outdoor",
+        "vacation"
+      ],
+      "quality_score": 2,
+      "quality_reason": "Dune plants and palms fill most of the frame; a few beachgoers sit and walk far back by the Gulf. Little changed across the paired frames and five more 30 s apart.",
+      "quality_evidence": {
+        "method": "Visual inspection of two decoded live frames 5 s apart (paired_frames), plus a second look at 5 frames 30 s apart",
+        "visual_inspected": true,
+        "checked_at": "2026-09-19T15:10:14+00:00",
+        "motion_observed": false,
+        "evidence_paths": [
+          "frames/earthcam-2026-09-19/sanibel-a.jpg",
+          "frames/earthcam-2026-09-19/sanibel-b.jpg",
+          "frames/earthcam-2026-09-19/resample/sanibel-1.jpg",
+          "frames/earthcam-2026-09-19/resample/sanibel-2.jpg",
+          "frames/earthcam-2026-09-19/resample/sanibel-3.jpg",
+          "frames/earthcam-2026-09-19/resample/sanibel-4.jpg",
+          "frames/earthcam-2026-09-19/resample/sanibel-5.jpg"
+        ]
+      },
+      "validation": {
+        "checked_at": "2026-09-19T15:07:18+00:00",
+        "is_live": true,
+        "playable": true,
+        "method": "yt-dlp metadata live_status=is_live, playable_in_embed=true; ffmpeg decoded the live stream",
+        "resolution": [
+          1280,
+          720
+        ],
+        "motion_observed": false,
+        "live_since": "2026-05-29T12:48:26+00:00",
+        "limitations": "short daytime sample; activity varies"
+      },
+      "source_provenance": {
+        "channel_url": "https://www.youtube.com/channel/UC6qrG3W8SMK0jior2olka3g",
+        "channel": "EarthCam",
+        "stream_title": "EarthCam Live:  Sanibel Island",
+        "found_via": "EarthCam channel /streams listing, 2026-09-19"
+      },
+      "notes": "EarthCam and Shalimar Beach Resort.",
+      "reserve_reason": "Score 2 on two looks today; recheck at a busier hour."
+    },
+    {
+      "name": "Milwaukee Riverwalk and the Bronze Fonz",
+      "location": "Milwaukee, Wisconsin, United States",
+      "country": "United States",
+      "category": "river",
+      "provider": "EarthCam",
+      "kind": "youtube",
+      "video_id": "MT5Og9gOKuM",
+      "url": "https://www.youtube.com/embed/MT5Og9gOKuM?autoplay=1&mute=1",
+      "watch_url": "https://www.youtube.com/watch?v=MT5Og9gOKuM",
+      "lat": 43.0404,
+      "lng": -87.911,
+      "timezone": "America/Chicago",
+      "coordinate_confidence": "OSM point for the Bronze Fonz statue on the Riverwalk, in frame.",
+      "tags": [
+        "milwaukee",
+        "wisconsin",
+        "riverwalk",
+        "bronze fonz",
+        "milwaukee river",
+        "downtown",
+        "river",
+        "outdoor"
+      ],
+      "quality_score": 2,
+      "quality_reason": "The Bronze Fonz on the Riverwalk with the Milwaukee River and downtown buildings behind. No one walked past in the paired frames or in five more 30 s apart on a wet morning; nothing moved.",
+      "quality_evidence": {
+        "method": "Visual inspection of two decoded live frames 5 s apart (paired_frames), plus a second look at 5 frames 30 s apart",
+        "visual_inspected": true,
+        "checked_at": "2026-09-19T15:12:48+00:00",
+        "motion_observed": false,
+        "evidence_paths": [
+          "frames/earthcam-2026-09-19/milwaukee-a.jpg",
+          "frames/earthcam-2026-09-19/milwaukee-b.jpg",
+          "frames/earthcam-2026-09-19/resample/milwaukee-1.jpg",
+          "frames/earthcam-2026-09-19/resample/milwaukee-2.jpg",
+          "frames/earthcam-2026-09-19/resample/milwaukee-3.jpg",
+          "frames/earthcam-2026-09-19/resample/milwaukee-4.jpg",
+          "frames/earthcam-2026-09-19/resample/milwaukee-5.jpg"
+        ]
+      },
+      "validation": {
+        "checked_at": "2026-09-19T15:06:52+00:00",
+        "is_live": true,
+        "playable": true,
+        "method": "yt-dlp metadata live_status=is_live, playable_in_embed=true; ffmpeg decoded the live stream",
+        "resolution": [
+          1920,
+          1080
+        ],
+        "motion_observed": false,
+        "live_since": "2026-02-28T13:59:11+00:00",
+        "limitations": "short daytime sample; activity varies"
+      },
+      "source_provenance": {
+        "channel_url": "https://www.youtube.com/channel/UC6qrG3W8SMK0jior2olka3g",
+        "channel": "EarthCam",
+        "stream_title": "EarthCam Live:  Milwaukee, WI",
+        "found_via": "EarthCam channel /streams listing, 2026-09-19"
+      },
+      "notes": "EarthCam and Visit Milwaukee.",
+      "reserve_reason": "Score 2 on two looks today; recheck at a busier hour."
+    }
+  ],
+  "rejected": []
+}

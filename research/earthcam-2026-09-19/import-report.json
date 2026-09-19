@@ -1,0 +1,249 @@
+{
+  "generated_at": "2026-09-19T15:23:12.520300+00:00",
+  "existing_count": 932,
+  "requested_additions": 500,
+  "accepted": [
+    {
+      "name": "Western Wall, Temple Archaeological Park",
+      "video_id": "zp6LNSoq000",
+      "lane": "earthcam-2026-09-19",
+      "source_file": "candidates.json",
+      "quality_score": 5,
+      "reasons": []
+    },
+    {
+      "name": "9/11 Memorial reflecting pool from above",
+      "video_id": "ZYQlLQHz2Mg",
+      "lane": "earthcam-2026-09-19",
+      "source_file": "candidates.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Coney Island, Luna Park and the beach from above",
+      "video_id": "H67j7H-7QD0",
+      "lane": "earthcam-2026-09-19",
+      "source_file": "candidates.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "River's Edge Park and the Omaha skyline, Council Bluffs",
+      "video_id": "qsrevo5Vdkw",
+      "lane": "earthcam-2026-09-19",
+      "source_file": "candidates.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Tamariu cove and beach, Costa Brava",
+      "video_id": "fTh5ssC1z-c",
+      "lane": "earthcam-2026-09-19",
+      "source_file": "candidates.json",
+      "quality_score": 4,
+      "reasons": []
+    },
+    {
+      "name": "Anglin's Pier and the beach path, Lauderdale-By-The-Sea",
+      "video_id": "tAdTOOsrZBQ",
+      "lane": "earthcam-2026-09-19",
+      "source_file": "candidates.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Chicago from the Willis Tower Skydeck",
+      "video_id": "O0UGT7AT3aw",
+      "lane": "earthcam-2026-09-19",
+      "source_file": "candidates.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Crescent Harbor and Sitka Sound",
+      "video_id": "sF5hFDGN20Y",
+      "lane": "earthcam-2026-09-19",
+      "source_file": "candidates.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Downtown Cleveland and Lake Erie from Terminal Tower",
+      "video_id": "iHqqkh_Lths",
+      "lane": "earthcam-2026-09-19",
+      "source_file": "candidates.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Giraffe yard, Greenville Zoo",
+      "video_id": "sLRtUoPNH2k",
+      "lane": "earthcam-2026-09-19",
+      "source_file": "candidates.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Lower Manhattan across the Hudson from Lincoln Harbor",
+      "video_id": "sixP_dAJ8D4",
+      "lane": "earthcam-2026-09-19",
+      "source_file": "candidates.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Main Street and Veterans Memorial Park, Roswell",
+      "video_id": "kLoFxVhRWtQ",
+      "lane": "earthcam-2026-09-19",
+      "source_file": "candidates.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Main Street at West Street, Madison, Indiana",
+      "video_id": "Ez6xC43MMTQ",
+      "lane": "earthcam-2026-09-19",
+      "source_file": "candidates.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Midtown and Central Park from SUMMIT One Vanderbilt",
+      "video_id": "2_PDaUJbfuI",
+      "lane": "earthcam-2026-09-19",
+      "source_file": "candidates.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Midway Airport airfield",
+      "video_id": "EiUyBIcG4fQ",
+      "lane": "earthcam-2026-09-19",
+      "source_file": "candidates.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Scottsville town square, Kentucky",
+      "video_id": "MsiHVaomJ04",
+      "lane": "earthcam-2026-09-19",
+      "source_file": "candidates.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Scrub Island marina, British Virgin Islands",
+      "video_id": "t55kv94nEzc",
+      "lane": "earthcam-2026-09-19",
+      "source_file": "candidates.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Son Muntaner golf course near Palma",
+      "video_id": "jtdyLykT_XY",
+      "lane": "earthcam-2026-09-19",
+      "source_file": "candidates.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Tower of Voices, Flight 93 National Memorial",
+      "video_id": "OSI8qWMoK5E",
+      "lane": "earthcam-2026-09-19",
+      "source_file": "candidates.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "Union Station and the Kansas City skyline from Liberty Memorial",
+      "video_id": "9fzUjSTK5F8",
+      "lane": "earthcam-2026-09-19",
+      "source_file": "candidates.json",
+      "quality_score": 3,
+      "reasons": []
+    },
+    {
+      "name": "World's Largest Buffalo, Jamestown",
+      "video_id": "VWDi2Po3ZsQ",
+      "lane": "earthcam-2026-09-19",
+      "source_file": "candidates.json",
+      "quality_score": 3,
+      "reasons": []
+    }
+  ],
+  "reserve": [
+    {
+      "name": "Beach from the Shalimar resort, Sanibel",
+      "video_id": "4LTSTw4jnZc",
+      "lane": "earthcam-2026-09-19",
+      "source_file": "candidates.json",
+      "quality_score": 2,
+      "reasons": [
+        "Score2 mostly static/weak scene: reserve only",
+        "Observed motion evidence missing"
+      ]
+    },
+    {
+      "name": "Giraffe barn, Greenville Zoo",
+      "video_id": "AIwsO8sB0LM",
+      "lane": "earthcam-2026-09-19",
+      "source_file": "candidates.json",
+      "quality_score": 2,
+      "reasons": [
+        "Score2 mostly static/weak scene: reserve only",
+        "Observed motion evidence missing"
+      ]
+    },
+    {
+      "name": "Milwaukee Riverwalk and the Bronze Fonz",
+      "video_id": "MT5Og9gOKuM",
+      "lane": "earthcam-2026-09-19",
+      "source_file": "candidates.json",
+      "quality_score": 2,
+      "reasons": [
+        "Score2 mostly static/weak scene: reserve only",
+        "Observed motion evidence missing"
+      ]
+    },
+    {
+      "name": "Snowman Cam wildlife yard, Gaylord",
+      "video_id": "IU_-Pl9O5jQ",
+      "lane": "earthcam-2026-09-19",
+      "source_file": "candidates.json",
+      "quality_score": 2,
+      "reasons": [
+        "Score2 mostly static/weak scene: reserve only",
+        "Observed motion evidence missing"
+      ]
+    }
+  ],
+  "rejected": [],
+  "duplicates": [],
+  "input_count": 25,
+  "lane_counts": {
+    "earthcam-2026-09-19": {
+      "accepted": 21,
+      "reserve": 4,
+      "rejected": 0,
+      "duplicates": 0
+    }
+  },
+  "counts": {
+    "accepted": 21,
+    "reserve": 4,
+    "rejected": 0,
+    "duplicates": 0
+  },
+  "new_total": 953,
+  "shortfall": 479,
+  "rating_distribution": {
+    "3": 16,
+    "4": 4,
+    "5": 1
+  },
+  "existing_values_preserved": true,
+  "mode": "write",
+  "catalog_changed": true,
+  "backup": "cameras-8dcfd523916ad814.json"
+}

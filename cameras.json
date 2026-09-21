@@ -34441,15 +34441,15 @@
         "expansion500"
       ],
       "pose": {
-        "lat": 41.45406,
-        "lng": -70.60299,
+        "lat": 41.35438,
+        "lng": -70.76638,
         "alt_m": null,
         "heading": null,
         "pitch": null,
         "fov": null,
         "aligned": false,
         "confidence": "low",
-        "basis": "low — approximate site position, not verified camera mount",
+        "basis": "low — Menemsha Harbor from Overture Maps places (release 2026-08-19.0); the camera mount inside the harbour is still unverified",
         "position_kind": "approximate-site"
       },
       "quality_score": 4,

@@ -295,9 +295,9 @@ Names people actually type are understood: **nyc**, **big apple**, **la**,
 **middle east**. Two-word ones survive the tokenizer, so "new york city" is one
 name and not three words. One and two letter terms match exactly rather than by
 prefix, so "la" is Los Angeles and not every lake, landmark and lava field.
-Aliases live in two places on purpose: `tag.py` writes the ones it knows into a
-camera's tags at build time, and `search.js` expands what is typed, so a camera
-added by hand answers to its nickname without being run through the tagger.
+Aliases live in two places on purpose: they are written into a camera's tags on
+its record, and `search.js` expands what is typed, so a camera added by hand
+answers to its nickname the day it lands.
 
 The box opens on a tag list, so nothing has to be known in advance: the chips
 under Places, Scenes and Moods are searches, and so is every chip on a result
@@ -319,9 +319,13 @@ Every camera carries a `tags` array in `cameras.json` covering three things:
 - **quality** - `busy`, `quiet`, `night lights`, `sunset-facing`,
   `sunrise-facing`, `always-on`, `part-time`, `has-sound`.
 
-`python3 tag.py` regenerates the whole array from the camera's own fields plus a
-hand-written table of what no field knows - that the Long Beach penguin cam is
-penguins, that Abbey Road is the Beatles. Edit `tag.py`, not `cameras.json`.
+The tags live on the record and `cameras.json` is the source of truth for them:
+most cameras carry tags no script can derive - that the Long Beach penguin cam
+is penguins, that Abbey Road is the Beatles - so nothing regenerates the array.
+`python3 tag.py` only reports: facing tags that disagree with a pose heading,
+and cameras carrying no tags at all. `--fix-facing` rewrites `sunrise-facing`
+and `sunset-facing` alone; `--suggest "name"` prints what its tables would
+derive for a camera being added, and writes nothing either way.
 `sunset-facing` comes from the pose heading, `has-sound` only from a camera
 confirmed to carry real ambience or live music (`audio: "unknown"` means nobody
 has listened yet, so it makes no promise).
@@ -399,7 +403,7 @@ pulled into the browser cache in the background.
 | terrain | AWS open terrain tiles, terrarium encoding | free |
 | buildings | OpenStreetMap via Overpass | free |
 | live feeds | the project's verified YouTube cams | free |
-| search tags | derived in `tag.py` from the camera records | free |
+| search tags | written on each camera record | free |
 
 No account, no key, no billing. The attribution line bottom-right is required
 by Esri's and OpenStreetMap's terms; leave it in.

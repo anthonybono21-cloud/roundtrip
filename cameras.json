@@ -71191,120 +71191,6 @@
       "video_id": "tBEIYdw1HeM"
     },
     {
-      "name": "Elbo Room main bar",
-      "location": "Fort Lauderdale Beach, Florida, USA",
-      "country": "United States",
-      "category": "bar",
-      "provider": "Elbo Room (ElboTV)",
-      "kind": "youtube",
-      "url": "https://www.youtube.com/embed/wVNt3l657X0?autoplay=1&mute=1",
-      "watch_url": "https://www.youtube.com/watch?v=wVNt3l657X0",
-      "requires_login": false,
-      "last_verified": "2026-09-18",
-      "notes": "Different camera from the catalog's Elbo Room BandCam (this one is the main bar rail). Window crosses midnight.",
-      "timezone": "America/New_York",
-      "tags": [
-        "fort lauderdale beach",
-        "florida",
-        "usa",
-        "united states",
-        "us",
-        "america",
-        "united states of america",
-        "north america",
-        "bar",
-        "fort lauderdale",
-        "beach bar",
-        "indoor",
-        "bartender",
-        "people",
-        "dive bar",
-        "vacation",
-        "quality-4",
-        "score-4",
-        "part-time"
-      ],
-      "curated_tags": [
-        "fort lauderdale",
-        "florida",
-        "usa",
-        "beach bar",
-        "indoor",
-        "bar",
-        "bartender",
-        "people",
-        "dive bar",
-        "vacation",
-        "quality-4",
-        "score-4",
-        "united states",
-        "fort lauderdale beach"
-      ],
-      "scene_set": "claude-scout-2026-09-18",
-      "in_sets": [
-        "claude-scout-2026-09-18"
-      ],
-      "pose": {
-        "lat": 26.1195,
-        "lng": -80.1044,
-        "alt_m": null,
-        "heading": null,
-        "pitch": null,
-        "fov": null,
-        "aligned": false,
-        "confidence": "low",
-        "basis": "Venue address 241 S Fort Lauderdale Beach Blvd (map estimate)",
-        "position_kind": "approximate-site"
-      },
-      "quality_score": 4,
-      "quality_reason": "From behind the bar: a bartender working the rail at left, drinkers on stools against the bright open front, and a man in a black shirt walks through the foreground and out of frame between shots.",
-      "quality_evidence": {
-        "method": "Visual inspection of two decoded live frames 5 s apart (paired_frames)",
-        "visual_inspected": true,
-        "checked_at": "2026-09-18T17:11:11+00:00",
-        "motion_observed": true,
-        "evidence_paths": [
-          "frames/indoor-activity/elbo-bar-cam-a.jpg",
-          "frames/indoor-activity/elbo-bar-cam-b.jpg"
-        ]
-      },
-      "validation": {
-        "checked_at": "2026-09-18T17:11:11+00:00",
-        "is_live": true,
-        "playable": true,
-        "method": "yt-dlp metadata live_status=is_live, playable_in_embed=true; ffmpeg decoded the live stream",
-        "resolution": [
-          1920,
-          1080
-        ],
-        "motion_observed": true,
-        "live_since": "2026-02-23T17:21:41+00:00",
-        "limitations": "short daytime sample; activity varies"
-      },
-      "provenance": {
-        "research_file": "indoor-activity.json",
-        "source": {
-          "channel_url": "https://www.youtube.com/channel/UCUkUjr4syovc3NbLWtuVfYw",
-          "found_via": "scout search 'bar cam live'"
-        }
-      },
-      "check": {
-        "verdict": "live",
-        "checked": "2026-09-18T17:11:11+00:00",
-        "method": "yt-dlp metadata live_status=is_live, playable_in_embed=true; ffmpeg decoded the live stream",
-        "embed": "verified",
-        "embed_reason": "Positive source playback evidence; see validation."
-      },
-      "audio": "unknown",
-      "ads": "unknown",
-      "video_id": "wVNt3l657X0",
-      "active_local_hours_hint": "open 10:00-02:00 (03:00 Fri-Sat) local; bands from 11:00",
-      "live_window": {
-        "from": "10:00",
-        "to": "02:00"
-      }
-    },
-    {
       "name": "Galveston Seawall and Pleasure Pier",
       "location": "Galveston, Texas, United States",
       "country": "United States",
@@ -72241,126 +72127,6 @@
       "ads": "unknown",
       "video_id": "0Y3yNq123R0",
       "active_local_hours_hint": "hens active in daylight, about 07:00-20:00 local; barn lights may go down at night"
-    },
-    {
-      "name": "Hog's Breath Saloon bar room",
-      "location": "Front Street, Key West, Florida, USA",
-      "country": "United States",
-      "category": "bar",
-      "provider": "Hog's Breath Saloon Key West",
-      "kind": "youtube",
-      "url": "https://www.youtube.com/embed/S605ycm0Vlk?autoplay=1&mute=1",
-      "watch_url": "https://www.youtube.com/watch?v=S605ycm0Vlk",
-      "requires_login": false,
-      "last_verified": "2026-09-18",
-      "notes": "Covered, open-sided saloon. Different view from the catalog's Hog's Breath stage cam (this one looks over the whole bar room).",
-      "timezone": "America/New_York",
-      "tags": [
-        "front street",
-        "key west",
-        "florida",
-        "usa",
-        "united states",
-        "us",
-        "america",
-        "united states of america",
-        "north america",
-        "bar",
-        "florida keys",
-        "indoor",
-        "covered bar",
-        "saloon",
-        "people",
-        "crowd",
-        "live music",
-        "musician",
-        "vacation",
-        "quality-4",
-        "score-4",
-        "part-time"
-      ],
-      "curated_tags": [
-        "key west",
-        "florida",
-        "florida keys",
-        "usa",
-        "indoor",
-        "covered bar",
-        "saloon",
-        "bar",
-        "people",
-        "crowd",
-        "live music",
-        "musician",
-        "vacation",
-        "quality-4",
-        "score-4",
-        "united states",
-        "front street"
-      ],
-      "scene_set": "claude-scout-2026-09-18",
-      "in_sets": [
-        "claude-scout-2026-09-18"
-      ],
-      "pose": {
-        "lat": 24.5594,
-        "lng": -81.8062,
-        "alt_m": null,
-        "heading": null,
-        "pitch": null,
-        "fov": null,
-        "aligned": false,
-        "confidence": "low",
-        "basis": "Venue address 400 Front Street, Key West (map estimate)",
-        "position_kind": "approximate-site"
-      },
-      "quality_score": 4,
-      "quality_reason": "High view over a packed covered bar: people on stools, a guitarist on the small stage at right, a woman walking through the center and a man crossing in front of the stage in the second frame. Canopy fills the top third.",
-      "quality_evidence": {
-        "method": "Visual inspection of two decoded live frames 5 s apart (paired_frames)",
-        "visual_inspected": true,
-        "checked_at": "2026-09-18T16:59:52+00:00",
-        "motion_observed": true,
-        "evidence_paths": [
-          "frames/indoor-activity/hogs-breath-minibar-a.jpg",
-          "frames/indoor-activity/hogs-breath-minibar-b.jpg"
-        ]
-      },
-      "validation": {
-        "checked_at": "2026-09-18T16:59:52+00:00",
-        "is_live": true,
-        "playable": true,
-        "method": "yt-dlp metadata live_status=is_live, playable_in_embed=true; ffmpeg decoded the live stream",
-        "resolution": [
-          1920,
-          1080
-        ],
-        "motion_observed": true,
-        "live_since": "2024-12-30T15:01:14+00:00",
-        "limitations": "short daytime sample; activity varies"
-      },
-      "provenance": {
-        "research_file": "indoor-activity.json",
-        "source": {
-          "channel_url": "https://www.youtube.com/channel/UCACzxtAksIzlsuBIiOT_ubw",
-          "found_via": "scout search 'bar cam live'"
-        }
-      },
-      "check": {
-        "verdict": "live",
-        "checked": "2026-09-18T16:59:52+00:00",
-        "method": "yt-dlp metadata live_status=is_live, playable_in_embed=true; ffmpeg decoded the live stream",
-        "embed": "verified",
-        "embed_reason": "Positive source playback evidence; see validation."
-      },
-      "audio": "unknown",
-      "ads": "unknown",
-      "video_id": "S605ycm0Vlk",
-      "active_local_hours_hint": "busy 11:00-01:00 local; music from midday",
-      "live_window": {
-        "from": "10:00",
-        "to": "02:00"
-      }
     },
     {
       "name": "Hotel Zone, giant flag and Nichupté lagoon",
@@ -97605,6 +97371,24 @@
       "reject_reason": "YouTube live filter returned zero results for Bosphorus and Istanbul ship-traffic queries; no embeddable live stream found.",
       "rejected_at": "2026-09-18",
       "kind": "youtube"
+    },
+    {
+      "name": "Elbo Room main bar",
+      "video_id": "wVNt3l657X0",
+      "location": "Fort Lauderdale Beach, Florida, USA",
+      "kind": "youtube",
+      "reject_reason": "The main bar rail at the Elbo Room, not its stage. Same reasoning: category bar, audio \"unknown\", no set times, so it does not meet the live-music exception. The venue's BandCam (YWs0HMRVCBY) is in the list and does.",
+      "rejected_at": "2026-10-05",
+      "was_in_list": "added 2026-09-18 by the camera-expansion pass; pulled on review against the content rule"
+    },
+    {
+      "name": "Hog's Breath Saloon bar room",
+      "video_id": "S605ycm0Vlk",
+      "location": "Front Street, Key West, Florida, USA",
+      "kind": "youtube",
+      "reject_reason": "The bar rail at the Hog's Breath, not its stage. Anthony's rule keeps bar cams out; the one exception is a stage whose feed carries real live music, gated to published set times. This camera has audio \"unknown\", no set times, and its own notes say it looks over the bar room. This exact video id was already rejected on 2026-09-17 for the same reason. The venue's stage cam (_eE4GBEjjs4) is in the list and is the one that qualifies.",
+      "rejected_at": "2026-10-05",
+      "was_in_list": "added 2026-09-18 by the camera-expansion pass; pulled on review against the content rule"
     }
   ],
   "audio_notes": [

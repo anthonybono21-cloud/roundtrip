@@ -63949,121 +63949,6 @@
       "video_id": "TObte08ESr0"
     },
     {
-      "name": "Henry Africa's Bar, Soi Green Mango, Chaweng",
-      "location": "Chaweng, Koh Samui, Surat Thani, Thailand",
-      "country": "Thailand",
-      "category": "bar",
-      "provider": "The Real Samui Webcam",
-      "kind": "youtube",
-      "url": "https://www.youtube.com/embed/Ajo0iFkX3EY?autoplay=1&mute=1",
-      "watch_url": "https://www.youtube.com/watch?v=Ajo0iFkX3EY",
-      "requires_login": false,
-      "last_verified": "2026-09-18",
-      "notes": "Same street as the Hush Bar camera (different view, about 30 m apart). If only one Soi Green Mango camera is wanted, this one and Hush Bar are equally strong.",
-      "timezone": "Asia/Bangkok",
-      "tags": [
-        "chaweng",
-        "koh samui",
-        "samui",
-        "surat thani",
-        "thailand",
-        "th",
-        "tha",
-        "asia",
-        "southeast asia",
-        "bar",
-        "soi green mango",
-        "outdoor",
-        "bars",
-        "nightlife",
-        "people",
-        "neon",
-        "night",
-        "vacation",
-        "island",
-        "quality-5",
-        "score-5"
-      ],
-      "curated_tags": [
-        "koh samui",
-        "samui",
-        "chaweng",
-        "soi green mango",
-        "thailand",
-        "outdoor",
-        "bars",
-        "nightlife",
-        "people",
-        "neon",
-        "night",
-        "vacation",
-        "island",
-        "quality-5",
-        "score-5",
-        "surat thani",
-        "bar"
-      ],
-      "scene_set": "claude-scout-2026-09-18",
-      "in_sets": [
-        "claude-scout-2026-09-18"
-      ],
-      "pose": {
-        "lat": 9.53229,
-        "lng": 100.06348,
-        "alt_m": null,
-        "heading": null,
-        "pitch": null,
-        "fov": null,
-        "aligned": false,
-        "confidence": "low",
-        "basis": "OpenStreetMap geocode of Henry Africa's Bar, Chaweng",
-        "position_kind": "approximate-site"
-      },
-      "quality_score": 5,
-      "quality_reason": "00:25 local: neon-lit open bar packed with drinkers, a promoter with a happy-hour sign walks the street, people move along the bar front and a woman waits in the foreground. Many people changed position between frames.",
-      "quality_evidence": {
-        "method": "Visual inspection of two decoded live frames 5 s apart (paired_frames)",
-        "visual_inspected": true,
-        "checked_at": "2026-09-18T17:25:34+00:00",
-        "motion_observed": true,
-        "evidence_paths": [
-          "frames/vacation-asia-pacific/samui-henry-africas-a.jpg",
-          "frames/vacation-asia-pacific/samui-henry-africas-b.jpg"
-        ]
-      },
-      "validation": {
-        "checked_at": "2026-09-18T17:25:34+00:00",
-        "is_live": true,
-        "playable": true,
-        "method": "yt-dlp metadata live_status=is_live, playable_in_embed=true; ffmpeg decoded the live stream",
-        "resolution": [
-          1920,
-          1080
-        ],
-        "motion_observed": true,
-        "live_since": "2026-09-09T06:07:34+00:00",
-        "limitations": "short sample at local night; activity varies"
-      },
-      "provenance": {
-        "research_file": "vacation-asia-pacific.json",
-        "source": {
-          "channel_url": "https://www.youtube.com/channel/UCmYyJaUxYiF5IbLx-0jFXHQ",
-          "found_via": "scout.py channel The Real Samui Webcam"
-        }
-      },
-      "check": {
-        "verdict": "live",
-        "checked": "2026-09-18T17:25:34+00:00",
-        "method": "yt-dlp metadata live_status=is_live, playable_in_embed=true; ffmpeg decoded the live stream",
-        "embed": "verified",
-        "embed_reason": "Positive source playback evidence; see validation."
-      },
-      "audio": "unknown",
-      "ads": "unknown",
-      "video_id": "Ajo0iFkX3EY",
-      "active_local_hours_hint": "19:00-03:00"
-    },
-    {
       "name": "Kaanapali Beach from the Sheraton Maui",
       "location": "Kaanapali, Lahaina, Maui, Hawaii, USA",
       "country": "United States",
@@ -65730,129 +65615,6 @@
         "from": "09:00",
         "to": "23:00"
       }
-    },
-    {
-      "name": "Soi Green Mango bar lane at Hush Bar, Chaweng",
-      "location": "Chaweng, Koh Samui, Surat Thani, Thailand",
-      "country": "Thailand",
-      "category": "street",
-      "provider": "The Real Samui Webcam",
-      "kind": "youtube",
-      "url": "https://www.youtube.com/embed/DwKCna1mumk?autoplay=1&mute=1",
-      "watch_url": "https://www.youtube.com/watch?v=DwKCna1mumk",
-      "requires_login": false,
-      "last_verified": "2026-09-18",
-      "notes": "Chaweng's main nightlife lane. Quiet by day, packed at night.",
-      "timezone": "Asia/Bangkok",
-      "tags": [
-        "chaweng",
-        "koh samui",
-        "samui",
-        "surat thani",
-        "thailand",
-        "th",
-        "tha",
-        "asia",
-        "southeast asia",
-        "street",
-        "city",
-        "urban",
-        "people",
-        "soi green mango",
-        "hush bar",
-        "outdoor",
-        "nightlife",
-        "bars",
-        "walking",
-        "crowd",
-        "night",
-        "vacation",
-        "island",
-        "quality-5",
-        "score-5",
-        "busy",
-        "night lights"
-      ],
-      "curated_tags": [
-        "koh samui",
-        "samui",
-        "chaweng",
-        "soi green mango",
-        "hush bar",
-        "surat thani",
-        "thailand",
-        "outdoor",
-        "street",
-        "nightlife",
-        "bars",
-        "people",
-        "walking",
-        "crowd",
-        "night",
-        "vacation",
-        "island",
-        "quality-5",
-        "score-5"
-      ],
-      "scene_set": "claude-scout-2026-09-18",
-      "in_sets": [
-        "claude-scout-2026-09-18"
-      ],
-      "pose": {
-        "lat": 9.53256,
-        "lng": 100.06339,
-        "alt_m": null,
-        "heading": null,
-        "pitch": null,
-        "fov": null,
-        "aligned": false,
-        "confidence": "low",
-        "basis": "OpenStreetMap geocode of Hush Bar on Soi Green Mango; Hush sign visible at the end of the lane",
-        "position_kind": "approximate-site"
-      },
-      "quality_score": 5,
-      "quality_reason": "Busy lit pedestrian bar lane at 00:11 local. A couple walks toward the camera in the first frame, a different pair in the second; about fifteen people stroll the lane, women sit outside the SIN bar, guests drink at the tables on the right. Sharp picture, only a small timestamp.",
-      "quality_evidence": {
-        "method": "Visual inspection of two decoded live frames 5 s apart (paired_frames)",
-        "visual_inspected": true,
-        "checked_at": "2026-09-18T17:13:00+00:00",
-        "motion_observed": true,
-        "evidence_paths": [
-          "frames/vacation-asia-pacific/samui-hush-bar-a.jpg",
-          "frames/vacation-asia-pacific/samui-hush-bar-b.jpg"
-        ]
-      },
-      "validation": {
-        "checked_at": "2026-09-18T17:13:00+00:00",
-        "is_live": true,
-        "playable": true,
-        "method": "yt-dlp metadata live_status=is_live, playable_in_embed=true; ffmpeg decoded the live stream",
-        "resolution": [
-          1920,
-          1080
-        ],
-        "motion_observed": true,
-        "live_since": "2023-08-24T07:19:14+00:00",
-        "limitations": "short sample at local night; activity varies"
-      },
-      "provenance": {
-        "research_file": "vacation-asia-pacific.json",
-        "source": {
-          "channel_url": "https://www.youtube.com/channel/UCmYyJaUxYiF5IbLx-0jFXHQ",
-          "found_via": "scout.py search 'phuket live cam'"
-        }
-      },
-      "check": {
-        "verdict": "live",
-        "checked": "2026-09-18T17:13:00+00:00",
-        "method": "yt-dlp metadata live_status=is_live, playable_in_embed=true; ffmpeg decoded the live stream",
-        "embed": "verified",
-        "embed_reason": "Positive source playback evidence; see validation."
-      },
-      "audio": "unknown",
-      "ads": "unknown",
-      "video_id": "DwKCna1mumk",
-      "active_local_hours_hint": "busiest 21:00-02:00 local"
     },
     {
       "name": "Sukhumvit Soi 11 nightlife street, Bangkok",
@@ -83606,124 +83368,6 @@
       "video_id": "ljaqazAaUBE"
     },
     {
-      "name": "Elbo Room patio and A1A at Las Olas",
-      "location": "Fort Lauderdale Beach, Florida, United States",
-      "country": "United States",
-      "category": "bar",
-      "provider": "Elbo Room (ElboTV)",
-      "kind": "youtube",
-      "url": "https://www.youtube.com/embed/bM0GplM_vPY?autoplay=1&mute=1",
-      "watch_url": "https://www.youtube.com/watch?v=bM0GplM_vPY",
-      "requires_login": false,
-      "last_verified": "2026-09-18",
-      "notes": "Different view from the Elbo Room BandCam already in the catalog. It was raining during the check, so the patio was empty; ElboTV logo top right.",
-      "timezone": "America/New_York",
-      "tags": [
-        "fort lauderdale beach",
-        "florida",
-        "united states",
-        "us",
-        "usa",
-        "america",
-        "united states of america",
-        "north america",
-        "bar",
-        "fort lauderdale",
-        "las olas",
-        "a1a",
-        "elbo room",
-        "outdoor",
-        "patio",
-        "street",
-        "palms",
-        "beach",
-        "people",
-        "cars",
-        "vacation",
-        "quality-3",
-        "score-3"
-      ],
-      "curated_tags": [
-        "fort lauderdale",
-        "las olas",
-        "a1a",
-        "elbo room",
-        "florida",
-        "united states",
-        "outdoor",
-        "bar",
-        "patio",
-        "street",
-        "palms",
-        "beach",
-        "people",
-        "cars",
-        "vacation",
-        "quality-3",
-        "score-3",
-        "fort lauderdale beach"
-      ],
-      "scene_set": "claude-scout-2026-09-18",
-      "in_sets": [
-        "claude-scout-2026-09-18"
-      ],
-      "pose": {
-        "lat": 26.1195,
-        "lng": -80.1047,
-        "alt_m": null,
-        "heading": null,
-        "pitch": null,
-        "fov": null,
-        "aligned": false,
-        "confidence": "low",
-        "basis": "Nominatim match for Elbo Room, 241 S Atlantic Blvd (corner of Las Olas and A1A)",
-        "position_kind": "approximate-site"
-      },
-      "quality_score": 3,
-      "quality_reason": "Corner view from the Elbo Room's outdoor patio: bar stools and high tops, the open bar window with a line of customers, and A1A with its palm-lined beach promenade beyond. People at the bar window shift and a car drives down A1A between frames.",
-      "quality_evidence": {
-        "method": "Visual inspection of two decoded live frames 5 s apart (paired_frames)",
-        "visual_inspected": true,
-        "checked_at": "2026-09-18T17:38:09+00:00",
-        "motion_observed": true,
-        "evidence_paths": [
-          "frames/na-east/ftl-elbo-patio-a.jpg",
-          "frames/na-east/ftl-elbo-patio-b.jpg"
-        ]
-      },
-      "validation": {
-        "checked_at": "2026-09-18T17:38:09+00:00",
-        "is_live": true,
-        "playable": true,
-        "method": "yt-dlp metadata live_status=is_live, playable_in_embed=true; ffmpeg decoded the live stream",
-        "resolution": [
-          1920,
-          1080
-        ],
-        "motion_observed": true,
-        "live_since": "2026-02-23T17:37:05+00:00",
-        "limitations": "rain during the check emptied the patio"
-      },
-      "provenance": {
-        "research_file": "na-east.json",
-        "source": {
-          "channel_url": "https://www.youtube.com/channel/UCUkUjr4syovc3NbLWtuVfYw",
-          "found_via": "search: Punta Cana en vivo camara playa (surfaced in results)"
-        }
-      },
-      "check": {
-        "verdict": "live",
-        "checked": "2026-09-18T17:38:09+00:00",
-        "method": "yt-dlp metadata live_status=is_live, playable_in_embed=true; ffmpeg decoded the live stream",
-        "embed": "verified",
-        "embed_reason": "Positive source playback evidence; see validation."
-      },
-      "audio": "unknown",
-      "ads": "unknown",
-      "video_id": "bM0GplM_vPY",
-      "active_local_hours_hint": "busy 11:00-02:00 local"
-    },
-    {
       "name": "Elvis' Beach Bar, Sandy Ground",
       "location": "Sandy Ground, Anguilla",
       "country": "Anguilla",
@@ -97389,6 +97033,33 @@
       "reject_reason": "The bar rail at the Hog's Breath, not its stage. Anthony's rule keeps bar cams out; the one exception is a stage whose feed carries real live music, gated to published set times. This camera has audio \"unknown\", no set times, and its own notes say it looks over the bar room. This exact video id was already rejected on 2026-09-17 for the same reason. The venue's stage cam (_eE4GBEjjs4) is in the list and is the one that qualifies.",
       "rejected_at": "2026-10-05",
       "was_in_list": "added 2026-09-18 by the camera-expansion pass; pulled on review against the content rule"
+    },
+    {
+      "name": "Henry Africa's Bar, Soi Green Mango, Chaweng",
+      "video_id": "Ajo0iFkX3EY",
+      "location": "Chaweng, Koh Samui, Surat Thani, Thailand",
+      "kind": "youtube",
+      "reject_reason": "A named bar on Soi Green Mango, Chaweng's nightlife lane, category bar, with no live-music audio tag and no set times. The earlier reject entry for that lane names Henry Africa's explicitly, so this is the same camera family coming back under its own id.",
+      "rejected_at": "2026-10-12",
+      "was_in_list": "pulled on review against the content rule; see audit.py"
+    },
+    {
+      "name": "Soi Green Mango bar lane at Hush Bar, Chaweng",
+      "video_id": "DwKCna1mumk",
+      "location": "Chaweng, Koh Samui, Surat Thani, Thailand",
+      "kind": "youtube",
+      "reject_reason": "Chaweng's main nightlife lane, and its own notes said so: \"Quiet by day, packed at night.\" That is the scene Anthony's no-nightlife rule exists to keep out, alongside Bangla Road and Soi Cowboy. This exact video id was already in rejects under \"Koh Samui and Patong bar cams\" before being re-added under a new name.",
+      "rejected_at": "2026-10-12",
+      "was_in_list": "pulled on review against the content rule; see audit.py"
+    },
+    {
+      "name": "Elbo Room patio and A1A at Las Olas",
+      "video_id": "bM0GplM_vPY",
+      "location": "Fort Lauderdale Beach, Florida, United States",
+      "kind": "youtube",
+      "reject_reason": "The Elbo Room's patio, not its stage: category bar, audio \"unknown\", no set times, and the notes record it empty at check time. Same case as the venue's bar rail, pulled on 2026-10-05. The BandCam (YWs0HMRVCBY) is the camera here that meets the live-music exception and stays.",
+      "rejected_at": "2026-10-12",
+      "was_in_list": "pulled on review against the content rule; see audit.py"
     }
   ],
   "audio_notes": [

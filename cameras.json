@@ -1579,10 +1579,10 @@
       "category": "beach",
       "provider": "Wickaninnish Inn",
       "kind": "youtube",
-      "url": "https://www.youtube.com/embed/Z5fFvERwo0o?autoplay=1&mute=1",
-      "watch_url": "https://www.youtube.com/watch?v=Z5fFvERwo0o",
+      "url": "https://www.youtube.com/embed/Yx9WvQiTCLo?autoplay=1&mute=1",
+      "watch_url": "https://www.youtube.com/watch?v=Yx9WvQiTCLo",
       "requires_login": false,
-      "last_verified": "2026-09-18",
+      "last_verified": "2026-10-15",
       "notes": "Brief daylight inspection; activity varies with time, weather and operator PTZ aim. No guarantee of continuous subject presence.",
       "timezone": "America/Vancouver",
       "tags": [
@@ -1666,19 +1666,24 @@
           "publisher_url": "https://www.youtube.com/watch?v=Z5fFvERwo0o",
           "discovery_url": "https://tw.live/en/cam/cachestermanbeachtofino/",
           "prior_research": null,
-          "directory_snapshot": "https://tw.live/en/map-data.php"
+          "directory_snapshot": "https://tw.live/en/map-data.php",
+          "channel_url": "https://www.youtube.com/@wickinn",
+          "channel_url_note": "Read a fresh video id from <channel_url>/live when this camera goes dead again."
         }
       },
       "check": {
         "verdict": "live",
-        "checked": "2026-09-18T15:44:04.404Z",
-        "method": "Chrome actual embedded playback + public IFrame API samples",
-        "embed": "verified",
-        "embed_reason": "Positive source playback evidence; see validation."
+        "checked": "2026-10-15",
+        "reason": "Re-pinned after the previous broadcast ended. Title identical; the Wickaninnish Inn restarted the same beach cam on 2026-10-09.",
+        "method": "youtube watch page metadata: isLiveBroadcast True, a startDate, no endDate in the past, 200, US in regionsAllowed",
+        "embed": "ok",
+        "embed_reason": "embed page returns the real video title, no noindex",
+        "previous_video_id": "Z5fFvERwo0o",
+        "previous_ended": "the id this record carried until 2026-10-15"
       },
       "audio": "unknown",
       "ads": "unknown",
-      "video_id": "Z5fFvERwo0o"
+      "video_id": "Yx9WvQiTCLo"
     },
     {
       "name": "Cox Bay surf beach from Long Beach Lodge",
@@ -4552,11 +4557,11 @@
       "category": "aquarium",
       "provider": "Monterey Bay Aquarium",
       "kind": "youtube",
-      "video_id": "cUoet3dmRU4",
-      "url": "https://www.youtube.com/embed/cUoet3dmRU4?autoplay=1&mute=1",
-      "watch_url": "https://www.youtube.com/watch?v=cUoet3dmRU4",
+      "video_id": "AWJi0LgyA28",
+      "url": "https://www.youtube.com/embed/AWJi0LgyA28?autoplay=1&mute=1",
+      "watch_url": "https://www.youtube.com/watch?v=AWJi0LgyA28",
       "requires_login": false,
-      "last_verified": "2026-09-18",
+      "last_verified": "2026-10-15",
       "notes": "Aviary, Monterey Bay Aquarium in Monterey, California. Animals in a named habitat; presence and activity vary.",
       "scene_set": "camera-expansion-2026-09-18",
       "pose": {
@@ -4578,13 +4583,13 @@
       ],
       "check": {
         "verdict": "live",
-        "checked": "2026-09-18T13:56:51.0233837Z",
-        "method": "fresh-youtube-metadata",
-        "reason": "Live broadcast evidence; present scene activity is not guaranteed.",
-        "embed": "metadata-ok",
-        "embed_reason": "Positive YouTube embed metadata; device playback untested.",
-        "in_app_playback_verified": false,
-        "research_ref": "research/camera-expansion-plan.json#cUoet3dmRU4"
+        "checked": "2026-10-15",
+        "reason": "Re-pinned after the previous broadcast ended. Title 'Live Aviary Cam | Monterey Bay Aquarium', identical to the dead one. The aquarium restarted it on 2026-10-01.",
+        "method": "youtube watch page metadata: isLiveBroadcast True, a startDate, no endDate in the past, 200, US in regionsAllowed",
+        "embed": "ok",
+        "embed_reason": "embed page returns the real video title, no noindex",
+        "previous_video_id": "cUoet3dmRU4",
+        "previous_ended": "the id this record carried until 2026-10-15"
       },
       "audio": "unknown",
       "audio_basis": "Not verified by listening.",
@@ -4594,7 +4599,13 @@
       "ads": "unknown",
       "active_local_hours_hint": "08:00-18:00",
       "night_hint": "unknown",
-      "replay_risk": "No replay noted in prior research; fresh content not visually verified."
+      "replay_risk": "No replay noted in prior research; fresh content not visually verified.",
+      "provenance": {
+        "source": {
+          "channel_url": "https://www.youtube.com/@montereybayaquarium",
+          "channel_url_note": "Read a fresh video id from <channel_url>/live when this camera goes dead again."
+        }
+      }
     },
     {
       "name": "Morro Bay harbor and Morro Rock from the Yacht Club",
@@ -4850,133 +4861,6 @@
       "audio": "unknown",
       "ads": "unknown",
       "video_id": "TmtVbezZaqg"
-    },
-    {
-      "name": "Campus Point surf break",
-      "location": "Isla Vista, Santa Barbara County, California, USA",
-      "country": "United States",
-      "category": "beach",
-      "provider": "GRIT",
-      "kind": "youtube",
-      "url": "https://www.youtube.com/embed/-Q20DkjKgpM?autoplay=1&mute=1",
-      "watch_url": "https://www.youtube.com/watch?v=-Q20DkjKgpM",
-      "requires_login": false,
-      "last_verified": "2026-09-18",
-      "notes": "Surfers are often out on swell days. Timestamp top right.",
-      "timezone": "America/Los_Angeles",
-      "tags": [
-        "isla vista",
-        "santa barbara county",
-        "california",
-        "ca",
-        "socal",
-        "west coast",
-        "usa",
-        "united states",
-        "us",
-        "america",
-        "united states of america",
-        "north america",
-        "beach",
-        "coast",
-        "sea",
-        "ocean",
-        "sand",
-        "shore",
-        "campus point",
-        "ucsb",
-        "goleta",
-        "santa barbara",
-        "outdoor",
-        "surf",
-        "waves",
-        "bluffs",
-        "vacation",
-        "quality-3",
-        "score-3"
-      ],
-      "curated_tags": [
-        "campus point",
-        "ucsb",
-        "isla vista",
-        "goleta",
-        "santa barbara",
-        "california",
-        "usa",
-        "outdoor",
-        "beach",
-        "surf",
-        "waves",
-        "bluffs",
-        "vacation",
-        "quality-3",
-        "score-3",
-        "united states",
-        "santa barbara county"
-      ],
-      "scene_set": "claude-scout-2026-09-18",
-      "in_sets": [
-        "claude-scout-2026-09-18"
-      ],
-      "pose": {
-        "lat": 34.4058,
-        "lng": -119.8447,
-        "alt_m": null,
-        "heading": null,
-        "pitch": null,
-        "fov": null,
-        "aligned": false,
-        "confidence": "low",
-        "basis": "Operator names Campus Point; bluff and rock groin at UCSB's Campus Point match the map",
-        "position_kind": "approximate-site"
-      },
-      "quality_score": 3,
-      "quality_reason": "Point break with sets wrapping around the rocky point onto a cove beach under the bluffs. Waves broke and washed up the sand between frames; no surfers out at this moment.",
-      "quality_evidence": {
-        "method": "Visual inspection of two decoded live frames 5 s apart (paired_frames)",
-        "visual_inspected": true,
-        "checked_at": "2026-09-18T17:12:20+00:00",
-        "motion_observed": true,
-        "evidence_paths": [
-          "frames/na-west/campus-point-surf-a.jpg",
-          "frames/na-west/campus-point-surf-b.jpg"
-        ],
-        "motion_metric": {
-          "mean_abs_diff": 9.2,
-          "changed_px_pct": 13.46,
-          "brightness": 116.1
-        }
-      },
-      "validation": {
-        "checked_at": "2026-09-18T17:12:20+00:00",
-        "is_live": true,
-        "playable": true,
-        "method": "yt-dlp metadata live_status=is_live, playable_in_embed=true; ffmpeg decoded the live stream",
-        "resolution": [
-          1920,
-          1080
-        ],
-        "motion_observed": true,
-        "live_since": "2026-09-03T15:54:12+00:00",
-        "limitations": "short daytime sample; activity varies"
-      },
-      "provenance": {
-        "research_file": "na-west.json",
-        "source": {
-          "channel_url": "https://www.youtube.com/channel/UCxd6_Ql2p4OoSXbKZGP0bmg",
-          "found_via": "search 'santa barbara live cam'"
-        }
-      },
-      "check": {
-        "verdict": "live",
-        "checked": "2026-09-18T17:12:20+00:00",
-        "method": "yt-dlp metadata live_status=is_live, playable_in_embed=true; ffmpeg decoded the live stream",
-        "embed": "verified",
-        "embed_reason": "Positive source playback evidence; see validation."
-      },
-      "audio": "unknown",
-      "ads": "unknown",
-      "video_id": "-Q20DkjKgpM"
     },
     {
       "name": "Reno Arch on Virginia Street",
@@ -10537,117 +10421,6 @@
       "video_id": "YbxFTypnGms"
     },
     {
-      "name": "Hanga Roa coast, Rapa Nui (Easter Island)",
-      "location": "Hanga Roa, Rapa Nui (Easter Island), Valparaiso Region, Chile",
-      "country": "Chile",
-      "category": "island",
-      "provider": "Marejadas UV (Universidad de Valparaiso)",
-      "kind": "youtube",
-      "url": "https://www.youtube.com/embed/qnz08E9WjSY?autoplay=1&mute=1",
-      "watch_url": "https://www.youtube.com/watch?v=qnz08E9WjSY",
-      "requires_login": false,
-      "last_verified": "2026-09-18",
-      "notes": "Rare view of Easter Island. Navy and municipal logos in the bottom corners.",
-      "timezone": "Pacific/Easter",
-      "tags": [
-        "hanga roa",
-        "rapa nui (easter island)",
-        "valparaiso region",
-        "chile",
-        "cl",
-        "south america",
-        "latin america",
-        "island",
-        "rapa nui",
-        "easter island",
-        "isla de pascua",
-        "polynesia",
-        "outdoor",
-        "coast",
-        "waves",
-        "surf",
-        "vacation",
-        "quality-3",
-        "score-3"
-      ],
-      "curated_tags": [
-        "rapa nui",
-        "easter island",
-        "isla de pascua",
-        "hanga roa",
-        "chile",
-        "polynesia",
-        "outdoor",
-        "island",
-        "coast",
-        "waves",
-        "surf",
-        "vacation",
-        "quality-3",
-        "score-3",
-        "rapa nui (easter island)",
-        "valparaiso region"
-      ],
-      "scene_set": "claude-scout-2026-09-18",
-      "in_sets": [
-        "claude-scout-2026-09-18"
-      ],
-      "pose": {
-        "lat": -27.144,
-        "lng": -109.43,
-        "alt_m": null,
-        "heading": null,
-        "pitch": null,
-        "fov": null,
-        "aligned": false,
-        "confidence": "low",
-        "basis": "Title says Rapa Nui; frames show Hanga Roa town and volcanic hills across a rocky cove; placed on the Hanga Roa shore, approximate",
-        "position_kind": "approximate-site"
-      },
-      "quality_score": 3,
-      "quality_reason": "Rocky volcanic cove with surf breaking white across black lava rocks, Hanga Roa's houses and grassy volcanic hills behind. Waves moved; no people close enough to see.",
-      "quality_evidence": {
-        "method": "Visual inspection of two decoded live frames 5 s apart (paired_frames)",
-        "visual_inspected": true,
-        "checked_at": "2026-09-18T17:06:11+00:00",
-        "motion_observed": true,
-        "evidence_paths": [
-          "frames/vacation-africa-latam/rapa-nui-a.jpg",
-          "frames/vacation-africa-latam/rapa-nui-b.jpg"
-        ]
-      },
-      "validation": {
-        "checked_at": "2026-09-18T17:06:11+00:00",
-        "is_live": true,
-        "playable": true,
-        "method": "yt-dlp metadata live_status=is_live, playable_in_embed=true; ffmpeg decoded the live stream",
-        "resolution": [
-          1280,
-          720
-        ],
-        "motion_observed": true,
-        "live_since": "2026-09-16T13:04:57+00:00",
-        "limitations": "short daytime sample; activity varies"
-      },
-      "provenance": {
-        "research_file": "vacation-africa-latam.json",
-        "source": {
-          "channel_url": "https://www.youtube.com/channel/UCMfVFofrKT5qV71nG-sDBRg",
-          "found_via": "scout channel listing, Marejadas UV"
-        }
-      },
-      "check": {
-        "verdict": "live",
-        "checked": "2026-09-18T17:06:11+00:00",
-        "method": "yt-dlp metadata live_status=is_live, playable_in_embed=true; ffmpeg decoded the live stream",
-        "embed": "verified",
-        "embed_reason": "Positive source playback evidence; see validation."
-      },
-      "audio": "unknown",
-      "ads": "unknown",
-      "video_id": "qnz08E9WjSY"
-    },
-    {
       "name": "Downtown Telluride",
       "location": "Telluride, Colorado",
       "country": "United States",
@@ -13185,11 +12958,11 @@
       "category": "model-railway",
       "provider": "Virtual Railfan",
       "kind": "youtube",
-      "video_id": "1P0feVMNX5s",
-      "url": "https://www.youtube.com/embed/1P0feVMNX5s?autoplay=1&mute=1",
-      "watch_url": "https://www.youtube.com/watch?v=1P0feVMNX5s",
+      "video_id": "MLuxiq6Uke8",
+      "url": "https://www.youtube.com/embed/MLuxiq6Uke8?autoplay=1&mute=1",
+      "watch_url": "https://www.youtube.com/watch?v=MLuxiq6Uke8",
       "requires_login": false,
-      "last_verified": "2026-09-18",
+      "last_verified": "2026-10-15",
       "notes": "Live public stream metadata verified; in-app playback, current frame motion, and camera alignment not yet visually verified. Activity varies by hour. Indoor model railroad; activity depends on museum operating hours.",
       "scene_set": "camera-expansion-2026-09-18",
       "pose": {
@@ -13211,13 +12984,13 @@
       ],
       "check": {
         "verdict": "live",
-        "checked": "2026-09-18T13:58:02.214424+00:00",
-        "method": "metadata",
-        "reason": "Live broadcast evidence; present scene activity is not guaranteed.",
-        "embed": "metadata-ok",
-        "embed_reason": "Positive YouTube embed metadata; device playback untested.",
-        "in_app_playback_verified": false,
-        "research_ref": "research/camera-expansion-plan.json#1P0feVMNX5s"
+        "checked": "2026-10-15",
+        "reason": "Re-pinned after the previous broadcast ended. Title byte-identical to the dead stream; Virtual Railfan restarted it 2026-10-07, two days after the old one ended.",
+        "method": "youtube watch page metadata: isLiveBroadcast True, a startDate, no endDate in the past, 200, US in regionsAllowed",
+        "embed": "ok",
+        "embed_reason": "embed page returns the real video title, no noindex",
+        "previous_video_id": "1P0feVMNX5s",
+        "previous_ended": "the id this record carried until 2026-10-15"
       },
       "audio": "unknown",
       "audio_basis": "Not verified by listening.",
@@ -13227,7 +13000,13 @@
         "public-webcam",
         "indoor"
       ],
-      "ads": "unknown"
+      "ads": "unknown",
+      "provenance": {
+        "source": {
+          "channel_url": "https://www.youtube.com/@VirtualRailfan",
+          "channel_url_note": "Read a fresh video id from <channel_url>/live when this camera goes dead again."
+        }
+      }
     },
     {
       "name": "Main Street and Veterans Memorial Park, Roswell",
@@ -17825,11 +17604,11 @@
       "category": "airport",
       "provider": "Flightradar24",
       "kind": "youtube",
-      "video_id": "MH0_mPt-VXE",
-      "url": "https://www.youtube.com/embed/MH0_mPt-VXE?autoplay=1&mute=1",
-      "watch_url": "https://www.youtube.com/watch?v=MH0_mPt-VXE",
+      "video_id": "iZRbml7fnXI",
+      "url": "https://www.youtube.com/embed/iZRbml7fnXI?autoplay=1&mute=1",
+      "watch_url": "https://www.youtube.com/watch?v=iZRbml7fnXI",
       "requires_login": false,
-      "last_verified": "2026-09-18",
+      "last_verified": "2026-10-15",
       "notes": "Live public stream metadata verified; in-app playback, current frame motion, and camera alignment not yet visually verified. Activity varies by hour.",
       "scene_set": "camera-expansion-2026-09-18",
       "pose": {
@@ -17851,13 +17630,13 @@
       ],
       "check": {
         "verdict": "live",
-        "checked": "2026-09-18T14:00:17.618403+00:00",
-        "method": "metadata",
-        "reason": "Live broadcast evidence; present scene activity is not guaranteed.",
-        "embed": "metadata-ok",
-        "embed_reason": "Positive YouTube embed metadata; device playback untested.",
-        "in_app_playback_verified": false,
-        "research_ref": "research/camera-expansion-plan.json#MH0_mPt-VXE"
+        "checked": "2026-10-15",
+        "reason": "Re-pinned after the previous broadcast ended. Title 'MSY Airport LIVE 24/7 - New Orleans'. Found by targeted search, not by the channel's /live endpoint, which served Heathrow instead: Flightradar24 runs many airport cams.",
+        "method": "youtube watch page metadata: isLiveBroadcast True, a startDate, no endDate in the past, 200, US in regionsAllowed",
+        "embed": "ok",
+        "embed_reason": "embed page returns the real video title, no noindex",
+        "previous_video_id": "MH0_mPt-VXE",
+        "previous_ended": "the id this record carried until 2026-10-15"
       },
       "audio": "unknown",
       "audio_basis": "Not verified by listening.",
@@ -17867,7 +17646,13 @@
         "public-webcam",
         "outdoor"
       ],
-      "ads": "unknown"
+      "ads": "unknown",
+      "provenance": {
+        "source": {
+          "channel_url": "https://www.youtube.com/@flightradar24",
+          "channel_url_note": "Read a fresh video id from <channel_url>/live when this camera goes dead again."
+        }
+      }
     },
     {
       "name": "Bourbon Street at St. Peter from a balcony",
@@ -42350,115 +42135,6 @@
       "video_id": "OteVW3af3BU"
     },
     {
-      "name": "Cerro Castor base area near Ushuaia",
-      "location": "Cerro Castor, Ushuaia, Tierra del Fuego, Argentina",
-      "country": "Argentina",
-      "category": "ski",
-      "provider": "Cerro Castor",
-      "kind": "youtube",
-      "url": "https://www.youtube.com/embed/O_JAplYN4AA?autoplay=1&mute=1",
-      "watch_url": "https://www.youtube.com/watch?v=O_JAplYN4AA",
-      "requires_login": false,
-      "last_verified": "2026-09-18",
-      "notes": "Picture is 4:3 with black bars on the sides. Southernmost ski resort in the world; season runs to about October.",
-      "timezone": "America/Argentina/Ushuaia",
-      "tags": [
-        "cerro castor",
-        "ushuaia",
-        "tierra del fuego",
-        "argentina",
-        "ar",
-        "arg",
-        "south america",
-        "latin america",
-        "ski",
-        "patagonia",
-        "outdoor",
-        "snow",
-        "skiers",
-        "chairlift",
-        "people",
-        "vacation",
-        "quality-4",
-        "score-4"
-      ],
-      "curated_tags": [
-        "cerro castor",
-        "ushuaia",
-        "tierra del fuego",
-        "patagonia",
-        "argentina",
-        "outdoor",
-        "ski",
-        "snow",
-        "skiers",
-        "chairlift",
-        "people",
-        "vacation",
-        "quality-4",
-        "score-4"
-      ],
-      "scene_set": "claude-scout-2026-09-18",
-      "in_sets": [
-        "claude-scout-2026-09-18"
-      ],
-      "pose": {
-        "lat": -54.721,
-        "lng": -68.0,
-        "alt_m": null,
-        "heading": null,
-        "pitch": null,
-        "fov": null,
-        "aligned": false,
-        "confidence": "low",
-        "basis": "Official resort channel, on-screen label Base Cerro Castor; placed at the base area on the map",
-        "position_kind": "approximate-site"
-      },
-      "quality_score": 4,
-      "quality_reason": "Snowy base area with skiers walking to the chairlift station, people on the cafe deck and a couple posing close to the camera. People moved and changed pose between frames.",
-      "quality_evidence": {
-        "method": "Visual inspection of two decoded live frames 5 s apart (paired_frames)",
-        "visual_inspected": true,
-        "checked_at": "2026-09-18T17:09:22+00:00",
-        "motion_observed": true,
-        "evidence_paths": [
-          "frames/vacation-africa-latam/cerro-castor-a.jpg",
-          "frames/vacation-africa-latam/cerro-castor-b.jpg"
-        ]
-      },
-      "validation": {
-        "checked_at": "2026-09-18T17:09:22+00:00",
-        "is_live": true,
-        "playable": true,
-        "method": "yt-dlp metadata live_status=is_live, playable_in_embed=true; ffmpeg decoded the live stream",
-        "resolution": [
-          1280,
-          720
-        ],
-        "motion_observed": true,
-        "live_since": "2026-09-03T15:17:00+00:00",
-        "limitations": "short daytime sample; activity varies"
-      },
-      "provenance": {
-        "research_file": "vacation-africa-latam.json",
-        "source": {
-          "channel_url": "https://www.youtube.com/channel/UCdRznjZhMfIArULYvuXxzZg",
-          "found_via": "scout search 'cerro castor en vivo'"
-        }
-      },
-      "check": {
-        "verdict": "live",
-        "checked": "2026-09-18T17:09:22+00:00",
-        "method": "yt-dlp metadata live_status=is_live, playable_in_embed=true; ffmpeg decoded the live stream",
-        "embed": "verified",
-        "embed_reason": "Positive source playback evidence; see validation."
-      },
-      "audio": "unknown",
-      "ads": "unknown",
-      "video_id": "O_JAplYN4AA",
-      "active_local_hours_hint": "lifts run about 10:00-17:00 local in ski season"
-    },
-    {
       "name": "Cerro Castor ski base, Tierra del Fuego",
       "location": "Cerro Castor, near Ushuaia, Tierra del Fuego, Argentina",
       "country": "Argentina",
@@ -49363,10 +49039,10 @@
       "category": "beach",
       "provider": "Surfistafotografo (camera: VIPW Intelbras)",
       "kind": "youtube",
-      "url": "https://www.youtube.com/embed/iZxXdVrlnTY?autoplay=1&mute=1",
-      "watch_url": "https://www.youtube.com/watch?v=iZxXdVrlnTY",
+      "url": "https://www.youtube.com/embed/aFvuSy05ki8?autoplay=1&mute=1",
+      "watch_url": "https://www.youtube.com/watch?v=aFvuSy05ki8",
       "requires_login": false,
-      "last_verified": "2026-09-18",
+      "last_verified": "2026-10-15",
       "notes": "Maresias hosts a WSL Challenger Series event 27 Sep to 3 Oct 2026, so it should be busy then. Small text in the bottom corners.",
       "timezone": "America/Sao_Paulo",
       "tags": [
@@ -49460,14 +49136,17 @@
       },
       "check": {
         "verdict": "live",
-        "checked": "2026-09-18T17:45:45+00:00",
-        "method": "yt-dlp metadata live_status=is_live, playable_in_embed=true; ffmpeg decoded the live stream",
-        "embed": "verified",
-        "embed_reason": "Positive source playback evidence; see validation."
+        "checked": "2026-10-15",
+        "reason": "Re-pinned after the previous broadcast ended. Title 'Praia de Maresias SP Ao Vivo, torre GBmar'. Found by targeted search, not /live, which served Praia Grande: the operator runs several beaches.",
+        "method": "youtube watch page metadata: isLiveBroadcast True, a startDate, no endDate in the past, 200, US in regionsAllowed",
+        "embed": "ok",
+        "embed_reason": "embed page returns the real video title, no noindex",
+        "previous_video_id": "iZxXdVrlnTY",
+        "previous_ended": "the id this record carried until 2026-10-15"
       },
       "audio": "unknown",
       "ads": "unknown",
-      "video_id": "iZxXdVrlnTY"
+      "video_id": "aFvuSy05ki8"
     },
     {
       "name": "Aparecida National Shrine pedestrian bridge",
@@ -49967,134 +49646,6 @@
       "audio": "unknown",
       "ads": "unknown",
       "video_id": "Ryz49vCa8Qk"
-    },
-    {
-      "name": "Pereque Acu Beach Ubatuba",
-      "location": "Ubatuba, São Paulo",
-      "country": "Brazil",
-      "category": "beach",
-      "provider": "UBACAM",
-      "kind": "youtube",
-      "url": "https://www.youtube.com/embed/VQ26pFMYudI?autoplay=1&mute=1",
-      "watch_url": "https://www.youtube.com/watch?v=VQ26pFMYudI",
-      "requires_login": false,
-      "last_verified": "2026-09-18",
-      "notes": "Rated for the actual inspected view; original YouTube player preserves operator attribution. ",
-      "timezone": "America/Sao_Paulo",
-      "tags": [
-        "pereque acu beach ubatuba",
-        "ubatuba, sao paulo",
-        "brazil",
-        "sao paulo",
-        "beach",
-        "outdoor",
-        "live webcam",
-        "ubatuba",
-        "coast",
-        "ocean",
-        "sea",
-        "waves",
-        "surf",
-        "vacation",
-        "tree",
-        "brasil",
-        "south america",
-        "latin america",
-        "quality-3",
-        "score-3",
-        "são paulo"
-      ],
-      "curated_tags": [
-        "pereque acu beach ubatuba",
-        "ubatuba, sao paulo",
-        "brazil",
-        "sao paulo",
-        "beach",
-        "outdoor",
-        "live webcam",
-        "ubatuba",
-        "coast",
-        "ocean",
-        "sea",
-        "waves",
-        "surf",
-        "vacation",
-        "tree",
-        "brasil",
-        "south america",
-        "latin america",
-        "quality-3",
-        "score-3",
-        "são paulo"
-      ],
-      "scene_set": "expansion500",
-      "in_sets": [
-        "expansion500"
-      ],
-      "pose": {
-        "lat": -23.4162,
-        "lng": -45.0639,
-        "alt_m": null,
-        "heading": null,
-        "pitch": null,
-        "fov": null,
-        "aligned": false,
-        "confidence": "low",
-        "basis": "Approximate discovery-map point; operator video title/description used to cross-check place. Not survey-verified.",
-        "position_kind": "approximate-site"
-      },
-      "quality_score": 3,
-      "quality_reason": "Gray-day beach bay with breaking surf and leaves moving; foreground tree obscures part.",
-      "quality_evidence": {
-        "method": "Human visual inspection of ffmpeg-decoded video frame pair, roughly one second apart",
-        "checked_at": "2026-09-18T15:14:55.027469+00:00",
-        "frames": [
-          "research/expansion500/south-world/frames/VQ26pFMYudI-01.jpg",
-          "research/expansion500/south-world/frames/VQ26pFMYudI-02.jpg"
-        ],
-        "metadata": "research/expansion500/south-world/checks/VQ26pFMYudI.json"
-      },
-      "validation": {
-        "checked_at": "2026-09-18T15:14:55.027469+00:00",
-        "is_live": true,
-        "playable": true,
-        "method": "YouTube extractor live_status/is_live/playable_in_embed metadata plus real HLS frame decoding and visual inspection",
-        "resolution": [
-          1920,
-          1080
-        ],
-        "decoded_resolution": [
-          1280,
-          720
-        ],
-        "motion_observed": true,
-        "limitations": "Brief inspection; activity varies by time, weather and operator camera direction. No guarantee of future uptime. Source coordinates approximate, not verified camera-mount pose."
-      },
-      "provenance": {
-        "research_file": "south-world.json",
-        "source": [
-          {
-            "url": "https://tw.live/en/map-data.php",
-            "role": "discovery name and approximate coordinates",
-            "id": "brubatubaperequeacu"
-          },
-          {
-            "url": "https://www.youtube.com/watch?v=VQ26pFMYudI",
-            "role": "operator live stream, title and description",
-            "channel": "UBACAM"
-          }
-        ]
-      },
-      "check": {
-        "verdict": "live",
-        "checked": "2026-09-18T15:14:55.027469+00:00",
-        "method": "YouTube extractor live_status/is_live/playable_in_embed metadata plus real HLS frame decoding and visual inspection",
-        "embed": "verified",
-        "embed_reason": "Positive source playback evidence; see validation."
-      },
-      "audio": "unknown",
-      "ads": "unknown",
-      "video_id": "VQ26pFMYudI"
     },
     {
       "name": "Prumirim beach, left corner",
@@ -51332,10 +50883,10 @@
       "category": "beach",
       "provider": "Madeira-Web",
       "kind": "youtube",
-      "url": "https://www.youtube.com/embed/t4x0u0ARLwo?autoplay=1&mute=1",
-      "watch_url": "https://www.youtube.com/watch?v=t4x0u0ARLwo",
+      "url": "https://www.youtube.com/embed/4dbXjCzI5FU?autoplay=1&mute=1",
+      "watch_url": "https://www.youtube.com/watch?v=4dbXjCzI5FU",
       "requires_login": false,
-      "last_verified": "2026-09-18",
+      "last_verified": "2026-10-15",
       "notes": "Madeira-Web and Webcamtaxi watermarks plus a clock. People on the beach are small at this distance.",
       "timezone": "Atlantic/Madeira",
       "tags": [
@@ -51427,19 +50978,23 @@
         "research_file": "vacation-europe.json",
         "source": {
           "channel_url": "https://www.youtube.com/channel/UCH_lKz2VXlfLPgYOE3biySg",
-          "found_via": "YouTube live search (scout.py search)"
+          "found_via": "YouTube live search (scout.py search)",
+          "channel_url_note": "Read a fresh video id from <channel_url>/live when this camera goes dead again."
         }
       },
       "check": {
         "verdict": "live",
-        "checked": "2026-09-18T17:26:21+00:00",
-        "method": "yt-dlp metadata live_status=is_live, playable_in_embed=true; ffmpeg decoded the live stream",
-        "embed": "verified",
-        "embed_reason": "Positive source playback evidence; see validation."
+        "checked": "2026-10-15",
+        "reason": "Re-pinned after the previous broadcast ended. Title 'LIVE: Calheta Beach Webcam @ Mudas Museum | Madeira-Web'; the same camera under a new id since 2026-09-30.",
+        "method": "youtube watch page metadata: isLiveBroadcast True, a startDate, no endDate in the past, 200, US in regionsAllowed",
+        "embed": "ok",
+        "embed_reason": "embed page returns the real video title, no noindex",
+        "previous_video_id": "t4x0u0ARLwo",
+        "previous_ended": "the id this record carried until 2026-10-15"
       },
       "audio": "unknown",
       "ads": "unknown",
-      "video_id": "t4x0u0ARLwo"
+      "video_id": "4dbXjCzI5FU"
     },
     {
       "name": "Porto Moniz lava rock pools",
@@ -54069,130 +53624,6 @@
       "audio": "unknown",
       "ads": "unknown",
       "video_id": "O5weUpesXfc"
-    },
-    {
-      "name": "Dawlish sea wall railway and seafront",
-      "location": "Dawlish, Devon, England, UK",
-      "country": "United Kingdom",
-      "category": "beach",
-      "provider": "Coast Cams",
-      "kind": "youtube",
-      "url": "https://www.youtube.com/embed/8g_AgbaTkmw?autoplay=1&mute=1",
-      "watch_url": "https://www.youtube.com/watch?v=8g_AgbaTkmw",
-      "requires_login": false,
-      "last_verified": "2026-09-18",
-      "notes": "Main-line trains run along the sea wall every few minutes in the daytime. Small clock and site text along the bottom.",
-      "timezone": "Europe/London",
-      "tags": [
-        "dawlish",
-        "devon",
-        "england",
-        "uk",
-        "united kingdom",
-        "gb",
-        "britain",
-        "great britain",
-        "europe",
-        "beach",
-        "coast",
-        "sea",
-        "ocean",
-        "sand",
-        "shore",
-        "outdoor",
-        "seafront",
-        "railway",
-        "trains",
-        "sea wall",
-        "people",
-        "cars",
-        "cafe",
-        "vacation",
-        "quality-3",
-        "score-3"
-      ],
-      "curated_tags": [
-        "dawlish",
-        "devon",
-        "england",
-        "uk",
-        "united kingdom",
-        "outdoor",
-        "seafront",
-        "railway",
-        "trains",
-        "sea wall",
-        "people",
-        "cars",
-        "cafe",
-        "vacation",
-        "quality-3",
-        "score-3",
-        "beach"
-      ],
-      "scene_set": "claude-scout-2026-09-18",
-      "in_sets": [
-        "claude-scout-2026-09-18"
-      ],
-      "pose": {
-        "lat": 50.58,
-        "lng": -3.465,
-        "alt_m": null,
-        "heading": null,
-        "pitch": null,
-        "fov": null,
-        "aligned": false,
-        "confidence": "low",
-        "basis": "Approximate: Coast Cams names the Blenheim cam in Dawlish; frames show the sea wall railway running toward the red cliffs and tunnels",
-        "position_kind": "approximate-site"
-      },
-      "quality_score": 3,
-      "quality_reason": "The famous sea wall railway runs between the promenade and the sea toward red sandstone cliffs, with a cafe terrace, parked cars and walkers on the street below. Walkers and a car moved between frames; no train passed in this sample.",
-      "quality_evidence": {
-        "method": "Visual inspection of two decoded live frames 5 s apart (paired_frames)",
-        "visual_inspected": true,
-        "checked_at": "2026-09-18T17:30:43+00:00",
-        "motion_observed": true,
-        "evidence_paths": [
-          "frames/vacation-europe/dawlish-seafront-a.jpg",
-          "frames/vacation-europe/dawlish-seafront-b.jpg"
-        ]
-      },
-      "validation": {
-        "checked_at": "2026-09-18T17:30:43+00:00",
-        "is_live": true,
-        "playable": true,
-        "method": "yt-dlp metadata live_status=is_live, playable_in_embed=true; ffmpeg decoded the live stream",
-        "resolution": [
-          1920,
-          1080
-        ],
-        "motion_observed": true,
-        "live_since": "2026-06-27T07:37:22+00:00",
-        "motion_metrics": {
-          "mean_abs_diff": 2.09,
-          "changed_px_pct": 0.88,
-          "brightness": 139.8
-        },
-        "limitations": "short evening sample (Europe, about 17-20 UTC); activity varies"
-      },
-      "provenance": {
-        "research_file": "vacation-europe.json",
-        "source": {
-          "channel_url": "https://www.youtube.com/channel/UCs1hoU1QdHuxrmNltGAYjkg",
-          "found_via": "YouTube live search (scout.py search)"
-        }
-      },
-      "check": {
-        "verdict": "live",
-        "checked": "2026-09-18T17:30:43+00:00",
-        "method": "yt-dlp metadata live_status=is_live, playable_in_embed=true; ffmpeg decoded the live stream",
-        "embed": "verified",
-        "embed_reason": "Positive source playback evidence; see validation."
-      },
-      "audio": "unknown",
-      "ads": "unknown",
-      "video_id": "8g_AgbaTkmw"
     },
     {
       "name": "Arthur's Seat and Salisbury Crags",
@@ -58288,123 +57719,6 @@
       },
       "audio": "unknown",
       "ads": "unknown"
-    },
-    {
-      "name": "Tamariu cove and beach, Costa Brava",
-      "location": "Tamariu, Palafrugell, Catalonia, Spain",
-      "country": "Spain",
-      "category": "beach",
-      "provider": "EarthCam",
-      "kind": "youtube",
-      "url": "https://www.youtube.com/embed/fTh5ssC1z-c?autoplay=1&mute=1",
-      "watch_url": "https://www.youtube.com/watch?v=fTh5ssC1z-c",
-      "requires_login": false,
-      "last_verified": "2026-09-19",
-      "notes": "EarthCam camera at the Club Nautic Tamariu on the Costa Brava. Busiest in summer.",
-      "timezone": "Europe/Madrid",
-      "tags": [
-        "tamariu",
-        "palafrugell",
-        "catalonia",
-        "spain",
-        "beach",
-        "coast",
-        "sea",
-        "ocean",
-        "sand",
-        "shore",
-        "costa brava",
-        "girona",
-        "mediterranean",
-        "cove",
-        "boats",
-        "sailboats",
-        "swimmers",
-        "sunbathers",
-        "outdoor",
-        "vacation",
-        "quality-4",
-        "score-4"
-      ],
-      "curated_tags": [
-        "tamariu",
-        "palafrugell",
-        "costa brava",
-        "catalonia",
-        "girona",
-        "mediterranean",
-        "beach",
-        "cove",
-        "boats",
-        "sailboats",
-        "swimmers",
-        "sunbathers",
-        "outdoor",
-        "vacation",
-        "quality-4",
-        "score-4",
-        "spain"
-      ],
-      "scene_set": "earthcam-2026-09-19",
-      "in_sets": [
-        "earthcam-2026-09-19"
-      ],
-      "pose": {
-        "lat": 41.9184,
-        "lng": 3.2081,
-        "alt_m": null,
-        "heading": null,
-        "pitch": null,
-        "fov": null,
-        "aligned": false,
-        "confidence": "low",
-        "basis": "OSM point for Club Nautic Tamariu, where EarthCam says the camera is; it looks across the beach and the cove.",
-        "position_kind": "approximate-site"
-      },
-      "quality_score": 4,
-      "quality_reason": "Wide view over Tamariu's beach and cove, with dozens of boats at anchor and wooded headlands on both sides. Many sunbathers on the sand and swimmers in the water; people walk the beach and boats shift between frames. A light haze patch sits on the right of the lens.",
-      "quality_evidence": {
-        "method": "Visual inspection of two decoded live frames 5 s apart (paired_frames)",
-        "visual_inspected": true,
-        "checked_at": "2026-09-19T15:07:02+00:00",
-        "motion_observed": true,
-        "evidence_paths": [
-          "frames/earthcam-2026-09-19/tamariu-a.jpg",
-          "frames/earthcam-2026-09-19/tamariu-b.jpg"
-        ]
-      },
-      "validation": {
-        "checked_at": "2026-09-19T15:07:02+00:00",
-        "is_live": true,
-        "playable": true,
-        "method": "yt-dlp metadata live_status=is_live, playable_in_embed=true; ffmpeg decoded the live stream",
-        "resolution": [
-          1920,
-          1080
-        ],
-        "motion_observed": true,
-        "live_since": "2026-08-27T11:00:07+00:00",
-        "limitations": "short daytime sample; activity varies"
-      },
-      "provenance": {
-        "research_file": "candidates.json",
-        "source": {
-          "channel_url": "https://www.youtube.com/channel/UC6qrG3W8SMK0jior2olka3g",
-          "channel": "EarthCam",
-          "stream_title": "EarthCam Live:  Tamariu, Spain",
-          "found_via": "EarthCam channel /streams listing, 2026-09-19"
-        }
-      },
-      "check": {
-        "verdict": "live",
-        "checked": "2026-09-19T15:07:02+00:00",
-        "method": "yt-dlp metadata live_status=is_live, playable_in_embed=true; ffmpeg decoded the live stream",
-        "embed": "verified",
-        "embed_reason": "Positive source playback evidence; see validation."
-      },
-      "audio": "unknown",
-      "ads": "unknown",
-      "video_id": "fTh5ssC1z-c"
     },
     {
       "name": "Cala Agulla swimmers and straw umbrellas",
@@ -81764,118 +81078,6 @@
       "video_id": "VhVgZi2lGv0"
     },
     {
-      "name": "Kamfers Dam Flamingo Sanctuary",
-      "location": "Kimberley, Northern Cape",
-      "country": "South Africa",
-      "category": "lake",
-      "provider": "Africam Conservation",
-      "kind": "youtube",
-      "url": "https://www.youtube.com/embed/IdDorfgnATw?autoplay=1&mute=1",
-      "watch_url": "https://www.youtube.com/watch?v=IdDorfgnATw",
-      "requires_login": false,
-      "last_verified": "2026-09-18",
-      "notes": "Rated for the actual inspected view; original YouTube player preserves operator attribution. ",
-      "timezone": "Africa/Johannesburg",
-      "tags": [
-        "kamfers dam flamingo sanctuary",
-        "kimberley, northern cape",
-        "south africa",
-        "northern cape",
-        "lake",
-        "outdoor",
-        "live webcam",
-        "kimberley",
-        "bird",
-        "africa",
-        "african",
-        "quality-3",
-        "score-3"
-      ],
-      "curated_tags": [
-        "kamfers dam flamingo sanctuary",
-        "kimberley, northern cape",
-        "south africa",
-        "northern cape",
-        "lake",
-        "outdoor",
-        "live webcam",
-        "kimberley",
-        "bird",
-        "africa",
-        "african",
-        "quality-3",
-        "score-3"
-      ],
-      "scene_set": "expansion500",
-      "in_sets": [
-        "expansion500"
-      ],
-      "pose": {
-        "lat": -28.6731,
-        "lng": 24.764,
-        "alt_m": null,
-        "heading": null,
-        "pitch": null,
-        "fov": null,
-        "aligned": false,
-        "confidence": "low",
-        "basis": "Approximate discovery-map point; operator video title/description used to cross-check place. Not survey-verified.",
-        "position_kind": "approximate-site"
-      },
-      "quality_score": 3,
-      "quality_reason": "Wide rippling dam and distant shoreline birds, too distant for detailed behavior.",
-      "quality_evidence": {
-        "method": "Human visual inspection of ffmpeg-decoded video frame pair, roughly one second apart",
-        "checked_at": "2026-09-18T15:13:33.051379+00:00",
-        "frames": [
-          "research/expansion500/south-world/frames/IdDorfgnATw-01.jpg",
-          "research/expansion500/south-world/frames/IdDorfgnATw-02.jpg"
-        ],
-        "metadata": "research/expansion500/south-world/checks/IdDorfgnATw.json"
-      },
-      "validation": {
-        "checked_at": "2026-09-18T15:13:33.051379+00:00",
-        "is_live": true,
-        "playable": true,
-        "method": "YouTube extractor live_status/is_live/playable_in_embed metadata plus real HLS frame decoding and visual inspection",
-        "resolution": [
-          1920,
-          1080
-        ],
-        "decoded_resolution": [
-          1280,
-          720
-        ],
-        "motion_observed": true,
-        "limitations": "Brief inspection; activity varies by time, weather and operator camera direction. No guarantee of future uptime. Source coordinates approximate, not verified camera-mount pose."
-      },
-      "provenance": {
-        "research_file": "south-world.json",
-        "source": [
-          {
-            "url": "https://tw.live/en/map-data.php",
-            "role": "discovery name and approximate coordinates",
-            "id": "zakamfersdamflamingosanctuary"
-          },
-          {
-            "url": "https://www.youtube.com/watch?v=IdDorfgnATw",
-            "role": "operator live stream, title and description",
-            "channel": "Africam Conservation"
-          }
-        ]
-      },
-      "check": {
-        "verdict": "live",
-        "checked": "2026-09-18T15:13:33.051379+00:00",
-        "method": "YouTube extractor live_status/is_live/playable_in_embed metadata plus real HLS frame decoding and visual inspection",
-        "embed": "verified",
-        "embed_reason": "Positive source playback evidence; see validation."
-      },
-      "audio": "unknown",
-      "ads": "unknown",
-      "video_id": "IdDorfgnATw"
-    },
-    {
       "name": "Supertubes Beach",
       "location": "Jeffreys Bay, Eastern Cape",
       "country": "South Africa",
@@ -88963,74 +88165,6 @@
       "ads": "unknown"
     },
     {
-      "name": "Maribago Port, Mactan",
-      "location": "Lapu-Lapu City, Mactan Island, Cebu, Philippines",
-      "country": "Philippines",
-      "category": "harbor",
-      "provider": "여행하는 다이버 칸 (YouTube)",
-      "kind": "youtube",
-      "video_id": "yaHOmhJyMWs",
-      "url": "https://www.youtube.com/embed/yaHOmhJyMWs?autoplay=1&mute=1",
-      "watch_url": "https://www.youtube.com/watch?v=yaHOmhJyMWs",
-      "requires_login": false,
-      "last_verified": "2026-09-17",
-      "notes": "Hopping-boat port with weather and wave conditions. The title carries today's date, so this looks like a per-day stream rather than a permanent one; expect the id to rotate.",
-      "scene_set": "philippines-italy-south-korea",
-      "pose": {
-        "lat": 10.288,
-        "lng": 124.0025,
-        "alt_m": 15,
-        "heading": 95,
-        "pitch": -8,
-        "fov": 60,
-        "aligned": false,
-        "view": "landscape",
-        "confidence": "low",
-        "basis": "The old point returned 0 m, open water. New ground 2 m, and the heading stays at near sea level for 1.2 km across the fringing reef flat.",
-        "source": "No port entry exists in the map data for Mactan and no operator page is readable, so the position follows the Maribago beach and resort cluster that is mapped, placed at the shoreline seaward of it.",
-        "position_checked": "terrain and bearings, 2026-09-18"
-      },
-      "timezone": "Asia/Manila",
-      "in_sets": [
-        "philippines-italy-south-korea"
-      ],
-      "check": {
-        "verdict": "live",
-        "checked": "2026-09-17",
-        "reason": "live now, streaming since 2026-09-17",
-        "method": "youtube watch page metadata (isLiveBroadcast / startDate / endDate)",
-        "embed": "ok",
-        "embed_reason": "embed page returns the video title, plays without login"
-      },
-      "audio": "unknown",
-      "audio_basis": "not established by listening; plays when sound is on, Shift+M silences it if it turns out to be music",
-      "tags": [
-        "lapu-lapu city",
-        "mactan island",
-        "cebu",
-        "visayas",
-        "philippines",
-        "ph",
-        "phl",
-        "asia",
-        "southeast asia",
-        "harbor",
-        "harbour",
-        "port",
-        "boats",
-        "waterfront",
-        "water",
-        "ferry",
-        "island",
-        "tropical",
-        "fishing boats",
-        "night lights",
-        "sunrise-facing",
-        "sunrise"
-      ],
-      "ads": "unknown"
-    },
-    {
       "name": "730 Intersection, Ishigaki",
       "location": "Ishigaki, Okinawa, Japan",
       "country": "Japan",
@@ -90976,11 +90110,11 @@
       "category": "beach",
       "provider": "Busan Haeundae Live (YouTube)",
       "kind": "youtube",
-      "video_id": "LGuktGeHQxI",
-      "url": "https://www.youtube.com/embed/LGuktGeHQxI?autoplay=1&mute=1",
-      "watch_url": "https://www.youtube.com/watch?v=LGuktGeHQxI",
+      "video_id": "x5paecMrjA8",
+      "url": "https://www.youtube.com/embed/x5paecMrjA8?autoplay=1&mute=1",
+      "watch_url": "https://www.youtube.com/watch?v=x5paecMrjA8",
       "requires_login": false,
-      "last_verified": "2026-09-17",
+      "last_verified": "2026-10-15",
       "notes": "4K over Korea's best-known beach.",
       "scene_set": "philippines-italy-south-korea",
       "pose": {
@@ -91003,11 +90137,13 @@
       ],
       "check": {
         "verdict": "live",
-        "checked": "2026-09-17",
-        "reason": "live now, streaming since 2026-08-01",
-        "method": "youtube watch page metadata (isLiveBroadcast / startDate / endDate)",
+        "checked": "2026-10-15",
+        "reason": "Re-pinned after the previous broadcast ended. Same camera title, startDate 2026-09-25, running now despite Korean night hours.",
+        "method": "youtube watch page metadata: isLiveBroadcast True, a startDate, no endDate in the past, 200, US in regionsAllowed",
         "embed": "ok",
-        "embed_reason": "embed page returns the video title, plays without login"
+        "embed_reason": "embed page returns the real video title, no noindex",
+        "previous_video_id": "LGuktGeHQxI",
+        "previous_ended": "the id this record carried until 2026-10-15"
       },
       "audio": "unknown",
       "audio_basis": "not established by listening; plays when sound is on, Shift+M silences it if it turns out to be music",
@@ -92078,11 +91214,11 @@
       "category": "city",
       "provider": "MBS NEWS (Mainichi Broadcasting System, Osaka)",
       "kind": "youtube",
-      "video_id": "czJhGgFsp38",
-      "url": "https://www.youtube.com/embed/czJhGgFsp38?autoplay=1&mute=1",
-      "watch_url": "https://www.youtube.com/watch?v=czJhGgFsp38",
+      "video_id": "soT0yMSldwI",
+      "url": "https://www.youtube.com/embed/soT0yMSldwI?autoplay=1&mute=1",
+      "watch_url": "https://www.youtube.com/watch?v=soT0yMSldwI",
       "requires_login": false,
-      "last_verified": "2026-09-18",
+      "last_verified": "2026-10-15",
       "notes": "Public operator-published webcam. Current camera mount and view alignment need verification. Live video IDs may change on restart. ",
       "scene_set": "camera-expansion-2026-09-18",
       "pose": {
@@ -92104,13 +91240,13 @@
       ],
       "check": {
         "verdict": "live",
-        "checked": "2026-09-18T14:15:42.598392+00:00",
-        "method": "YouTube live page ytInitialPlayerResponse",
-        "reason": "Live broadcast evidence; present scene activity is not guaranteed.",
-        "embed": "metadata-ok",
-        "embed_reason": "Positive YouTube embed metadata; device playback untested.",
-        "in_app_playback_verified": false,
-        "research_ref": "research/camera-expansion-plan.json#czJhGgFsp38"
+        "checked": "2026-10-15",
+        "reason": "Re-pinned after the previous broadcast ended. Title byte-identical, MBS NEWS, startDate 2026-10-04, no endDate. Checked twice, once directly: MBS restarted its Dotonbori camera the day after the old stream ended.",
+        "method": "youtube watch page metadata: isLiveBroadcast True, a startDate, no endDate in the past, 200, US in regionsAllowed",
+        "embed": "ok",
+        "embed_reason": "embed page returns the real video title, no noindex",
+        "previous_video_id": "czJhGgFsp38",
+        "previous_ended": "the id this record carried until 2026-10-15"
       },
       "audio": "unknown",
       "audio_basis": "Not verified by listening.",
@@ -92120,7 +91256,13 @@
         "people",
         "street"
       ],
-      "ads": "unknown"
+      "ads": "unknown",
+      "provenance": {
+        "source": {
+          "channel_url": "https://www.youtube.com/@MBSNEWS",
+          "channel_url_note": "Read a fresh video id from <channel_url>/live when this camera goes dead again."
+        }
+      }
     },
     {
       "name": "Osaka Night Skyline",
@@ -95470,62 +94612,6 @@
       "ads": "unknown"
     },
     {
-      "name": "Brisbane skyline from Bowen Hills",
-      "location": "Bowen Hills, Brisbane, Queensland, Australia",
-      "country": "Australia",
-      "category": "skyline",
-      "provider": "Brisbane Live (YouTube)",
-      "kind": "youtube",
-      "video_id": "o1LRcS28T2M",
-      "url": "https://www.youtube.com/embed/o1LRcS28T2M?autoplay=1&mute=1",
-      "watch_url": "https://www.youtube.com/watch?v=o1LRcS28T2M",
-      "requires_login": false,
-      "last_verified": "2026-09-17",
-      "notes": "Wide weather-watching view southwest over the city and the ranges beyond. Description explicitly says 24/7. Audio is a radio simulcast, so it plays muted.",
-      "lat": -27.4415,
-      "lng": 153.0323,
-      "timezone": "Australia/Brisbane",
-      "always_on": true,
-      "pose": {
-        "lat": -27.4425,
-        "lng": 153.03,
-        "alt_m": 60,
-        "heading": 225,
-        "pitch": -5,
-        "fov": 66,
-        "aligned": false,
-        "view": "landscape",
-        "confidence": "medium",
-        "basis": "Ground 7 m, so the 60 m is a genuine eye height about twenty floors up. Mt Coot-tha bears 245 at 9 km and is visible, and the Spring Hill ridge stays below the eye line, so the heading sweeps the CBD at 194 through to the ranges at 246.",
-        "source": "A webcam directory names the stream for an apartment tower at 35 Campbell Street, Bowen Hills; the tower is confirmed, its exact footprint is an estimate.",
-        "position_checked": "terrain and bearings, 2026-09-18"
-      },
-      "audio": "unknown",
-      "audio_basis": "not established by listening; plays when sound is on, Shift+M silences it if it turns out to be music",
-      "tags": [
-        "bowen hills",
-        "brisbane",
-        "queensland",
-        "australia",
-        "au",
-        "aus",
-        "oceania",
-        "australasia",
-        "skyline",
-        "city",
-        "urban",
-        "buildings",
-        "downtown",
-        "brisbane river",
-        "night lights",
-        "high rises",
-        "sunset-facing",
-        "sunset",
-        "always-on"
-      ],
-      "ads": "unknown"
-    },
-    {
       "name": "Royal Albatross, Taiaroa Head NZ",
       "location": "Taiaroa Head, Otago Peninsula, New Zealand",
       "country": "New Zealand",
@@ -95698,10 +94784,10 @@
       "category": "sky",
       "provider": "WISP Media Productions / WISP Tasman",
       "kind": "youtube",
-      "url": "https://www.youtube.com/embed/MPwMmEvl6F0?autoplay=1&mute=1",
-      "watch_url": "https://www.youtube.com/watch?v=MPwMmEvl6F0",
+      "url": "https://www.youtube.com/embed/gfJ4wIhnULQ?autoplay=1&mute=1",
+      "watch_url": "https://www.youtube.com/watch?v=gfJ4wIhnULQ",
       "requires_login": false,
-      "last_verified": "2026-09-18",
+      "last_verified": "2026-10-15",
       "notes": "Night window recommended. Operator uses long exposure; moonlight can make the night resemble daytime. Do not advertise aurora or meteor activity as currently observed.",
       "timezone": "Pacific/Auckland",
       "tags": [
@@ -95796,14 +94882,17 @@
       },
       "check": {
         "verdict": "live",
-        "checked": "2026-09-18T15:22:00Z",
-        "method": "Actual Chrome public YouTube iframe playback, advancing clock; decoded video element readyState4, paused false.",
-        "embed": "verified",
-        "embed_reason": "Positive source playback evidence; see validation."
+        "checked": "2026-10-15",
+        "reason": "Re-pinned after the previous broadcast ended. Title identical; the same Nelson/Tasman 4K camera has been running under a new id since 2026-09-20.",
+        "method": "youtube watch page metadata: isLiveBroadcast True, a startDate, no endDate in the past, 200, US in regionsAllowed",
+        "embed": "ok",
+        "embed_reason": "embed page returns the real video title, no noindex",
+        "previous_video_id": "MPwMmEvl6F0",
+        "previous_ended": "the id this record carried until 2026-10-15"
       },
       "audio": "unknown",
       "ads": "unknown",
-      "video_id": "MPwMmEvl6F0"
+      "video_id": "gfJ4wIhnULQ"
     },
     {
       "name": "Auckland Viaduct Harbour",
@@ -97712,6 +96801,406 @@
       "kind": "youtube",
       "reject_reason": "A bar cam, not a stage cam, and a third-party one. The venue runs four cameras and describes each separately: its actual \"Beach Bar Stage Cam\" is a different Ozolio-hosted feed kept under a privacy overlay until after happy hour, while the feed this id points at is the one looking down the length of the bar. It also sits on a villa-rental operator's channel rather than the venue's, and is titled only \"Beach Bar St. John Webcam\" with a description about Painkillers and Bushwackers. Its published calendar gives start times only, with no set ends, so no complete sets array could be built even if the framing were right. The question is never whether the venue books bands, it is whether the camera points at the stage.",
       "rejected_at": "2026-10-15"
+    },
+    {
+      "name": "Tamariu cove and beach, Costa Brava",
+      "video_id": "fTh5ssC1z-c",
+      "kind": "youtube",
+      "reject_reason": "Dormant channel. The broadcast ended 2026-09-29 and EarthCam has not restarted a Tamariu stream: the only candidate found carries its own past endDate of 2026-01-18. EarthCam's /live endpoint serves an arbitrary one of its many cams (it offered New Orleans), so it cannot be used to re-pin this one. Re-check the channel for a Costa Brava stream in a few weeks.",
+      "rejected_at": "2026-10-15",
+      "location": "Tamariu, Palafrugell, Catalonia, Spain",
+      "was_in_the_app": "Yes - it was showing a dead panel until 2026-10-15.",
+      "pose_if_restored": {
+        "lat": 41.9184,
+        "lng": 3.2081,
+        "alt_m": null,
+        "heading": null,
+        "pitch": null,
+        "fov": null,
+        "aligned": false,
+        "confidence": "low",
+        "basis": "OSM point for Club Nautic Tamariu, where EarthCam says the camera is; it looks across the beach and the cove.",
+        "position_kind": "approximate-site"
+      },
+      "tags_if_restored": [
+        "tamariu",
+        "palafrugell",
+        "catalonia",
+        "spain",
+        "beach",
+        "coast",
+        "sea",
+        "ocean",
+        "sand",
+        "shore",
+        "costa brava",
+        "girona",
+        "mediterranean",
+        "cove",
+        "boats",
+        "sailboats",
+        "swimmers",
+        "sunbathers",
+        "outdoor",
+        "vacation",
+        "quality-4",
+        "score-4"
+      ]
+    },
+    {
+      "name": "Campus Point surf break",
+      "video_id": "-Q20DkjKgpM",
+      "kind": "youtube",
+      "reject_reason": "Dormant channel. Ended 2026-09-28 and GRIT has not restarted a Campus Point stream. Worth another look at the start of the northern surf season.",
+      "rejected_at": "2026-10-15",
+      "location": "Isla Vista, Santa Barbara County, California, USA",
+      "was_in_the_app": "Yes - it was showing a dead panel until 2026-10-15.",
+      "pose_if_restored": {
+        "lat": 34.4058,
+        "lng": -119.8447,
+        "alt_m": null,
+        "heading": null,
+        "pitch": null,
+        "fov": null,
+        "aligned": false,
+        "confidence": "low",
+        "basis": "Operator names Campus Point; bluff and rock groin at UCSB's Campus Point match the map",
+        "position_kind": "approximate-site"
+      },
+      "tags_if_restored": [
+        "isla vista",
+        "santa barbara county",
+        "california",
+        "ca",
+        "socal",
+        "west coast",
+        "usa",
+        "united states",
+        "us",
+        "america",
+        "united states of america",
+        "north america",
+        "beach",
+        "coast",
+        "sea",
+        "ocean",
+        "sand",
+        "shore",
+        "campus point",
+        "ucsb",
+        "goleta",
+        "santa barbara",
+        "outdoor",
+        "surf",
+        "waves",
+        "bluffs",
+        "vacation",
+        "quality-3",
+        "score-3"
+      ]
+    },
+    {
+      "name": "Kamfers Dam Flamingo Sanctuary",
+      "video_id": "IdDorfgnATw",
+      "kind": "youtube",
+      "reject_reason": "Gone for good, and deliberately. Africam published \"Saying Goodbye to Kamfers Dam - at the end of September we'll be ending our live stream\", and the endDate of 2026-10-01 matches. This one will not come back; do not re-check it.",
+      "rejected_at": "2026-10-15",
+      "location": "Kimberley, Northern Cape",
+      "was_in_the_app": "Yes - it was showing a dead panel until 2026-10-15.",
+      "pose_if_restored": {
+        "lat": -28.6731,
+        "lng": 24.764,
+        "alt_m": null,
+        "heading": null,
+        "pitch": null,
+        "fov": null,
+        "aligned": false,
+        "confidence": "low",
+        "basis": "Approximate discovery-map point; operator video title/description used to cross-check place. Not survey-verified.",
+        "position_kind": "approximate-site"
+      },
+      "tags_if_restored": [
+        "kamfers dam flamingo sanctuary",
+        "kimberley, northern cape",
+        "south africa",
+        "northern cape",
+        "lake",
+        "outdoor",
+        "live webcam",
+        "kimberley",
+        "bird",
+        "africa",
+        "african",
+        "quality-3",
+        "score-3"
+      ]
+    },
+    {
+      "name": "Dawlish sea wall railway and seafront",
+      "video_id": "8g_AgbaTkmw",
+      "kind": "youtube",
+      "reject_reason": "Dead stream, ended 2026-09-23, and not safely replaceable. Coast Cams is live at Dawlish under VjmeEdvxyPM, but that is their Blenheim mount, a different camera from this sea-wall-and-railway view, and the original mount is not separately live (the older Dawlish Beach Cams stream ended in 2020). Pinning this record to a different mount would leave the name and pose describing a frame it may not show. The Blenheim camera is verified live and embeddable and is parked as a lead, to be added as its own camera with its own name and position.",
+      "rejected_at": "2026-10-15",
+      "location": "Dawlish, Devon, England, UK",
+      "was_in_the_app": "Yes - it was showing a dead panel until 2026-10-15.",
+      "pose_if_restored": {
+        "lat": 50.58,
+        "lng": -3.465,
+        "alt_m": null,
+        "heading": null,
+        "pitch": null,
+        "fov": null,
+        "aligned": false,
+        "confidence": "low",
+        "basis": "Approximate: Coast Cams names the Blenheim cam in Dawlish; frames show the sea wall railway running toward the red cliffs and tunnels",
+        "position_kind": "approximate-site"
+      },
+      "tags_if_restored": [
+        "dawlish",
+        "devon",
+        "england",
+        "uk",
+        "united kingdom",
+        "gb",
+        "britain",
+        "great britain",
+        "europe",
+        "beach",
+        "coast",
+        "sea",
+        "ocean",
+        "sand",
+        "shore",
+        "outdoor",
+        "seafront",
+        "railway",
+        "trains",
+        "sea wall",
+        "people",
+        "cars",
+        "cafe",
+        "vacation",
+        "quality-3",
+        "score-3"
+      ]
+    },
+    {
+      "name": "Pereque Acu Beach Ubatuba",
+      "video_id": "VQ26pFMYudI",
+      "kind": "youtube",
+      "reject_reason": "Ended 2026-10-13. This camera mints a NEW video id every session, so it can never be held by a static video id in the list. It needs a resolver that reads the channel at play time, or the camera has to be re-pinned by hand every run. Restore it only alongside such a mechanism, otherwise it goes dead again within a day. UBACAM is demonstrably live right now on a sibling Ubatuba beach, so the operator is healthy; it is the id that will not hold still.",
+      "rejected_at": "2026-10-15",
+      "location": "Ubatuba, São Paulo",
+      "was_in_the_app": "Yes - it was showing a dead panel until 2026-10-15.",
+      "pose_if_restored": {
+        "lat": -23.4162,
+        "lng": -45.0639,
+        "alt_m": null,
+        "heading": null,
+        "pitch": null,
+        "fov": null,
+        "aligned": false,
+        "confidence": "low",
+        "basis": "Approximate discovery-map point; operator video title/description used to cross-check place. Not survey-verified.",
+        "position_kind": "approximate-site"
+      },
+      "tags_if_restored": [
+        "pereque acu beach ubatuba",
+        "ubatuba, sao paulo",
+        "brazil",
+        "sao paulo",
+        "beach",
+        "outdoor",
+        "live webcam",
+        "ubatuba",
+        "coast",
+        "ocean",
+        "sea",
+        "waves",
+        "surf",
+        "vacation",
+        "tree",
+        "brasil",
+        "south america",
+        "latin america",
+        "quality-3",
+        "score-3",
+        "são paulo"
+      ]
+    },
+    {
+      "name": "Maribago Port, Mactan",
+      "video_id": "yaHOmhJyMWs",
+      "kind": "youtube",
+      "reject_reason": "Ended 2026-09-17, and this camera mints a NEW video id every session, so it can never be held by a static video id in the list. It needs a resolver that reads the channel at play time, or the camera has to be re-pinned by hand every run. Restore it only alongside such a mechanism, otherwise it goes dead again within a day.",
+      "rejected_at": "2026-10-15",
+      "location": "Lapu-Lapu City, Mactan Island, Cebu, Philippines",
+      "was_in_the_app": "Yes - it was showing a dead panel until 2026-10-15.",
+      "pose_if_restored": {
+        "lat": 10.288,
+        "lng": 124.0025,
+        "alt_m": 15,
+        "heading": 95,
+        "pitch": -8,
+        "fov": 60,
+        "aligned": false,
+        "view": "landscape",
+        "confidence": "low",
+        "basis": "The old point returned 0 m, open water. New ground 2 m, and the heading stays at near sea level for 1.2 km across the fringing reef flat.",
+        "source": "No port entry exists in the map data for Mactan and no operator page is readable, so the position follows the Maribago beach and resort cluster that is mapped, placed at the shoreline seaward of it.",
+        "position_checked": "terrain and bearings, 2026-09-18"
+      },
+      "tags_if_restored": [
+        "lapu-lapu city",
+        "mactan island",
+        "cebu",
+        "visayas",
+        "philippines",
+        "ph",
+        "phl",
+        "asia",
+        "southeast asia",
+        "harbor",
+        "harbour",
+        "port",
+        "boats",
+        "waterfront",
+        "water",
+        "ferry",
+        "island",
+        "tropical",
+        "fishing boats",
+        "night lights",
+        "sunrise-facing",
+        "sunrise"
+      ]
+    },
+    {
+      "name": "Hanga Roa coast, Rapa Nui (Easter Island)",
+      "video_id": "qnz08E9WjSY",
+      "kind": "youtube",
+      "reject_reason": "Ended 2026-09-28. Runs roughly eight-hour daylight sessions and mints a new id each time: the candidate found had already ended six hours after starting. Same resolver problem as Pereque Acu and Maribago. Rapa Nui is a camera worth having back, so it is a good argument for building the resolver.",
+      "rejected_at": "2026-10-15",
+      "location": "Hanga Roa, Rapa Nui (Easter Island), Valparaiso Region, Chile",
+      "was_in_the_app": "Yes - it was showing a dead panel until 2026-10-15.",
+      "pose_if_restored": {
+        "lat": -27.144,
+        "lng": -109.43,
+        "alt_m": null,
+        "heading": null,
+        "pitch": null,
+        "fov": null,
+        "aligned": false,
+        "confidence": "low",
+        "basis": "Title says Rapa Nui; frames show Hanga Roa town and volcanic hills across a rocky cove; placed on the Hanga Roa shore, approximate",
+        "position_kind": "approximate-site"
+      },
+      "tags_if_restored": [
+        "hanga roa",
+        "rapa nui (easter island)",
+        "valparaiso region",
+        "chile",
+        "cl",
+        "south america",
+        "latin america",
+        "island",
+        "rapa nui",
+        "easter island",
+        "isla de pascua",
+        "polynesia",
+        "outdoor",
+        "coast",
+        "waves",
+        "surf",
+        "vacation",
+        "quality-3",
+        "score-3"
+      ]
+    },
+    {
+      "name": "Cerro Castor base area near Ushuaia",
+      "video_id": "O_JAplYN4AA",
+      "kind": "youtube",
+      "reject_reason": "Seasonal, not dead. Ended 2026-10-01 with the southern ski season, and Cerro Castor's /live endpoint is a parked 'Interski 2015' video with no startDate - a placeholder, not a broadcast. Re-check around June 2027 when the season reopens. When it is restored it should carry a live_window season field, which isLiveNow honours, so it drops out of the deck on its own in the off months.",
+      "rejected_at": "2026-10-15",
+      "location": "Cerro Castor, Ushuaia, Tierra del Fuego, Argentina",
+      "was_in_the_app": "Yes - it was showing a dead panel until 2026-10-15.",
+      "pose_if_restored": {
+        "lat": -54.721,
+        "lng": -68.0,
+        "alt_m": null,
+        "heading": null,
+        "pitch": null,
+        "fov": null,
+        "aligned": false,
+        "confidence": "low",
+        "basis": "Official resort channel, on-screen label Base Cerro Castor; placed at the base area on the map",
+        "position_kind": "approximate-site"
+      },
+      "tags_if_restored": [
+        "cerro castor",
+        "ushuaia",
+        "tierra del fuego",
+        "argentina",
+        "ar",
+        "arg",
+        "south america",
+        "latin america",
+        "ski",
+        "patagonia",
+        "outdoor",
+        "snow",
+        "skiers",
+        "chairlift",
+        "people",
+        "vacation",
+        "quality-4",
+        "score-4"
+      ]
+    },
+    {
+      "name": "Brisbane skyline from Bowen Hills",
+      "video_id": "o1LRcS28T2M",
+      "kind": "youtube",
+      "reject_reason": "Ended 2026-10-14, the day before this check, and the channel has not yet put up a replacement. It bills itself as a 24/7 weather stream, so it will probably restart within days: the next weekly sweep should look for a new id on the Brisbane Live channel before writing this camera off.",
+      "rejected_at": "2026-10-15",
+      "location": "Bowen Hills, Brisbane, Queensland, Australia",
+      "was_in_the_app": "Yes - it was showing a dead panel until 2026-10-15.",
+      "pose_if_restored": {
+        "lat": -27.4425,
+        "lng": 153.03,
+        "alt_m": 60,
+        "heading": 225,
+        "pitch": -5,
+        "fov": 66,
+        "aligned": false,
+        "view": "landscape",
+        "confidence": "medium",
+        "basis": "Ground 7 m, so the 60 m is a genuine eye height about twenty floors up. Mt Coot-tha bears 245 at 9 km and is visible, and the Spring Hill ridge stays below the eye line, so the heading sweeps the CBD at 194 through to the ranges at 246.",
+        "source": "A webcam directory names the stream for an apartment tower at 35 Campbell Street, Bowen Hills; the tower is confirmed, its exact footprint is an estimate.",
+        "position_checked": "terrain and bearings, 2026-09-18"
+      },
+      "tags_if_restored": [
+        "bowen hills",
+        "brisbane",
+        "queensland",
+        "australia",
+        "au",
+        "aus",
+        "oceania",
+        "australasia",
+        "skyline",
+        "city",
+        "urban",
+        "buildings",
+        "downtown",
+        "brisbane river",
+        "night lights",
+        "high rises",
+        "sunset-facing",
+        "sunset",
+        "always-on"
+      ]
     }
   ],
   "audio_notes": [

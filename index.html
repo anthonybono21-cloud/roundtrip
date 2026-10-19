@@ -896,7 +896,7 @@ function toggleSound(){
    with is a player that stops playing — the feed is the whole product. */
 const AD_KEY = 'roundtrip.adseen';
 const ads = { on:false, since:0, seen:{}, watching:null, knock:null,
-              replied:false, silentRuns:0, playerState:null, error:null };
+              replied:false, silentRuns:0, playerState:null, error:null, played:false, at:0 };
 try { ads.seen = JSON.parse(localStorage.getItem(AD_KEY) || '{}') || {}; } catch {}
 
 /* The player says nothing until it is asked to (`enablejsapi=1` is already on
@@ -913,6 +913,7 @@ try { ads.seen = JSON.parse(localStorage.getItem(AD_KEY) || '{}') || {}; } catch
 function adsWatch(frame){
   adsReset();
   ads.watching = frame;
+  ads.at = clock();
   let n = 0;
   const knock = () => {
     if (ads.watching !== frame || ++n > 32){
@@ -937,7 +938,7 @@ function adsReset(){
   // for ever.
   if (ads.watching && !ads.replied) ads.silentRuns++;
   ads.on = false; ads.since = 0; ads.watching = null; ads.replied = false;
-  ads.playerState=null;ads.error=null;
+  ads.playerState=null;ads.error=null;ads.played=false;
 }
 
 /* A live stream has no length: the player reports 0, or a DVR window running
@@ -952,13 +953,14 @@ addEventListener('message', e => {
   if (e.source !== ads.watching.contentWindow) return;
   let d; try { d = JSON.parse(e.data); } catch { return; }
   if(!d)return;
-  if(d.event==='onStateChange')ads.playerState=Number(d.info);
-  if(d.event==='onError')ads.error=d.info;
+  if(d.event==='onStateChange'){ads.playerState=Number(d.info);deadWatch();}
+  if(d.event==='onError'){ads.error=d.info;deadWatch(Number(d.info));}
   if (d.event !== 'infoDelivery' || !d.info) return;
-  if(Number.isFinite(d.info.playerState))ads.playerState=d.info.playerState;
+  if(Number.isFinite(d.info.playerState)){ads.playerState=d.info.playerState;deadWatch();}
   const len = Number(d.info.duration);
   if (!Number.isFinite(len)) return;
   ads.replied = true; ads.silentRuns = 0;
+  deadReplay(len, Number(d.info.currentTime));
   const advert = len > 0.5 && len <= AD_MAX_LEN;
   if (advert === ads.on) return;
   ads.on = advert;
@@ -1316,6 +1318,175 @@ const voteReady = () => !!state.cam
                      && (state.phase === 'live' || state.phase === 'reveal');
 function paintVote(){ Menu?.sync(); }
 
+/* ── cameras that have died ────────────────────────────────────────────
+
+   The list says a camera is live; the player is the one that knows. A
+   broadcast restarted under a new video id, an old stream made private, an
+   embed the owner has since turned off: the list still carries the old
+   address, the dive still lands on it, and what is on screen is a black panel
+   in the middle of the rotation. A sample taken on Oct 15, 2026 put that at
+   about one camera in eight, with roughly thirty-five to forty more going the
+   same way every month, which is faster than any weekly re-check keeps up
+   with. So the page drops them itself, the moment it happens, at no cost.
+
+   This is deliberately not the thumbs-down list. A thumb is a verdict and is
+   meant to last; this is a fault, and faults heal - an operator who restarts
+   a broadcast may well come back on the old id, and a camera re-pinned in the
+   list arrives with a new key anyway. So every drop is provisional: it is
+   stamped, and after DEAD_RETRY days the camera is dealt again as if nothing
+   had happened. The two live in separate storage keys for the same reason.
+   Nothing here can quietly become a verdict that was never given.
+
+   What counts as death is kept narrow on purpose, because a false positive is
+   far worse than a slow re-check: it would empty the deck, and an emptying
+   deck looks exactly like a rotation that has got boring.
+
+     - an error that means this id cannot play here: 2 (not a valid id),
+       100 (gone), 101 and 150 (embedding turned off).
+     - the ended state. A live camera does not end.
+     - plainly playing a recording rather than a live feed: a finite length
+       over an hour with the playhead more than an hour short of it. A live
+       stream autoplays at its live edge, DVR window or not, so the two sit
+       an hour apart rather than a second apart. This is the restarted
+       broadcast, where the old id stays up as a replay of yesterday - the
+       worst of the lot, because it still looks like a camera. Only asked in
+       the first DEAD_FRESH seconds of a landing, because a live feed left
+       paused behind a covered window also wakes up behind its own edge, and
+       that is a camera doing nothing wrong.
+     - a player that never produces a picture at all is skipped and counted,
+       not dropped. Three separate landings that each showed nothing, and
+       only then. A slow connection must not be able to cost a camera. */
+const DEAD_KEY    = 'roundtrip.dead';
+const DEAD_RETRY  = 6;        // days before a dropped camera is dealt again
+const DEAD_STALLS = 3;        // landings with no picture before that counts
+const DEAD_LAG    = 3600;     // seconds behind a finite length that means replay
+const DEAD_FRESH  = 90;       // seconds after a mount that the replay check runs
+const DEAD_CODES  = new Set([2, 100, 101, 150]);
+const DAY = 86400e3;
+
+let deadLog = {};
+try { deadLog = JSON.parse(localStorage.getItem(DEAD_KEY) || '{}') || {}; } catch {}
+const dead = new Set();       // what is dropped right now
+
+/* Fresh drops only. An expired one is forgotten outright rather than kept as
+   history: the camera has earned another landing, and if it is still dead it
+   says so again within seconds of getting one. */
+function deadLoad(){
+  dead.clear();
+  let changed = false;
+  for (const [k, v] of Object.entries(deadLog)){
+    const age = Date.now() - Date.parse(v?.at || '');
+    if (!(age >= 0) || age > DEAD_RETRY*DAY){ delete deadLog[k]; changed = true; continue; }
+    if (v.code != null) dead.add(k);
+  }
+  if (changed) deadSave(false);
+}
+
+let deadTimer = null;
+function deadSave(publish = true){
+  try { localStorage.setItem(DEAD_KEY, JSON.stringify(deadLog)); } catch {}
+  if (publish){ clearTimeout(deadTimer); deadTimer = setTimeout(publishDead, 1500); }
+}
+
+/* Sent out the way the thumbs are, to the same public topic, so the camera
+   file can be mended from the reading side rather than waiting on the next
+   sweep. Its own kind, because the two must never be confused: a dead stream
+   is a camera to go and re-pin, a thumbs-down is a camera to leave out. */
+const deadList = () => Object.entries(deadLog)
+  .filter(([, v]) => v.code != null)
+  .map(([key, v]) => ({ key, ...v }));
+function publishDead(){
+  const list = deadList();
+  if (!list.length) return;
+  const body = JSON.stringify({
+    app: 'roundtrip', kind: 'cam-dead', device: deviceId,
+    at: new Date().toISOString(), dead: list.length, cams: list,
+  });
+  try { fetch(VOTE_TOPIC, { method:'POST', body, keepalive:true }).catch(()=>{}); } catch {}
+}
+deadLoad();
+setTimeout(() => { if (deadList().length) publishDead(); }, 11000);
+
+/* Out of the rotation: thumbed down for good, or dead for now. */
+const isDropped = c => { const k = camKey(c); return state.rejects.has(k) || dead.has(k); };
+
+/* The thumbs-down shape - off this device's deck and on to the next dive -
+   written out here rather than borrowed, so that nothing about a fault can
+   reach into the votes. */
+function dropDead(cam, code, why){
+  if (!cam) return;
+  const key = camKey(cam);
+  if (dead.has(key)) return;
+  deadLog[key] = { at: new Date().toISOString(), code, why, name: cam.name,
+                   location: cam.location || '', video_id: cam.video_id || '',
+                   url: cam.url || '' };
+  dead.add(key);
+  deadSave();
+  console.warn('Roundtrip dead camera:', cam.name, code, why);
+  bag = bag.filter(c => c !== cam);
+  if (upNext === cam) upNext = null;
+  refreshPins();                       // and off the pin map
+  if (cam !== state.cam) return;       // the rotation has already moved on
+  note(cam.name + ' is off the air. Moving to the next view.');
+  if (state.phase === 'live' || state.phase === 'orbit') requestDive(pickNext());
+  else backToOrbit();
+}
+
+/* Counted against the camera rather than the moment, so one bad minute on the
+   wifi costs nothing at all. */
+function stallDead(cam){
+  if (!cam) return;
+  const key = camKey(cam);
+  const was = deadLog[key] || {};
+  const stalls = (was.stalls || 0) + 1;
+  deadLog[key] = { ...was, stalls, at: new Date().toISOString(),
+                   name: cam.name, video_id: cam.video_id || '' };
+  if (stalls >= DEAD_STALLS) dropDead(cam, 'stalled', stalls + ' landings with no picture');
+  else deadSave(false);
+}
+
+/* A camera that plays has nothing against it: any tally it collected on a bad
+   night goes, so three strikes can never be three separate bad nights. */
+function deadPlayed(){
+  const key = state.cam && camKey(state.cam);
+  if (key && deadLog[key] && deadLog[key].code == null){ delete deadLog[key]; deadSave(false); }
+}
+
+function deadWatch(code){
+  if (DEAD_CODES.has(code)) dropDead(state.cam, code, 'player error ' + code);
+  else if (ads.playerState === 0) dropDead(state.cam, 'ended', 'the broadcast has ended');
+  else if (ads.playerState === 1 && !ads.played){ ads.played = true; deadPlayed(); }
+}
+
+/* Two reports a few seconds apart have to agree before a replay is called,
+   so a single odd number from a player still working out what it is playing
+   cannot drop anything. */
+let replayWatch = null;
+function deadReplay(len, at){
+  if (!ads.at || clock() - ads.at > DEAD_FRESH || state.suspended){ replayWatch = null; return; }
+  if (!(len > DEAD_LAG) || !Number.isFinite(at) || len - at <= DEAD_LAG){ replayWatch = null; return; }
+  const now = clock();
+  if (replayWatch && replayWatch.cam === state.cam){
+    if (now - replayWatch.t >= 3)
+      dropDead(state.cam, 'recorded',
+               'playing a recording ' + Math.round((len - at)/60) + ' minutes behind its end');
+  } else replayWatch = { cam: state.cam, t: now };
+}
+
+/* A player that answered all the way through and still never produced a
+   picture is showing nothing. Skipped on the spot, and it takes DEAD_STALLS
+   of those before the camera itself is blamed. */
+function deadStalled(){
+  if (!liveFrame || liveFrame.tagName !== 'IFRAME') return false;
+  if (!ads.replied || ads.played || clock() - state.t0 < 6) return false;
+  const cam = state.cam;
+  note(cam.name + ' is not playing. Moving to the next view.');
+  stallDead(cam);
+  if (dead.has(camKey(cam))) return true;      // dropDead has moved on already
+  skipNext();
+  return true;
+}
+
 function lightWeight(cam){
   const el = sunElevation(cam.pose.lat, cam.pose.lng);
   const raw = el < -8 ? 0.90      // night: a little behind, never excluded
@@ -1331,7 +1502,13 @@ function lightWeight(cam){
    per item, raised to 1/weight, sorted. Heavier items tend to sort earlier
    while every item still appears exactly once. */
 function shuffledBag(){
-  let kept = state.cams.filter(c => !state.rejects.has(camKey(c)));
+  let kept = state.cams.filter(c => !isDropped(c));
+  // The one thing a fault must never do is empty the deck. If every camera
+  // left has been dropped as dead then the drops are likelier to be wrong
+  // than the whole list is to be off the air, so they are ignored until the
+  // next load retires the stale ones. A thumbs-down still holds: that one was
+  // asked for.
+  if (!kept.length) kept = state.cams.filter(c => !state.rejects.has(camKey(c)));
   // A search set narrows the deck without touching anything else: the
   // light bias, the live windows and the once-per-cycle rule all still
   // apply, just over fewer cameras.
@@ -1354,7 +1531,7 @@ function drawNext(){
   for (let cycle = 0; cycle < 2; cycle++){
     while (bag.length){
       const c = bag.shift();
-      if (state.rejects.has(camKey(c))) continue;
+      if (isDropped(c)) continue;
       // Don't repeat the camera just shown across a cycle boundary, unless it
       // is the only one left.
       if (c === state.cam && bag.length){ bag.push(c); continue; }
@@ -1597,6 +1774,7 @@ function tick(){
       if (phaseT(CFG.reveal) >= 1) setPhase('live');
       break;
     case 'live':
+      if (deadStalled()) break;
       if (!state.pinned && clock()-state.t0 > CFG.dwell) backToOrbit();
       break;
     case 'retreat': {
@@ -1726,12 +1904,13 @@ function pinOnScreen(p){
 }
 
 /* Which cameras are on the globe at all: a thumbs-down takes its pin with it,
-   and a camera that is off air right now stays but goes quiet. */
+   a camera found dead takes its pin until it is tried again, and a camera
+   that is off air right now stays but goes quiet. */
 function refreshPins(){
   if (!pins) return;
   pins.children.forEach(p => {
     const c = p.userData.cam;
-    p.userData.off = state.rejects.has(camKey(c));   // thumbed down: gone
+    p.userData.off = isDropped(c);                  // thumbed down or dead: gone
     p.visible = !p.userData.off;
     p.userData.onAir = isLiveNow(c);
   });
@@ -2334,6 +2513,11 @@ const progress = v => { bar.style.width = (v*100)+'%'; };
     // camera file can be pruned from; Roundtrip.publishVotes() sends that
     // list out again by hand.
     votes: voteList, publishVotes, castVote,
+    // Roundtrip.dead() is every camera this browser has found off the air,
+    // as a list the camera file can be mended from; the drops expire by
+    // themselves after DEAD_RETRY days. Roundtrip.dropDead(cam,'by hand') is
+    // what the player's own error report does.
+    dead: deadList, deadLog, dropDead, publishDead, isDropped,
     silenced: () => [...silenced],
     // Roundtrip.find('beach') is what the search box runs.
     find: q => (Search ? Search.search(q).map(r => r.cam.name) : []),

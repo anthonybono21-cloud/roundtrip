@@ -219,6 +219,57 @@ with no custom headers, so there is no CORS preflight to fail, and a vote that
 cannot leave now leaves on the next load. Nothing about it can affect what is
 on screen.
 
+## Cameras that have died
+
+The list says a camera is live; the player is the one that knows. A broadcast
+restarted under a new video id, an old stream made private, an embed the owner
+has since turned off - the list still carries the old address, the dive still
+lands on it, and what is on screen is a black panel. A sample of 150 of the
+YouTube cameras in October 2026 found about one in eight like that, with
+roughly thirty-five to forty more going the same way every month, which is
+faster than any periodic re-check keeps up with.
+
+So the page drops them itself, within seconds of landing on one, for nothing.
+It is **not** the thumbs-down list: a thumb is a verdict and lasts, while a
+dead stream is a fault and faults heal, so every drop is stamped in
+`localStorage` under `roundtrip.dead` and expires after six days, at which
+point the camera is dealt again as if nothing had happened. The two keys are
+separate so a fault can never quietly become a verdict.
+
+What counts as dead is kept narrow on purpose, because a false positive is far
+worse than a slow re-check - it would empty the deck, and an emptying deck
+looks exactly like a rotation that has got boring:
+
+| what the player reports | what happens |
+| --- | --- |
+| error 2, 100, 101 or 150 - bad id, gone, embedding turned off | dropped |
+| the ended state | dropped: a live camera does not end |
+| a finite length over an hour with the playhead more than an hour short of it | dropped: that is a recording, not a live feed |
+| answered, but never produced a picture | skipped, and counted; dropped on the third such landing |
+
+The third row is the restarted broadcast, where the old id stays up as a replay
+of yesterday - the worst of the lot, because it still looks like a camera. A
+live stream autoplays at its live edge, DVR window or not, so the two sit an
+hour apart rather than a second apart. It is only asked in the first ninety
+seconds of a landing, because a feed left paused behind a covered window also
+wakes up behind its own edge, and that is a camera doing nothing wrong.
+
+Three guards matter. A stall is only counted on a device whose player answers
+at all, so a browser where the handshake never works can never drop anything.
+A camera that does play has its tally wiped, so three strikes cannot be three
+bad nights. And if every remaining camera is marked dead the marks are ignored
+outright, because at that point they are likelier to be wrong than the whole
+list is to be off the air.
+
+`Roundtrip.dead()` prints what this browser has found, and the drops go to the
+same ntfy topic as the votes under their own `kind: "cam-dead"`, so whoever
+mends the camera file can tell "go and re-pin this" from "leave this out".
+
+`node tools/dead-stream-check.mjs` drives this page in Chromium against a
+stand-in YouTube player and checks every row of that table, the reload, and the
+empty-deck guard. It needs Playwright and a Chromium build; point
+`PLAYWRIGHT_PACKAGE` and `CHROMIUM_PATH` at them.
+
 ## Adverts over the camera
 
 The feeds are embedded YouTube players and YouTube runs its own advertising

@@ -92,7 +92,16 @@ finger drive exactly the same strip.
 
 `Roundtrip.offAir()` lists cameras held back right now by a `live_window`: the
 part-time and seasonal ones are kept in the list and returned to the rotation
-when they are actually broadcasting, rather than rejected.
+when they are actually broadcasting, rather than rejected. A window carries
+hours (`from`/`to` in the camera's own `tz`), an optional `season`, optional
+`sets` for a venue whose published set times leave gaps inside its opening
+hours, and `weekdays` for the days it is on air at all — a small shop closes
+one day a week, and without that the dive lands on a shuttered room. A window
+that runs past midnight belongs to the day it started on, so a venue open
+Friday evening to two in the morning is still on air at one on a Saturday it
+is otherwise closed. `node tools/live-window-check.mjs` checks all of that
+against the viewer's own code and reports how many hours a week each windowed
+camera is actually dealt.
 
 ## On a television
 

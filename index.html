@@ -1162,11 +1162,33 @@ const camKey = c => c.video_id || c.url || c.name;
    are live. An optional `live_window` on the camera says when:
 
      "live_window": { "from": "07:00", "to": "19:00", "tz": "America/Los_Angeles",
+                      "weekdays": ["mon","wed","thu","fri","sat","sun"],
                       "season": { "from": "06-01", "to": "10-10" } }
 
    No live_window means always eligible. Times are local to `tz`, or to the
    camera's own `timezone`. Both windows may wrap (a night-only cam, or a
-   season crossing new year). */
+   season crossing new year).
+
+   `weekdays` is the days it is on air at all, and it matters more than it
+   looks: a small shop closes one day a week, and until this was read the
+   closed day could only be written as prose in `days`, which nothing looked
+   at - so the camera was dealt on its closed day and the dive landed on a
+   shuttered room. Barbers and small trades are exactly the niche being
+   filled, and every one of them has a closed day. `days` stays as the
+   sentence a person reads; `weekdays` is the part the deck obeys. A `sets`
+   entry may carry its own `weekdays` for a set that only runs some days,
+   and falls back to the camera's. */
+const DAYNAMES = ['sun','mon','tue','wed','thu','fri','sat'];
+function onDay(list, zone, wrapped){
+  if (!Array.isArray(list) || !list.length) return true;
+  const want = new Set(list.map(d => String(d).slice(0,3).toLowerCase()));
+  const today = new Intl.DateTimeFormat('en-US',
+    { weekday:'short', timeZone:zone }).format(now()).slice(0,3).toLowerCase();
+  const i = DAYNAMES.indexOf(today);
+  if (i < 0) return true;                    // unreadable day: show the camera
+  return want.has(DAYNAMES[wrapped ? (i + 6) % 7 : i]);
+}
+
 function isLiveNow(cam){
   const w = cam.live_window;
   if (!w) return true;
@@ -1183,12 +1205,20 @@ function isLiveNow(cam){
     const hm = new Intl.DateTimeFormat('en-GB',
       { hour:'2-digit', minute:'2-digit', hour12:false, timeZone:zone }).format(now());
     if (from && to && !within(hm, from, to)) return false;
+    // Wrapped means the clock is in the small-hours half of a window that ran
+    // past midnight, so the day it belongs to is yesterday: a venue open
+    // Friday 20:00 to 02:00 is still on air at one on a Saturday morning it
+    // is otherwise closed.
+    if (!onDay(w.weekdays, zone, !!(from && to && from > to && hm < to))) return false;
     // A venue with published set times has gaps inside its opening hours. Those
     // gaps are an empty stage, which is the whole reason for the window, so a
     // camera that lists sets has to be inside one of them, not just inside the
     // outer span.
-    if (Array.isArray(w.sets) && w.sets.length
-        && !w.sets.some(t => within(hm, t.from || t.start, t.to || t.end))) return false;
+    if (Array.isArray(w.sets) && w.sets.length && !w.sets.some(t => {
+          const a = t.from || t.start, b = t.to || t.end;
+          return within(hm, a, b)
+              && onDay(t.weekdays || w.weekdays, zone, !!(a > b && hm < b));
+        })) return false;
   } catch { return true; }        // a bad zone should not hide a camera
   return true;
 }

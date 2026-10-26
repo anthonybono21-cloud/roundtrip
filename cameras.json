@@ -94024,7 +94024,7 @@
       "watch_url": "https://www.youtube.com/watch?v=3o9aoRyrvAk",
       "requires_login": false,
       "last_verified": "2026-10-15",
-      "notes": "The shop's own in-store camera (titled 店内カメラ). Umineko Shouten describes itself as part coffee shop, part general store, part motorcycle shop, and roasts its own coffee. 11.4M lifetime views on one long-running feed. The shop is closed on Tuesdays, which live_window has no way to express, so expect a shut shop then.",
+      "notes": "The shop's own in-store camera (titled 店内カメラ). Umineko Shouten describes itself as part coffee shop, part general store, part motorcycle shop, and roasts its own coffee. 11.4M lifetime views on one long-running feed. The shop is closed on Tuesdays, and the camera is held back on Tuesdays.",
       "audio": "unknown",
       "audio_basis": "No audio information on the page or the channel.",
       "ads": "unknown",
@@ -94032,10 +94032,18 @@
       "live_window": {
         "tz": "Asia/Tokyo",
         "days": "daily except Tuesdays",
+        "weekdays": [
+          "mon",
+          "wed",
+          "thu",
+          "fri",
+          "sat",
+          "sun"
+        ],
         "from": "09:00",
         "to": "18:00",
         "source": "The shop's own YouTube channel description, read 2026-10-15: 営業時間 9:00〜18:00, 定休日 火曜日（祝日の場合は営業）",
-        "note": "Closed Tuesdays unless the Tuesday is a public holiday. live_window has no day-of-week field and isLiveNow does not read the days string, so the window still opens on Tuesdays."
+        "note": "Closed Tuesdays unless the Tuesday is a public holiday, which the shop works. The closed day is in weekdays, which isLiveNow reads, so the camera is no longer dealt on a Tuesday. The holiday exception cannot be expressed, so on a public holiday Tuesday the shop is open and this camera is held back anyway - the safe way round, since a shut shop on screen is worse than a camera missed."
       },
       "timezone": "Asia/Tokyo",
       "pose": {
@@ -97201,6 +97209,17 @@
         "sunset",
         "always-on"
       ]
+    },
+    {
+      "name": "Dodong Barber Shop street view, Agdao",
+      "location": "Agdao, Davao City, Philippines",
+      "country": "Philippines",
+      "kind": "youtube",
+      "video_id": "D0zoMg6-XsQ",
+      "watch_url": "https://www.youtube.com/watch?v=D0zoMg6-XsQ",
+      "rejected_at": "2026-10-26",
+      "reject_reason": "Verified live and embeddable on 2026-10-15, and rejected on the ground rather than the check. It is misnamed as a barbershop camera: the title says the camera is OUTSIDE Dodong Barber Shop and JazBaz’s own description calls the subject \"the market area in Agdao\", so the frame is a sidewalk, not a working counter, and it does nothing for the barbers and small-trades niche it was parked under. That ground is already covered: the list carries nine Davao cameras, five of them in Agdao, including Agdao Public Market (u8CbGedbI08), the F. Bangoy and Soliman crossing (yznpQlk0exE), Soliman Street (DSRm7V_bsm8) and the Agdao barbershop interior (8xDhxzGlJHs) that is the camera this one was meant to complement. A tenth camera in one city crowds a rotation whose whole point is going round the globe.",
+      "reconsider_if": "The Agdao barbershop interior 8xDhxzGlJHs dies and cannot be re-pinned. This is a known-good operator (JazBaz Philippines, CAM025) and would then be the only remaining frame on that street, which is worth more than nothing."
     }
   ],
   "audio_notes": [

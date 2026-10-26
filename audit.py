@@ -135,6 +135,41 @@ def check_windows(cams):
                 out.append('%s has an unreadable set %r' % (c['name'], s))
             elif a == b:
                 out.append('%s has a zero-length set %r' % (c['name'], s))
+            out += check_weekdays(c, s.get('weekdays'), 'a set of')
+        out += check_weekdays(c, w.get('weekdays'), '')
+        # The trap this is here for: the closed day written as prose in `days`
+        # and then never put in `weekdays`, which is the only one the viewer
+        # reads. That is how a shop cam ends up dealt on the day it is shut.
+        days = str(w.get('days') or '').lower()
+        if not w.get('weekdays') and any(d in days for d in DAYWORDS):
+            out.append('%s names a day in its days note (%r) but has no weekdays list, '
+                       'so the viewer will deal it every day' % (c['name'], w.get('days')))
+    return out
+
+
+DAYS = ('mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun')
+DAYWORDS = ('monday', 'tuesday', 'wednesday', 'thursday', 'friday',
+            'saturday', 'sunday', 'weekday', 'weekend')
+
+
+def check_weekdays(c, wd, where):
+    """A weekdays list the viewer cannot read holds the camera back for good."""
+    if wd is None:
+        return []
+    label = (where + ' ' if where else '') + 'weekdays'
+    if not isinstance(wd, list) or not wd:
+        return ['%s has an empty or malformed %s %r' % (c['name'], label, wd)]
+    seen, out = set(), []
+    for d in wd:
+        k = str(d)[:3].lower()
+        if k not in DAYS:
+            out.append('%s has an unreadable day %r in %s' % (c['name'], d, label))
+        elif k in seen:
+            out.append('%s lists %s twice in %s' % (c['name'], k, label))
+        seen.add(k)
+    if len(seen) == 7 and not out:
+        out.append('%s lists all seven days in %s, which is the same as leaving it out'
+                   % (c['name'], label))
     return out
 
 

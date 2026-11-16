@@ -54,6 +54,17 @@ const CAMS = { rejects:[], cameras:[
   cam('Yesterday Replay Street',  'replay1', 'street', { lat:30, lng:30 }),
   cam('Silent Stall Square',      'stall1',  'square', { lat:40, lng:40 }),
 ]};
+/* Four that answer the way every camera answers on a device YouTube has
+   started turning away. They are dealt into the list only when the run guard
+   is being tested: a camera that always refuses would otherwise be wandered
+   onto between the other scenarios and make every one of them a lottery. */
+const REFUSED = [
+  cam('Refused One',   'refuse1', 'coast', { lat:50, lng:50 }),
+  cam('Refused Two',   'refuse2', 'coast', { lat:52, lng:52 }),
+  cam('Refused Three', 'refuse3', 'coast', { lat:54, lng:54 }),
+  cam('Refused Four',  'refuse4', 'coast', { lat:56, lng:56 }),
+];
+let deck = CAMS;                     // what the page is served right now
 
 /* The stand-in. It says nothing until it is asked to, exactly like the embed,
    so the page's own handshake is what is being tested. */
@@ -70,7 +81,8 @@ addEventListener('message', e => {
   asked = true;
   const id = ${JSON.stringify(id)}, every = f => setInterval(f, 500);
   setTimeout(() => {
-    if (id === 'dead1') return say({ event:'onError', info:150 });   // embedding off
+    if (id === 'dead1' || id.startsWith('refuse'))
+      return say({ event:'onError', info:150 });                     // embedding off
     if (id === 'ok1'){                                              // live, at the edge
       say({ event:'onStateChange', info:1 });
       return every(() => say({ event:'infoDelivery',
@@ -99,7 +111,7 @@ const reports = [];
 // The most recently added route wins, so the catch-all goes on first.
 await page.route(/^https?:\/\/(?!localhost|127\.0\.0\.1)/, r => r.abort());
 await page.route('**/cameras.json', r =>
-  r.fulfill({ status:200, contentType:'application/json', body:JSON.stringify(CAMS) }));
+  r.fulfill({ status:200, contentType:'application/json', body:JSON.stringify(deck) }));
 await page.route('https://www.youtube.com/embed/**', r =>
   r.fulfill({ status:200, contentType:'text/html',
               body: player(new URL(r.request().url()).pathname.split('/').pop()) }));
@@ -189,10 +201,47 @@ check('a fresh drop survives a reload', after.length === 3 && !after.includes('H
 check('and it is kept apart from the thumbs',
       !!stored && (await page.evaluate(() => localStorage.getItem('et45.rejects'))) === null);
 
+/* The run guard. Three refusals in a row are three cameras; the fourth is the
+   device, and the page has to say so by giving all four back. This is the
+   failure that actually happened: both TVs dropped a fifth of the list in a
+   day, one camera every four minutes, every embed answering error 150. */
+console.log('four cameras in a row that will not play');
+deck = { rejects:[], cameras: CAMS.cameras.concat(REFUSED) };
+await page.reload({ waitUntil:'load' });
+await page.waitForFunction(() => !!window.Roundtrip, null, { timeout:30000 });
+const before4 = (await dead()).length;
+for (const n of ['Refused One', 'Refused Two', 'Refused Three'])
+  await land(n, { moves: true });
+check('three refusals in a row are each dropped', (await dead()).length === before4 + 3);
+
+await page.evaluate(() => window.Roundtrip.backToOrbit());
+await onOrbit();
+await page.evaluate(() => window.Roundtrip.dive('Refused Four'));
+let rolled = false;
+for (let i = 0; i < 80; i++){
+  if ((await dead()).length === before4){ rolled = true; break; }
+  await page.waitForTimeout(500);
+}
+check('the fourth makes the page blame itself and take all four back', rolled);
+const back = await page.evaluate(() => window.Roundtrip.order());
+check('and all four are dealt again',
+      ['Refused One','Refused Two','Refused Three','Refused Four']
+        .every(n => back.includes(n)));
+check('nothing was written down while the fault looked local',
+      !Object.keys(await page.evaluate(() => window.Roundtrip.deadLog))
+         .some(k => k.startsWith('refuse')));
+
+console.log('and the guard lifts as soon as something plays');
+await land('Healthy Harbour', { hold: 14 });
+check('the healthy camera still plays', !(await dead()).includes('Healthy Harbour'));
+await land('Refused One', { moves: true });
+check('a refusal after that is dropped again, one at a time',
+      (await dead()).includes('Refused One'));
+
 // Mark every camera dead and the deck still has to deal one, or an eager
 // check could empty the rotation.
 await page.evaluate(cams => cams.forEach(c =>
-  window.Roundtrip.dropDead(c, 'test', 'by hand')), CAMS.cameras);
+  window.Roundtrip.dropDead(c, 'test', 'by hand')), deck.cameras);
 for (let i = 0; i < 6; i++){
   await page.evaluate(() => window.Roundtrip.skipNext());
   await page.waitForTimeout(1500);

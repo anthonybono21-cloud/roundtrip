@@ -78317,6 +78317,1583 @@
       "audio": "ambience",
       "ads": "unknown",
       "video_id": "VjmeEdvxyPM"
+    },
+    {
+      "name": "Haneda plane spotting, Tokyo",
+      "location": "Ota, Tokyo",
+      "country": "Japan",
+      "category": "airport",
+      "provider": "Nippon Television (YouTube)",
+      "kind": "youtube",
+      "video_id": "2PIdi3Xa7TY",
+      "url": "https://www.youtube.com/embed/2PIdi3Xa7TY?autoplay=1&mute=1",
+      "watch_url": "https://www.youtube.com/watch?v=2PIdi3Xa7TY",
+      "requires_login": false,
+      "last_verified": "2026-11-16",
+      "notes": "Elevated view across Haneda's aprons and runways with Tokyo Bay behind, departures and arrivals almost continuously through the Japanese day. A dedicated spotting stream rather than a news programme. Re-pinned 2026-11-16: the stream this record was added with (3w4zEyFamuA) had ended, and the operator had restarted on a new id. Found on 日テレNEWS (@ntv_news) as \"【ライブカメラ】羽田空港 \"T2\" HANEDA,Tokyo International Airport（日テレNEWS LIVE）\". Same operator and the same airport, but the new stream is titled as the Terminal 2 camera and the old angle could not be confirmed, so the dive point may want a look.",
+      "lat": 35.5494,
+      "lng": 139.7798,
+      "timezone": "Asia/Tokyo",
+      "always_on": true,
+      "pose": {
+        "lat": 35.5498,
+        "lng": 139.7865,
+        "alt_m": 35,
+        "heading": 105,
+        "pitch": -5,
+        "fov": 60,
+        "aligned": false,
+        "view": "landscape",
+        "confidence": "low",
+        "basis": "Ground 5 m. The heading crosses apron and runway for 700 m then reads sea level for 2.3 km, which is the bay behind the runway as described. The old pose sat mid-taxiway at an 80 m eye height where no structure exists.",
+        "source": "The broadcaster does not state the mount; the position follows the described elevated view across the aprons with Tokyo Bay behind, which at Haneda only works looking east from the Terminal 1 rooftop deck.",
+        "position_checked": "terrain and bearings, 2026-09-18"
+      },
+      "audio": "unknown",
+      "audio_basis": "not established by listening; plays when sound is on, Shift+M silences it if it turns out to be music",
+      "tags": [
+        "ota",
+        "tokyo",
+        "kanto",
+        "japan",
+        "jp",
+        "jpn",
+        "asia",
+        "east asia",
+        "airport",
+        "planes",
+        "aviation",
+        "plane spotting",
+        "runway",
+        "jets",
+        "bay",
+        "busy",
+        "always-on",
+        "sunrise-facing",
+        "sunrise"
+      ],
+      "ads": "yes"
+    },
+    {
+      "name": "Zocalo Plaza de la Constitucion Mexico City",
+      "location": "Mexico City",
+      "country": "Mexico",
+      "category": "square",
+      "provider": "webcamsdemexico",
+      "kind": "youtube",
+      "url": "https://www.youtube.com/embed/gj6lXqFzzbQ?autoplay=1&mute=1",
+      "watch_url": "https://www.youtube.com/watch?v=gj6lXqFzzbQ",
+      "requires_login": false,
+      "last_verified": "2026-11-16",
+      "notes": "Rated for the actual inspected view; original YouTube player preserves operator attribution. Re-pinned 2026-11-16: the stream this record was added with (7tf7p5LCtXY) had ended, and the operator had restarted on a new id. Found on webcamsdemexico (UColBcWm6ybTbQnNuQS8JaKg) as \"En vivo Zócalo de la Ciudad de México\". Same view, same place; the dive point is unchanged.",
+      "timezone": "America/Mexico_City",
+      "tags": [
+        "zocalo plaza de la constitucion mexico city",
+        "mexico city",
+        "mexico",
+        "square",
+        "outdoor",
+        "live webcam",
+        "pedestrians",
+        "people",
+        "public square",
+        "town center",
+        "pedestrian",
+        "mexican",
+        "latin america",
+        "quality-4",
+        "score-4"
+      ],
+      "curated_tags": [
+        "zocalo plaza de la constitucion mexico city",
+        "mexico city",
+        "mexico",
+        "square",
+        "outdoor",
+        "live webcam",
+        "pedestrians",
+        "people",
+        "public square",
+        "town center",
+        "pedestrian",
+        "mexican",
+        "latin america",
+        "quality-4",
+        "score-4"
+      ],
+      "scene_set": "expansion500",
+      "in_sets": [
+        "expansion500"
+      ],
+      "pose": {
+        "lat": 19.43184,
+        "lng": -99.13487,
+        "alt_m": null,
+        "heading": null,
+        "pitch": null,
+        "fov": null,
+        "aligned": false,
+        "confidence": "low",
+        "basis": "Approximate discovery-map point; operator video title/description used to cross-check place. Not survey-verified.",
+        "position_kind": "approximate-site"
+      },
+      "quality_score": 4,
+      "quality_reason": "Detailed historic facades and decorated public square, pedestrians change positions in clear close framing.",
+      "quality_evidence": {
+        "method": "Human visual inspection of ffmpeg-decoded video frame pair, roughly one second apart",
+        "checked_at": "2026-09-18T15:12:39.846105+00:00",
+        "frames": [
+          "research/expansion500/south-world/frames/7tf7p5LCtXY-01.jpg",
+          "research/expansion500/south-world/frames/7tf7p5LCtXY-02.jpg"
+        ],
+        "metadata": "research/expansion500/south-world/checks/7tf7p5LCtXY.json"
+      },
+      "validation": {
+        "checked_at": "2026-09-18T15:12:39.846105+00:00",
+        "is_live": true,
+        "playable": true,
+        "method": "YouTube extractor live_status/is_live/playable_in_embed metadata plus real HLS frame decoding and visual inspection",
+        "resolution": [
+          840,
+          480
+        ],
+        "decoded_resolution": [
+          840,
+          480
+        ],
+        "motion_observed": true,
+        "limitations": "Brief inspection; activity varies by time, weather and operator camera direction. No guarantee of future uptime. Source coordinates approximate, not verified camera-mount pose."
+      },
+      "provenance": {
+        "research_file": "south-world.json",
+        "source": [
+          {
+            "url": "https://tw.live/en/map-data.php",
+            "role": "discovery name and approximate coordinates",
+            "id": "mxmexicocityzocaloplaza"
+          },
+          {
+            "url": "https://www.youtube.com/watch?v=7tf7p5LCtXY",
+            "role": "operator live stream, title and description",
+            "channel": "webcamsdemexico"
+          }
+        ]
+      },
+      "check": {
+        "verdict": "live",
+        "checked": "2026-09-18T15:12:39.846105+00:00",
+        "method": "YouTube extractor live_status/is_live/playable_in_embed metadata plus real HLS frame decoding and visual inspection",
+        "embed": "verified",
+        "embed_reason": "Positive source playback evidence; see validation."
+      },
+      "audio": "unknown",
+      "ads": "unknown",
+      "video_id": "gj6lXqFzzbQ"
+    },
+    {
+      "name": "The Hide Waterhole",
+      "location": "Hwange, Zimbabwe",
+      "country": "Zimbabwe",
+      "category": "wildlife",
+      "provider": "Africam / The Hide Safari Camp",
+      "kind": "youtube",
+      "video_id": "ljLeMq_KXpY",
+      "url": "https://www.youtube.com/embed/ljLeMq_KXpY?autoplay=1&mute=1",
+      "watch_url": "https://www.youtube.com/watch?v=ljLeMq_KXpY",
+      "requires_login": false,
+      "last_verified": "2026-11-16",
+      "notes": "The Hide Waterhole in Hwange, Zimbabwe. Animals in a named habitat; presence and activity vary. Re-pinned 2026-11-16: the stream this record was added with (nXI-kWu6BLo) had ended, and the operator had restarted on a new id. Found on Africam (@Africamvideos) as \"Live Wildlife Camera at The Hide | Hwange Waterhole, Zimbabwe\". Same view, same place; the dive point is unchanged.",
+      "scene_set": "camera-expansion-2026-09-18",
+      "pose": {
+        "lat": -18.9167,
+        "lng": 26.9333,
+        "alt_m": null,
+        "heading": null,
+        "pitch": null,
+        "fov": null,
+        "aligned": false,
+        "confidence": "low",
+        "basis": "Recovered venue/location estimate. Camera mount and heading/pitch/FOV unverified; orientation values are provisional defaults.",
+        "position_kind": "approximate-site",
+        "orientation_status": "unknown"
+      },
+      "timezone": "Africa/Harare",
+      "in_sets": [
+        "camera-expansion-2026-09-18"
+      ],
+      "check": {
+        "verdict": "live",
+        "checked": "2026-09-18T13:56:59.5860276Z",
+        "method": "fresh-youtube-metadata",
+        "reason": "Live broadcast evidence; present scene activity is not guaranteed.",
+        "embed": "metadata-ok",
+        "embed_reason": "Positive YouTube embed metadata; device playback untested.",
+        "in_app_playback_verified": false,
+        "research_ref": "research/camera-expansion-plan.json#nXI-kWu6BLo"
+      },
+      "audio": "unknown",
+      "audio_basis": "Not verified by listening.",
+      "tags": [
+        "wildlife",
+        "waterhole"
+      ],
+      "ads": "unknown",
+      "night_hint": true,
+      "replay_risk": "No replay noted in prior research; fresh content not visually verified."
+    },
+    {
+      "name": "Grand Harbour, Valletta and the Three Cities",
+      "location": "Valletta, Malta",
+      "country": "Malta",
+      "category": "harbor",
+      "provider": "Grand Harbour Live",
+      "kind": "youtube",
+      "url": "https://www.youtube.com/embed/1o23sdh8J9U?autoplay=1&mute=1",
+      "watch_url": "https://www.youtube.com/watch?v=1o23sdh8J9U",
+      "requires_login": false,
+      "last_verified": "2026-11-16",
+      "notes": "Small weather box top-left and a ship-arrival ticker at the bottom. Cruise ships and ferries pass through by day. Re-pinned 2026-11-16: the stream this record was added with (DSCy97qUXeE) had ended, and the operator had restarted on a new id. Found on Grand Harbour Live (UCOaftBNU_PWVFLkR2LY3LPg) as \"LIVE 24/7: Malta Ship Spotting by day, chilling by night | 4K Grand Harbour Live\". Same view, same place; the dive point is unchanged.",
+      "timezone": "Europe/Malta",
+      "tags": [
+        "valletta",
+        "malta",
+        "harbor",
+        "harbour",
+        "port",
+        "boats",
+        "waterfront",
+        "water",
+        "grand harbour",
+        "kalkara",
+        "birgu",
+        "three cities",
+        "outdoor",
+        "yachts",
+        "ships",
+        "fortress",
+        "vacation",
+        "quality-4",
+        "score-4",
+        "night lights"
+      ],
+      "curated_tags": [
+        "valletta",
+        "grand harbour",
+        "kalkara",
+        "birgu",
+        "three cities",
+        "malta",
+        "outdoor",
+        "harbor",
+        "boats",
+        "yachts",
+        "ships",
+        "fortress",
+        "vacation",
+        "quality-4",
+        "score-4"
+      ],
+      "scene_set": "claude-scout-2026-09-18",
+      "in_sets": [
+        "claude-scout-2026-09-18"
+      ],
+      "pose": {
+        "lat": 35.895,
+        "lng": 14.516,
+        "alt_m": null,
+        "heading": null,
+        "pitch": null,
+        "fov": null,
+        "aligned": false,
+        "confidence": "low",
+        "basis": "Channel is Grand Harbour Live, overlay says Valletta; frames show Fort Ricasoli and Kalkara across the harbour",
+        "position_kind": "approximate-site"
+      },
+      "quality_score": 4,
+      "quality_reason": "PTZ tour of Grand Harbour. Frame A shows the harbour fortifications with small boats crossing; frame B shows Kalkara's yacht marina and the old naval bakery. The camera moves between presets and boats move on the water.",
+      "quality_evidence": {
+        "method": "Visual inspection of two decoded live frames 5 s apart (paired_frames)",
+        "visual_inspected": true,
+        "checked_at": "2026-09-18T16:59:22+00:00",
+        "motion_observed": true,
+        "evidence_paths": [
+          "frames/vacation-europe/malta-grandharbour-a.jpg",
+          "frames/vacation-europe/malta-grandharbour-b.jpg"
+        ]
+      },
+      "validation": {
+        "checked_at": "2026-09-18T16:59:22+00:00",
+        "is_live": true,
+        "playable": true,
+        "method": "yt-dlp metadata live_status=is_live, playable_in_embed=true; ffmpeg decoded the live stream",
+        "resolution": [
+          1920,
+          1080
+        ],
+        "motion_observed": true,
+        "live_since": "2026-09-17T13:49:05+00:00",
+        "motion_metrics": {
+          "mean_abs_diff": 30.34,
+          "changed_px_pct": 56.65,
+          "brightness": 127.3
+        },
+        "limitations": "short evening sample (Europe, about 17-20 UTC); activity varies"
+      },
+      "provenance": {
+        "research_file": "vacation-europe.json",
+        "source": {
+          "channel_url": "https://www.youtube.com/channel/UCOaftBNU_PWVFLkR2LY3LPg",
+          "found_via": "YouTube live search (scout.py search)"
+        }
+      },
+      "check": {
+        "verdict": "live",
+        "checked": "2026-09-18T16:59:22+00:00",
+        "method": "yt-dlp metadata live_status=is_live, playable_in_embed=true; ffmpeg decoded the live stream",
+        "embed": "verified",
+        "embed_reason": "Positive source playback evidence; see validation."
+      },
+      "audio": "unknown",
+      "ads": "unknown",
+      "video_id": "1o23sdh8J9U"
+    },
+    {
+      "name": "Licheń Basilica high altar",
+      "location": "Licheń Stary, Greater Poland, Poland",
+      "country": "Poland",
+      "category": "sacred",
+      "provider": "Sanktuarium Matki Bożej Licheńskiej",
+      "kind": "youtube",
+      "url": "https://www.youtube.com/embed/6UEllYbAZOg?autoplay=1&mute=1",
+      "watch_url": "https://www.youtube.com/watch?v=6UEllYbAZOg",
+      "requires_login": false,
+      "last_verified": "2026-11-16",
+      "notes": "Small channel logo top left. Between masses the altar is lit but quiet. Re-pinned 2026-11-16: the stream this record was added with (DyRLA_JWqoo) had ended, and the operator had restarted on a new id. Found on Sanktuarium Matki Bożej Licheńskiej (UC0Q-gl8ZPmPW1k6xpIeU_4A) as \"Sanktuarium Matki Bożej Licheńskiej – transmisja na żywo\". The sanctuary's own main transmission. Its title is generic, so it does not confirm the high altar angle; the place is right either way.",
+      "timezone": "Europe/Warsaw",
+      "tags": [
+        "lichen stary",
+        "greater poland",
+        "poland",
+        "sacred",
+        "religion",
+        "pilgrimage",
+        "holy",
+        "worship",
+        "lichen",
+        "indoor",
+        "basilica",
+        "church",
+        "mass",
+        "priests",
+        "people",
+        "quality-3",
+        "score-3",
+        "part-time"
+      ],
+      "curated_tags": [
+        "lichen",
+        "licheń",
+        "greater poland",
+        "poland",
+        "indoor",
+        "basilica",
+        "church",
+        "mass",
+        "sacred",
+        "priests",
+        "people",
+        "quality-3",
+        "score-3",
+        "licheń stary"
+      ],
+      "scene_set": "claude-scout-2026-09-18",
+      "in_sets": [
+        "claude-scout-2026-09-18"
+      ],
+      "pose": {
+        "lat": 52.3236,
+        "lng": 18.3578,
+        "alt_m": null,
+        "heading": null,
+        "pitch": null,
+        "fov": null,
+        "aligned": false,
+        "confidence": "low",
+        "basis": "Named landmark: Basilica of Our Lady of Licheń (map estimate)",
+        "position_kind": "approximate-site"
+      },
+      "quality_score": 3,
+      "quality_reason": "Fixed view of the gold high altar of Poland's largest church during the 19:00 evening mass: seven priests in red and gold vestments at the altar and an altar server at left; only small gestures between frames.",
+      "quality_evidence": {
+        "method": "Visual inspection of two decoded live frames 5 s apart (paired_frames)",
+        "visual_inspected": true,
+        "checked_at": "2026-09-18T17:33:08+00:00",
+        "motion_observed": true,
+        "evidence_paths": [
+          "frames/indoor-activity/lichen-a.jpg",
+          "frames/indoor-activity/lichen-b.jpg"
+        ]
+      },
+      "validation": {
+        "checked_at": "2026-09-18T17:33:08+00:00",
+        "is_live": true,
+        "playable": true,
+        "method": "yt-dlp metadata live_status=is_live, playable_in_embed=true; ffmpeg decoded the live stream",
+        "resolution": [
+          1920,
+          1080
+        ],
+        "motion_observed": true,
+        "live_since": "2026-08-28T23:57:47+00:00",
+        "limitations": "short daytime sample; activity varies"
+      },
+      "provenance": {
+        "research_file": "indoor-activity.json",
+        "source": {
+          "channel_url": "https://www.youtube.com/channel/UC0Q-gl8ZPmPW1k6xpIeU_4A",
+          "found_via": "WebSearch for Polish sanctuary streams, then scout yt"
+        }
+      },
+      "check": {
+        "verdict": "live",
+        "checked": "2026-09-18T17:33:08+00:00",
+        "method": "yt-dlp metadata live_status=is_live, playable_in_embed=true; ffmpeg decoded the live stream",
+        "embed": "verified",
+        "embed_reason": "Positive source playback evidence; see validation."
+      },
+      "audio": "unknown",
+      "ads": "unknown",
+      "video_id": "6UEllYbAZOg",
+      "active_local_hours_hint": "masses 07:30, 12:00, 19:00 weekdays; 07:30-18:00 several on Sundays (from the stream's own schedule)",
+      "live_window": {
+        "from": "07:00",
+        "to": "20:00"
+      }
+    },
+    {
+      "name": "Kusatsu Onsen Yubatake hot-spring field",
+      "location": "Kusatsu, Agatsuma, Gunma, Japan",
+      "country": "Japan",
+      "category": "resort",
+      "provider": "Kusatsu Town (official channel)",
+      "kind": "youtube",
+      "url": "https://www.youtube.com/embed/caahuMvVxsw?autoplay=1&mute=1",
+      "watch_url": "https://www.youtube.com/watch?v=caahuMvVxsw",
+      "requires_login": false,
+      "last_verified": "2026-11-16",
+      "notes": "Japan's best-known hot-spring town center. Crowds by day and evening; steam moves all night. Re-pinned 2026-11-16: the stream this record was added with (GrEEoEmmrKs) had ended, and the operator had restarted on a new id. Found on 草津町公式YouTubeチャンネル2 as \"「LIVECAMERA」 草津温泉「湯畑」湯滝前\". Same view, same place; the dive point is unchanged.",
+      "timezone": "Asia/Tokyo",
+      "tags": [
+        "kusatsu",
+        "agatsuma",
+        "gunma",
+        "japan",
+        "jp",
+        "jpn",
+        "asia",
+        "east asia",
+        "resort",
+        "kusatsu onsen",
+        "yubatake",
+        "onsen",
+        "hot spring",
+        "outdoor",
+        "steam",
+        "town square",
+        "night",
+        "vacation",
+        "quality-3",
+        "score-3"
+      ],
+      "curated_tags": [
+        "kusatsu",
+        "kusatsu onsen",
+        "yubatake",
+        "gunma",
+        "japan",
+        "onsen",
+        "hot spring",
+        "outdoor",
+        "steam",
+        "town square",
+        "night",
+        "vacation",
+        "quality-3",
+        "score-3",
+        "agatsuma",
+        "resort"
+      ],
+      "scene_set": "claude-scout-2026-09-18",
+      "in_sets": [
+        "claude-scout-2026-09-18"
+      ],
+      "pose": {
+        "lat": 36.62294,
+        "lng": 138.59673,
+        "alt_m": null,
+        "heading": null,
+        "pitch": null,
+        "fov": null,
+        "aligned": false,
+        "confidence": "low",
+        "basis": "Town's official camera titled Yubatake Yutaki-mae; OpenStreetMap geocode of Yubatake",
+        "position_kind": "approximate-site"
+      },
+      "quality_score": 3,
+      "quality_reason": "Lit Yubatake at 01:59 local: steam pours off the hot-spring channels and drifts differently in each frame, lanterns and ryokan fronts lit around it. No people at this hour. Small weather box lower right.",
+      "quality_evidence": {
+        "method": "Visual inspection of two decoded live frames 5 s apart (paired_frames)",
+        "visual_inspected": true,
+        "checked_at": "2026-09-18T17:00:57+00:00",
+        "motion_observed": true,
+        "evidence_paths": [
+          "frames/vacation-asia-pacific/kusatsu-yubatake-yutaki-a.jpg",
+          "frames/vacation-asia-pacific/kusatsu-yubatake-yutaki-b.jpg"
+        ]
+      },
+      "validation": {
+        "checked_at": "2026-09-18T17:00:57+00:00",
+        "is_live": true,
+        "playable": true,
+        "method": "yt-dlp metadata live_status=is_live, playable_in_embed=true; ffmpeg decoded the live stream",
+        "resolution": [
+          1920,
+          1080
+        ],
+        "motion_observed": true,
+        "live_since": "2023-01-12T02:02:58+00:00",
+        "limitations": "short sample at local night; activity varies"
+      },
+      "provenance": {
+        "research_file": "vacation-asia-pacific.json",
+        "source": {
+          "channel_url": "https://www.youtube.com/channel/UCbn5eHDjwmPC2K9RG8P0i_A",
+          "found_via": "scout.py search '草津温泉 ライブカメラ'"
+        }
+      },
+      "check": {
+        "verdict": "live",
+        "checked": "2026-09-18T17:00:57+00:00",
+        "method": "yt-dlp metadata live_status=is_live, playable_in_embed=true; ffmpeg decoded the live stream",
+        "embed": "verified",
+        "embed_reason": "Positive source playback evidence; see validation."
+      },
+      "audio": "unknown",
+      "ads": "unknown",
+      "video_id": "caahuMvVxsw",
+      "active_local_hours_hint": "crowded with visitors 09:00-22:00 local"
+    },
+    {
+      "name": "Mierlo-Hout level crossing",
+      "location": "Helmond, North Brabant",
+      "country": "Netherlands",
+      "category": "railway",
+      "provider": "RailCam Netherlands (YouTube)",
+      "kind": "youtube",
+      "video_id": "TOlyziCWZwY",
+      "url": "https://www.youtube.com/embed/TOlyziCWZwY?autoplay=1&mute=1",
+      "watch_url": "https://www.youtube.com/watch?v=TOlyziCWZwY",
+      "requires_login": false,
+      "last_verified": "2026-11-16",
+      "notes": "Trackside view of a Dutch level crossing with the barriers, waiting cars and cyclists. Intercity and stopping trains pass every few minutes. Re-pinned 2026-11-16: the stream this record was added with (0zh0kWfRKlQ) had ended, and the operator had restarted on a new id. Found on RailCam Netherlands (UC2qwiv3R_Dqrp15vh7cpH9Q) as \"Livestream RailCam Netherlands\". Same view, same place; the dive point is unchanged.",
+      "lat": 51.48,
+      "lng": 5.63,
+      "timezone": "Europe/Amsterdam",
+      "always_on": true,
+      "pose": {
+        "lat": 51.48085,
+        "lng": 5.6213,
+        "alt_m": 6,
+        "heading": 250,
+        "pitch": -6,
+        "fov": 65,
+        "aligned": false,
+        "view": "landscape",
+        "confidence": "medium",
+        "basis": "Ground 19 m of flat Brabant, level for 600 m along the heading, so a 6 m trackside pole frames the crossing. The old two-decimal position was about 1.1 km east.",
+        "source": "The operator is a railway camera at Mierlo-Hout, Helmond, watching the Hoofdstraat crossing beside Helmond 't Hout station on the Eindhoven to Venlo line; trackside to a few tens of metres.",
+        "position_checked": "terrain and bearings, 2026-09-18"
+      },
+      "audio": "unknown",
+      "audio_basis": "not established by listening; plays when sound is on, Shift+M silences it if it turns out to be music",
+      "tags": [
+        "helmond",
+        "north brabant",
+        "netherlands",
+        "nl",
+        "nld",
+        "holland",
+        "europe",
+        "railway",
+        "trains",
+        "rail",
+        "trainspotting",
+        "railfan",
+        "level crossing",
+        "dutch rail",
+        "night lights",
+        "sunset-facing",
+        "sunset",
+        "always-on"
+      ],
+      "ads": "unknown"
+    },
+    {
+      "name": "Rynek market square at dusk, Kazimierz Dolny",
+      "location": "Kazimierz Dolny, Lublin Voivodeship, Poland",
+      "country": "Poland",
+      "category": "square",
+      "provider": "Kazimierz Dolny town hall",
+      "kind": "youtube",
+      "url": "https://www.youtube.com/embed/4BQw6n_WVGY?autoplay=1&mute=1",
+      "watch_url": "https://www.youtube.com/watch?v=4BQw6n_WVGY",
+      "requires_login": false,
+      "last_verified": "2026-11-16",
+      "notes": "Run by the town hall. Title text across the top and a web address along the bottom. Re-pinned 2026-11-16: the stream this record was added with (6EwviT2usa8) had ended, and the operator had restarted on a new id. Found on Kazimierz Dolny (@KazimierzDolnyUM) as \"Kamera Urzędu Miasta w Kazimierzu Dolnym - Rynek\". Same view, same place; the dive point is unchanged.",
+      "timezone": "Europe/Warsaw",
+      "tags": [
+        "kazimierz dolny",
+        "lublin voivodeship",
+        "poland",
+        "square",
+        "plaza",
+        "city",
+        "urban",
+        "people",
+        "polska",
+        "lublin",
+        "rynek",
+        "market square",
+        "outdoor",
+        "old town",
+        "restaurant terraces",
+        "pedestrians",
+        "tour group",
+        "evening",
+        "vacation",
+        "quality-4",
+        "score-4",
+        "busy",
+        "night lights"
+      ],
+      "curated_tags": [
+        "kazimierz dolny",
+        "poland",
+        "polska",
+        "lublin",
+        "rynek",
+        "market square",
+        "outdoor",
+        "square",
+        "old town",
+        "restaurant terraces",
+        "people",
+        "pedestrians",
+        "tour group",
+        "evening",
+        "vacation",
+        "quality-4",
+        "score-4",
+        "lublin voivodeship"
+      ],
+      "scene_set": "claude-scout-2026-09-18",
+      "in_sets": [
+        "claude-scout-2026-09-18"
+      ],
+      "pose": {
+        "lat": 51.3223,
+        "lng": 21.948,
+        "alt_m": null,
+        "heading": null,
+        "pitch": null,
+        "fov": null,
+        "aligned": false,
+        "confidence": "low",
+        "basis": "Overlay and title name the town hall camera on the Rynek; map check of the square",
+        "position_kind": "approximate-site"
+      },
+      "quality_score": 4,
+      "quality_reason": "Blue-hour view over lit restaurant umbrellas to the Rynek and its white townhouses. A tour group stands in the square while other people walk along the terraces and across the cobbles between frames.",
+      "quality_evidence": {
+        "method": "Visual inspection of two decoded live frames 5 s apart (paired_frames)",
+        "visual_inspected": true,
+        "checked_at": "2026-09-18T17:23:02+00:00",
+        "motion_observed": true,
+        "evidence_paths": [
+          "frames/streets-worldwide/kazimierz-dolny-a.jpg",
+          "frames/streets-worldwide/kazimierz-dolny-b.jpg"
+        ]
+      },
+      "validation": {
+        "checked_at": "2026-09-18T17:23:02+00:00",
+        "is_live": true,
+        "playable": true,
+        "method": "yt-dlp metadata live_status=is_live, playable_in_embed=true; ffmpeg decoded the live stream",
+        "resolution": [
+          1920,
+          1080
+        ],
+        "motion_observed": true,
+        "live_since": "2026-07-04T11:31:45+00:00",
+        "limitations": "short sample; activity varies by hour"
+      },
+      "provenance": {
+        "research_file": "streets-worldwide.json",
+        "source": {
+          "channel_url": "https://www.youtube.com/channel/UC-uKmbYCee1FrwyNJ5MR-0A",
+          "found_via": "search: kamera na żywo rynek miasta"
+        }
+      },
+      "check": {
+        "verdict": "live",
+        "checked": "2026-09-18T17:23:02+00:00",
+        "method": "yt-dlp metadata live_status=is_live, playable_in_embed=true; ffmpeg decoded the live stream",
+        "embed": "verified",
+        "embed_reason": "Positive source playback evidence; see validation."
+      },
+      "audio": "unknown",
+      "ads": "unknown",
+      "video_id": "4BQw6n_WVGY"
+    },
+    {
+      "name": "Historic Market Square Naumburg",
+      "location": "Naumburg an der Saale, Saxony-Anhalt, Germany",
+      "country": "Germany",
+      "category": "city",
+      "provider": "YouTube",
+      "kind": "youtube",
+      "url": "https://www.youtube.com/embed/WoybvWtR4h0?autoplay=1&mute=1",
+      "watch_url": "https://www.youtube.com/watch?v=WoybvWtR4h0",
+      "requires_login": false,
+      "last_verified": "2026-11-16",
+      "notes": "Re-pinned 2026-11-16: the stream this record was added with (r-aFbbMHnhI) had ended, and the operator had restarted on a new id. Found on Stadt Naumburg (@stadtnaumburg7037) as \"Webcam Naumburg (Saale) - Marktplatz\". Same view, same place; the dive point is unchanged.",
+      "timezone": "Europe/Berlin",
+      "tags": [
+        "naumburg an der saale",
+        "saxony-anhalt",
+        "germany",
+        "de",
+        "deutschland",
+        "city",
+        "market",
+        "square",
+        "architecture",
+        "pedestrians",
+        "traffic",
+        "outdoor",
+        "town square",
+        "market square",
+        "people watching",
+        "quality-3",
+        "score-3"
+      ],
+      "curated_tags": [
+        "naumburg an der saale",
+        "saxony-anhalt",
+        "germany",
+        "de",
+        "deutschland",
+        "city",
+        "market",
+        "square",
+        "architecture",
+        "pedestrians",
+        "traffic",
+        "outdoor",
+        "town square",
+        "market square",
+        "people watching",
+        "quality-3",
+        "score-3"
+      ],
+      "scene_set": "expansion500",
+      "in_sets": [
+        "expansion500"
+      ],
+      "pose": {
+        "lat": 51.15292,
+        "lng": 11.81015,
+        "alt_m": null,
+        "heading": null,
+        "pitch": null,
+        "fov": null,
+        "aligned": false,
+        "confidence": "low",
+        "basis": "medium",
+        "position_kind": "approximate-site"
+      },
+      "quality_score": 3,
+      "quality_reason": "Attractive historic facades and market square with some people and traffic; soft 360p inspected playback.",
+      "quality_evidence": {
+        "method": "Actual public YouTube embed playback inspected visually in Chrome; decoded video state read from player DOM.",
+        "checked_at": "2026-09-18T15:27:32.688Z",
+        "source": "https://www.youtube.com/watch?v=r-aFbbMHnhI",
+        "evidence_paths": [
+          "research/expansion500/europe-north/inspection-evidence.json"
+        ],
+        "observed_player_title": "Webcam Naumburg (Saale) - Marktplatz - YouTube",
+        "sample_playback_seconds": 46808.489308
+      },
+      "validation": {
+        "checked_at": "2026-09-18T15:27:32.688Z",
+        "is_live": true,
+        "playable": true,
+        "method": "Actual public YouTube embed playback inspected visually in Chrome; decoded video state read from player DOM.",
+        "resolution": "640x360",
+        "motion_observed": true,
+        "limitations": [
+          "Point-in-time check; public broadcasts can go offline or restart under a new video ID.",
+          "Muted playback; audio and rights for redistribution were not assessed.",
+          "Inspection resolution is sample playback, not a claim about maximum source quality."
+        ]
+      },
+      "provenance": {
+        "research_file": "europe-north.json",
+        "source": {
+          "discovery_url": "https://tw.live/en/cam/naumburgmarktgermany/",
+          "map_data_url": "https://tw.live/en/map-data.php",
+          "publisher_video_url": "https://www.youtube.com/watch?v=r-aFbbMHnhI"
+        }
+      },
+      "check": {
+        "verdict": "live",
+        "checked": "2026-09-18T15:27:32.688Z",
+        "method": "Actual public YouTube embed playback inspected visually in Chrome; decoded video state read from player DOM.",
+        "embed": "verified",
+        "embed_reason": "Positive source playback evidence; see validation."
+      },
+      "audio": "unknown",
+      "ads": "unknown",
+      "video_id": "WoybvWtR4h0"
+    },
+    {
+      "name": "Canal do Porto de Santos",
+      "location": "Santos, São Paulo",
+      "country": "Brazil",
+      "category": "city",
+      "provider": "Praticagem de São Paulo - Canal Oficial",
+      "kind": "youtube",
+      "url": "https://www.youtube.com/embed/fGYrAZAdHBU?autoplay=1&mute=1",
+      "watch_url": "https://www.youtube.com/watch?v=fGYrAZAdHBU",
+      "requires_login": false,
+      "last_verified": "2026-11-16",
+      "notes": "Rated for the actual inspected view; original YouTube player preserves operator attribution. Re-pinned 2026-11-16: the stream this record was added with (5BxqzvR6TgM) had ended, and the operator had restarted on a new id. Found on Praticagem de São Paulo - Canal Oficial (@santospilotsoficial) as \"Porto ao Vivo - Entrada no Canal do Porto de Santos\". Same view, same place; the dive point is unchanged.",
+      "timezone": "America/Sao_Paulo",
+      "tags": [
+        "canal do porto de santos",
+        "santos, sao paulo",
+        "brazil",
+        "sao paulo",
+        "city",
+        "outdoor",
+        "live webcam",
+        "santos",
+        "harbor",
+        "brasil",
+        "south america",
+        "latin america",
+        "quality-4",
+        "score-4",
+        "são paulo"
+      ],
+      "curated_tags": [
+        "canal do porto de santos",
+        "santos, sao paulo",
+        "brazil",
+        "sao paulo",
+        "city",
+        "outdoor",
+        "live webcam",
+        "santos",
+        "harbor",
+        "brasil",
+        "south america",
+        "latin america",
+        "quality-4",
+        "score-4",
+        "são paulo"
+      ],
+      "scene_set": "expansion500",
+      "in_sets": [
+        "expansion500"
+      ],
+      "pose": {
+        "lat": -23.99472,
+        "lng": -46.30696,
+        "alt_m": null,
+        "heading": null,
+        "pitch": null,
+        "fov": null,
+        "aligned": false,
+        "confidence": "low",
+        "basis": "Approximate discovery-map point; operator video title/description used to cross-check place. Not survey-verified.",
+        "position_kind": "approximate-site"
+      },
+      "quality_score": 4,
+      "quality_reason": "Clear harbor channel with small vessels leaving visible changing wakes, shoreline buildings and road.",
+      "quality_evidence": {
+        "method": "Human visual inspection of ffmpeg-decoded video frame pair, roughly one second apart",
+        "checked_at": "2026-09-18T15:11:29.479720+00:00",
+        "frames": [
+          "research/expansion500/south-world/frames/5BxqzvR6TgM-01.jpg",
+          "research/expansion500/south-world/frames/5BxqzvR6TgM-02.jpg"
+        ],
+        "metadata": "research/expansion500/south-world/checks/5BxqzvR6TgM.json"
+      },
+      "validation": {
+        "checked_at": "2026-09-18T15:11:29.479720+00:00",
+        "is_live": true,
+        "playable": true,
+        "method": "YouTube extractor live_status/is_live/playable_in_embed metadata plus real HLS frame decoding and visual inspection",
+        "resolution": [
+          1920,
+          1080
+        ],
+        "decoded_resolution": [
+          1280,
+          720
+        ],
+        "motion_observed": true,
+        "limitations": "Brief inspection; activity varies by time, weather and operator camera direction. No guarantee of future uptime. Source coordinates approximate, not verified camera-mount pose."
+      },
+      "provenance": {
+        "research_file": "south-world.json",
+        "source": [
+          {
+            "url": "https://tw.live/en/map-data.php",
+            "role": "discovery name and approximate coordinates",
+            "id": "brportosantoscanal"
+          },
+          {
+            "url": "https://www.youtube.com/watch?v=5BxqzvR6TgM",
+            "role": "operator live stream, title and description",
+            "channel": "Praticagem de São Paulo - Canal Oficial"
+          }
+        ]
+      },
+      "check": {
+        "verdict": "live",
+        "checked": "2026-09-18T15:11:29.479720+00:00",
+        "method": "YouTube extractor live_status/is_live/playable_in_embed metadata plus real HLS frame decoding and visual inspection",
+        "embed": "verified",
+        "embed_reason": "Positive source playback evidence; see validation."
+      },
+      "audio": "unknown",
+      "ads": "unknown",
+      "video_id": "fGYrAZAdHBU"
+    },
+    {
+      "name": "Chicago River, Wrigley Building and DuSable Bridge",
+      "location": "Chicago, Illinois",
+      "country": "United States",
+      "category": "bridge",
+      "provider": "ChicagoLoopLive",
+      "kind": "youtube",
+      "url": "https://www.youtube.com/embed/vodPF-0McTQ?autoplay=1&mute=1",
+      "watch_url": "https://www.youtube.com/watch?v=vodPF-0McTQ",
+      "requires_login": false,
+      "last_verified": "2026-11-16",
+      "notes": "Public operator stream. Current liveness, playback and composition checked from decoded live frames. Coordinates are approximate discovery-source positions; camera mounting point is not verified. Re-pinned 2026-11-16: the stream this record was added with (Dq4ih_eeQ9w) had ended, and the operator had restarted on a new id. Found on ChicagoLoopLive as \"24/7 Downtown Chicago Live Stream | Relaxing music & City View\". Same view, same place; the dive point is unchanged.",
+      "timezone": "America/Chicago",
+      "tags": [
+        "chicago",
+        "illinois",
+        "united states",
+        "usa",
+        "north america",
+        "outdoor",
+        "bridge",
+        "transport",
+        "traffic",
+        "water",
+        "il",
+        "chicago river, wrigley building and dusable bridge",
+        "quality-4",
+        "score-4"
+      ],
+      "curated_tags": [
+        "chicago",
+        "illinois",
+        "united states",
+        "usa",
+        "north america",
+        "outdoor",
+        "bridge",
+        "transport",
+        "traffic",
+        "water",
+        "il",
+        "chicago river, wrigley building and dusable bridge",
+        "quality-4",
+        "score-4"
+      ],
+      "scene_set": "expansion500",
+      "in_sets": [
+        "expansion500"
+      ],
+      "pose": {
+        "lat": 41.88906,
+        "lng": -87.6266,
+        "alt_m": null,
+        "heading": null,
+        "pitch": null,
+        "fov": null,
+        "aligned": false,
+        "confidence": "low",
+        "basis": "low — approximate site position, not verified camera mount",
+        "position_kind": "approximate-site"
+      },
+      "quality_score": 4,
+      "quality_reason": "Iconic Chicago river and bridge with visible urban traffic; camera pans across architecture.",
+      "quality_evidence": {
+        "method": "Human inspection of two decoded live HLS frames, four seconds apart, at 640px width; contact sheets and full frames reviewed",
+        "inspected_at": "2026-09-18T15:11:01.880870+00:00",
+        "source": "https://www.youtube.com/watch?v=Dq4ih_eeQ9w",
+        "paths": [
+          "research/expansion500/us-east/Dq4ih_eeQ9w-frame-1.jpg",
+          "research/expansion500/us-east/Dq4ih_eeQ9w-frame-2.jpg"
+        ]
+      },
+      "validation": {
+        "checked_at": "2026-09-18T15:11:01.880870+00:00",
+        "is_live": true,
+        "playable": true,
+        "method": "YouTube current player metadata via web_embedded/mweb and ffmpeg decode of live HLS manifest, not HTTP status alone",
+        "resolution": [
+          854,
+          480
+        ],
+        "motion_observed": true,
+        "limitations": "Brief daytime sample; activity can vary and nights may be quiet. Inspection resolution is the selected HLS variant, not a claim of maximum source quality.",
+        "embeddable": true
+      },
+      "provenance": {
+        "research_file": "us-east.json",
+        "source": {
+          "discovery": "cams-michigan.json",
+          "operator_channel": "https://www.youtube.com/channel/UCj0wW84FJvt3i_gAI8RdRkg",
+          "operator_title": "24/7 Downtown Chicago Live Stream | Chill music & Relaxing City View 2026-09-18 11:11",
+          "operator_page": "https://www.youtube.com/@ChicagoLoopLive"
+        }
+      },
+      "check": {
+        "verdict": "live",
+        "checked": "2026-09-18T15:11:01.880870+00:00",
+        "method": "YouTube current player metadata via web_embedded/mweb and ffmpeg decode of live HLS manifest, not HTTP status alone",
+        "embed": "verified",
+        "embed_reason": "Positive source playback evidence; see validation."
+      },
+      "audio": "unknown",
+      "ads": "unknown",
+      "video_id": "vodPF-0McTQ"
+    },
+    {
+      "name": "The Thames and the City from Bankside",
+      "location": "Bankside, Southwark, London, England",
+      "country": "United Kingdom",
+      "category": "river",
+      "provider": "Beach Life Cams (YouTube)",
+      "kind": "youtube",
+      "video_id": "MXmzsjABC-U",
+      "url": "https://www.youtube.com/embed/MXmzsjABC-U?autoplay=1&mute=1",
+      "watch_url": "https://www.youtube.com/watch?v=MXmzsjABC-U",
+      "requires_login": false,
+      "last_verified": "2026-11-16",
+      "notes": "4K view from the Golden Hinde's dock across the Thames to London Bridge and the City skyline. States 24/7 and lights up well after dark. Re-pinned 2026-11-16: the stream this record was added with (AoWlXqIXNZ8) had ended, and the operator had restarted on a new id. Found on Beach Life Cams (@BeachLifeCams) as \"London Webcam LIVE 4K | London Bridge & River Thames | Golden Hinde\". The Golden Hinde is moored at Bankside, which is where this camera was, but the title says London Bridge, so the exact angle is unconfirmed.",
+      "lat": 51.5075,
+      "lng": -0.0905,
+      "timezone": "Europe/London",
+      "always_on": true,
+      "pose": {
+        "lat": 51.50705,
+        "lng": -0.09025,
+        "alt_m": 20,
+        "heading": 45,
+        "pitch": -3,
+        "fov": 65,
+        "aligned": false,
+        "view": "landscape",
+        "confidence": "medium",
+        "basis": "The old point read -1.4 m, mid-river. New ground 1.5 m, and the heading crosses water for 200 m then climbs the north bank. London Bridge bears 61 and 22 Bishopsgate 32, so a 65 degree frame holds both.",
+        "source": "No mount is published; the position is the first solid ground behind the Golden Hinde's berth at St Mary Overie Dock, on Clink Street.",
+        "position_checked": "terrain and bearings, 2026-09-18"
+      },
+      "audio": "unknown",
+      "audio_basis": "not established by listening; plays when sound is on, Shift+M silences it if it turns out to be music",
+      "tags": [
+        "bankside",
+        "southwark",
+        "london",
+        "england",
+        "united kingdom",
+        "uk",
+        "gb",
+        "britain",
+        "great britain",
+        "europe",
+        "river",
+        "water",
+        "waterfront",
+        "thames",
+        "st pauls",
+        "shard",
+        "bridges",
+        "night lights",
+        "always-on",
+        "sunrise-facing",
+        "sunrise"
+      ],
+      "ads": "yes"
+    },
+    {
+      "name": "Shantikunj ashram, Haridwar",
+      "location": "Gayatri Teerth Shantikunj, Haridwar, Uttarakhand",
+      "country": "India",
+      "category": "temple",
+      "provider": "All World Gayatri Pariwar",
+      "kind": "youtube",
+      "video_id": "m-3Endg-Ea4",
+      "url": "https://www.youtube.com/embed/m-3Endg-Ea4?autoplay=1&mute=1",
+      "watch_url": "https://www.youtube.com/watch?v=m-3Endg-Ea4",
+      "requires_login": false,
+      "last_verified": "2026-11-16",
+      "notes": "The ashram's own 24-hour feed on its official channel. The description invites viewers to join Shantikunj's daily routine live, which points at the programme rather than one fixed idol, but nothing on the page settles how much of the frame is people. If it turns out to be a locked-off shrine shot, thumbs down will say so. Re-pinned 2026-11-16: the stream this record was added with (Bi9cRN61nOY) had ended, and the operator had restarted on a new id. Found on Shantikunjvideo-AWGP (@shantikunjvideo) as \"LIVE Darshan गायत्री तीर्थ शांतिकुंज हरिद्वार का 24 घंटे लाइव दर्शन | Shantikunj Haridwar 24 hours\". Same view, same place; the dive point is unchanged.",
+      "audio": "ambience",
+      "audio_basis": "The site's own chanting and aarti, which is the place's real sound rather than an added music overlay, so it plays when the speaker is on. Inferred from the darshan format and the Music genre field, not from listening.",
+      "ads": "unknown",
+      "always_on": true,
+      "timezone": "Asia/Kolkata",
+      "pose": {
+        "lat": 29.99142,
+        "lng": 78.19142,
+        "alt_m": 20,
+        "heading": 180,
+        "pitch": -10,
+        "fov": 70,
+        "aligned": false,
+        "view": "landscape",
+        "confidence": "low",
+        "basis": "Camera position from a named source (see position_source); heading, pitch and field of view are first guesses, not measured from the frame.",
+        "position_kind": "approximate-site",
+        "position_source": "Overture Maps places 2026-08-19.0, Shantikunj, queried 2026-09-21"
+      },
+      "tags": [
+        "shantikunj",
+        "gayatri teerth",
+        "haridwar",
+        "uttarakhand",
+        "india",
+        "in",
+        "ind",
+        "asia",
+        "south asia",
+        "temple",
+        "ashram",
+        "sacred",
+        "pilgrimage",
+        "darshan",
+        "people",
+        "ganges",
+        "always-on",
+        "has-sound"
+      ],
+      "scene_set": "claude-scout-2026-10-15",
+      "in_sets": [
+        "claude-scout-2026-10-15"
+      ],
+      "check": {
+        "verdict": "live",
+        "checked": "2026-10-15",
+        "reason": "live at check time",
+        "method": "youtube watch page metadata: isLiveBroadcast True, a startDate, no endDate in the past, 200, US in regionsAllowed",
+        "embed": "ok",
+        "embed_reason": "embed page returns the real video title, no noindex, plays without login"
+      }
+    },
+    {
+      "name": "Philippine Coral Reef, San Francisco",
+      "location": "San Francisco, California",
+      "country": "United States",
+      "category": "aquarium",
+      "provider": "California Academy of Sciences, Steinhart Aquarium",
+      "kind": "youtube",
+      "video_id": "je7nCiZhEJE",
+      "url": "https://www.youtube.com/embed/je7nCiZhEJE?autoplay=1&mute=1",
+      "watch_url": "https://www.youtube.com/watch?v=je7nCiZhEJE",
+      "requires_login": false,
+      "last_verified": "2026-11-16",
+      "notes": "Philippine Coral Reef, San Francisco in San Francisco, California. Animals in a named habitat; presence and activity vary. Re-pinned 2026-11-16: the stream this record was added with (99aULx3GORo) had ended, and the operator had restarted on a new id. Found on California Academy of Sciences (@calacademy) as \"Live Coral Reef Cam | California Academy of Sciences\". Same view, same place; the dive point is unchanged.",
+      "scene_set": "camera-expansion-2026-09-18",
+      "pose": {
+        "lat": 37.7699,
+        "lng": -122.4661,
+        "alt_m": null,
+        "heading": null,
+        "pitch": null,
+        "fov": null,
+        "aligned": false,
+        "confidence": "low",
+        "basis": "Recovered venue/location estimate. Camera mount and heading/pitch/FOV unverified; orientation values are provisional defaults.",
+        "position_kind": "approximate-site",
+        "orientation_status": "unknown"
+      },
+      "timezone": "America/Los_Angeles",
+      "in_sets": [
+        "camera-expansion-2026-09-18"
+      ],
+      "check": {
+        "verdict": "live",
+        "checked": "2026-09-18T13:56:53.1737879Z",
+        "method": "fresh-youtube-metadata",
+        "reason": "Live broadcast evidence; present scene activity is not guaranteed.",
+        "embed": "metadata-ok",
+        "embed_reason": "Positive YouTube embed metadata; device playback untested.",
+        "in_app_playback_verified": false,
+        "research_ref": "research/camera-expansion-plan.json#99aULx3GORo"
+      },
+      "audio": "unknown",
+      "audio_basis": "Not verified by listening.",
+      "tags": [
+        "aquarium"
+      ],
+      "ads": "unknown",
+      "active_local_hours_hint": "09:30-17:00",
+      "night_hint": false,
+      "replay_risk": "No replay noted in prior research; fresh content not visually verified."
+    },
+    {
+      "name": "Sea Eagle Nest",
+      "location": "Sydney, Australia",
+      "country": "Australia",
+      "category": "wildlife",
+      "provider": "Sea-EagleCAM (BirdLife Australia Discovery Centre)",
+      "kind": "youtube",
+      "video_id": "LWYBNX02Q-A",
+      "url": "https://www.youtube.com/embed/LWYBNX02Q-A?autoplay=1&mute=1",
+      "watch_url": "https://www.youtube.com/watch?v=LWYBNX02Q-A",
+      "requires_login": false,
+      "last_verified": "2026-11-16",
+      "notes": "Sea Eagle Nest in Sydney, Australia. Animals in a named habitat; presence and activity vary. Re-pinned 2026-11-16: the stream this record was added with (Gngxj2FpID0) had ended, and the operator had restarted on a new id. Found on Sea-EagleCAM4 (@SeaEagleCAM4) as \"Sea-EagleCAM4 Live Stream\". Same view, same place; the dive point is unchanged.",
+      "scene_set": "camera-expansion-2026-09-18",
+      "pose": {
+        "lat": -33.83,
+        "lng": 151.05,
+        "alt_m": null,
+        "heading": null,
+        "pitch": null,
+        "fov": null,
+        "aligned": false,
+        "confidence": "low",
+        "basis": "Recovered venue/location estimate. Camera mount and heading/pitch/FOV unverified; orientation values are provisional defaults.",
+        "position_kind": "approximate-site",
+        "orientation_status": "unknown"
+      },
+      "timezone": "Australia/Sydney",
+      "in_sets": [
+        "camera-expansion-2026-09-18"
+      ],
+      "check": {
+        "verdict": "live",
+        "checked": "2026-09-18T13:56:50.4256222Z",
+        "method": "fresh-youtube-metadata",
+        "reason": "Live broadcast evidence; present scene activity is not guaranteed.",
+        "embed": "metadata-ok",
+        "embed_reason": "Positive YouTube embed metadata; device playback untested.",
+        "in_app_playback_verified": false,
+        "research_ref": "research/camera-expansion-plan.json#Gngxj2FpID0"
+      },
+      "audio": "unknown",
+      "audio_basis": "Not verified by listening.",
+      "tags": [
+        "wildlife",
+        "birds"
+      ],
+      "ads": "unknown",
+      "active_local_hours_hint": "06:00-18:00 AEST for daylight; the adult stays on the nest overnight under IR",
+      "seasonal_hint": "Jun-Dec; eggs mid-winter, chicks on the nest Aug-Oct, so September is in season",
+      "night_hint": true,
+      "replay_risk": "No replay noted in prior research; fresh content not visually verified."
+    },
+    {
+      "name": "Jena Markt old town square",
+      "location": "Jena, Thuringia, Germany",
+      "country": "Germany",
+      "category": "square",
+      "provider": "Reuter-Immobilien (Sebastian Reuter)",
+      "kind": "youtube",
+      "url": "https://www.youtube.com/embed/tk74GuL9RyE?autoplay=1&mute=1",
+      "watch_url": "https://www.youtube.com/watch?v=tk74GuL9RyE",
+      "requires_login": false,
+      "last_verified": "2026-11-16",
+      "notes": "Only 640x480. A festival was on at sampling; on normal days expect a quieter market square. The on-screen clock runs one hour behind local time (likely no daylight saving), but the stream is live. Re-pinned 2026-11-16: the stream this record was added with (0UbGQoCOlsY) had ended, and the operator had restarted on a new id. Found on Sebastian Reuter (@reuter-immobilien-jena) as \"Webcam vom Jenaer Markt von REUTER-IMMOBILIEN\". Same view, same place; the dive point is unchanged.",
+      "timezone": "Europe/Berlin",
+      "tags": [
+        "jena",
+        "thuringia",
+        "germany",
+        "de",
+        "deu",
+        "europe",
+        "square",
+        "plaza",
+        "city",
+        "urban",
+        "people",
+        "markt",
+        "marktplatz",
+        "old town",
+        "outdoor",
+        "festival",
+        "stage",
+        "market stalls",
+        "crowd",
+        "pedestrians",
+        "evening",
+        "quality-4",
+        "score-4",
+        "busy",
+        "night lights"
+      ],
+      "curated_tags": [
+        "jena",
+        "thuringia",
+        "germany",
+        "markt",
+        "marktplatz",
+        "old town",
+        "outdoor",
+        "square",
+        "festival",
+        "stage",
+        "market stalls",
+        "crowd",
+        "people",
+        "pedestrians",
+        "evening",
+        "quality-4",
+        "score-4"
+      ],
+      "scene_set": "claude-scout-2026-09-18",
+      "in_sets": [
+        "claude-scout-2026-09-18"
+      ],
+      "pose": {
+        "lat": 50.929,
+        "lng": 11.589,
+        "alt_m": null,
+        "heading": null,
+        "pitch": null,
+        "fov": null,
+        "aligned": false,
+        "confidence": "low",
+        "basis": "Title and description name the Jena market square; map check",
+        "position_kind": "approximate-site"
+      },
+      "quality_score": 4,
+      "quality_reason": "Elevated view down onto the market square packed with a festival crowd around a lit stage and food stalls, with colorful gabled houses behind. The crowd shifts and people walk between the stalls between frames.",
+      "quality_evidence": {
+        "method": "Visual inspection of two decoded live frames 5 s apart (paired_frames)",
+        "visual_inspected": true,
+        "checked_at": "2026-09-18T17:29:13+00:00",
+        "motion_observed": true,
+        "evidence_paths": [
+          "frames/streets-worldwide/jena-markt-a.jpg",
+          "frames/streets-worldwide/jena-markt-b.jpg"
+        ]
+      },
+      "validation": {
+        "checked_at": "2026-09-18T17:29:13+00:00",
+        "is_live": true,
+        "playable": true,
+        "method": "yt-dlp metadata live_status=is_live, playable_in_embed=true; ffmpeg decoded the live stream",
+        "resolution": [
+          640,
+          480
+        ],
+        "motion_observed": true,
+        "live_since": "2026-08-03T09:39:48+00:00",
+        "limitations": "short sample; activity varies by hour"
+      },
+      "provenance": {
+        "research_file": "streets-worldwide.json",
+        "source": {
+          "channel_url": "https://www.youtube.com/channel/UCIPm6vzPS2KJM2mMKyvEOsA",
+          "found_via": "search: Marktplatz Webcam live"
+        }
+      },
+      "check": {
+        "verdict": "live",
+        "checked": "2026-09-18T17:29:13+00:00",
+        "method": "yt-dlp metadata live_status=is_live, playable_in_embed=true; ffmpeg decoded the live stream",
+        "embed": "verified",
+        "embed_reason": "Positive source playback evidence; see validation."
+      },
+      "audio": "unknown",
+      "ads": "unknown",
+      "video_id": "tk74GuL9RyE"
+    },
+    {
+      "name": "Brickell Avenue Bridge, Miami River",
+      "location": "Miami, Florida",
+      "country": "United States",
+      "category": "harbor",
+      "provider": "Miami River Camera",
+      "kind": "youtube",
+      "video_id": "FHzIIYECzmM",
+      "url": "https://www.youtube.com/embed/FHzIIYECzmM?autoplay=1&mute=1",
+      "watch_url": "https://www.youtube.com/watch?v=FHzIIYECzmM",
+      "requires_login": false,
+      "last_verified": "2026-11-16",
+      "notes": "Live public stream metadata verified; in-app playback, current frame motion, and camera alignment not yet visually verified. Activity varies by hour. Re-pinned 2026-11-16: the stream this record was added with (7wHgYc_kN98) had ended, and the operator had restarted on a new id. Found on Miami River Camera (@MiamiRiverCam) as \"Miami River Camera\". Same view, same place; the dive point is unchanged.",
+      "scene_set": "camera-expansion-2026-09-18",
+      "pose": {
+        "lat": 25.7722,
+        "lng": -80.1903,
+        "alt_m": null,
+        "heading": null,
+        "pitch": null,
+        "fov": null,
+        "aligned": false,
+        "confidence": "low",
+        "basis": "Inherited approximate site position from original desk-companion places.json; camera mounting point and orientation have not been verified.",
+        "position_kind": "approximate-site",
+        "orientation_status": "unknown"
+      },
+      "timezone": "America/New_York",
+      "in_sets": [
+        "camera-expansion-2026-09-18"
+      ],
+      "check": {
+        "verdict": "live",
+        "checked": "2026-09-18T14:00:18.256158+00:00",
+        "method": "metadata",
+        "reason": "Live broadcast evidence; present scene activity is not guaranteed.",
+        "embed": "metadata-ok",
+        "embed_reason": "Positive YouTube embed metadata; device playback untested.",
+        "in_app_playback_verified": false,
+        "research_ref": "research/camera-expansion-plan.json#7wHgYc_kN98"
+      },
+      "audio": "unknown",
+      "audio_basis": "Not verified by listening.",
+      "tags": [
+        "harbor",
+        "live",
+        "public-webcam",
+        "outdoor"
+      ],
+      "ads": "unknown"
+    },
+    {
+      "name": "New England Aquarium penguin colony",
+      "location": "Central Wharf, Boston, Massachusetts, USA",
+      "country": "United States",
+      "category": "aquarium",
+      "provider": "Ozolio (New England Aquarium webcam)",
+      "kind": "youtube",
+      "url": "https://www.youtube.com/embed/2IYnyd_BNX4?autoplay=1&mute=1",
+      "watch_url": "https://www.youtube.com/watch?v=2IYnyd_BNX4",
+      "requires_login": false,
+      "last_verified": "2026-11-16",
+      "notes": "Clean picture with no overlays. Re-pinned 2026-11-16: the stream this record was added with (_bdNFTNqHws) had ended, and the operator had restarted on a new id. Found on Ozolio Live (@ozolio_live) as \"Live African Penguins at New England Aquarium | Watch Penguins in Real Time\". Same view, same place; the dive point is unchanged.",
+      "timezone": "America/New_York",
+      "tags": [
+        "central wharf",
+        "boston",
+        "massachusetts",
+        "usa",
+        "united states",
+        "us",
+        "america",
+        "united states of america",
+        "north america",
+        "aquarium",
+        "underwater",
+        "fish",
+        "indoor",
+        "ocean",
+        "penguins",
+        "whale skeleton",
+        "visitors",
+        "people",
+        "animals",
+        "quality-4",
+        "score-4"
+      ],
+      "curated_tags": [
+        "boston",
+        "massachusetts",
+        "usa",
+        "indoor",
+        "aquarium",
+        "penguins",
+        "whale skeleton",
+        "visitors",
+        "people",
+        "animals",
+        "quality-4",
+        "score-4",
+        "united states",
+        "central wharf"
+      ],
+      "scene_set": "claude-scout-2026-09-18",
+      "in_sets": [
+        "claude-scout-2026-09-18"
+      ],
+      "pose": {
+        "lat": 42.3591,
+        "lng": -71.0498,
+        "alt_m": null,
+        "heading": null,
+        "pitch": null,
+        "fov": null,
+        "aligned": false,
+        "confidence": "low",
+        "basis": "Named landmark: New England Aquarium, 1 Central Wharf, Boston (map estimate)",
+        "position_kind": "approximate-site"
+      },
+      "quality_score": 4,
+      "quality_reason": "Wide view of the aquarium's penguin island in a turquoise pool under a hanging whale skeleton, with the giant ocean tank ramp above; penguins stand on the rocks, one swims at right, and visitors on the ramp moved and regrouped between frames.",
+      "quality_evidence": {
+        "method": "Visual inspection of two decoded live frames 5 s apart (paired_frames)",
+        "visual_inspected": true,
+        "checked_at": "2026-09-18T17:28:45+00:00",
+        "motion_observed": true,
+        "evidence_paths": [
+          "frames/indoor-activity/neaq-penguins-a.jpg",
+          "frames/indoor-activity/neaq-penguins-b.jpg"
+        ]
+      },
+      "validation": {
+        "checked_at": "2026-09-18T17:28:45+00:00",
+        "is_live": true,
+        "playable": true,
+        "method": "yt-dlp metadata live_status=is_live, playable_in_embed=true; ffmpeg decoded the live stream",
+        "resolution": [
+          1920,
+          1080
+        ],
+        "motion_observed": true,
+        "live_since": "2026-09-17T21:55:32+00:00",
+        "limitations": "short daytime sample; this YouTube stream restarted on 2026-09-17, so the video id may change"
+      },
+      "provenance": {
+        "research_file": "indoor-activity.json",
+        "source": {
+          "channel_url": "https://www.youtube.com/channel/UCspnu6n44ydqafj6nFIw5hw",
+          "found_via": "scout search 'penguin cam live'"
+        }
+      },
+      "check": {
+        "verdict": "live",
+        "checked": "2026-09-18T17:28:45+00:00",
+        "method": "yt-dlp metadata live_status=is_live, playable_in_embed=true; ffmpeg decoded the live stream",
+        "embed": "verified",
+        "embed_reason": "Positive source playback evidence; see validation."
+      },
+      "audio": "unknown",
+      "ads": "unknown",
+      "video_id": "2IYnyd_BNX4",
+      "active_local_hours_hint": "visitors 09:00-17:00 local (to 18:00 weekends); penguins on view all day"
     }
   ],
   "rejects": [
@@ -80347,34 +81924,6 @@
       ]
     },
     {
-      "name": "Philippine Coral Reef, San Francisco",
-      "location": "San Francisco, California",
-      "category": "aquarium",
-      "provider": "California Academy of Sciences, Steinhart Aquarium",
-      "timezone": "America/Los_Angeles",
-      "video_id": "99aULx3GORo",
-      "kind": "youtube",
-      "reject_reason": "Dead stream, found by the TVs themselves and confirmed against YouTube on 2026-11-16. The page dropped it on a player error code; the watch page then said: ended - 2026-10-22. A broadcast that has ended never resumes under the same id, so this id is finished, but the camera itself probably is not: most of these are operators who restarted on a new id.",
-      "rejected_at": "2026-11-16",
-      "how_to_repin": "Re-pin candidate, not a judgement on the camera: Anthony's list already wanted this view. Find the operator's channel (provider above names it), read https://www.youtube.com/@<handle>/live or /channel/<id>/live for whatever it is broadcasting now, confirm from the title that it is this camera and not a sibling, then re-add with this record's own name, location and pose.",
-      "pose": {
-        "lat": 37.7699,
-        "lng": -122.4661,
-        "alt_m": null,
-        "heading": null,
-        "pitch": null,
-        "fov": null,
-        "aligned": false,
-        "confidence": "low",
-        "basis": "Recovered venue/location estimate. Camera mount and heading/pitch/FOV unverified; orientation values are provisional defaults.",
-        "position_kind": "approximate-site",
-        "orientation_status": "unknown"
-      },
-      "tags": [
-        "aquarium"
-      ]
-    },
-    {
       "name": "African penguins, San Francisco",
       "location": "San Francisco, California",
       "category": "aquarium",
@@ -81533,47 +83082,6 @@
       ]
     },
     {
-      "name": "Zocalo Plaza de la Constitucion Mexico City",
-      "location": "Mexico City",
-      "category": "square",
-      "provider": "webcamsdemexico",
-      "timezone": "America/Mexico_City",
-      "video_id": "7tf7p5LCtXY",
-      "kind": "youtube",
-      "reject_reason": "Dead stream, found by the TVs themselves and confirmed against YouTube on 2026-11-16. The page dropped it on a player error code; the watch page then said: ended - 2026-09-22. A broadcast that has ended never resumes under the same id, so this id is finished, but the camera itself probably is not: most of these are operators who restarted on a new id.",
-      "rejected_at": "2026-11-16",
-      "how_to_repin": "Re-pin candidate, not a judgement on the camera: Anthony's list already wanted this view. Find the operator's channel (provider above names it), read https://www.youtube.com/@<handle>/live or /channel/<id>/live for whatever it is broadcasting now, confirm from the title that it is this camera and not a sibling, then re-add with this record's own name, location and pose.",
-      "pose": {
-        "lat": 19.43184,
-        "lng": -99.13487,
-        "alt_m": null,
-        "heading": null,
-        "pitch": null,
-        "fov": null,
-        "aligned": false,
-        "confidence": "low",
-        "basis": "Approximate discovery-map point; operator video title/description used to cross-check place. Not survey-verified.",
-        "position_kind": "approximate-site"
-      },
-      "tags": [
-        "zocalo plaza de la constitucion mexico city",
-        "mexico city",
-        "mexico",
-        "square",
-        "outdoor",
-        "live webcam",
-        "pedestrians",
-        "people",
-        "public square",
-        "town center",
-        "pedestrian",
-        "mexican",
-        "latin america",
-        "quality-4",
-        "score-4"
-      ]
-    },
-    {
       "name": "Basilica of Our Lady of Guadalupe",
       "location": "Mexico City",
       "category": "sacred",
@@ -81860,46 +83368,6 @@
         "campus",
         "park",
         "people"
-      ]
-    },
-    {
-      "name": "Chicago River, Wrigley Building and DuSable Bridge",
-      "location": "Chicago, Illinois",
-      "category": "bridge",
-      "provider": "ChicagoLoopLive",
-      "timezone": "America/Chicago",
-      "video_id": "Dq4ih_eeQ9w",
-      "kind": "youtube",
-      "reject_reason": "Dead stream, found by the TVs themselves and confirmed against YouTube on 2026-11-16. The page dropped it on a player error code; the watch page then said: ended - 2026-09-22. A broadcast that has ended never resumes under the same id, so this id is finished, but the camera itself probably is not: most of these are operators who restarted on a new id.",
-      "rejected_at": "2026-11-16",
-      "how_to_repin": "Re-pin candidate, not a judgement on the camera: Anthony's list already wanted this view. Find the operator's channel (provider above names it), read https://www.youtube.com/@<handle>/live or /channel/<id>/live for whatever it is broadcasting now, confirm from the title that it is this camera and not a sibling, then re-add with this record's own name, location and pose.",
-      "pose": {
-        "lat": 41.88906,
-        "lng": -87.6266,
-        "alt_m": null,
-        "heading": null,
-        "pitch": null,
-        "fov": null,
-        "aligned": false,
-        "confidence": "low",
-        "basis": "low — approximate site position, not verified camera mount",
-        "position_kind": "approximate-site"
-      },
-      "tags": [
-        "chicago",
-        "illinois",
-        "united states",
-        "usa",
-        "north america",
-        "outdoor",
-        "bridge",
-        "transport",
-        "traffic",
-        "water",
-        "il",
-        "chicago river, wrigley building and dusable bridge",
-        "quality-4",
-        "score-4"
       ]
     },
     {
@@ -82566,37 +84034,6 @@
         "vacation",
         "quality-4",
         "score-4"
-      ]
-    },
-    {
-      "name": "Brickell Avenue Bridge, Miami River",
-      "location": "Miami, Florida",
-      "category": "harbor",
-      "provider": "Miami River Camera",
-      "timezone": "America/New_York",
-      "video_id": "7wHgYc_kN98",
-      "kind": "youtube",
-      "reject_reason": "Dead stream, found by the TVs themselves and confirmed against YouTube on 2026-11-16. The page dropped it on a player error code; the watch page then said: ended - 2026-09-25. A broadcast that has ended never resumes under the same id, so this id is finished, but the camera itself probably is not: most of these are operators who restarted on a new id.",
-      "rejected_at": "2026-11-16",
-      "how_to_repin": "Re-pin candidate, not a judgement on the camera: Anthony's list already wanted this view. Find the operator's channel (provider above names it), read https://www.youtube.com/@<handle>/live or /channel/<id>/live for whatever it is broadcasting now, confirm from the title that it is this camera and not a sibling, then re-add with this record's own name, location and pose.",
-      "pose": {
-        "lat": 25.7722,
-        "lng": -80.1903,
-        "alt_m": null,
-        "heading": null,
-        "pitch": null,
-        "fov": null,
-        "aligned": false,
-        "confidence": "low",
-        "basis": "Inherited approximate site position from original desk-companion places.json; camera mounting point and orientation have not been verified.",
-        "position_kind": "approximate-site",
-        "orientation_status": "unknown"
-      },
-      "tags": [
-        "harbor",
-        "live",
-        "public-webcam",
-        "outdoor"
       ]
     },
     {
@@ -83675,53 +85112,6 @@
       ]
     },
     {
-      "name": "New England Aquarium penguin colony",
-      "location": "Central Wharf, Boston, Massachusetts, USA",
-      "category": "aquarium",
-      "provider": "Ozolio (New England Aquarium webcam)",
-      "timezone": "America/New_York",
-      "video_id": "_bdNFTNqHws",
-      "kind": "youtube",
-      "reject_reason": "Dead stream, found by the TVs themselves and confirmed against YouTube on 2026-11-16. The page dropped it on a player error code; the watch page then said: ended - 2026-10-21. A broadcast that has ended never resumes under the same id, so this id is finished, but the camera itself probably is not: most of these are operators who restarted on a new id.",
-      "rejected_at": "2026-11-16",
-      "how_to_repin": "Re-pin candidate, not a judgement on the camera: Anthony's list already wanted this view. Find the operator's channel (provider above names it), read https://www.youtube.com/@<handle>/live or /channel/<id>/live for whatever it is broadcasting now, confirm from the title that it is this camera and not a sibling, then re-add with this record's own name, location and pose.",
-      "pose": {
-        "lat": 42.3591,
-        "lng": -71.0498,
-        "alt_m": null,
-        "heading": null,
-        "pitch": null,
-        "fov": null,
-        "aligned": false,
-        "confidence": "low",
-        "basis": "Named landmark: New England Aquarium, 1 Central Wharf, Boston (map estimate)",
-        "position_kind": "approximate-site"
-      },
-      "tags": [
-        "central wharf",
-        "boston",
-        "massachusetts",
-        "usa",
-        "united states",
-        "us",
-        "america",
-        "united states of america",
-        "north america",
-        "aquarium",
-        "underwater",
-        "fish",
-        "indoor",
-        "ocean",
-        "penguins",
-        "whale skeleton",
-        "visitors",
-        "people",
-        "animals",
-        "quality-4",
-        "score-4"
-      ]
-    },
-    {
       "name": "Plaza Baquedano Santiago",
       "location": "Santiago, Santiago Metropolitan Region",
       "category": "square",
@@ -84681,47 +86071,6 @@
       ]
     },
     {
-      "name": "Canal do Porto de Santos",
-      "location": "Santos, São Paulo",
-      "category": "city",
-      "provider": "Praticagem de São Paulo - Canal Oficial",
-      "timezone": "America/Sao_Paulo",
-      "video_id": "5BxqzvR6TgM",
-      "kind": "youtube",
-      "reject_reason": "Dead stream, found by the TVs themselves and confirmed against YouTube on 2026-11-16. The page dropped it on a player error code; the watch page then said: gone. The video is gone from YouTube outright.",
-      "rejected_at": "2026-11-16",
-      "how_to_repin": "Re-pin candidate, not a judgement on the camera: Anthony's list already wanted this view. Find the operator's channel (provider above names it), read https://www.youtube.com/@<handle>/live or /channel/<id>/live for whatever it is broadcasting now, confirm from the title that it is this camera and not a sibling, then re-add with this record's own name, location and pose.",
-      "pose": {
-        "lat": -23.99472,
-        "lng": -46.30696,
-        "alt_m": null,
-        "heading": null,
-        "pitch": null,
-        "fov": null,
-        "aligned": false,
-        "confidence": "low",
-        "basis": "Approximate discovery-map point; operator video title/description used to cross-check place. Not survey-verified.",
-        "position_kind": "approximate-site"
-      },
-      "tags": [
-        "canal do porto de santos",
-        "santos, sao paulo",
-        "brazil",
-        "sao paulo",
-        "city",
-        "outdoor",
-        "live webcam",
-        "santos",
-        "harbor",
-        "brasil",
-        "south america",
-        "latin america",
-        "quality-4",
-        "score-4",
-        "são paulo"
-      ]
-    },
-    {
       "name": "Aparecida National Shrine pedestrian bridge",
       "location": "Aparecida, São Paulo",
       "category": "bridge",
@@ -85592,55 +86941,6 @@
       ]
     },
     {
-      "name": "The Thames and the City from Bankside",
-      "location": "Bankside, Southwark, London, England",
-      "category": "river",
-      "provider": "Beach Life Cams (YouTube)",
-      "timezone": "Europe/London",
-      "video_id": "AoWlXqIXNZ8",
-      "kind": "youtube",
-      "reject_reason": "Dead stream, found by the TVs themselves and confirmed against YouTube on 2026-11-16. The page dropped it on a player error code; the watch page then said: ended - 2026-10-12. A broadcast that has ended never resumes under the same id, so this id is finished, but the camera itself probably is not: most of these are operators who restarted on a new id.",
-      "rejected_at": "2026-11-16",
-      "how_to_repin": "Re-pin candidate, not a judgement on the camera: Anthony's list already wanted this view. Find the operator's channel (provider above names it), read https://www.youtube.com/@<handle>/live or /channel/<id>/live for whatever it is broadcasting now, confirm from the title that it is this camera and not a sibling, then re-add with this record's own name, location and pose.",
-      "pose": {
-        "lat": 51.50705,
-        "lng": -0.09025,
-        "alt_m": 20,
-        "heading": 45,
-        "pitch": -3,
-        "fov": 65,
-        "aligned": false,
-        "view": "landscape",
-        "confidence": "medium",
-        "basis": "The old point read -1.4 m, mid-river. New ground 1.5 m, and the heading crosses water for 200 m then climbs the north bank. London Bridge bears 61 and 22 Bishopsgate 32, so a 65 degree frame holds both.",
-        "source": "No mount is published; the position is the first solid ground behind the Golden Hinde's berth at St Mary Overie Dock, on Clink Street.",
-        "position_checked": "terrain and bearings, 2026-09-18"
-      },
-      "tags": [
-        "bankside",
-        "southwark",
-        "london",
-        "england",
-        "united kingdom",
-        "uk",
-        "gb",
-        "britain",
-        "great britain",
-        "europe",
-        "river",
-        "water",
-        "waterfront",
-        "thames",
-        "st pauls",
-        "shard",
-        "bridges",
-        "night lights",
-        "always-on",
-        "sunrise-facing",
-        "sunrise"
-      ]
-    },
-    {
       "name": "Ramsgate Royal Harbour Marina",
       "location": "Ramsgate, Kent, South East England, United Kingdom",
       "category": "harbour",
@@ -85779,52 +87079,6 @@
       ]
     },
     {
-      "name": "Mierlo-Hout level crossing",
-      "location": "Helmond, North Brabant",
-      "category": "railway",
-      "provider": "RailCam Netherlands (YouTube)",
-      "timezone": "Europe/Amsterdam",
-      "video_id": "0zh0kWfRKlQ",
-      "kind": "youtube",
-      "reject_reason": "Dead stream, found by the TVs themselves and confirmed against YouTube on 2026-11-16. The page dropped it on a player error code; the watch page then said: ended - 2026-09-22. A broadcast that has ended never resumes under the same id, so this id is finished, but the camera itself probably is not: most of these are operators who restarted on a new id.",
-      "rejected_at": "2026-11-16",
-      "how_to_repin": "Re-pin candidate, not a judgement on the camera: Anthony's list already wanted this view. Find the operator's channel (provider above names it), read https://www.youtube.com/@<handle>/live or /channel/<id>/live for whatever it is broadcasting now, confirm from the title that it is this camera and not a sibling, then re-add with this record's own name, location and pose.",
-      "pose": {
-        "lat": 51.48085,
-        "lng": 5.6213,
-        "alt_m": 6,
-        "heading": 250,
-        "pitch": -6,
-        "fov": 65,
-        "aligned": false,
-        "view": "landscape",
-        "confidence": "medium",
-        "basis": "Ground 19 m of flat Brabant, level for 600 m along the heading, so a 6 m trackside pole frames the crossing. The old two-decimal position was about 1.1 km east.",
-        "source": "The operator is a railway camera at Mierlo-Hout, Helmond, watching the Hoofdstraat crossing beside Helmond 't Hout station on the Eindhoven to Venlo line; trackside to a few tens of metres.",
-        "position_checked": "terrain and bearings, 2026-09-18"
-      },
-      "tags": [
-        "helmond",
-        "north brabant",
-        "netherlands",
-        "nl",
-        "nld",
-        "holland",
-        "europe",
-        "railway",
-        "trains",
-        "rail",
-        "trainspotting",
-        "railfan",
-        "level crossing",
-        "dutch rail",
-        "night lights",
-        "sunset-facing",
-        "sunset",
-        "always-on"
-      ]
-    },
-    {
       "name": "Eiger, Monch and Jungfrau over Lake Thun",
       "location": "Beatenberg, Bernese Oberland, Switzerland",
       "category": "mountain",
@@ -85952,100 +87206,6 @@
       ]
     },
     {
-      "name": "Jena Markt old town square",
-      "location": "Jena, Thuringia, Germany",
-      "category": "square",
-      "provider": "Reuter-Immobilien (Sebastian Reuter)",
-      "timezone": "Europe/Berlin",
-      "video_id": "0UbGQoCOlsY",
-      "kind": "youtube",
-      "reject_reason": "Dead stream, found by the TVs themselves and confirmed against YouTube on 2026-11-16. The page dropped it on a player error code; the watch page then said: ended - 2026-11-13. A broadcast that has ended never resumes under the same id, so this id is finished, but the camera itself probably is not: most of these are operators who restarted on a new id.",
-      "rejected_at": "2026-11-16",
-      "how_to_repin": "Re-pin candidate, not a judgement on the camera: Anthony's list already wanted this view. Find the operator's channel (provider above names it), read https://www.youtube.com/@<handle>/live or /channel/<id>/live for whatever it is broadcasting now, confirm from the title that it is this camera and not a sibling, then re-add with this record's own name, location and pose.",
-      "pose": {
-        "lat": 50.929,
-        "lng": 11.589,
-        "alt_m": null,
-        "heading": null,
-        "pitch": null,
-        "fov": null,
-        "aligned": false,
-        "confidence": "low",
-        "basis": "Title and description name the Jena market square; map check",
-        "position_kind": "approximate-site"
-      },
-      "tags": [
-        "jena",
-        "thuringia",
-        "germany",
-        "de",
-        "deu",
-        "europe",
-        "square",
-        "plaza",
-        "city",
-        "urban",
-        "people",
-        "markt",
-        "marktplatz",
-        "old town",
-        "outdoor",
-        "festival",
-        "stage",
-        "market stalls",
-        "crowd",
-        "pedestrians",
-        "evening",
-        "quality-4",
-        "score-4",
-        "busy",
-        "night lights"
-      ]
-    },
-    {
-      "name": "Historic Market Square Naumburg",
-      "location": "Naumburg an der Saale, Saxony-Anhalt, Germany",
-      "category": "city",
-      "provider": "YouTube",
-      "timezone": "Europe/Berlin",
-      "video_id": "r-aFbbMHnhI",
-      "kind": "youtube",
-      "reject_reason": "Dead stream, found by the TVs themselves and confirmed against YouTube on 2026-11-16. The page dropped it on a player error code; the watch page then said: ended - 2026-10-22. A broadcast that has ended never resumes under the same id, so this id is finished, but the camera itself probably is not: most of these are operators who restarted on a new id.",
-      "rejected_at": "2026-11-16",
-      "how_to_repin": "Re-pin candidate, not a judgement on the camera: Anthony's list already wanted this view. Find the operator's channel (provider above names it), read https://www.youtube.com/@<handle>/live or /channel/<id>/live for whatever it is broadcasting now, confirm from the title that it is this camera and not a sibling, then re-add with this record's own name, location and pose.",
-      "pose": {
-        "lat": 51.15292,
-        "lng": 11.81015,
-        "alt_m": null,
-        "heading": null,
-        "pitch": null,
-        "fov": null,
-        "aligned": false,
-        "confidence": "low",
-        "basis": "medium",
-        "position_kind": "approximate-site"
-      },
-      "tags": [
-        "naumburg an der saale",
-        "saxony-anhalt",
-        "germany",
-        "de",
-        "deutschland",
-        "city",
-        "market",
-        "square",
-        "architecture",
-        "pedestrians",
-        "traffic",
-        "outdoor",
-        "town square",
-        "market square",
-        "people watching",
-        "quality-3",
-        "score-3"
-      ]
-    },
-    {
       "name": "Rialto Bridge, Venice",
       "location": "Venice, Veneto, Italy",
       "category": "city",
@@ -86141,145 +87301,6 @@
         "sunset-facing",
         "sunset",
         "always-on"
-      ]
-    },
-    {
-      "name": "Grand Harbour, Valletta and the Three Cities",
-      "location": "Valletta, Malta",
-      "category": "harbor",
-      "provider": "Grand Harbour Live",
-      "timezone": "Europe/Malta",
-      "video_id": "DSCy97qUXeE",
-      "kind": "youtube",
-      "reject_reason": "Dead stream, found by the TVs themselves and confirmed against YouTube on 2026-11-16. The page dropped it on a player error code; the watch page then said: gone. The video is gone from YouTube outright.",
-      "rejected_at": "2026-11-16",
-      "how_to_repin": "Re-pin candidate, not a judgement on the camera: Anthony's list already wanted this view. Find the operator's channel (provider above names it), read https://www.youtube.com/@<handle>/live or /channel/<id>/live for whatever it is broadcasting now, confirm from the title that it is this camera and not a sibling, then re-add with this record's own name, location and pose.",
-      "pose": {
-        "lat": 35.895,
-        "lng": 14.516,
-        "alt_m": null,
-        "heading": null,
-        "pitch": null,
-        "fov": null,
-        "aligned": false,
-        "confidence": "low",
-        "basis": "Channel is Grand Harbour Live, overlay says Valletta; frames show Fort Ricasoli and Kalkara across the harbour",
-        "position_kind": "approximate-site"
-      },
-      "tags": [
-        "valletta",
-        "malta",
-        "harbor",
-        "harbour",
-        "port",
-        "boats",
-        "waterfront",
-        "water",
-        "grand harbour",
-        "kalkara",
-        "birgu",
-        "three cities",
-        "outdoor",
-        "yachts",
-        "ships",
-        "fortress",
-        "vacation",
-        "quality-4",
-        "score-4",
-        "night lights"
-      ]
-    },
-    {
-      "name": "Licheń Basilica high altar",
-      "location": "Licheń Stary, Greater Poland, Poland",
-      "category": "sacred",
-      "provider": "Sanktuarium Matki Bożej Licheńskiej",
-      "timezone": "Europe/Warsaw",
-      "video_id": "DyRLA_JWqoo",
-      "kind": "youtube",
-      "reject_reason": "Dead stream, found by the TVs themselves and confirmed against YouTube on 2026-11-16. The page dropped it on a player error code; the watch page then said: ended - 2026-09-21. A broadcast that has ended never resumes under the same id, so this id is finished, but the camera itself probably is not: most of these are operators who restarted on a new id.",
-      "rejected_at": "2026-11-16",
-      "how_to_repin": "Re-pin candidate, not a judgement on the camera: Anthony's list already wanted this view. Find the operator's channel (provider above names it), read https://www.youtube.com/@<handle>/live or /channel/<id>/live for whatever it is broadcasting now, confirm from the title that it is this camera and not a sibling, then re-add with this record's own name, location and pose.",
-      "pose": {
-        "lat": 52.3236,
-        "lng": 18.3578,
-        "alt_m": null,
-        "heading": null,
-        "pitch": null,
-        "fov": null,
-        "aligned": false,
-        "confidence": "low",
-        "basis": "Named landmark: Basilica of Our Lady of Licheń (map estimate)",
-        "position_kind": "approximate-site"
-      },
-      "tags": [
-        "lichen stary",
-        "greater poland",
-        "poland",
-        "sacred",
-        "religion",
-        "pilgrimage",
-        "holy",
-        "worship",
-        "lichen",
-        "indoor",
-        "basilica",
-        "church",
-        "mass",
-        "priests",
-        "people",
-        "quality-3",
-        "score-3",
-        "part-time"
-      ]
-    },
-    {
-      "name": "Rynek market square at dusk, Kazimierz Dolny",
-      "location": "Kazimierz Dolny, Lublin Voivodeship, Poland",
-      "category": "square",
-      "provider": "Kazimierz Dolny town hall",
-      "timezone": "Europe/Warsaw",
-      "video_id": "6EwviT2usa8",
-      "kind": "youtube",
-      "reject_reason": "Dead stream, found by the TVs themselves and confirmed against YouTube on 2026-11-16. The page dropped it on a player error code; the watch page then said: ended - 2026-10-03. A broadcast that has ended never resumes under the same id, so this id is finished, but the camera itself probably is not: most of these are operators who restarted on a new id.",
-      "rejected_at": "2026-11-16",
-      "how_to_repin": "Re-pin candidate, not a judgement on the camera: Anthony's list already wanted this view. Find the operator's channel (provider above names it), read https://www.youtube.com/@<handle>/live or /channel/<id>/live for whatever it is broadcasting now, confirm from the title that it is this camera and not a sibling, then re-add with this record's own name, location and pose.",
-      "pose": {
-        "lat": 51.3223,
-        "lng": 21.948,
-        "alt_m": null,
-        "heading": null,
-        "pitch": null,
-        "fov": null,
-        "aligned": false,
-        "confidence": "low",
-        "basis": "Overlay and title name the town hall camera on the Rynek; map check of the square",
-        "position_kind": "approximate-site"
-      },
-      "tags": [
-        "kazimierz dolny",
-        "lublin voivodeship",
-        "poland",
-        "square",
-        "plaza",
-        "city",
-        "urban",
-        "people",
-        "polska",
-        "lublin",
-        "rynek",
-        "market square",
-        "outdoor",
-        "old town",
-        "restaurant terraces",
-        "pedestrians",
-        "tour group",
-        "evening",
-        "vacation",
-        "quality-4",
-        "score-4",
-        "busy",
-        "night lights"
       ]
     },
     {
@@ -86408,35 +87429,6 @@
         "quality-3",
         "score-3",
         "night lights"
-      ]
-    },
-    {
-      "name": "The Hide Waterhole",
-      "location": "Hwange, Zimbabwe",
-      "category": "wildlife",
-      "provider": "Africam / The Hide Safari Camp",
-      "timezone": "Africa/Harare",
-      "video_id": "nXI-kWu6BLo",
-      "kind": "youtube",
-      "reject_reason": "Dead stream, found by the TVs themselves and confirmed against YouTube on 2026-11-16. The page dropped it on a player error code; the watch page then said: ended - 2026-09-23. A broadcast that has ended never resumes under the same id, so this id is finished, but the camera itself probably is not: most of these are operators who restarted on a new id.",
-      "rejected_at": "2026-11-16",
-      "how_to_repin": "Re-pin candidate, not a judgement on the camera: Anthony's list already wanted this view. Find the operator's channel (provider above names it), read https://www.youtube.com/@<handle>/live or /channel/<id>/live for whatever it is broadcasting now, confirm from the title that it is this camera and not a sibling, then re-add with this record's own name, location and pose.",
-      "pose": {
-        "lat": -18.9167,
-        "lng": 26.9333,
-        "alt_m": null,
-        "heading": null,
-        "pitch": null,
-        "fov": null,
-        "aligned": false,
-        "confidence": "low",
-        "basis": "Recovered venue/location estimate. Camera mount and heading/pitch/FOV unverified; orientation values are provisional defaults.",
-        "position_kind": "approximate-site",
-        "orientation_status": "unknown"
-      },
-      "tags": [
-        "wildlife",
-        "waterhole"
       ]
     },
     {
@@ -86611,52 +87603,6 @@
         "snow peaks",
         "quiet",
         "always-on"
-      ]
-    },
-    {
-      "name": "Shantikunj ashram, Haridwar",
-      "location": "Gayatri Teerth Shantikunj, Haridwar, Uttarakhand",
-      "category": "temple",
-      "provider": "All World Gayatri Pariwar",
-      "timezone": "Asia/Kolkata",
-      "video_id": "Bi9cRN61nOY",
-      "kind": "youtube",
-      "reject_reason": "Dead stream, found by the TVs themselves and confirmed against YouTube on 2026-11-16. The page dropped it on a player error code; the watch page then said: ended - 2026-11-12. A broadcast that has ended never resumes under the same id, so this id is finished, but the camera itself probably is not: most of these are operators who restarted on a new id.",
-      "rejected_at": "2026-11-16",
-      "how_to_repin": "Re-pin candidate, not a judgement on the camera: Anthony's list already wanted this view. Find the operator's channel (provider above names it), read https://www.youtube.com/@<handle>/live or /channel/<id>/live for whatever it is broadcasting now, confirm from the title that it is this camera and not a sibling, then re-add with this record's own name, location and pose.",
-      "pose": {
-        "lat": 29.99142,
-        "lng": 78.19142,
-        "alt_m": 20,
-        "heading": 180,
-        "pitch": -10,
-        "fov": 70,
-        "aligned": false,
-        "view": "landscape",
-        "confidence": "low",
-        "basis": "Camera position from a named source (see position_source); heading, pitch and field of view are first guesses, not measured from the frame.",
-        "position_kind": "approximate-site",
-        "position_source": "Overture Maps places 2026-08-19.0, Shantikunj, queried 2026-09-21"
-      },
-      "tags": [
-        "shantikunj",
-        "gayatri teerth",
-        "haridwar",
-        "uttarakhand",
-        "india",
-        "in",
-        "ind",
-        "asia",
-        "south asia",
-        "temple",
-        "ashram",
-        "sacred",
-        "pilgrimage",
-        "darshan",
-        "people",
-        "ganges",
-        "always-on",
-        "has-sound"
       ]
     },
     {
@@ -87189,52 +88135,6 @@
       ]
     },
     {
-      "name": "Kusatsu Onsen Yubatake hot-spring field",
-      "location": "Kusatsu, Agatsuma, Gunma, Japan",
-      "category": "resort",
-      "provider": "Kusatsu Town (official channel)",
-      "timezone": "Asia/Tokyo",
-      "video_id": "GrEEoEmmrKs",
-      "kind": "youtube",
-      "reject_reason": "Dead stream, found by the TVs themselves and confirmed against YouTube on 2026-11-16. The page dropped it on a player error code; the watch page then said: ended - 2026-10-25. A broadcast that has ended never resumes under the same id, so this id is finished, but the camera itself probably is not: most of these are operators who restarted on a new id.",
-      "rejected_at": "2026-11-16",
-      "how_to_repin": "Re-pin candidate, not a judgement on the camera: Anthony's list already wanted this view. Find the operator's channel (provider above names it), read https://www.youtube.com/@<handle>/live or /channel/<id>/live for whatever it is broadcasting now, confirm from the title that it is this camera and not a sibling, then re-add with this record's own name, location and pose.",
-      "pose": {
-        "lat": 36.62294,
-        "lng": 138.59673,
-        "alt_m": null,
-        "heading": null,
-        "pitch": null,
-        "fov": null,
-        "aligned": false,
-        "confidence": "low",
-        "basis": "Town's official camera titled Yubatake Yutaki-mae; OpenStreetMap geocode of Yubatake",
-        "position_kind": "approximate-site"
-      },
-      "tags": [
-        "kusatsu",
-        "agatsuma",
-        "gunma",
-        "japan",
-        "jp",
-        "jpn",
-        "asia",
-        "east asia",
-        "resort",
-        "kusatsu onsen",
-        "yubatake",
-        "onsen",
-        "hot spring",
-        "outdoor",
-        "steam",
-        "town square",
-        "night",
-        "vacation",
-        "quality-3",
-        "score-3"
-      ]
-    },
-    {
       "name": "Ginza Sukiyabashi Crossing",
       "location": "Ginza, Tokyo, Japan",
       "category": "streets",
@@ -87283,53 +88183,6 @@
         "銀座",
         "quality-4",
         "score-4"
-      ]
-    },
-    {
-      "name": "Haneda plane spotting, Tokyo",
-      "location": "Ota, Tokyo",
-      "category": "airport",
-      "provider": "Nippon Television (YouTube)",
-      "timezone": "Asia/Tokyo",
-      "video_id": "3w4zEyFamuA",
-      "kind": "youtube",
-      "reject_reason": "Dead stream, found by the TVs themselves and confirmed against YouTube on 2026-11-16. The page dropped it on a player error code; the watch page then said: ended - 2026-10-27. A broadcast that has ended never resumes under the same id, so this id is finished, but the camera itself probably is not: most of these are operators who restarted on a new id.",
-      "rejected_at": "2026-11-16",
-      "how_to_repin": "Re-pin candidate, not a judgement on the camera: Anthony's list already wanted this view. Find the operator's channel (provider above names it), read https://www.youtube.com/@<handle>/live or /channel/<id>/live for whatever it is broadcasting now, confirm from the title that it is this camera and not a sibling, then re-add with this record's own name, location and pose.",
-      "pose": {
-        "lat": 35.5498,
-        "lng": 139.7865,
-        "alt_m": 35,
-        "heading": 105,
-        "pitch": -5,
-        "fov": 60,
-        "aligned": false,
-        "view": "landscape",
-        "confidence": "low",
-        "basis": "Ground 5 m. The heading crosses apron and runway for 700 m then reads sea level for 2.3 km, which is the bay behind the runway as described. The old pose sat mid-taxiway at an 80 m eye height where no structure exists.",
-        "source": "The broadcaster does not state the mount; the position follows the described elevated view across the aprons with Tokyo Bay behind, which at Haneda only works looking east from the Terminal 1 rooftop deck.",
-        "position_checked": "terrain and bearings, 2026-09-18"
-      },
-      "tags": [
-        "ota",
-        "tokyo",
-        "kanto",
-        "japan",
-        "jp",
-        "jpn",
-        "asia",
-        "east asia",
-        "airport",
-        "planes",
-        "aviation",
-        "plane spotting",
-        "runway",
-        "jets",
-        "bay",
-        "busy",
-        "always-on",
-        "sunrise-facing",
-        "sunrise"
       ]
     },
     {
@@ -87433,35 +88286,6 @@
         "福島",
         "quality-3",
         "score-3"
-      ]
-    },
-    {
-      "name": "Sea Eagle Nest",
-      "location": "Sydney, Australia",
-      "category": "wildlife",
-      "provider": "Sea-EagleCAM (BirdLife Australia Discovery Centre)",
-      "timezone": "Australia/Sydney",
-      "video_id": "Gngxj2FpID0",
-      "kind": "youtube",
-      "reject_reason": "Dead stream, found by the TVs themselves and confirmed against YouTube on 2026-11-16. The page dropped it on a player error code; the watch page then said: ended - 2026-09-20. A broadcast that has ended never resumes under the same id, so this id is finished, but the camera itself probably is not: most of these are operators who restarted on a new id.",
-      "rejected_at": "2026-11-16",
-      "how_to_repin": "Re-pin candidate, not a judgement on the camera: Anthony's list already wanted this view. Find the operator's channel (provider above names it), read https://www.youtube.com/@<handle>/live or /channel/<id>/live for whatever it is broadcasting now, confirm from the title that it is this camera and not a sibling, then re-add with this record's own name, location and pose.",
-      "pose": {
-        "lat": -33.83,
-        "lng": 151.05,
-        "alt_m": null,
-        "heading": null,
-        "pitch": null,
-        "fov": null,
-        "aligned": false,
-        "confidence": "low",
-        "basis": "Recovered venue/location estimate. Camera mount and heading/pitch/FOV unverified; orientation values are provisional defaults.",
-        "position_kind": "approximate-site",
-        "orientation_status": "unknown"
-      },
-      "tags": [
-        "wildlife",
-        "birds"
       ]
     },
     {

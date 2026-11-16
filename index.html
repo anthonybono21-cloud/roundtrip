@@ -1387,29 +1387,42 @@ function paintVote(){ Menu?.sync(); }
        not dropped. Three separate landings that each showed nothing, and
        only then. A slow connection must not be able to cost a camera.
 
-   And over all of it, the run guard, which is the part that matters most.
-   None of the tests above can tell a camera that is off the air from a
-   device that YouTube has started turning away, because both arrive as the
-   same error on the same wire. What tells them apart is how many come at
-   once. Four separate operators do not go off the air inside a quarter of
-   an hour, so a run of DEAD_RUN drops with no camera playing in between is
-   read as the fault being here: the whole run is undone, the deck is dealt
-   again, and nothing more is dropped until a camera plays and proves the
-   device is well. Both TVs needed this and neither had it - the kitchen set
-   dropped 155 good cameras on 29 October and the other 170 on 15 and 16
-   November, one every four minutes at the rotation's own pace, every embed
-   answering error 150. A fifth of the list was out of the rotation before
-   anyone noticed, which is exactly the failure this whole mechanism was
-   supposed to be too careful to cause. */
+   Which of those to trust was settled on 16 November by re-checking, against
+   YouTube itself, all 240 cameras the two TVs had dropped. The answer was
+   not the one the code assumed.
+
+   An error code is about the video and can be believed. Of the cameras
+   dropped on one, not a single one came back live: the great majority had an
+   end date in the past, the rest were gone outright. So those still drop on
+   the spot.
+
+   A player state is about the moment and cannot. Of 52 cameras dropped
+   because the player reported the broadcast ended, or reported a recording,
+   39 were broadcasting when they were asked and exactly one was really
+   gone. The reason is that a great many webcam operators run one permanent
+   broadcast id that goes off the air at night, or for maintenance, and comes
+   back on the same id - so `ended` means off the air this minute, not off
+   the air for good. A camera must not be dropped for that, which is what
+   DEAD_OFFLINE is for: the state has to say the same thing on two separate
+   landings. Nothing is lost by waiting, because a camera that really has
+   finished answers with an error code soon enough, and that is believed at
+   once.
+
+   The earlier reading of the same evidence was that the TVs had suffered a
+   run of false drops - 155 on one in a day, 170 on the other - and the fix
+   was a guard against runs. The re-check showed that run for what it was:
+   the backlog of a month with no sweep, genuinely dead cameras found one
+   after another at the rotation's own pace. A run guard would have handed
+   them all back, so there is none. The deck is still protected at the only
+   place it needs to be: if every camera left has been dropped, the drops are
+   ignored outright. */
 const DEAD_KEY    = 'roundtrip.dead';
 const DEAD_RETRY  = 6;        // days before a dropped camera is dealt again
 const DEAD_STALLS = 3;        // landings with no picture before that counts
 const DEAD_LAG    = 3600;     // seconds behind a finite length that means replay
 const DEAD_FRESH  = 90;       // seconds after a mount that the replay check runs
 const DEAD_CODES  = new Set([2, 100, 101, 150]);
-const DEAD_RUN    = 4;        // drops in a row, nothing playing between, that mean the fault is here
-const DEAD_VER    = 2;        // the rule that wrote a drop; older ones are not trusted
-const DEAD_VKEY   = 'roundtrip.dead.v';
+const DEAD_OFFLINE = 2;       // separate landings a player state must agree on
 const DEAD_SWEEP  = 6*3600e3; // how often a left-on TV retires its stale drops
 const DAY = 86400e3;
 
@@ -1423,18 +1436,6 @@ const dead = new Set();       // what is dropped right now
 function deadLoad(){
   dead.clear();
   let changed = false;
-  /* Drops written before the run guard existed cannot be trusted. Between
-     them the two TVs wrote 189 of them across two bad days, every one an
-     embed refusal from a device YouTube had started turning away. They go,
-     once; a camera that really is off the air says so again within seconds
-     of its next landing. */
-  let ver = 0;
-  try { ver = Number(localStorage.getItem(DEAD_VKEY)) || 0; } catch {}
-  if (ver < DEAD_VER){
-    for (const [k, v] of Object.entries(deadLog))
-      if (v && (v.code === 101 || v.code === 150)){ delete deadLog[k]; changed = true; }
-    try { localStorage.setItem(DEAD_VKEY, String(DEAD_VER)); } catch {}
-  }
   for (const [k, v] of Object.entries(deadLog)){
     const age = Date.now() - Date.parse(v?.at || '');
     if (!(age >= 0) || age > DEAD_RETRY*DAY){ delete deadLog[k]; changed = true; continue; }
@@ -1475,14 +1476,8 @@ setTimeout(() => { if (deadList().length) publishDead(); }, 11000);
 /* Out of the rotation: thumbed down for good, or dead for now. */
 const isDropped = c => { const k = camKey(c); return state.rejects.has(k) || dead.has(k); };
 
-/* What the run guard counts, and whether it has decided the fault is local.
-   Both are per session rather than stored: a device that was being refused
-   an hour ago deserves to be taken at its word again now. */
-let deadRunKeys = [];            // dropped since the last camera that played
-let deadBlind   = false;         // the fault looks local: drop nothing
-
-/* Off this device's deck and on to the next dive. Used by a real drop and by
-   a camera that is merely being passed over, which look the same on screen
+/* Off this device's deck and on to the next dive. Kept as its own step
+   because a drop and a camera merely passed over look the same on screen,
    and must: the viewer's job is to show something else, either way. */
 function deadMoveOn(cam, said){
   bag = bag.filter(c => c !== cam);
@@ -1493,82 +1488,73 @@ function deadMoveOn(cam, said){
   else backToOrbit();
 }
 
-/* A run of drops is better evidence about the device than about the cameras,
-   so it is spent on the device: every drop in the run goes back, the deck is
-   dealt again from the restored list, and the tests are held until something
-   plays. Nothing is written down in the meantime, so a bad hour cannot leave
-   a mark for the camera file to be mended from. */
-function deadFaultHere(){
-  for (const key of deadRunKeys){ dead.delete(key); delete deadLog[key]; }
-  deadRunKeys = [];
-  deadBlind = true;
-  bag = []; upNext = null;
-  deadSave();
-  refreshPins();
-  console.warn('Roundtrip: ' + DEAD_RUN + ' cameras in a row would not play here, '
-             + 'so the fault is this device and not the list. Nothing dropped.');
-  if (state.cam) deadMoveOn(state.cam, state.cam.name + ' will not play here. Moving on.');
-}
-
 /* The thumbs-down shape - off this device's deck and on to the next dive -
    written out here rather than borrowed, so that nothing about a fault can
-   reach into the votes. `auto` is false for a drop asked for by hand, which
-   is a verdict and so is never counted in a run nor taken back by one. */
-function dropDead(cam, code, why, auto = true){
+   reach into the votes. */
+function dropDead(cam, code, why){
   if (!cam) return;
   const key = camKey(cam);
   if (dead.has(key)) return;
-
-  // While the fault looks local, a camera that will not play is passed over
-  // and nothing is recorded against it.
-  if (auto && deadBlind){
-    deadMoveOn(cam, cam.name + ' will not play here. Moving on.');
-    return;
-  }
-
   deadLog[key] = { at: new Date().toISOString(), code, why, name: cam.name,
                    location: cam.location || '', video_id: cam.video_id || '',
                    url: cam.url || '' };
   dead.add(key);
-
-  if (auto){
-    deadRunKeys.push(key);
-    if (deadRunKeys.length >= DEAD_RUN){ deadFaultHere(); return; }
-  }
-
   deadSave();
   console.warn('Roundtrip dead camera:', cam.name, code, why);
   refreshPins();                       // and off the pin map
   deadMoveOn(cam, cam.name + ' is off the air. Moving to the next view.');
 }
 
-/* Counted against the camera rather than the moment, so one bad minute on the
-   wifi costs nothing at all. */
-function stallDead(cam){
+/* Everything a player state says is counted against the camera rather than
+   decided on the spot, so one bad minute on the wifi, or one night a
+   permanent broadcast spends off the air, costs nothing at all. A landing
+   can only ever add one strike of a kind, however many times the player
+   repeats itself while it is up. */
+function strikeDead(cam, kind, limit, code, said){
   if (!cam) return;
   const key = camKey(cam);
   const was = deadLog[key] || {};
-  const stalls = (was.stalls || 0) + 1;
-  deadLog[key] = { ...was, stalls, at: new Date().toISOString(),
+  if (ads.at && was[kind + 'At'] === ads.at) return;
+  const n = (was[kind] || 0) + 1;
+  deadLog[key] = { ...was, [kind]: n, [kind + 'At']: ads.at,
+                   at: new Date().toISOString(),
                    name: cam.name, video_id: cam.video_id || '' };
-  if (stalls >= DEAD_STALLS) dropDead(cam, 'stalled', stalls + ' landings with no picture');
+  if (n >= limit) dropDead(cam, code, said + ', on ' + n + ' separate landings');
   else deadSave(false);
 }
+const stallDead = cam =>
+  strikeDead(cam, 'stalls', DEAD_STALLS, 'stalled', 'no picture');
 
-/* A camera that plays has nothing against it: any tally it collected on a bad
-   night goes, so three strikes can never be three separate bad nights. */
+/* Positive proof that a strike of this kind was wrong. Kept separate from
+   dropping, because each kind has its own proof: a camera that plays did not
+   stall and is not off the air, while a camera playing a recording is playing
+   perfectly well, so only its own live edge can clear a replay strike. */
+function clearStrike(cam, ...kinds){
+  const key = cam && camKey(cam);
+  const was = key && deadLog[key];
+  if (!was || was.code != null) return;          // already dropped: leave it
+  let changed = false;
+  for (const kind of kinds)
+    if (was[kind] != null){ delete was[kind]; delete was[kind + 'At']; changed = true; }
+  if (!changed) return;
+  if (!Object.keys(was).some(k => ['stalls','offline','replay'].includes(k)))
+    delete deadLog[key];
+  deadSave(false);
+}
+
+/* A camera that plays did not stall and is not off the air, so those tallies
+   go and three strikes can never be three separate bad nights. A replay
+   strike is deliberately left alone: a camera showing yesterday's recording
+   is playing, and reports playing, so this would wipe the very evidence it
+   was collected for. Only deadReplay's own live-edge reading clears that. */
 function deadPlayed(){
-  // Proof that this device can still play a camera, which is what the run
-  // guard was waiting for.
-  deadRunKeys = [];
-  deadBlind = false;
-  const key = state.cam && camKey(state.cam);
-  if (key && deadLog[key] && deadLog[key].code == null){ delete deadLog[key]; deadSave(false); }
+  clearStrike(state.cam, 'stalls', 'offline');
 }
 
 function deadWatch(code){
   if (DEAD_CODES.has(code)) dropDead(state.cam, code, 'player error ' + code);
-  else if (ads.playerState === 0) dropDead(state.cam, 'ended', 'the broadcast has ended');
+  else if (ads.playerState === 0)
+    strikeDead(state.cam, 'offline', DEAD_OFFLINE, 'ended', 'reported off the air');
   else if (ads.playerState === 1 && !ads.played){ ads.played = true; deadPlayed(); }
 }
 
@@ -1578,12 +1564,19 @@ function deadWatch(code){
 let replayWatch = null;
 function deadReplay(len, at){
   if (!ads.at || clock() - ads.at > DEAD_FRESH || state.suspended){ replayWatch = null; return; }
-  if (!(len > DEAD_LAG) || !Number.isFinite(at) || len - at <= DEAD_LAG){ replayWatch = null; return; }
+  if (!(len > DEAD_LAG) || !Number.isFinite(at) || len - at <= DEAD_LAG){
+    // Playing at its own live edge, which is what a camera is supposed to do
+    // and is the one thing that answers a replay strike.
+    replayWatch = null;
+    clearStrike(state.cam, 'replay');
+    return;
+  }
   const now = clock();
   if (replayWatch && replayWatch.cam === state.cam){
     if (now - replayWatch.t >= 3)
-      dropDead(state.cam, 'recorded',
-               'playing a recording ' + Math.round((len - at)/60) + ' minutes behind its end');
+      strikeDead(state.cam, 'replay', DEAD_OFFLINE, 'recorded',
+                 'playing a recording ' + Math.round((len - at)/60)
+                 + ' minutes behind its end');
   } else replayWatch = { cam: state.cam, t: now };
 }
 
@@ -2631,8 +2624,7 @@ const progress = v => { bar.style.width = (v*100)+'%'; };
     // as a list the camera file can be mended from; the drops expire by
     // themselves after DEAD_RETRY days. Roundtrip.dropDead(cam,'by hand') is
     // what the player's own error report does.
-    dead: deadList, deadLog, publishDead, isDropped,
-    dropDead: (cam, code, why) => dropDead(cam, code, why, false),
+    dead: deadList, deadLog, dropDead, publishDead, isDropped,
     silenced: () => [...silenced],
     // Roundtrip.find('beach') is what the search box runs.
     find: q => (Search ? Search.search(q).map(r => r.cam.name) : []),

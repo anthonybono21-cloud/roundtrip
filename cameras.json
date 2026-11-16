@@ -79293,7 +79293,7 @@
       "watch_url": "https://www.youtube.com/watch?v=vodPF-0McTQ",
       "requires_login": false,
       "last_verified": "2026-11-16",
-      "notes": "Public operator stream. Current liveness, playback and composition checked from decoded live frames. Coordinates are approximate discovery-source positions; camera mounting point is not verified. Re-pinned 2026-11-16: the stream this record was added with (Dq4ih_eeQ9w) had ended, and the operator had restarted on a new id. Found on ChicagoLoopLive as \"24/7 Downtown Chicago Live Stream | Relaxing music & City View\". Same view, same place; the dive point is unchanged.",
+      "notes": "Public operator stream. Current liveness, playback and composition checked from decoded live frames. Coordinates are approximate discovery-source positions; camera mounting point is not verified. Re-pinned 2026-11-16: the stream this record was added with (Dq4ih_eeQ9w) had ended, and the operator had restarted on a new id. Found on ChicagoLoopLive as \"24/7 Downtown Chicago Live Stream | Relaxing music & City View\". The same operator's current downtown stream; its title says Downtown Chicago rather than naming the Wrigley Building and the bridge, so the exact framing is unconfirmed.",
       "timezone": "America/Chicago",
       "tags": [
         "chicago",

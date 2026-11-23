@@ -33068,25 +33068,55 @@
       "url": "https://www.youtube.com/embed/d-drfinzIWU?autoplay=1&mute=1",
       "watch_url": "https://www.youtube.com/watch?v=d-drfinzIWU",
       "requires_login": false,
-      "last_verified": "2026-10-15",
-      "notes": "The venue's own stage camera: its live-cam page calls it 'our live Stage Camera ... a view from the main deck and stage on top of Neptune's Lookout'. The frame takes in the deck as well as the stage, so between sets it is a deck of drinkers - which is why the sets below are the conservative core rather than the full opening hours.",
+      "last_verified": "2026-11-23",
+      "notes": "The venue's own stage camera: its live-cam page calls it 'our live Stage Camera ... a view from the main deck and stage on top of Neptune's Lookout'. The frame takes in the deck as well as the stage, so between sets it is a deck of drinkers - which is why the sets below are the conservative core rather than the full opening hours. Window rewritten 2026-11-23 from the November schedule, with the Monday and Friday steel pan sets and the Sunday steel pan added.",
       "audio": "live-music",
       "audio_basis": "The venue's own live-cam page carries an unmute control on the embedded player and the video tags include 'livemusic', and the published schedule puts a named act on that stage during the set times, so during a set the sound is the performance.",
       "ads": "unknown",
       "always_on": false,
       "live_window": {
         "tz": "America/St_Thomas",
-        "days": "daily",
-        "from": "16:30",
-        "to": "19:30",
+        "days": "Monday to Friday, an act on the stage 4:30pm to 7:30pm; steel pan Monday and Friday 11:30am to 2:30pm and Sunday 6pm to 8pm",
+        "from": "11:30",
+        "to": "20:00",
+        "weekdays": [
+          "mon",
+          "tue",
+          "wed",
+          "thu",
+          "fri",
+          "sun"
+        ],
         "sets": [
           {
             "from": "16:30",
-            "to": "19:30"
+            "to": "19:30",
+            "weekdays": [
+              "mon",
+              "tue",
+              "wed",
+              "thu",
+              "fri"
+            ]
+          },
+          {
+            "from": "11:30",
+            "to": "14:30",
+            "weekdays": [
+              "mon",
+              "fri"
+            ]
+          },
+          {
+            "from": "18:00",
+            "to": "20:00",
+            "weekdays": [
+              "sun"
+            ]
           }
         ],
-        "source": "windmillbar.com/live-cam/, October 2026 live music schedule, read 2026-10-15. The page states \"All times are St. John time\".",
-        "note": "The venue publishes per-act start AND end times, and 16:30-19:30 is the one set that recurs Monday to Friday, so it is the only one that can go in a sets array: isLiveNow does not read the days string, so anything listed here applies to every day. Excluded on purpose: the Monday and Friday 11:30-14:30 steel pan sets, because Tuesday to Thursday have no midday act and the camera would show an empty deck; the Sunday steel pan at 18:00-20:00 and the occasional Sunday open mic at 19:00-21:00, which fall partly outside this window; and the Sunday 16:00-18:00 bingo, which is not live music. Saturdays are irregular - two October dates carried an act and two said 'No live music scheduled'. The venue states it is open 11:00 to 20:00, so some published sets run past its own stated close."
+        "source": "windmillbar.com/live-cam/, November 2026 live music schedule, read 2026-11-23. The page states \"All times are St. John time\".",
+        "note": "Each set now carries its own weekdays, so the three recurring sets are expressed separately instead of being collapsed into the one that runs every weekday. Checked against every date in the published month: the 16:30-19:30 act ran on all 21 weekdays, Ikema on Steel Pan on all five Mondays and all four Fridays at 11:30-14:30, and Jeff on Steel Pan on all five Sundays at 18:00-20:00. The outer 11:30 to 20:00 span is a gate over the sets, not opening hours. Left out on purpose: Saturday, where an act at 16:30-19:30 ran on all four November dates but two October Saturdays said \"No live music scheduled\", so it is not yet a pattern; the Sunday 16:00-18:00 bingo, which is not live music; and the occasional Sunday open mic at 19:00-21:00, which runs past the venue's own 20:00 close. Lineups change at short notice and a public-holiday closure cannot be expressed."
       },
       "timezone": "America/St_Thomas",
       "pose": {

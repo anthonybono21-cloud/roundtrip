@@ -83435,7 +83435,7 @@
       "kind": "youtube",
       "reject_reason": "Dead stream, found by the TVs themselves and confirmed against YouTube on 2026-11-16. The page dropped it on a player error code; the watch page then said: ended - 2026-09-23. A broadcast that has ended never resumes under the same id, so this id is finished, but the camera itself probably is not: most of these are operators who restarted on a new id.",
       "rejected_at": "2026-11-16",
-      "how_to_repin": "Re-pin candidate, not a judgement on the camera: Anthony's list already wanted this view. Find the operator's channel (provider above names it), read https://www.youtube.com/@<handle>/live or /channel/<id>/live for whatever it is broadcasting now, confirm from the title that it is this camera and not a sibling, then re-add with this record's own name, location and pose.",
+      "how_to_repin": "Re-pin candidate, not a judgement on the camera: Anthony's list already wanted this view. Find the operator's channel (provider above names it), read https://www.youtube.com/@<handle>/live or /channel/<id>/live for whatever it is broadcasting now, confirm from the title that it is this camera and not a sibling, then re-add with this record's own name, location and pose. Tried 2026-11-23, no re-pin (mismatch): two live siblings on the same plaza and neither title names the Reloj Monumental: h0zfjWnZtho (Canal 8 - vista hacia el Norte from Hotel Emily) and gnUStuienrw (Canal 11 - south view). Ambiguous; not re-pinned.",
       "pose": {
         "lat": 20.1275,
         "lng": -98.7324,
@@ -83865,7 +83865,7 @@
       "kind": "youtube",
       "reject_reason": "Dead stream, found by the TVs themselves and confirmed against YouTube on 2026-11-16. The page dropped it on a player error code; the watch page then said: ended - 2026-10-10. A broadcast that has ended never resumes under the same id, so this id is finished, but the camera itself probably is not: most of these are operators who restarted on a new id.",
       "rejected_at": "2026-11-16",
-      "how_to_repin": "Re-pin candidate, not a judgement on the camera: Anthony's list already wanted this view. Find the operator's channel (provider above names it), read https://www.youtube.com/@<handle>/live or /channel/<id>/live for whatever it is broadcasting now, confirm from the title that it is this camera and not a sibling, then re-add with this record's own name, location and pose.",
+      "how_to_repin": "Re-pin candidate, not a judgement on the camera: Anthony's list already wanted this view. Find the operator's channel (provider above names it), read https://www.youtube.com/@<handle>/live or /channel/<id>/live for whatever it is broadcasting now, confirm from the title that it is this camera and not a sibling, then re-add with this record's own name, location and pose. Tried 2026-11-23, no re-pin (no_channel): could not locate an Adventures with Willy / Pineapple Willy YouTube channel; pwillys.com/watch/beach-cams embeds its cams via script with no YouTube link in the markup, and live search returned no matching stream",
       "pose": {
         "lat": 30.1751,
         "lng": -85.8052,
@@ -84037,7 +84037,7 @@
       "kind": "youtube",
       "reject_reason": "Dead stream, found by the TVs themselves and confirmed against YouTube on 2026-11-16. The page dropped it on a player error code; the watch page then said: ended - 2026-09-20. A broadcast that has ended never resumes under the same id, so this id is finished, but the camera itself probably is not: most of these are operators who restarted on a new id.",
       "rejected_at": "2026-11-16",
-      "how_to_repin": "Re-pin candidate, not a judgement on the camera: Anthony's list already wanted this view. Find the operator's channel (provider above names it), read https://www.youtube.com/@<handle>/live or /channel/<id>/live for whatever it is broadcasting now, confirm from the title that it is this camera and not a sibling, then re-add with this record's own name, location and pose.",
+      "how_to_repin": "Re-pin candidate, not a judgement on the camera: Anthony's list already wanted this view. Find the operator's channel (provider above names it), read https://www.youtube.com/@<handle>/live or /channel/<id>/live for whatever it is broadcasting now, confirm from the title that it is this camera and not a sibling, then re-add with this record's own name, location and pose. Tried 2026-11-23, no re-pin (channel_dark): EarthCam channel found and live, but only Times Square North, Washington Monument, Chicago Skydeck and EarthCamTV3; both Greenville giraffe streams (paddock vTaJjIttrZU, barn) have ended",
       "pose": {
         "lat": 34.8469,
         "lng": -82.3878,
@@ -84218,7 +84218,7 @@
       "kind": "youtube",
       "reject_reason": "Dead stream, found by the TVs themselves and confirmed against YouTube on 2026-11-16. The page dropped it on a player error code; the watch page then said: ended - 2026-09-22. A broadcast that has ended never resumes under the same id, so this id is finished, but the camera itself probably is not: most of these are operators who restarted on a new id.",
       "rejected_at": "2026-11-16",
-      "how_to_repin": "Re-pin candidate, not a judgement on the camera: Anthony's list already wanted this view. Find the operator's channel (provider above names it), read https://www.youtube.com/@<handle>/live or /channel/<id>/live for whatever it is broadcasting now, confirm from the title that it is this camera and not a sibling, then re-add with this record's own name, location and pose.",
+      "how_to_repin": "Re-pin candidate, not a judgement on the camera: Anthony's list already wanted this view. Find the operator's channel (provider above names it), read https://www.youtube.com/@<handle>/live or /channel/<id>/live for whatever it is broadcasting now, confirm from the title that it is this camera and not a sibling, then re-add with this record's own name, location and pose. Tried 2026-11-23, no re-pin (channel_dark): ZeroEight channel UCmSsdXm7F8CWlOODXSzANsg found; /live falls back to its profile page and its Collins Ave streams show as past live streams, nothing live now",
       "pose": {
         "lat": 25.7983,
         "lng": -80.1275,
@@ -84271,7 +84271,7 @@
       "kind": "youtube",
       "reject_reason": "Dead stream, found by the TVs themselves and confirmed against YouTube on 2026-11-16. The page dropped it on a player error code; the watch page then said: ended - 2026-11-04. A broadcast that has ended never resumes under the same id, so this id is finished, but the camera itself probably is not: most of these are operators who restarted on a new id.",
       "rejected_at": "2026-11-16",
-      "how_to_repin": "Re-pin candidate, not a judgement on the camera: Anthony's list already wanted this view. Find the operator's channel (provider above names it), read https://www.youtube.com/@<handle>/live or /channel/<id>/live for whatever it is broadcasting now, confirm from the title that it is this camera and not a sibling, then re-add with this record's own name, location and pose.",
+      "how_to_repin": "Re-pin candidate, not a judgement on the camera: Anthony's list already wanted this view. Find the operator's channel (provider above names it), read https://www.youtube.com/@<handle>/live or /channel/<id>/live for whatever it is broadcasting now, confirm from the title that it is this camera and not a sibling, then re-add with this record's own name, location and pose. Tried 2026-11-23, no re-pin (channel_dark): Ozolio Live is the operator channel (Ozolio own channel UC5lNakfSdpqXCW214H5sBgQ /live is its Waikiki cam); a YouTube live-filtered search for the Pittsburgh penguin cam returns nothing live, so the cached \"Penguin Cam Live | Pittsburgh Zoo & PPG Aquarium Webcam\" listing is stale",
       "pose": {
         "lat": 40.4833,
         "lng": -79.9216,
@@ -84705,7 +84705,7 @@
       "kind": "youtube",
       "reject_reason": "Dead stream, found by the TVs themselves and confirmed against YouTube on 2026-11-16. The page dropped it on a player error code; the watch page then said: ended - 2026-09-24. A broadcast that has ended never resumes under the same id, so this id is finished, but the camera itself probably is not: most of these are operators who restarted on a new id.",
       "rejected_at": "2026-11-16",
-      "how_to_repin": "Re-pin candidate, not a judgement on the camera: Anthony's list already wanted this view. Find the operator's channel (provider above names it), read https://www.youtube.com/@<handle>/live or /channel/<id>/live for whatever it is broadcasting now, confirm from the title that it is this camera and not a sibling, then re-add with this record's own name, location and pose.",
+      "how_to_repin": "Re-pin candidate, not a judgement on the camera: Anthony's list already wanted this view. Find the operator's channel (provider above names it), read https://www.youtube.com/@<handle>/live or /channel/<id>/live for whatever it is broadcasting now, confirm from the title that it is this camera and not a sibling, then re-add with this record's own name, location and pose. Tried 2026-11-23, no re-pin (mismatch): Jim Ginn channel @ocbeachli is live, but only with Ocean City Fishing Club/Pier, a different one of his ~40 cams; no live Ninth Street boardwalk stream found",
       "pose": {
         "lat": 39.2749,
         "lng": -74.5721,
@@ -85113,7 +85113,7 @@
       "kind": "youtube",
       "reject_reason": "Dead stream, found by the TVs themselves and confirmed against YouTube on 2026-11-16. The page dropped it on a player error code; the watch page then said: ended - 2026-09-19. A broadcast that has ended never resumes under the same id, so this id is finished, but the camera itself probably is not: most of these are operators who restarted on a new id.",
       "rejected_at": "2026-11-16",
-      "how_to_repin": "Re-pin candidate, not a judgement on the camera: Anthony's list already wanted this view. Find the operator's channel (provider above names it), read https://www.youtube.com/@<handle>/live or /channel/<id>/live for whatever it is broadcasting now, confirm from the title that it is this camera and not a sibling, then re-add with this record's own name, location and pose.",
+      "how_to_repin": "Re-pin candidate, not a judgement on the camera: Anthony's list already wanted this view. Find the operator's channel (provider above names it), read https://www.youtube.com/@<handle>/live or /channel/<id>/live for whatever it is broadcasting now, confirm from the title that it is this camera and not a sibling, then re-add with this record's own name, location and pose. Tried 2026-11-23, no re-pin (channel_dark): channel @galeriacima (UC4GOcOKkEefz5NamN4WyMFg) found but /live falls back to its profile page, nothing live",
       "pose": {
         "lat": -33.4371,
         "lng": -70.6377,
@@ -85416,7 +85416,7 @@
       "kind": "youtube",
       "reject_reason": "Dead stream, found by the TVs themselves and confirmed against YouTube on 2026-11-16. The page dropped it on a player error code; the watch page then said: ended - 2026-10-24. A broadcast that has ended never resumes under the same id, so this id is finished, but the camera itself probably is not: most of these are operators who restarted on a new id.",
       "rejected_at": "2026-11-16",
-      "how_to_repin": "Re-pin candidate, not a judgement on the camera: Anthony's list already wanted this view. Find the operator's channel (provider above names it), read https://www.youtube.com/@<handle>/live or /channel/<id>/live for whatever it is broadcasting now, confirm from the title that it is this camera and not a sibling, then re-add with this record's own name, location and pose.",
+      "how_to_repin": "Re-pin candidate, not a judgement on the camera: Anthony's list already wanted this view. Find the operator's channel (provider above names it), read https://www.youtube.com/@<handle>/live or /channel/<id>/live for whatever it is broadcasting now, confirm from the title that it is this camera and not a sibling, then re-add with this record's own name, location and pose. Tried 2026-11-23, no re-pin (channel_dark): channel UCyll26UKJ7JHZ9txipeUW2w found; its /live redirects to an ordinary upload (The Landing Beach Bar), so nothing is live; cached listings still show a Caravelle/Christiansted Harbor stream but no current id could be resolved",
       "pose": {
         "lat": 17.74599,
         "lng": -64.70296,
@@ -85976,7 +85976,7 @@
       "kind": "youtube",
       "reject_reason": "Dead stream, found by the TVs themselves and confirmed against YouTube on 2026-11-16. The page dropped it on a player state; the watch page then said: gone - page says video removed by uploader; no metadata. The video is gone from YouTube outright.",
       "rejected_at": "2026-11-16",
-      "how_to_repin": "Re-pin candidate, not a judgement on the camera: Anthony's list already wanted this view. Find the operator's channel (provider above names it), read https://www.youtube.com/@<handle>/live or /channel/<id>/live for whatever it is broadcasting now, confirm from the title that it is this camera and not a sibling, then re-add with this record's own name, location and pose.",
+      "how_to_repin": "Re-pin candidate, not a judgement on the camera: Anthony's list already wanted this view. Find the operator's channel (provider above names it), read https://www.youtube.com/@<handle>/live or /channel/<id>/live for whatever it is broadcasting now, confirm from the title that it is this camera and not a sibling, then re-add with this record's own name, location and pose. Tried 2026-11-23, no re-pin (mismatch): shrine channel /live is the Casa da Mae prayer/basilica feed (juUt-rN5CVo); the Aparecida ao Vivo camera channel has nothing live; no passarela feed found",
       "pose": {
         "lat": -22.85172,
         "lng": -45.23422,
@@ -87576,7 +87576,7 @@
       "kind": "youtube",
       "reject_reason": "Dead stream, found by the TVs themselves and confirmed against YouTube on 2026-11-16. The page dropped it on a player error code; the watch page then said: ended - 2026-11-07. A broadcast that has ended never resumes under the same id, so this id is finished, but the camera itself probably is not: most of these are operators who restarted on a new id.",
       "rejected_at": "2026-11-16",
-      "how_to_repin": "Re-pin candidate, not a judgement on the camera: Anthony's list already wanted this view. Find the operator's channel (provider above names it), read https://www.youtube.com/@<handle>/live or /channel/<id>/live for whatever it is broadcasting now, confirm from the title that it is this camera and not a sibling, then re-add with this record's own name, location and pose.",
+      "how_to_repin": "Re-pin candidate, not a judgement on the camera: Anthony's list already wanted this view. Find the operator's channel (provider above names it), read https://www.youtube.com/@<handle>/live or /channel/<id>/live for whatever it is broadcasting now, confirm from the title that it is this camera and not a sibling, then re-add with this record's own name, location and pose. Tried 2026-11-23, no re-pin (channel_dark): channel @AucklandCityViews found; /live redirects to the channel profile and its last stream was flagged \"[Ending Nov 5th]\"; live-filtered search surfaces only other operators",
       "pose": {
         "lat": -36.8515,
         "lng": 174.7845,

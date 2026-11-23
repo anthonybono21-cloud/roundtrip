@@ -1402,11 +1402,19 @@ function paintVote(){ Menu?.sync(); }
    gone. The reason is that a great many webcam operators run one permanent
    broadcast id that goes off the air at night, or for maintenance, and comes
    back on the same id - so `ended` means off the air this minute, not off
-   the air for good. A camera must not be dropped for that, which is what
-   DEAD_OFFLINE is for: the state has to say the same thing on two separate
-   landings. Nothing is lost by waiting, because a camera that really has
-   finished answers with an error code soon enough, and that is believed at
-   once.
+   the air for good.
+
+   Asking for two separate landings to agree was not enough, because a
+   camera that is dark every night is dark on two separate nights. On 23
+   November the TVs had dropped ten cameras on a state and every single one
+   of the ten was broadcasting when it was asked. Across both weeks that is
+   49 of 62. So a player state now rests a camera instead of dropping it:
+   out of the rotation for DEAD_REST, then dealt again, and never removed.
+   Nothing is lost by waiting, because a camera that really has finished
+   answers with an error code soon enough, and that is believed at once. Once
+   the same state has been seen on DEAD_OFFLINE separate landings the camera
+   is reported to the topic under its own kind, `cam-offline`, which is not a
+   camera to go and re-pin but a camera that may want a live_window.
 
    The earlier reading of the same evidence was that the TVs had suffered a
    run of false drops - 155 on one in a day, 170 on the other - and the fix
@@ -1422,7 +1430,8 @@ const DEAD_STALLS = 3;        // landings with no picture before that counts
 const DEAD_LAG    = 3600;     // seconds behind a finite length that means replay
 const DEAD_FRESH  = 90;       // seconds after a mount that the replay check runs
 const DEAD_CODES  = new Set([2, 100, 101, 150]);
-const DEAD_OFFLINE = 2;       // separate landings a player state must agree on
+const DEAD_OFFLINE = 2;       // separate landings before a rest is worth reporting
+const DEAD_REST   = 3*3600e3; // how long a player state rests a camera for
 const DEAD_SWEEP  = 6*3600e3; // how often a left-on TV retires its stale drops
 const DAY = 86400e3;
 
@@ -1458,11 +1467,27 @@ const deadList = () => Object.entries(deadLog)
   .filter(([, v]) => v.code != null)
   .map(([key, v]) => ({ key, ...v }));
 function publishDead(){
-  const list = deadList();
+  send('cam-dead', deadList());
+}
+
+/* Its own kind again, and for the same reason: a camera that keeps being off
+   the air when it is landed on is not a camera to go and re-pin, it is a
+   camera whose hours the list does not know. Sent separately so the two can
+   never be read as one list. */
+let offTimer = null;
+const offList = () => Object.entries(deadLog)
+  .filter(([, v]) => v.code == null
+                     && ((v.offline || 0) >= DEAD_OFFLINE || (v.replay || 0) >= DEAD_OFFLINE
+                         || (v.stalls || 0) >= DEAD_STALLS))
+  .map(([key, v]) => ({ key, ...v }));
+const publishOffline = () => send('cam-offline', offList());
+
+function send(kind, list){
   if (!list.length) return;
   const body = JSON.stringify({
-    app: 'roundtrip', kind: 'cam-dead', device: deviceId,
-    at: new Date().toISOString(), dead: list.length, cams: list,
+    app: 'roundtrip', kind, device: deviceId,
+    at: new Date().toISOString(), [kind === 'cam-dead' ? 'dead' : 'offline']: list.length,
+    cams: list,
   });
   try { fetch(VOTE_TOPIC, { method:'POST', body, keepalive:true }).catch(()=>{}); } catch {}
 }
@@ -1471,10 +1496,21 @@ deadLoad();
    TV that is never reloaded: the kitchen set was still dropping cameras it
    had written off in October. So it runs on a clock too. */
 setInterval(deadLoad, DEAD_SWEEP);
-setTimeout(() => { if (deadList().length) publishDead(); }, 11000);
+setTimeout(() => { publishDead(); publishOffline(); }, 11000);
 
-/* Out of the rotation: thumbed down for good, or dead for now. */
-const isDropped = c => { const k = camKey(c); return state.rejects.has(k) || dead.has(k); };
+/* A camera the player said was off the air is not dropped, only stood down
+   for a few hours and then dealt again. Read off the clock rather than kept
+   in a set, so a rest ends when it is up and not at the next sweep. */
+const isResting = c => {
+  const v = deadLog[camKey(c)];
+  return !!v && v.code == null && v.rest > Date.now();
+};
+
+/* Out of the rotation: thumbed down for good, dead for now, or resting. */
+const isDropped = c => {
+  const k = camKey(c);
+  return state.rejects.has(k) || dead.has(k) || isResting(c);
+};
 
 /* Off this device's deck and on to the next dive. Kept as its own step
    because a drop and a camera merely passed over look the same on screen,
@@ -1505,11 +1541,15 @@ function dropDead(cam, code, why){
   deadMoveOn(cam, cam.name + ' is off the air. Moving to the next view.');
 }
 
-/* Everything a player state says is counted against the camera rather than
-   decided on the spot, so one bad minute on the wifi, or one night a
-   permanent broadcast spends off the air, costs nothing at all. A landing
-   can only ever add one strike of a kind, however many times the player
-   repeats itself while it is up. */
+/* What a player state earns a camera is a rest, never a drop. It goes out of
+   the rotation for DEAD_REST and is then dealt again, because the state says
+   only that this minute is no good: ten of ten cameras the TVs dropped on a
+   state in the week to 23 November were broadcasting when they were asked.
+   The tally is still kept, and once the same state has been seen on `limit`
+   separate landings the camera is reported as `cam-offline` - something to
+   write a live_window for, not something to re-pin. A landing can only ever
+   add one strike of a kind, however many times the player repeats itself
+   while it is up. */
 function strikeDead(cam, kind, limit, code, said){
   if (!cam) return;
   const key = camKey(cam);
@@ -1518,10 +1558,17 @@ function strikeDead(cam, kind, limit, code, said){
   const n = (was[kind] || 0) + 1;
   deadLog[key] = { ...was, [kind]: n, [kind + 'At']: ads.at,
                    at: new Date().toISOString(),
-                   name: cam.name, video_id: cam.video_id || '' };
-  if (n >= limit) dropDead(cam, code, said + ', on ' + n + ' separate landings');
-  else deadSave(false);
+                   rest: Date.now() + DEAD_REST, why: code,
+                   said: said + ', on ' + n + ' separate landings',
+                   name: cam.name, location: cam.location || '',
+                   video_id: cam.video_id || '', url: cam.url || '' };
+  deadSave(false);
+  if (n >= limit){ clearTimeout(offTimer); offTimer = setTimeout(publishOffline, 1500); }
+  refreshPins();
+  deadMoveOn(cam, cam.name + ' ' + RESTED[kind] + '. Moving to the next view.');
 }
+const RESTED = { offline: 'is not on the air just now', stalls: 'is not playing',
+                 replay: 'is showing a recording' };
 const stallDead = cam =>
   strikeDead(cam, 'stalls', DEAD_STALLS, 'stalled', 'no picture');
 
@@ -1539,6 +1586,7 @@ function clearStrike(cam, ...kinds){
   if (!changed) return;
   if (!Object.keys(was).some(k => ['stalls','offline','replay'].includes(k)))
     delete deadLog[key];
+  else delete was.rest;        // it is playing, so whatever rest is left is over
   deadSave(false);
 }
 
@@ -1586,11 +1634,7 @@ function deadReplay(len, at){
 function deadStalled(){
   if (!liveFrame || liveFrame.tagName !== 'IFRAME') return false;
   if (!ads.replied || ads.played || clock() - state.t0 < 6) return false;
-  const cam = state.cam;
-  note(cam.name + ' is not playing. Moving to the next view.');
-  stallDead(cam);
-  if (dead.has(camKey(cam))) return true;      // dropDead has moved on already
-  skipNext();
+  stallDead(state.cam);        // rests the camera and moves the rotation on itself
   return true;
 }
 
@@ -2620,11 +2664,18 @@ const progress = v => { bar.style.width = (v*100)+'%'; };
     // camera file can be pruned from; Roundtrip.publishVotes() sends that
     // list out again by hand.
     votes: voteList, publishVotes, castVote,
-    // Roundtrip.dead() is every camera this browser has found off the air,
-    // as a list the camera file can be mended from; the drops expire by
+    // Roundtrip.dead() is every camera this browser has found off the air for
+    // good, as a list the camera file can be mended from; the drops expire by
     // themselves after DEAD_RETRY days. Roundtrip.dropDead(cam,'by hand') is
-    // what the player's own error report does.
-    dead: deadList, deadLog, dropDead, publishDead, isDropped,
+    // what the player's own error report does. Roundtrip.offline() is the
+    // separate, softer list: cameras that keep being off the air when they are
+    // landed on, which want a live_window rather than removing.
+    dead: deadList, deadLog, dropDead, publishDead, isDropped, isResting,
+    offline: offList, publishOffline,
+    // Roundtrip.resting() is what is standing down this minute and will be
+    // dealt again once its rest is up.
+    resting: () => Object.values(deadLog)
+      .filter(v => v.code == null && v.rest > Date.now()).map(v => v.name),
     silenced: () => [...silenced],
     // Roundtrip.find('beach') is what the search box runs.
     find: q => (Search ? Search.search(q).map(r => r.cam.name) : []),

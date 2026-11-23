@@ -1,6 +1,7 @@
 /* Drives the real index.html in Chromium with a stand-in YouTube player, to
-   prove that a camera which has died leaves the deck and that a camera which
-   is fine never does.
+   prove that a camera which has died leaves the deck, that a camera which is
+   merely off the air tonight is only rested and comes back, and that a camera
+   which is fine is never touched.
 
    The page cannot be checked against YouTube itself from a sandbox, and
    pointing it at live ids would make the result depend on whatever those
@@ -116,6 +117,9 @@ await page.waitForFunction(() => !!window.Roundtrip, null, { timeout:30000 });
 
 const phase = () => page.evaluate(() => document.querySelector('#phase').textContent);
 const dead  = () => page.evaluate(() => window.Roundtrip.dead().map(d => d.name));
+const off   = () => page.evaluate(() => window.Roundtrip.offline().map(d => d.name));
+const resting = name => page.evaluate(n => Object.values(window.Roundtrip.deadLog)
+  .some(v => v.name === n && v.code == null && v.rest > Date.now()), name);
 
 async function onOrbit(){            // a dive asked for mid-retreat is lost
   for (let i = 0; i < 60; i++){
@@ -135,12 +139,18 @@ async function land(name, { hold = 0, moves = false, strikes = 0,
   await page.evaluate(n => window.Roundtrip.dive(n), name);
   if (moves){
     // Dropped on the way down, or shown and then left: either way the camera
-    // is gone and the rotation has moved on. A strike that is not the last one
-    // never shows up as a drop, so wait for the tally instead.
+    // is out of the rotation now. A player state only rests a camera, so that
+    // counts as having moved on too, and so does a strike tally going up when
+    // the strike is not yet the one that matters.
     for (let i = 0; i < 100; i++){
       if ((await dead()).includes(name)) break;
-      if (strikes && await page.evaluate(([k, kind]) =>
-            (window.Roundtrip.deadLog[k] || {})[kind] || 0, strikeOf) >= strikes) break;
+      // Wait for the tally when one is asked for. A camera that is already
+      // resting from the landing before is resting on the way in, so testing
+      // that first would leave this landing before its own strike lands.
+      if (strikes){
+        if (await page.evaluate(([k, kind]) =>
+              (window.Roundtrip.deadLog[k] || {})[kind] || 0, strikeOf) >= strikes) break;
+      } else if (await resting(name)) break;
       await page.waitForTimeout(500);
     }
   } else {
@@ -166,49 +176,80 @@ check('a blocked embed is dropped', (await dead()).includes('Blocked Embed Bay')
 check('and it is out of the deck',
       !(await page.evaluate(() => window.Roundtrip.order())).includes('Blocked Embed Bay'));
 
-/* A player state is about the moment, so it has to agree on two separate
-   landings. On 16 November, 39 of the 52 cameras dropped on one of these were
-   broadcasting when they were asked, and exactly one was really gone. */
+/* A player state is about the moment and must never drop a camera. Of the 52
+   cameras dropped on one of these by 16 November, 39 were broadcasting when
+   they were asked; of the 10 dropped on one in the week to 23 November, all
+   ten were. So a state rests the camera for a few hours instead, and after
+   DEAD_OFFLINE separate landings it is reported under its own softer kind. */
 console.log('a restarted broadcast left up as a recording, twice');
 await land('Yesterday Replay Street', { moves: true, strikes: 1,
                                         strikeOf: ['replay1', 'replay'] });
-check('one recording report does not drop it',
+check('a recording report rests it instead of dropping it',
+      !(await dead()).includes('Yesterday Replay Street')
+      && await resting('Yesterday Replay Street'));
+check('and it is out of the rotation while it rests',
+      !(await page.evaluate(() => window.Roundtrip.order())).includes('Yesterday Replay Street'));
+await land('Yesterday Replay Street', { moves: true, strikes: 2,
+                                        strikeOf: ['replay1', 'replay'] });
+check('the second report still does not drop it',
       !(await dead()).includes('Yesterday Replay Street'));
-await land('Yesterday Replay Street', { moves: true });
-check('the second does', (await dead()).includes('Yesterday Replay Street'));
+check('and by then it is reported as off the air, not as dead',
+      (await off()).includes('Yesterday Replay Street'));
 
 console.log('a permanent broadcast that is off the air tonight');
 await land('Off Air Island', { moves: true, strikes: 1,
                                strikeOf: ['ended1', 'offline'] });
-check('one off-the-air report does not drop it',
-      !(await dead()).includes('Off Air Island'));
+check('one off-the-air report rests it and nothing more',
+      !(await dead()).includes('Off Air Island') && await resting('Off Air Island'));
 await land('Healthy Harbour', { hold: 12 });
 check('and a camera that plays is untouched by it',
       !(await dead()).includes('Off Air Island'));
-await land('Off Air Island', { moves: true });
-check('a second off-the-air report on another landing drops it',
-      (await dead()).includes('Off Air Island'));
+await land('Off Air Island', { moves: true, strikes: 2,
+                               strikeOf: ['ended1', 'offline'] });
+check('a second off-the-air report on another landing still does not drop it',
+      !(await dead()).includes('Off Air Island'));
+check('it is reported as off the air instead', (await off()).includes('Off Air Island'));
 
 console.log('a player that answers but never plays, three times');
 for (let i = 1; i <= 3; i++){
   await land('Silent Stall Square', { moves: true, strikes: i });
-  const gone = (await dead()).includes('Silent Stall Square');
-  check(`stall ${i} of 3 ${i < 3 ? 'does not drop it' : 'drops it'}`, gone === (i === 3));
+  check(`stall ${i} of 3 never drops it`,
+        !(await dead()).includes('Silent Stall Square'));
 }
+check('three stalls are reported as off the air', (await off()).includes('Silent Stall Square'));
+
+check('all three are resting and only the blocked embed is really gone',
+      (await page.evaluate(() => window.Roundtrip.resting())).length === 3
+      && (await dead()).length === 1);
+
+/* The whole point of a rest: the camera comes back. Winding the stored rest
+   back into the past is what the clock does three hours later anyway. */
+await page.evaluate(() => {
+  for (const v of Object.values(window.Roundtrip.deadLog))
+    if (v.code == null && v.rest) v.rest = Date.now() - 1000;
+});
+check('and a rest that is up leaves nothing standing down',
+      (await page.evaluate(() => window.Roundtrip.resting())).length === 0);
 
 await land('Healthy Harbour', { hold: 18 });
 check('the healthy camera is still fine after all that',
       !(await dead()).includes('Healthy Harbour'));
 check('nothing reached the thumbs',
       (await page.evaluate(() => window.Roundtrip.votes())).length === 0);
-check('the drops went out as their own kind of report',
-      reports.length > 0 && reports.every(r => r.kind === 'cam-dead'));
+check('the reports went out under the two separate kinds',
+      reports.some(r => r.kind === 'cam-dead')
+      && reports.some(r => r.kind === 'cam-offline')
+      && reports.every(r => r.kind === 'cam-dead' || r.kind === 'cam-offline'));
+check('and a camera is never on both lists at once',
+      !reports.filter(r => r.kind === 'cam-dead').flatMap(r => r.cams.map(c => c.key))
+        .some(k => reports.filter(r => r.kind === 'cam-offline')
+          .flatMap(r => r.cams.map(c => c.key)).includes(k)));
 
 const stored = await page.evaluate(() => localStorage.getItem('roundtrip.dead'));
 await page.reload({ waitUntil:'load' });
 await page.waitForFunction(() => !!window.Roundtrip, null, { timeout:30000 });
 const after = await dead();
-check('a fresh drop survives a reload', after.length === 4 && !after.includes('Healthy Harbour'));
+check('a fresh drop survives a reload', after.length === 1 && !after.includes('Healthy Harbour'));
 check('and it is kept apart from the thumbs',
       !!stored && (await page.evaluate(() => localStorage.getItem('et45.rejects'))) === null);
 

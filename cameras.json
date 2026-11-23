@@ -80329,6 +80329,69 @@
         "embed_reason": "Embed page returned the stream title, so the stream is embeddable.",
         "in_app_playback_verified": false
       }
+    },
+    {
+      "name": "Edge Barber working area, Agdao",
+      "location": "Agdao, Davao City",
+      "country": "Philippines",
+      "category": "business",
+      "provider": "Edge Babor Family PH",
+      "kind": "youtube",
+      "video_id": "ZozAm_tfkgE",
+      "url": "https://www.youtube.com/embed/ZozAm_tfkgE?autoplay=1&mute=1",
+      "watch_url": "https://www.youtube.com/watch?v=ZozAm_tfkgE",
+      "requires_login": false,
+      "last_verified": "2026-11-23",
+      "notes": "Re-pinned 2026-11-23 from the shop's dead id 8xDhxzGlJHs, which had ended on 2026-10-15. The shop is the same (Edge Babor is the shop's own name and the operator channel is unchanged) but the angle is NOT the same: the live stream is titled \"Edge Cam Inside/Working Area\", so this is the working area rather than whatever the old id framed. Kept because barbers and small trades are the thinnest niche on the list and one Anthony asked for by name. Watch this one: the current id is only a day old, so the operator may be restarting daily, in which case it will need re-pinning again. Against that, the stream title carries a live clock that was ticking today on a broadcast started yesterday, which reads more like a long-running feed with a self-updating title than a daily restart.",
+      "audio": "unknown",
+      "audio_basis": "Not verified by listening.",
+      "ads": "unknown",
+      "pose": {
+        "lat": 7.06087,
+        "lng": 125.59693,
+        "alt_m": 3,
+        "heading": 180,
+        "pitch": -20,
+        "fov": 75,
+        "aligned": false,
+        "view": "interior",
+        "confidence": "low",
+        "basis": "Camera position from a named source (see position_source); heading, pitch and field of view are first guesses, not measured from the frame.",
+        "position_kind": "approximate-site",
+        "position_source": "Overture Maps places 2026-08-19.0, barber in Agdao, queried 2026-09-21"
+      },
+      "timezone": "Asia/Manila",
+      "tags": [
+        "agdao",
+        "davao city",
+        "mindanao",
+        "philippines",
+        "ph",
+        "phl",
+        "asia",
+        "southeast asia",
+        "barber",
+        "barbershop",
+        "haircut",
+        "shop",
+        "indoor",
+        "people",
+        "small trade",
+        "cctv"
+      ],
+      "scene_set": "claude-repin-2026-11-23",
+      "in_sets": [
+        "claude-repin-2026-11-23"
+      ],
+      "check": {
+        "verdict": "live",
+        "checked": "2026-11-23",
+        "method": "metadata",
+        "reason": "isLiveBroadcast True, startDate 2026-11-22, 200, US in regionsAllowed, no endDate.",
+        "embed": "metadata-ok",
+        "embed_reason": "Embed page returned the real stream title, no noindex.",
+        "in_app_playback_verified": false
+      }
     }
   ],
   "rejects": [
@@ -87086,50 +87149,6 @@
         "score-3",
         "busy",
         "night lights"
-      ]
-    },
-    {
-      "name": "Agdao barbershop",
-      "location": "Agdao, Davao City",
-      "category": "business",
-      "provider": "Edge Babor Family PH",
-      "timezone": "Asia/Manila",
-      "video_id": "8xDhxzGlJHs",
-      "kind": "youtube",
-      "reject_reason": "Dead stream, found by the TVs themselves and confirmed against YouTube on 2026-11-16. The page dropped it on a player error code; the watch page then said: ended - 2026-10-15. A broadcast that has ended never resumes under the same id, so this id is finished, but the camera itself probably is not: most of these are operators who restarted on a new id.",
-      "rejected_at": "2026-11-16",
-      "how_to_repin": "Re-pin candidate, not a judgement on the camera: Anthony's list already wanted this view. Find the operator's channel (provider above names it), read https://www.youtube.com/@<handle>/live or /channel/<id>/live for whatever it is broadcasting now, confirm from the title that it is this camera and not a sibling, then re-add with this record's own name, location and pose.",
-      "pose": {
-        "lat": 7.06087,
-        "lng": 125.59693,
-        "alt_m": 3,
-        "heading": 180,
-        "pitch": -20,
-        "fov": 75,
-        "aligned": false,
-        "view": "interior",
-        "confidence": "low",
-        "basis": "Camera position from a named source (see position_source); heading, pitch and field of view are first guesses, not measured from the frame.",
-        "position_kind": "approximate-site",
-        "position_source": "Overture Maps places 2026-08-19.0, barber in Agdao, queried 2026-09-21"
-      },
-      "tags": [
-        "agdao",
-        "davao city",
-        "mindanao",
-        "philippines",
-        "ph",
-        "phl",
-        "asia",
-        "southeast asia",
-        "barber",
-        "barbershop",
-        "haircut",
-        "shop",
-        "indoor",
-        "people",
-        "small trade",
-        "cctv"
       ]
     },
     {

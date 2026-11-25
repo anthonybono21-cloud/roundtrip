@@ -26,7 +26,7 @@ identity and profiles without anything being clicked.
 | | Builds | Runs | What is missing |
 |---|---|---|---|
 | **Android** | Yes, in CI, on every push | Phone and tablet | Nothing, for sideloading |
-| **iPhone / iPad** | Compiles in CI; builds and installs from the MacBook | Anthony's iPhone, over the wireless pairing | Nothing |
+| **iPhone / iPad** | Compiles in CI when Apple-side code under `native/` changes (apple.yml); builds and installs from the MacBook | Anthony's iPhone, over the wireless pairing | Nothing |
 | **Mac** | Same project, Mac Catalyst | Yes | Nothing |
 | **Apple TV** | Not possible as a web shell | — | See below |
 

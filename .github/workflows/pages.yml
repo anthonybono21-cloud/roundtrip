@@ -22,13 +22,15 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  publish:
+  # Two jobs, build then deploy, as GitHub's own Pages starter workflows do.
+  # The upload and the deploy used to share one job, which is the layout that
+  # hits actions/deploy-pages#451 hardest (see the deploy job). Apart, the
+  # deploy starts on a fresh runner some seconds after the upload, and "Re-run
+  # failed jobs" re-runs only the deploy, against the upload already made.
+  build:
     if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
     runs-on: ubuntu-latest
     timeout-minutes: 12
-    environment:
-      name: github-pages
-      url: ${{ steps.deploy.outputs.page_url }}
     steps:
       - uses: actions/checkout@v4
         with:
@@ -68,6 +70,56 @@ jobs:
         with:
           path: ${{ runner.temp }}/roundtrip-site
           retention-days: 1
-      - name: Deploy existing Pages site
-        id: deploy
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    # Room for the retry waits below (three minutes) on top of deploy-pages'
+    # own wait for GitHub to finish publishing.
+    timeout-minutes: 20
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy1.outputs.page_url || steps.deploy2.outputs.page_url || steps.deploy3.outputs.page_url || steps.deploy4.outputs.page_url }}
+    steps:
+      # GitHub bug, actions/deploy-pages#451 (open; much worse since about
+      # 2026-11-22, when this workflow started failing most runs).
+      # deploy-pages looks the artifact up by name once, and that lookup can
+      # come back empty for an upload finalized moments earlier. Others have
+      # measured the lag at under a second up to about a minute. So retry the
+      # deploy alone, with waits of 15, 45 and 120 seconds between tries.
+      #
+      # A failed lookup creates no deployment, so calling deploy-pages again
+      # is safe. Only the last try can fail the run. If it does, use "Re-run
+      # failed jobs", never "Re-run all jobs": a second upload in the same
+      # run makes the lookup fail for good with "Multiple artifacts named
+      # github-pages".
+      #
+      # Remove the extra tries once actions/deploy-pages#455 (retry the
+      # lookup inside the action) is released and this file moves to it.
+      - name: Deploy the site
+        id: deploy1
+        continue-on-error: true
+        uses: actions/deploy-pages@v4
+      - name: Wait 15 s for GitHub to list the upload
+        if: steps.deploy1.outcome == 'failure'
+        run: sleep 15
+      - name: Deploy the site, try 2
+        id: deploy2
+        if: steps.deploy1.outcome == 'failure'
+        continue-on-error: true
+        uses: actions/deploy-pages@v4
+      - name: Wait 45 s more
+        if: steps.deploy2.outcome == 'failure'
+        run: sleep 45
+      - name: Deploy the site, try 3
+        id: deploy3
+        if: steps.deploy2.outcome == 'failure'
+        continue-on-error: true
+        uses: actions/deploy-pages@v4
+      - name: Wait 120 s more
+        if: steps.deploy3.outcome == 'failure'
+        run: sleep 120
+      - name: Deploy the site, last try
+        id: deploy4
+        if: steps.deploy3.outcome == 'failure'
         uses: actions/deploy-pages@v4

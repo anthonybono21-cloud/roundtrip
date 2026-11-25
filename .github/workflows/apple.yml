@@ -1,0 +1,96 @@
+# Compiles the iPhone, iPad and Mac apps, unsigned, to catch a Swift or
+# Xcode project mistake on the push that made it. Nothing here is
+# installable: a signed build needs the certificate on Anthony's MacBook,
+# which builds and installs them directly. native/BUILD.md has those commands.
+#
+# Why this is its own workflow and runs only when native/ changes
+# (2026-11-25): GitHub is short of hosted Macs. Five times between 11/16 and
+# 11/23 this job, then part of Apps (native.yml), waited 15 minutes, never
+# got a Mac ("The job was not acquired by Runner of type hosted even after
+# multiple attempts"), and failed the whole Apps run. Each time that sent a
+# failure email and held back the website deploy that waits on Apps.
+#
+# All five pushes changed only cameras.json or web files, and those cannot
+# break an Apple compile. The one step they touch, copying the web app into
+# the shell (sync-web), also runs in the Android job, which still runs on
+# every web change. So a Mac is only asked for when Apple-side code under
+# native/ changes: not the Android shell, not the docs.
+
+name: Apple compile
+
+on:
+  push:
+    # Work branches build too: an app that only gets compiled once it is on
+    # main is an app nobody finds out is broken until it is too late.
+    branches: [main, 'claude/**', 'codex/**']
+    paths:
+      - 'native/**'
+      # The Android shell and the docs cannot break an Apple compile.
+      - '!native/android/**'
+      - '!native/**/*.md'
+      - '.github/workflows/apple.yml'
+  pull_request:
+    paths:
+      - 'native/**'
+      # The Android shell and the docs cannot break an Apple compile.
+      - '!native/android/**'
+      - '!native/**/*.md'
+      - '.github/workflows/apple.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  apple:
+    name: iPhone, iPad and Mac
+    runs-on: macos-15
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: native/package-lock.json
+
+      - name: Install
+        working-directory: native
+        run: npm ci
+
+      - name: Copy the web app into the shell
+        working-directory: native
+        run: npm run sync-web
+
+      - name: Sync Capacitor
+        working-directory: native
+        run: npx cap sync ios
+
+      # Compiled unsigned, for a simulator. The signed build that actually
+      # goes on a phone happens on the MacBook, which has the developer
+      # account; see native/BUILD.md. This is here to catch a Swift or
+      # project mistake on the push that made it, not to produce anything
+      # installable.
+      - name: Compile for iPhone and iPad
+        working-directory: native/ios/App
+        run: |
+          xcodebuild \
+            -workspace App.xcworkspace \
+            -scheme App \
+            -configuration Debug \
+            -destination 'generic/platform=iOS Simulator' \
+            -derivedDataPath build \
+            CODE_SIGNING_ALLOWED=NO \
+            build
+
+      - name: Compile for Mac
+        working-directory: native/ios/App
+        run: |
+          xcodebuild \
+            -workspace App.xcworkspace \
+            -scheme App \
+            -configuration Debug \
+            -destination 'platform=macOS,variant=Mac Catalyst' \
+            -derivedDataPath build-mac \
+            CODE_SIGNING_ALLOWED=NO \
+            build
